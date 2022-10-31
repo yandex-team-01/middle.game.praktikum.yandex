@@ -3,7 +3,7 @@ import cn from 'classnames'
 import { Props } from './types'
 import styles from './button.module.scss'
 
-export const Button: React.FC<Props> = ({
+export const Button = ({
   children,
   type = 'button',
   className = '',

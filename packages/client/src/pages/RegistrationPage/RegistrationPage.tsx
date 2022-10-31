@@ -1,15 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useFormik } from 'formik'
-import Input from '../../components/Input'
-import Button from '../../components/Button'
-import Form from '../../components/Form'
+import { Input } from '../../components/Input'
+import { Button } from '../../components/Button'
+import { Form } from '../../components/Form'
 import styles from './RegistrationPage.module.scss'
 import stylesForm from '../../components/Form/Form.module.scss'
 
 import { regSchema } from '../../constants/Schemas'
 
-const RegistrationPage: React.FC = (): JSX.Element => {
+export const RegistrationPage: React.FC = (): JSX.Element => {
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: {
@@ -96,5 +96,3 @@ const RegistrationPage: React.FC = (): JSX.Element => {
     </div>
   )
 }
-
-export default RegistrationPage

@@ -1,8 +1,9 @@
 import React from 'react';
 import { BlankWindow } from '../../../../components/BlankWindow';
 import styles from './topic.module.scss'
+import { Props } from './types';
 
-const Topic = (props: any) => {
+export const Topic = (props: Props) => {
     const { title, description, author, date, comments, views } = props.topic;
 
     return (
@@ -26,5 +27,3 @@ const Topic = (props: any) => {
         </BlankWindow>
     );
 };
-
-export default Topic;

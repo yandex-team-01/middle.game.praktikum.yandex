@@ -3,13 +3,12 @@ import cn from 'classnames'
 import styles from './Input.module.scss'
 import { Props } from './types'
 
-export const Input: React.FC<Props> = ({
+export const Input = ({
   name,
   type = 'text',
   showError = false,
   error,
-  className = '',
-  ...props
+  className = ''
 }: Props): JSX.Element => (
   <div className={styles.input_container}>
     <input
@@ -17,10 +16,10 @@ export const Input: React.FC<Props> = ({
       type={type}
       className={cn(
         styles.input,
-        styles[className],
+        styles[className],        
+        className,
         showError && styles.input_error
       )}
-      {...props}
     />
     {showError && <p className={styles.error}>{error}</p>}
   </div>

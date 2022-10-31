@@ -1,22 +1,23 @@
 import React from 'react';
 import { BlankWindow } from '../../../../components/BlankWindow';
-import Input from '../../../../components/Input';
+import { Input } from '../../../../components/Input';
 import styles from './createtopic.module.scss'
 
-const CreateTopic = (props: any) => {
-
+export const CreateTopic = () => {
     return (
         <BlankWindow className={styles.card}>
             <div className={styles.topic}>
                 <div className={styles.title}>NEW TOPIC: </div>
-                <Input style={{ flex: 1 }} />
+                <Input name="name_topic" onChange={change} value='' />
             </div>
             <div className={styles.title}>Topic description: </div>
             <div className={styles.description}>
-                <Input className={styles.input} />
+                <Input name="name_topic" className={styles.input} onChange={change} value='' />
             </div>
         </BlankWindow>
     );
 };
 
-export default CreateTopic;
+const change = (value: any) => {
+    console.log(value)
+}

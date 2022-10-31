@@ -6,7 +6,7 @@ const props = {
     description: "404"
 }
 
-function ErrorPage404() {
+export const ErrorPage404 = () => {
   return (
     <EmptyLayout>
       <div>
@@ -16,5 +16,3 @@ function ErrorPage404() {
     </EmptyLayout>
   )
 }
-
-export default ErrorPage404

@@ -2,16 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import ErrorPage404 from './pages/404'
-import ErrorPage500 from './pages/500'
-import Forum from './pages/Forum'
+import { Forum, LoginPage, RegistrationPage, ErrorPage404, ErrorPage500 }  from './pages' 
 
 import App from './App'
 import 'normalize.css'
 import './index.module.scss'
 import BackgroundLayout from './layouts/BackgroundLayout'
-import LoginPage from './pages/LoginPage/LoginPage'
-import RegistrationPage from './pages/RegistrationPage'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

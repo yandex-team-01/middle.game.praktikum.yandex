@@ -4,7 +4,7 @@
         "description": "Topic description",
         "author": "user_1",
         "date": "25/10/2022 12 : 20",
-        "comments": [1, 2, 3],
+        "comments": ["Hello"],
         "views": 74
     },
     {
@@ -12,7 +12,7 @@
         "description": "Topic description",
         "author": "user_1",
         "date": "25/10/2022 12 : 20",
-        "comments": [1, 2, 3],
+        "comments": [],
         "views": 74
     },
     {
@@ -20,7 +20,7 @@
         "description": "Topic description",
         "author": "user_1",
         "date": "25/10/2022 12 : 20",
-        "comments": [1, 2, 3],
+        "comments": [],
         "views": 74
     }
 ]

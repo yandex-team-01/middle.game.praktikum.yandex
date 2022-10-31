@@ -1,15 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useFormik } from 'formik'
-import Input from '../../components/Input'
-import Button from '../../components/Button'
-import Form from '../../components/Form'
+import { Input } from '../../components/Input'
+import { Button } from '../../components/Button'
+import { Form } from '../../components/Form'
 import styles from './LoginPage.module.scss'
 import stylesForm from '../../components/Form/Form.module.scss'
 
 import { loginSchema } from '../../constants/Schemas'
 
-const LoginPage: React.FC = (): JSX.Element => {
+export const LoginPage: React.FC = (): JSX.Element => {
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: {
@@ -76,5 +76,3 @@ const LoginPage: React.FC = (): JSX.Element => {
     </div>
   )
 }
-
-export default LoginPage

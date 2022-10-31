@@ -6,7 +6,7 @@ const props = {
     description: "500"
 }
 
-function ErrorPage500() {
+export const ErrorPage500 = () => {
   return (
     <EmptyLayout>
       <div>
@@ -16,5 +16,3 @@ function ErrorPage500() {
     </EmptyLayout>
   )
 }
-
-export default ErrorPage500
