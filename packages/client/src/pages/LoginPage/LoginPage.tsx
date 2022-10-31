@@ -70,7 +70,7 @@ export const LoginPage: React.FC = (): JSX.Element => {
             onChange={handleChange}
             onBlur={handleBlur}
             className="regular"
-            showError={!!errors.login && !!touched.login}
+            showError={Boolean(errors.login) && Boolean(touched.login)}
             error={errors.login}
           />
           <h4 className={stylesForm.form_title}>Password</h4>
@@ -82,7 +82,7 @@ export const LoginPage: React.FC = (): JSX.Element => {
             onChange={handleChange}
             onBlur={handleBlur}
             className="regular"
-            showError={!!errors.password && !!touched.password}
+            showError={Boolean(errors.password) && Boolean(touched.password)}
             error={errors.password}
           />
 

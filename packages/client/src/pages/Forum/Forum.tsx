@@ -21,11 +21,7 @@ export const Forum = () => {
         <Button onClick={handleCreateNewTopic}>POST NEW TOPIC</Button>
       </div>
       <div className={styles.block_posts}>
-        {open ? (
-          <CreateTopic />
-        ) : (
-          <TopicList />
-        )}
+        {open ? <CreateTopic /> : <TopicList />}
       </div>
     </div>
   );

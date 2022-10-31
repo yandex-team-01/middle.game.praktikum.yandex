@@ -85,7 +85,9 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
             onChange={handleChange}
             onBlur={handleBlur}
             className="regular"
-            showError={!!errors.first_name && !!touched.first_name}
+            showError={
+              Boolean(errors.first_name) && Boolean(touched.first_name)
+            }
             error={errors.first_name}
           />
           <h4 className={stylesForm.form_title}>Second Name</h4>
@@ -95,7 +97,9 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
             onChange={handleChange}
             onBlur={handleBlur}
             className="regular"
-            showError={!!errors.second_name && !!touched.second_name}
+            showError={
+              Boolean(errors.second_name) && Boolean(touched.second_name)
+            }
             error={errors.second_name}
           />
           <h4 className={stylesForm.form_title}>Phone</h4>
@@ -105,7 +109,7 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
             onChange={handleChange}
             onBlur={handleBlur}
             className="regular"
-            showError={!!errors.phone && !!touched.phone}
+            showError={Boolean(errors.phone) && Boolean(touched.phone)}
             error={errors.phone}
           />
 
@@ -116,7 +120,7 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
             onChange={handleChange}
             onBlur={handleBlur}
             className="regular"
-            showError={!!errors.email && !!touched.email}
+            showError={Boolean(errors.email) && Boolean(touched.email)}
             error={errors.email}
           />
 
@@ -127,7 +131,7 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
             onChange={handleChange}
             onBlur={handleBlur}
             className="regular"
-            showError={!!errors.login && !!touched.login}
+            showError={Boolean(errors.login) && Boolean(touched.login)}
             error={errors.login}
           />
 
@@ -139,7 +143,7 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
             onChange={handleChange}
             onBlur={handleBlur}
             className="regular"
-            showError={!!errors.password && !!touched.password}
+            showError={Boolean(errors.password) && Boolean(touched.password)}
             error={errors.password}
           />
 
@@ -151,7 +155,9 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
             onChange={handleChange}
             onBlur={handleBlur}
             className="regular"
-            showError={!!errors.repeatPassword && !!touched.repeatPassword}
+            showError={
+              Boolean(errors.repeatPassword) && Boolean(touched.repeatPassword)
+            }
             error={errors.repeatPassword}
           />
         </div>
