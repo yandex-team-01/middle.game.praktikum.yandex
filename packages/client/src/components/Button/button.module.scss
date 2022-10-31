@@ -16,6 +16,11 @@
   &:hover {
     background: #4c5c89;
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: auto;
+  }
 }
 
 .regular {

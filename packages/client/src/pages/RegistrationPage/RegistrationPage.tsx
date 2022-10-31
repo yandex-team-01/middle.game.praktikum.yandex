@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
@@ -8,19 +8,47 @@ import styles from './RegistrationPage.module.scss';
 import stylesForm from '../../components/Form/Form.module.scss';
 
 import { regSchema } from '../../constants/Schemas';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { SignupData } from '../../modules/IAuth';
+import { fetchSignup } from '../../controllers/AuthController';
 
 export const RegistrationPage: React.FC = (): JSX.Element => {
+  const dispath = useAppDispatch();
+  const navigate = useNavigate();
+  const { auth, loading } = useAppSelector(state => state.authReducer);
+
+  const signupHandler = (values: SignupData) => {
+    dispath(fetchSignup(values));
+  };
+
+  useEffect(() => {
+    if (auth) {
+      navigate('/');
+    }
+  }, [auth]);
+
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: {
+        first_name: '',
+        second_name: '',
+        phone: '',
         email: '',
         login: '',
         password: '',
-        confirmPassword: '',
+        repeatPassword: '',
       },
       validationSchema: regSchema,
       onSubmit: values => {
-        console.log('values', values);
+        const data: SignupData = {
+          first_name: values.first_name,
+          second_name: values.second_name,
+          phone: values.phone,
+          email: values.email,
+          login: values.login,
+          password: values.password,
+        };
+        signupHandler(data);
       },
     });
 
@@ -35,7 +63,11 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
         actions={[
           <div key={0}>
             <div className={stylesForm.form_button_box}>
-              <Button regular type="submit">
+              <Button
+                regular
+                className="regular"
+                type="submit"
+                disabled={loading}>
                 <h1 className={styles.reg_button_title}>Sign Up</h1>
               </Button>
             </div>
@@ -46,6 +78,37 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
           </div>,
         ]}>
         <div>
+          <h4 className={stylesForm.form_title}>First Name</h4>
+          <Input
+            name="first_name"
+            value={values.first_name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className="regular"
+            showError={!!errors.first_name && !!touched.first_name}
+            error={errors.first_name}
+          />
+          <h4 className={stylesForm.form_title}>Second Name</h4>
+          <Input
+            name="second_name"
+            value={values.second_name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className="regular"
+            showError={!!errors.second_name && !!touched.second_name}
+            error={errors.second_name}
+          />
+          <h4 className={stylesForm.form_title}>Phone</h4>
+          <Input
+            name="phone"
+            value={values.phone}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className="regular"
+            showError={!!errors.phone && !!touched.phone}
+            error={errors.phone}
+          />
+
           <h4 className={stylesForm.form_title}>Email</h4>
           <Input
             name="email"
@@ -82,14 +145,14 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
 
           <h4 className={stylesForm.form_title}>Password</h4>
           <Input
-            name="confirmPassword"
+            name="repeatPassword"
             type="password"
-            value={values.confirmPassword}
+            value={values.repeatPassword}
             onChange={handleChange}
             onBlur={handleBlur}
             className="regular"
-            showError={!!errors.confirmPassword && !!touched.confirmPassword}
-            error={errors.confirmPassword}
+            showError={!!errors.repeatPassword && !!touched.repeatPassword}
+            error={errors.repeatPassword}
           />
         </div>
       </Form>

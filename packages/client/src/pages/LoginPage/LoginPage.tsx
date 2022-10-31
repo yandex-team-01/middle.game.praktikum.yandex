@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { Input } from '../../components/Input';
@@ -8,8 +9,24 @@ import styles from './LoginPage.module.scss';
 import stylesForm from '../../components/Form/Form.module.scss';
 
 import { loginSchema } from '../../constants/Schemas';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchSignin } from '../../controllers/AuthController';
+import { SigninData } from '../../modules/IAuth';
 
 export const LoginPage: React.FC = (): JSX.Element => {
+  const dispath = useAppDispatch();
+  const navigate = useNavigate();
+  const { auth, loading } = useAppSelector(state => state.authReducer);
+  const signinHandler = (values: SigninData) => {
+    dispath(fetchSignin(values));
+  };
+
+  useEffect(() => {
+    if (auth) {
+      navigate('/');
+    }
+  }, [auth]);
+
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: {
@@ -18,7 +35,7 @@ export const LoginPage: React.FC = (): JSX.Element => {
       },
       validationSchema: loginSchema,
       onSubmit: values => {
-        console.log('values', values);
+        signinHandler(values as SigninData);
       },
     });
 
@@ -28,12 +45,13 @@ export const LoginPage: React.FC = (): JSX.Element => {
         Huggy Wuggy
         <br />& Kissy Missy
       </h1>
+
       <Form
         onSubmit={handleSubmit}
         actions={[
           <div key={0}>
             <div className={stylesForm.form_button_box}>
-              <Button regular type="submit">
+              <Button regular type="submit" disabled={loading}>
                 <h1 className={styles.login_button_title}>Sign in</h1>
               </Button>
             </div>

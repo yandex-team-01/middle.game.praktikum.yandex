@@ -8,15 +8,19 @@ export const Input = ({
   type = 'text',
   showError = false,
   error,
-  className = ''
-}: Props<any>): JSX.Element => (
+  onChange,
+  onBlur,
+  className = '',
+}: Props): JSX.Element => (
   <div className={styles.input_container}>
     <input
       name={name}
+      onChange={onChange}
+      onBlur={onBlur}
       type={type}
       className={cn(
         styles.input,
-        styles[className],        
+        styles[className],
         className,
         showError && styles.input_error
       )}
