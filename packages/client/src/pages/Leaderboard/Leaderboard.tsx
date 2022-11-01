@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import styles from './Leaderboard.module.scss'
 
 const LeadersMockData = [
@@ -26,7 +26,7 @@ const LeadersMockData = [
   },
 ]
 
-const Leaderboard = () => {
+export const Leaderboard = () => {
   return (
     <div>
       <div className={styles.button_wrapper}>
@@ -50,5 +50,3 @@ const Leaderboard = () => {
     </div>
   )
 }
-
-export { Leaderboard }
