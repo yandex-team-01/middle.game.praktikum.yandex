@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Form.module.scss'
 import { Props } from './types'
 
-export const Form: React.FC<Props> = ({
+export const Form = ({
   children,
   actions,
   onSubmit,

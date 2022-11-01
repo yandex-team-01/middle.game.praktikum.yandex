@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
 import BackgroundLayout from './layouts/BackgroundLayout'
-import Forum from './pages/Forum/Forum'
 
-function App() {
+export const App = () => {
   useEffect(() => {
     const fetchServerData = async () => {
       const url = `http://localhost:${__SERVER_PORT__}`
@@ -19,5 +18,3 @@ function App() {
     </BackgroundLayout>
   )
 }
-
-export default App

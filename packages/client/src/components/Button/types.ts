@@ -1,9 +1,7 @@
-import { ButtonHTMLAttributes } from 'react'
-
-export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface Props {
   onClick?: () => void
   className?: string
   color?: string
-  type?: 'button' | 'submit' | 'reset' | undefined
+  type?: 'button' | 'submit' | 'reset' 
   children: React.ReactNode
 }
