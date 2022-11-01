@@ -1,7 +1,7 @@
-import React from 'react';
-import cn from 'classnames';
-import { Props } from './types';
-import styles from './button.module.scss';
+import React from 'react'
+import cn from 'classnames'
+import { Props } from './types'
+import styles from './button.module.scss'
 
 export const Button = ({
   children,
@@ -15,4 +15,4 @@ export const Button = ({
     type={type}>
     {children}
   </button>
-);
+)

@@ -1,1 +1,1 @@
-export { TopicList } from './TopicList';
+export { TopicList } from './TopicList'

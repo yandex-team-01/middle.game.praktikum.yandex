@@ -1,1 +1,1 @@
-export { BlankWindow } from './BlankWindow';
+export { BlankWindow } from './BlankWindow'

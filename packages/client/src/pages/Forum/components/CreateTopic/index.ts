@@ -1,1 +1,1 @@
-export { CreateTopic } from './CreateTopic';
+export { CreateTopic } from './CreateTopic'

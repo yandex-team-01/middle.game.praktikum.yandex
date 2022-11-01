@@ -1,10 +1,10 @@
-import EmptyLayout from '../../layouts/EmptyLayout';
-import styles from './404.module.scss';
+import EmptyLayout from '../../layouts/EmptyLayout'
+import styles from './404.module.scss'
 
 const props = {
     title: "Страница не найдена",
     description: "404"
-};
+}
 
 export const ErrorPage404 = () => {
   return (
@@ -14,5 +14,5 @@ export const ErrorPage404 = () => {
         <h2>{props.description}</h2>
       </div>
     </EmptyLayout>
-  );
-};
+  )
+}

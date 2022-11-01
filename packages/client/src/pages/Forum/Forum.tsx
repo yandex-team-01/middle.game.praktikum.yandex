@@ -1,15 +1,15 @@
-import React, { useCallback, useState } from 'react';
-import { Button } from '../../components/Button';
-import { CreateTopic } from './components/CreateTopic';
-import { TopicList } from './components/TopicList';
-import styles from './forum.module.scss';
+import React, { useCallback, useState } from 'react'
+import { Button } from '../../components/Button'
+import { CreateTopic } from './components/CreateTopic'
+import { TopicList } from './components/TopicList'
+import styles from './forum.module.scss'
 
 export const Forum = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   const handleCreateNewTopic = useCallback(() => {
-    setOpen(!open);
-  }, []);
+    setOpen(!open)
+  }, [])
 
   return (
     <div className={styles.block}>
@@ -28,5 +28,5 @@ export const Forum = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}

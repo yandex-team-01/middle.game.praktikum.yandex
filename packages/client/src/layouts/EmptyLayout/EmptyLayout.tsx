@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
-import {BlankWindow} from '../../components/BlankWindow';
-import styles from './EmptyLayout.module.scss';
+import {BlankWindow} from '../../components/BlankWindow'
+import styles from './EmptyLayout.module.scss'
 
 function EmptyLayout({ children }: any) {
   return (
@@ -15,7 +15,7 @@ function EmptyLayout({ children }: any) {
         </div>
       </BlankWindow>
     </div>
-  );
+  )
 }
 
-export default EmptyLayout;
+export default EmptyLayout

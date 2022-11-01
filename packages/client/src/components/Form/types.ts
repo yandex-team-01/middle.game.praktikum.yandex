@@ -1,4 +1,4 @@
-import { ReactNode, FormEvent } from 'react';
+import { ReactNode, FormEvent } from 'react'
 
 export type Props = {
   children: ReactNode
