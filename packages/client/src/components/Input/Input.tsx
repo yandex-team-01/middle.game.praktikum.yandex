@@ -1,7 +1,7 @@
-import React from 'react'
-import cn from 'classnames'
-import styles from './Input.module.scss'
-import { Props } from './types'
+import React from 'react';
+import cn from 'classnames';
+import styles from './Input.module.scss';
+import { Props } from './types';
 
 export const Input = ({
   name,
@@ -23,4 +23,4 @@ export const Input = ({
     />
     {showError && <p className={styles.error}>{error}</p>}
   </div>
-)
+);

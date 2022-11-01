@@ -1,7 +1,7 @@
 import React from 'react';
-import { BlankWindow } from '../../../../components/BlankWindow';
-import { Input } from '../../../../components/Input';
-import styles from './createtopic.module.scss'
+import { BlankWindow } from 'src/components/BlankWindow';
+import { Input } from 'src/components/Input';
+import styles from './createtopic.module.scss';
 
 export const CreateTopic = () => {
     return (
@@ -19,5 +19,5 @@ export const CreateTopic = () => {
 };
 
 const change = (value: any) => {
-    console.log(value)
-}
+    //здесь будет логика создания топика
+};

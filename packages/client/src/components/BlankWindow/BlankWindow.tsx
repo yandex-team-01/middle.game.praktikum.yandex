@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styles from './BlankWindow.module.scss';
 import cn from 'classnames';
 import { Props } from './types';

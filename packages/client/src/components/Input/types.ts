@@ -1,9 +1,9 @@
-export interface Props {
+export interface Props<T> {
   name: string
   type?: string
   value: string
-  onChange: (e: React.ChangeEvent<any>) => void
-  onBlur?: (e: React.FocusEvent<any, Element>) => void
+  onChange: (e: React.ChangeEvent<T>) => void
+  onBlur?: (e: React.FocusEvent<T, Element>) => void
   className?: string
   inputClassName?: string
   showError?: boolean

@@ -1,6 +1,6 @@
 import React from 'react';
-import { BlankWindow } from '../../../../components/BlankWindow';
-import styles from './topic.module.scss'
+import { BlankWindow } from 'src/components/BlankWindow';
+import styles from './topic.module.scss';
 import { Props } from './types';
 
 export const Topic = (props: Props) => {

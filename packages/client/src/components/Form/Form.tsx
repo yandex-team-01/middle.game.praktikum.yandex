@@ -1,6 +1,6 @@
-import React from 'react'
-import styles from './Form.module.scss'
-import { Props } from './types'
+import React from 'react';
+import styles from './Form.module.scss';
+import { Props } from './types';
 
 export const Form = ({
   children,
@@ -17,4 +17,4 @@ export const Form = ({
       </div>
     </div>
   </form>
-)
+);
