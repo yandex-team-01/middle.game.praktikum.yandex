@@ -1,1 +1,1 @@
-export { Topic } from './Topic'
+export { Topic } from './Topic';

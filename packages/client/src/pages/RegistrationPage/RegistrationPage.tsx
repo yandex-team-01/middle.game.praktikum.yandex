@@ -1,13 +1,13 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useFormik } from 'formik'
-import { Input } from '../../components/Input'
-import { Button } from '../../components/Button'
-import { Form } from '../../components/Form'
-import styles from './RegistrationPage.module.scss'
-import stylesForm from '../../components/Form/Form.module.scss'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useFormik } from 'formik';
+import { Input } from '../../components/Input';
+import { Button } from '../../components/Button';
+import { Form } from '../../components/Form';
+import styles from './RegistrationPage.module.scss';
+import stylesForm from '../../components/Form/Form.module.scss';
 
-import { regSchema } from '../../constants/Schemas'
+import { regSchema } from '../../constants/Schemas';
 
 export const RegistrationPage: React.FC = (): JSX.Element => {
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
@@ -20,9 +20,9 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
       },
       validationSchema: regSchema,
       onSubmit: values => {
-        console.log('values', values)
+        console.log('values', values);
       },
-    })
+    });
 
   return (
     <div className={stylesForm.form_root}>
@@ -35,7 +35,7 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
         actions={[
           <div key={0}>
             <div className={stylesForm.form_button_box}>
-              <Button className="regular" type="submit">
+              <Button regular type="submit">
                 <h1 className={styles.reg_button_title}>Sign Up</h1>
               </Button>
             </div>
@@ -94,5 +94,5 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
         </div>
       </Form>
     </div>
-  )
-}
+  );
+};

@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
 
-import { Button } from '../../components/Button'
-import styles from './Leaderboard.module.scss'
+import { Button } from '../../components/Button';
+import { LeaderboardLine } from './components/LeaderboardLine';
+import styles from './Leaderboard.module.scss';
 
 const LeadersMockData = [
   {
@@ -24,29 +25,21 @@ const LeadersMockData = [
     score: 600,
     players: ['player 122', 'player 442'],
   },
-]
+];
 
 export const Leaderboard = () => {
   return (
     <div>
       <div className={styles.button_wrapper}>
-        <Button>Go back</Button>
-        <Button>Play</Button>
+        <Button className={styles.button_item}>Go back</Button>
+        <Button className={styles.button_item}>Play</Button>
       </div>
       <div className={styles.background_overlay}>
         <h1 className={styles.header}>Top teams</h1>
         {LeadersMockData.map((team, idx) => {
-          return (
-            <div className={styles.leader_line}>
-              <span>{idx + 1}</span>
-              <span>{team.name}</span>
-              <span>{team.score}</span>
-              <span>{team.players[0]}, </span>
-              <span>{team.players[1]}</span>
-            </div>
-          )
+          return <LeaderboardLine team={team} idx={idx} />;
         })}
       </div>
     </div>
-  )
-}
+  );
+};

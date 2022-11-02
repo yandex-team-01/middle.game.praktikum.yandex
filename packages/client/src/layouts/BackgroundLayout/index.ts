@@ -1,1 +1,1 @@
-export { default } from './BackgroundLayout'
+export { default } from './BackgroundLayout';

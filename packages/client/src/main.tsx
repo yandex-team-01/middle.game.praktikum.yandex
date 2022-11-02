@@ -1,6 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import {
   Forum,
@@ -9,12 +9,12 @@ import {
   ErrorPage404,
   ErrorPage500,
   Leaderboard,
-} from 'src/pages'
+} from 'src/pages';
 
-import { App } from './App'
-import 'normalize.css'
-import './index.module.scss'
-import BackgroundLayout from './layouts/BackgroundLayout'
+import { App } from './App';
+import 'normalize.css';
+import './index.module.scss';
+import BackgroundLayout from './layouts/BackgroundLayout';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -58,4 +58,4 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
-)
+);
