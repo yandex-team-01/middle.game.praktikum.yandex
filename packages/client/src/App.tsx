@@ -5,14 +5,15 @@ import { fetchAuth } from './store/auth/AuthActions';
 import { Preloader } from './components/Preloader';
 import { ErrorsNotification } from './components/ErrorsNotification';
 import { Routing } from './components/Routing';
+import { useMountEffect } from './hooks/useMountEffect';
 
 export const App = () => {
   const dispath = useAppDispatch();
   const checkAuth = useAppSelector(state => state.auth.checkAuth);
 
-  useEffect(() => {
+  useMountEffect(() => {
     dispath(fetchAuth());
-  }, []);
+  });
 
   if (!checkAuth) {
     return (
