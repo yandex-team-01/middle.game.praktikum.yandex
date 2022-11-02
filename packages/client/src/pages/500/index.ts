@@ -1,1 +1,1 @@
-export { ErrorPage500 } from './500'
+export { ErrorPage500 } from './500';

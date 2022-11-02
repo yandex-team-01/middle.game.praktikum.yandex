@@ -1,10 +1,10 @@
-import React from 'react'
-import { BlankWindow } from 'src/components/BlankWindow'
-import styles from './topic.module.scss'
-import { Props } from './types'
+import React from 'react';
+import { BlankWindow } from 'src/components/BlankWindow';
+import styles from './topic.module.scss';
+import { Props } from './types';
 
 export const Topic = (props: Props) => {
-    const { title, description, author, date, comments, views } = props.topic
+    const { title, description, author, date, comments, views } = props.topic;
 
     return (
         <BlankWindow className={styles.card}>
@@ -25,5 +25,5 @@ export const Topic = (props: Props) => {
                 <div className={styles.count}>{views}</div>
             </div>
         </BlankWindow>
-    )
-}
+    );
+};

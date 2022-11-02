@@ -17,6 +17,6 @@ module.exports = {
   rules: {
     '@typescript-eslint/ban-ts-comment': 1,
     'eol-last': ["error", "always"],
-    'semi': ["error", "never"]
+    'semi': ["error", "always"]
   },
-}
+};
