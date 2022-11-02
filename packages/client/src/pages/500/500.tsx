@@ -1,9 +1,8 @@
-import EmptyLayout from '../../layouts/EmptyLayout';
-import styles from './500.module.scss';
+import { EmptyLayout } from '../../layouts/EmptyLayout';
 
 const props = {
-    title: "Нет соединения",
-    description: "500"
+  title: 'Нет соединения',
+  description: '500',
 };
 
 export const ErrorPage500 = () => {

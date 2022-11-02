@@ -8,7 +8,7 @@ export const Forum = () => {
   const [open, setOpen] = useState(false);
 
   const handleCreateNewTopic = useCallback(() => {
-    setOpen(!open);
+    setOpen(isOpen => !isOpen);
   }, []);
 
   return (

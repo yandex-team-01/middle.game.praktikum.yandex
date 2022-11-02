@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import { BlankWindow } from '../../components/BlankWindow';
 import styles from './EmptyLayout.module.scss';
 
-function EmptyLayout({ children }: any) {
+type Props = {
+  children: JSX.Element;
+};
+
+export const EmptyLayout = ({ children }: Props) => {
   return (
     <div className={styles.wrapped}>
       <BlankWindow>
@@ -14,6 +18,4 @@ function EmptyLayout({ children }: any) {
       </BlankWindow>
     </div>
   );
-}
-
-export default EmptyLayout;
+};
