@@ -1,11 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-// import errorReducer from './slices/ErrorSlice'
-import authReducer from './slices/AuthSlice';
-import errorSlice from './slices/ErrorSlice';
+import { authReducer } from './auth/AuthSlice';
+import { errorReducer } from './error/ErrorSlice';
 
 const rootReducer = combineReducers({
-  authReducer,
-  errorSlice,
+  auth: authReducer,
+  error: errorReducer,
 });
 
 export const setupStore = () => {

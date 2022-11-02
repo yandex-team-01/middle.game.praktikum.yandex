@@ -1,12 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  fetchAuth,
-  fetchSignin,
-  fetchSignup,
-} from '../../controllers/AuthController';
+import { fetchAuth, fetchSignin, fetchSignup } from './AuthActions';
 import { IUser } from '../../modules/IUser';
 
-import { AuthState } from './types';
+import { AuthState } from '../types';
 
 const initialState: AuthState = {
   checkAuth: false,
@@ -69,4 +65,4 @@ export const authSlice = createSlice({
   },
 });
 
-export default authSlice.reducer;
+export const authReducer = authSlice.reducer;

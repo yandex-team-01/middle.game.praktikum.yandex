@@ -1,24 +1,14 @@
 import { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { ProtectedRoute } from './components/ProtectedRoute';
-import {
-  Forum,
-  LoginPage,
-  RegistrationPage,
-  ErrorPage404,
-  ErrorPage500,
-  Leaderboard,
-} from 'src/pages';
-
-import BackgroundLayout from './layouts/BackgroundLayout';
+import { BackgroundLayout } from './layouts/BackgroundLayout';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
-import { fetchAuth } from './controllers/AuthController';
+import { fetchAuth } from './store/auth/AuthActions';
 import { Preloader } from './components/Preloader';
-import PopupError from './components/PopupError';
+import { ErrorsNotification } from './components/ErrorsNotification';
+import { Routing } from './components/Routing';
 
 export const App = () => {
   const dispath = useAppDispatch();
-  const { auth, checkAuth } = useAppSelector(state => state.authReducer);
+  const checkAuth = useAppSelector(state => state.auth.checkAuth);
 
   useEffect(() => {
     dispath(fetchAuth());
@@ -34,58 +24,8 @@ export const App = () => {
 
   return (
     <>
-      <PopupError />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute flag={auth} redirect="/login">
-              <BackgroundLayout>
-                <div>Вот тут будет жить ваше приложение :)</div>
-              </BackgroundLayout>
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/forum"
-          element={
-            <ProtectedRoute flag={auth} redirect="/login">
-              <BackgroundLayout>
-                <Forum />
-              </BackgroundLayout>
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/leaders"
-          element={
-            <BackgroundLayout>
-              <Leaderboard />
-            </BackgroundLayout>
-          }
-        />
-
-        <Route
-          path="/login"
-          element={
-            <BackgroundLayout>
-              <LoginPage />
-            </BackgroundLayout>
-          }
-        />
-        <Route
-          path="/reg"
-          element={
-            <BackgroundLayout>
-              <RegistrationPage />
-            </BackgroundLayout>
-          }
-        />
-        <Route path="/500" element={<ErrorPage500 />} />
-        <Route path="*" element={<ErrorPage404 />} />
-      </Routes>
+      <ErrorsNotification />
+      <Routing />
     </>
   );
 };

@@ -1,3 +1,4 @@
+//import * as Yup from 'yup'
 import { object, ref, string } from 'yup';
 
 const loginRules = /^(?=.*[A-Za-z])[0-9A-Za-z_-]{3,20}$/;
