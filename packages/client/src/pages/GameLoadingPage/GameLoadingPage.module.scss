@@ -1,0 +1,27 @@
+@import 'src/index.module.scss';
+
+.game_loading_root {
+  display: flex;
+  flex-direction: column;
+  background-color: $bg-color-loading;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.game_loading_title {
+  @include fontTitle(normal, 400, 100px, 100px);
+  color: $main_logo_text_color;
+}
+
+.bar_container {
+  width: 80%;
+  margin-top: 90px;
+}
+
+.percent {
+  @include fontText(normal, 400, 24px, 40px);
+  color: $text-primary;
+  margin-top: 30px;
+}

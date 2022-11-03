@@ -13,7 +13,7 @@ export const LoginPage: React.FC = (): JSX.Element => {
     if (auth) {
       navigate('/');
     }
-  }, [auth]);
+  }, [auth, navigate]);
 
   return (
     <div className={stylesForm.form_root}>

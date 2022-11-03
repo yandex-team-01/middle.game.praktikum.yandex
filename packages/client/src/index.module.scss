@@ -2,3 +2,7 @@
 @import './styles/mixins.scss';
 @import './styles/variables.scss';
 @import './styles/reset.scss';
+
+body {
+  position: relative;
+}

@@ -24,4 +24,5 @@ module.exports = {
     'react-hooks/exhaustive-deps': "error",
     'import/no-default-export': 2
   },
+  "ignorePatterns": ["**/*.test.*", "**/*.config.*"]
 };

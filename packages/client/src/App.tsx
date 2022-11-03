@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { BackgroundLayout } from './layouts/BackgroundLayout';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { fetchAuth } from './store/auth/AuthActions';

@@ -1,0 +1,60 @@
+.ispinner {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+.ispinner .ispinner_blade {
+  position: absolute;
+  top: 13px;
+  left: 8.5px;
+  width: 8px;
+  height: 16px;
+  background-color: #8e8e93;
+  border-radius: 1.25px;
+  animation: iSpinnerBlade 1s linear infinite;
+  will-change: opacity;
+}
+.ispinner .ispinner_blade:nth-child(1) {
+  transform: rotate(45deg) translateY(20px);
+  animation-delay: -1.625s;
+}
+.ispinner .ispinner_blade:nth-child(2) {
+  transform: rotate(90deg) translateY(20px);
+  animation-delay: -1.5s;
+}
+.ispinner .ispinner_blade:nth-child(3) {
+  transform: rotate(135deg) translateY(20px);
+  animation-delay: -1.375s;
+}
+.ispinner .ispinner_blade:nth-child(4) {
+  transform: rotate(180deg) translateY(20px);
+  animation-delay: -1.25s;
+}
+.ispinner .ispinner_blade:nth-child(5) {
+  transform: rotate(225deg) translateY(20px);
+  animation-delay: -1.125s;
+}
+.ispinner .ispinner_blade:nth-child(6) {
+  transform: rotate(270deg) translateY(20px);
+  animation-delay: -1s;
+}
+.ispinner .ispinner_blade:nth-child(7) {
+  transform: rotate(315deg) translateY(20px);
+  animation-delay: -0.875s;
+}
+.ispinner .ispinner_blade:nth-child(8) {
+  transform: rotate(360deg) translateY(20px);
+  animation-delay: -0.75s;
+}
+
+@keyframes iSpinnerBlade {
+  0% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0.25;
+  }
+}
