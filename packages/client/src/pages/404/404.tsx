@@ -1,5 +1,4 @@
-import EmptyLayout from '../../layouts/EmptyLayout';
-import styles from './404.module.scss';
+import { EmptyLayout } from '../../layouts/EmptyLayout';
 
 const props = {
   title: 'Страница не найдена',
