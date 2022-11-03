@@ -54,7 +54,7 @@ export const RegistrationForm: React.FC = (): JSX.Element => {
           <div key={0}>
             <div className={stylesForm.form_button_box}>
               <Button regular type="submit" disabled={loading}>
-                <h1 className={styles.reg_button_title}>Sign Up</h1>
+                <p className={styles.reg_button_title}>Sign Up</p>
               </Button>
             </div>
 
@@ -71,7 +71,9 @@ export const RegistrationForm: React.FC = (): JSX.Element => {
             onChange={handleChange}
             onBlur={handleBlur}
             className="regular"
-            showError={Boolean(errors.first_name) && Boolean(touched.first_name)}
+            showError={
+              Boolean(errors.first_name) && Boolean(touched.first_name)
+            }
             error={errors.first_name}
           />
           <h4 className={stylesForm.form_title}>Second Name</h4>
