@@ -1,20 +1,32 @@
 import { useEffect } from 'react';
-import BackgroundLayout from './layouts/BackgroundLayout';
+import { BackgroundLayout } from './layouts/BackgroundLayout';
+import { useAppDispatch, useAppSelector } from './hooks/redux';
+import { fetchAuth } from './store/auth/AuthActions';
+import { Preloader } from './components/Preloader';
+import { ErrorsNotification } from './components/ErrorsNotification';
+import { Routing } from './components/Routing';
+import { useMountEffect } from './hooks/useMountEffect';
 
 export const App = () => {
-  useEffect(() => {
-    const fetchServerData = async () => {
-      const url = `http://localhost:${__SERVER_PORT__}`;
-      const response = await fetch(url);
-      const data = await response.json();
-      console.log(data);
-    };
+  const dispath = useAppDispatch();
+  const checkAuth = useAppSelector(state => state.auth.checkAuth);
 
-    fetchServerData();
-  }, []);
+  useMountEffect(() => {
+    dispath(fetchAuth());
+  });
+
+  if (!checkAuth) {
+    return (
+      <BackgroundLayout>
+        <Preloader />
+      </BackgroundLayout>
+    );
+  }
+
   return (
-    <BackgroundLayout>
-      <div>Вот тут будет жить ваше приложение :)</div>
-    </BackgroundLayout>
+    <>
+      <ErrorsNotification />
+      <Routing />
+    </>
   );
 };

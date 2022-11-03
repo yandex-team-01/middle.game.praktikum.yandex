@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import {BlankWindow} from '../../components/BlankWindow';
+import { BlankWindow } from '../../components/BlankWindow';
 import styles from './EmptyLayout.module.scss';
 
 function EmptyLayout({ children }: any) {
@@ -8,10 +8,8 @@ function EmptyLayout({ children }: any) {
     <div className={styles.wrapped}>
       <BlankWindow>
         <div className={styles.inner}>
-        {children}
-        <Link to="/">
-          перейти на главную
-        </Link>
+          {children}
+          <Link to="/">перейти на главную</Link>
         </div>
       </BlankWindow>
     </div>
