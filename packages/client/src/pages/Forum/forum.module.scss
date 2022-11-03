@@ -24,10 +24,12 @@
   }
 }
 
-.block_posts {
+.block_topics {
   display: grid;
   gap: 10px;
   height: 300px;
+  overflow: auto;
+  @include scroll($bg-color-main, $main_block_bg_color, $bg-color-secondary)
 }
 
 .block_footer {
