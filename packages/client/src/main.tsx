@@ -6,6 +6,7 @@ import { App } from './App';
 import 'normalize.css';
 import './index.module.scss';
 import { setupStore } from './store/store';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 const store = setupStore();
 
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>

@@ -5,10 +5,11 @@ import { Preloader } from './components/Preloader';
 import { ErrorsNotification } from './components/ErrorsNotification';
 import { Routing } from './components/Routing';
 import { useMountEffect } from './hooks/useMountEffect';
+import { RootState } from './store/store';
 
 export const App = () => {
   const dispath = useAppDispatch();
-  const checkAuth = useAppSelector(state => state.auth.checkAuth);
+  const checkAuth = useAppSelector((state: RootState) => state.auth.checkAuth);
 
   useMountEffect(() => {
     dispath(fetchAuth());

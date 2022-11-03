@@ -2,6 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import { Props } from './types';
 import styles from './button.module.scss';
+import { ErrorBoundary } from '../ErrorBoundary';
 
 export const Button = ({
   children,
@@ -11,11 +12,13 @@ export const Button = ({
   className = '',
   onClick,
 }: Props): JSX.Element => (
-  <button
-    className={cn(styles.button, { [styles.regular]: regular }, className)}
-    onClick={onClick}
-    type={type}
-    disabled={disabled}>
-    {children}
-  </button>
+  <ErrorBoundary>
+    <button
+      className={cn(styles.button, { [styles.regular]: regular }, className)}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}>
+      {children}
+    </button>
+  </ErrorBoundary>
 );
