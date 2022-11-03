@@ -4,12 +4,11 @@ import stylesForm from '../../components/Form/Form.module.scss';
 import { LoginForm } from './LoginForm';
 
 import { useAppSelector } from '../../hooks/redux';
-import { RootState } from 'src/store/store';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 export const LoginPage: React.FC = (): JSX.Element => {
   const navigate = useNavigate();
-  const auth = useAppSelector((state: RootState) => state.auth.auth);
+  const auth = useAppSelector(state => state.auth.auth);
 
   useEffect(() => {
     if (auth) {

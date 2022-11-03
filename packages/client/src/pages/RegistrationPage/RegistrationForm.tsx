@@ -11,12 +11,11 @@ import { regSchema } from '../../constants/Schemas';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { SignupData } from '../../modules/IAuth';
 import { fetchSignup } from '../../store/auth/AuthActions';
-import { RootState } from 'src/store/store';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 export const RegistrationForm: React.FC = (): JSX.Element => {
   const dispath = useAppDispatch();
-  const loading = useAppSelector((state: RootState) => state.auth.loading);
+  const loading = useAppSelector(state => state.auth.loading);
 
   const signupHandler = (values: SignupData) => {
     dispath(fetchSignup(values));

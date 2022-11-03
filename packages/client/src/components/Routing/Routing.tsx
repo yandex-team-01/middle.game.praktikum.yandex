@@ -11,11 +11,10 @@ import {
 import { ProtectedRoute } from '../ProtectedRoute';
 import { BackgroundLayout } from '../../layouts/BackgroundLayout';
 import { useAppSelector } from '../../hooks/redux';
-import { RootState } from 'src/store/store';
 import { ErrorBoundary } from '../ErrorBoundary';
 
 export const Routing = () => {
-  const auth = useAppSelector((state: RootState) => state.auth.auth);
+  const auth = useAppSelector(state => state.auth.auth);
 
   return (
     <ErrorBoundary>

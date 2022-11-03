@@ -11,12 +11,11 @@ import { SigninData } from '../../modules/IAuth';
 
 import styles from './LoginPage.module.scss';
 import stylesForm from '../../components/Form/Form.module.scss';
-import { RootState } from 'src/store/store';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 export const LoginForm: React.FC = (): JSX.Element => {
   const dispath = useAppDispatch();
-  const loading = useAppSelector((state: RootState) => state.auth.loading);
+  const loading = useAppSelector(state => state.auth.loading);
   const signinHandler = (values: SigninData) => {
     dispath(fetchSignin(values));
   };
