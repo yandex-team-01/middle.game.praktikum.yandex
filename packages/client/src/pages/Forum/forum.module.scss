@@ -6,6 +6,7 @@
   color: $text-secondary;
   display: grid;
   gap: 40px;
+  margin-top: -100px;
 }
 
 .block_button {
@@ -28,9 +29,7 @@
   display: grid;
   gap: 10px;
   height: 300px;
-  overflow: auto;
-  @include scroll($bg-color-main, $main_block_bg_color, $bg-color-secondary)
-}
+  }
 
 .block_footer {
   @include fontTitle(normal, 400, 14px, 20px);

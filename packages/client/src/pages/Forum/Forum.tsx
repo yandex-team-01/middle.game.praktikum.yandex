@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { Button } from '../../components/Button';
+import { CommentsPage } from './components/CommentsPage';
 import { CreateTopic } from './components/CreateTopic';
 import { TopicList } from './components/TopicList';
 import styles from './forum.module.scss';
@@ -25,7 +26,11 @@ export const Forum = () => {
           </Button>
         </div>
         <div className={styles.block_posts}>
-          {open ? <CreateTopic /> : <TopicList />}
+          {open ? (
+            <CreateTopic />
+          ) : (
+            <TopicList />
+          )}
         </div>
       </div>
     </ErrorBoundary>
