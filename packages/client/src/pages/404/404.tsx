@@ -1,3 +1,4 @@
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { EmptyLayout } from '../../layouts/EmptyLayout';
 
 const props = {
@@ -7,11 +8,13 @@ const props = {
 
 export const ErrorPage404 = () => {
   return (
-    <EmptyLayout>
-      <div>
-        <h1>{props.title}</h1>
-        <h2>{props.description}</h2>
-      </div>
-    </EmptyLayout>
+    <ErrorBoundary>
+      <EmptyLayout>
+        <div>
+          <h1>{props.title}</h1>
+          <h2>{props.description}</h2>
+        </div>
+      </EmptyLayout>
+    </ErrorBoundary>
   );
 };

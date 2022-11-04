@@ -4,6 +4,7 @@ import stylesForm from '../../components/Form/Form.module.scss';
 import { LoginForm } from './LoginForm';
 
 import { useAppSelector } from '../../hooks/redux';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 export const LoginPage: React.FC = (): JSX.Element => {
   const navigate = useNavigate();
@@ -16,12 +17,14 @@ export const LoginPage: React.FC = (): JSX.Element => {
   }, [auth, navigate]);
 
   return (
-    <div className={stylesForm.form_root}>
-      <h1 className={stylesForm.form_logo_title}>
-        Huggy Wuggy
-        <br />& Kissy Missy
-      </h1>
-      <LoginForm />
-    </div>
+    <ErrorBoundary>
+      <div className={stylesForm.form_root}>
+        <h1 className={stylesForm.form_logo_title}>
+          Huggy Wuggy
+          <br />& Kissy Missy
+        </h1>
+        <LoginForm />
+      </div>
+    </ErrorBoundary>
   );
 };

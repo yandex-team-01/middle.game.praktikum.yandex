@@ -11,6 +11,7 @@ import { regSchema } from '../../constants/Schemas';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { SignupData } from '../../modules/IAuth';
 import { fetchSignup } from '../../store/auth/AuthActions';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 export const RegistrationForm: React.FC = (): JSX.Element => {
   const dispath = useAppDispatch();
@@ -46,103 +47,105 @@ export const RegistrationForm: React.FC = (): JSX.Element => {
     });
 
   return (
-    <Form
-      onSubmit={handleSubmit}
-      actions={[
-        <div key={0}>
-          <div className={stylesForm.form_button_box}>
-            <Button regular type="submit" disabled={loading}>
-              <h1 className={styles.reg_button_title}>Sign Up</h1>
-            </Button>
-          </div>
+    <ErrorBoundary>
+      <Form
+        onSubmit={handleSubmit}
+        actions={[
+          <div key={0}>
+            <div className={stylesForm.form_button_box}>
+              <Button regular type="submit" disabled={loading}>
+                <h1 className={styles.reg_button_title}>Sign Up</h1>
+              </Button>
+            </div>
 
-          <Link to="/login" className={stylesForm.form_sign_in_link}>
-            Sign In
-          </Link>
-        </div>,
-      ]}>
-      <div>
-        <h4 className={stylesForm.form_title}>First Name</h4>
-        <Input
-          name="first_name"
-          value={values.first_name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className="regular"
-          showError={Boolean(errors.first_name) && Boolean(touched.first_name)}
-          error={errors.first_name}
-        />
-        <h4 className={stylesForm.form_title}>Second Name</h4>
-        <Input
-          name="second_name"
-          value={values.second_name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className="regular"
-          showError={
-            Boolean(errors.second_name) && Boolean(touched.second_name)
-          }
-          error={errors.second_name}
-        />
-        <h4 className={stylesForm.form_title}>Phone</h4>
-        <Input
-          name="phone"
-          value={values.phone}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className="regular"
-          showError={Boolean(errors.phone) && Boolean(touched.phone)}
-          error={errors.phone}
-        />
+            <Link to="/login" className={stylesForm.form_sign_in_link}>
+              Sign In
+            </Link>
+          </div>,
+        ]}>
+        <div>
+          <h4 className={stylesForm.form_title}>First Name</h4>
+          <Input
+            name="first_name"
+            value={values.first_name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className="regular"
+            showError={Boolean(errors.first_name) && Boolean(touched.first_name)}
+            error={errors.first_name}
+          />
+          <h4 className={stylesForm.form_title}>Second Name</h4>
+          <Input
+            name="second_name"
+            value={values.second_name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className="regular"
+            showError={
+              Boolean(errors.second_name) && Boolean(touched.second_name)
+            }
+            error={errors.second_name}
+          />
+          <h4 className={stylesForm.form_title}>Phone</h4>
+          <Input
+            name="phone"
+            value={values.phone}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className="regular"
+            showError={Boolean(errors.phone) && Boolean(touched.phone)}
+            error={errors.phone}
+          />
 
-        <h4 className={stylesForm.form_title}>Email</h4>
-        <Input
-          name="email"
-          value={values.email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className="regular"
-          showError={Boolean(errors.email) && Boolean(touched.email)}
-          error={errors.email}
-        />
+          <h4 className={stylesForm.form_title}>Email</h4>
+          <Input
+            name="email"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className="regular"
+            showError={Boolean(errors.email) && Boolean(touched.email)}
+            error={errors.email}
+          />
 
-        <h4 className={stylesForm.form_title}>Login</h4>
-        <Input
-          name="login"
-          value={values.login}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className="regular"
-          showError={Boolean(errors.login) && Boolean(touched.login)}
-          error={errors.login}
-        />
+          <h4 className={stylesForm.form_title}>Login</h4>
+          <Input
+            name="login"
+            value={values.login}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className="regular"
+            showError={Boolean(errors.login) && Boolean(touched.login)}
+            error={errors.login}
+          />
 
-        <h4 className={stylesForm.form_title}>Password</h4>
-        <Input
-          name="password"
-          type="password"
-          value={values.password}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className="regular"
-          showError={Boolean(errors.password) && Boolean(touched.password)}
-          error={errors.password}
-        />
+          <h4 className={stylesForm.form_title}>Password</h4>
+          <Input
+            name="password"
+            type="password"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className="regular"
+            showError={Boolean(errors.password) && Boolean(touched.password)}
+            error={errors.password}
+          />
 
-        <h4 className={stylesForm.form_title}>Password</h4>
-        <Input
-          name="repeatPassword"
-          type="password"
-          value={values.repeatPassword}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className="regular"
-          showError={
-            Boolean(errors.repeatPassword) && Boolean(touched.repeatPassword)
-          }
-          error={errors.repeatPassword}
-        />
-      </div>
-    </Form>
+          <h4 className={stylesForm.form_title}>Password</h4>
+          <Input
+            name="repeatPassword"
+            type="password"
+            value={values.repeatPassword}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className="regular"
+            showError={
+              Boolean(errors.repeatPassword) && Boolean(touched.repeatPassword)
+            }
+            error={errors.repeatPassword}
+          />
+        </div>
+      </Form>
+    </ErrorBoundary>
   );
 };

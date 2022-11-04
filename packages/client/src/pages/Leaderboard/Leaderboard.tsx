@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 import { Button } from '../../components/Button';
 import { LeaderboardLine } from './components/LeaderboardLine';
@@ -29,17 +30,19 @@ const LeadersMockData = [
 
 export const Leaderboard = () => {
   return (
-    <div>
-      <div className={styles.button_wrapper}>
-        <Button className={styles.button_item}>Go back</Button>
-        <Button className={styles.button_item}>Play</Button>
+    <ErrorBoundary>
+      <div>
+        <div className={styles.button_wrapper}>
+          <Button className={styles.button_item}>Go back</Button>
+          <Button className={styles.button_item}>Play</Button>
+        </div>
+        <div className={styles.background_overlay}>
+          <h1 className={styles.header}>Top teams</h1>
+          {LeadersMockData.map((team, idx) => {
+            return <LeaderboardLine team={team} idx={idx} />;
+          })}
+        </div>
       </div>
-      <div className={styles.background_overlay}>
-        <h1 className={styles.header}>Top teams</h1>
-        {LeadersMockData.map((team, idx) => {
-          return <LeaderboardLine team={team} idx={idx} />;
-        })}
-      </div>
-    </div>
+    </ErrorBoundary>
   );
 };
