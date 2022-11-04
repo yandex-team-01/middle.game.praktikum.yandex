@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { SignupData, SigninData } from '../../modules/IAuth';
+import { SignupData, SigninData } from 'src/modules/IAuth';
 import { fetchApi } from '../utils';
 import { addError } from '../error/ErrorSlice';
 

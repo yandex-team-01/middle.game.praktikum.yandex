@@ -1,1 +1,0 @@
-export { CommentsPage } from './CommentsPage';

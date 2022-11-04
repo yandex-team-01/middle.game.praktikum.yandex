@@ -5,24 +5,62 @@ import { Button } from 'src/components/Button';
 import { Input } from 'src/components/Input';
 import styles from './createtopic.module.scss';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import * as uuid from 'uuid';
+import { ITopic } from '../Forum/components/Topic/types';
+import { addNewTopic } from 'src/store/forum/ForumSlice';
+import { useAppSelector } from 'src/hooks/redux';
 
-export const CreateTopic = () => {
+export const ForumCreateTopic = () => {
   const navigate = useNavigate();
 
-  const handleCreateNewTopic = useCallback(() => {
-    navigate('/forum');
-  }, [navigate]);
+  const login = useAppSelector(state => state.auth.user?.login);
+  const dispatch = useDispatch();
 
-  const handleBackToForum = useCallback(() => {
+  const handleCreateNewTopic = useCallback(() => {
+    const name_topic = document.getElementsByName(
+      'name_topic'
+    )[0] as HTMLInputElement;
+    const descrioption_topic = document.getElementsByName(
+      'descrioption_topic'
+    )[0] as HTMLInputElement;
+    const date = new Date();
+    const new_format_date = String(
+      date.getDate() +
+      '/' +
+      date.getMonth() +
+      '/' +
+      date.getFullYear() +
+      ' ' +
+      date.getHours() +
+      ':' +
+      date.getMinutes()
+    );
+
+    const newtopic: ITopic = {
+      id: uuid.v1(),
+      title: name_topic.value,
+      description: descrioption_topic.value,
+      author: login || '',
+      date: new_format_date,
+      comments: [],
+      views: 0,
+    };
+    dispatch(addNewTopic(newtopic));
     navigate('/forum');
-  }, [navigate]);
+  }, [dispatch, login, navigate]);
 
   return (
     <ErrorBoundary>
       <div className={styles.block}>
         <div className={styles.block_button}>
           <div className={styles.block_buttons_top}>
-            <Button onClick={handleBackToForum}>GO BACK</Button>
+            <Button
+              onClick={() => {
+                navigate('/forum');
+              }}>
+              GO BACK
+            </Button>
             <Button>PLAY</Button>
           </div>
           <Button onClick={handleCreateNewTopic}>PUBLISH</Button>
@@ -55,11 +93,11 @@ export const CreateTopic = () => {
 };
 
 const changeName = (event: ChangeEvent) => {
-  console.log(event.target.value);
-  //здесь будет логика создания топика
+  console.log(event);
+  //возможно здесь будет валидация формы?
 };
 
 const changeDescription = (event: ChangeEvent) => {
-  console.log(event.target.value);
-  //здесь будет логика создания топика
+  console.log(event);
+  //возможно здесь будет валидация формы?
 };

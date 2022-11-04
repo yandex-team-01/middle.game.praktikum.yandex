@@ -1,5 +1,5 @@
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
-import { EmptyLayout } from '../../layouts/EmptyLayout';
+import { EmptyLayout } from 'src/layouts/EmptyLayout';
 
 const props = {
   title: 'Страница не найдена',

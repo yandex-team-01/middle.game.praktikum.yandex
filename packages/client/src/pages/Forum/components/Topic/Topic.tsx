@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { useAppDispatch } from 'src/hooks/redux';
+import { changeActiveTopic } from 'src/store/forum/ForumSlice';
 import styles from './topic.module.scss';
-import { ITopic, Props } from './types';
+import { Props } from './types';
 
 export const Topic = (props: Props) => {
-  const { title, description, author, date, comments, views } = props.topic;
+  const { id, title, description, author, date, comments, views } = props.topic;
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const handlerGoToTopic = useCallback((): void => {
+    dispatch(changeActiveTopic(id));
+    navigate('/topic');
+  }, [dispatch, id, navigate]);
 
   return (
     <ErrorBoundary>
       <BlankWindow className={styles.card}>
-        <div onClick={() => change(props.topic)} className={styles.topic}>
+        <div onClick={handlerGoToTopic} className={styles.topic}>
           <div className={styles.title}>{title}</div>
           <div>{description}</div>
           <div className={styles.author}>
@@ -29,9 +40,4 @@ export const Topic = (props: Props) => {
       </BlankWindow>
     </ErrorBoundary>
   );
-};
-
-const change = (topic: ITopic) => {
-  console.log(topic.id);
-  //здесь будет логика перехода в топик
 };

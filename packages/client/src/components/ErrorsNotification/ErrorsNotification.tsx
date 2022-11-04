@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { removeError } from '../../store/error/ErrorSlice';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
+import { removeError } from 'src/store/error/ErrorSlice';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { ErrorItem } from './ErrorItem';
 import styles from './styles.module.scss';

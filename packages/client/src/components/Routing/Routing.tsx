@@ -9,17 +9,18 @@ import {
   SettingsPage,
   GameLoadingPage,
   HomePage,
-} from '../../pages';
+  ForumCreateTopic,
+  ForumCommentsPage,
+} from 'src/pages';
 import {
   SettingsChangePassword,
   SettingsChangeData,
   SettingsData,
 } from '../../pages/SettingsPage';
 import { ProtectedRoute } from '../ProtectedRoute';
-import { BackgroundLayout } from '../../layouts/BackgroundLayout';
-import { useAppSelector } from '../../hooks/redux';
+import { BackgroundLayout } from 'src/layouts/BackgroundLayout';
+import { useAppSelector } from 'src/hooks/redux';
 import { ErrorBoundary } from '../ErrorBoundary';
-import { CreateTopic } from 'src/pages/CreateTopic';
 
 export const Routing = () => {
   const auth = useAppSelector(state => state.auth.auth);
@@ -50,7 +51,7 @@ export const Routing = () => {
           element={
             <ProtectedRoute flag={auth} redirect="/login">
               <BackgroundLayout>
-                <CreateTopic />
+                <ForumCreateTopic />
               </BackgroundLayout>
             </ProtectedRoute>
           }
@@ -60,7 +61,7 @@ export const Routing = () => {
           element={
             <ProtectedRoute flag={auth} redirect="/login">
               <BackgroundLayout>
-                <Forum />
+                <ForumCommentsPage />
               </BackgroundLayout>
             </ProtectedRoute>
           }

@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { BlankWindow } from 'src/components/BlankWindow';
 
-import { Button } from '../../components/Button';
+import { Button } from 'src/components/Button';
 import { LeaderboardLine } from './components/LeaderboardLine';
 import styles from './Leaderboard.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 const LeadersMockData = [
   {

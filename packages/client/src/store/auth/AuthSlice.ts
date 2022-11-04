@@ -5,7 +5,7 @@ import {
   fetchSignin,
   fetchSignup,
 } from './AuthActions';
-import { IUser } from '../../modules/IUser';
+import { IUser } from 'src/modules/IUser';
 
 import { AuthState } from '../types';
 

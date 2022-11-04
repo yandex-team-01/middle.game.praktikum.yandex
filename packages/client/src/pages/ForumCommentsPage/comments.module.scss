@@ -1,5 +1,36 @@
 @import 'src/index.module.scss';
 
+.block {
+  @include fontSecondaryText(normal, 400, 12px, 20px);
+  width: 50vw;
+  color: $text-secondary;
+  padding: 20px 0px;
+}
+
+.block_button {
+  display: flex;
+  flex-flow: column;
+  margin: 0px 50px;
+  gap: 10px;
+}
+
+.block_buttons_top {
+  display: flex;
+  flex-flow: row;
+  gap: 10px;
+  button {
+    width: 100%;
+  }
+}
+
+.block_topics {
+  display: flex;
+  flex-flow: column;
+  margin-top: 40px;
+  gap: 10px;
+  height: 400px;
+}
+
 .title {
   @include fontTitle(normal, 400, 20px, 16px);
   color: white;

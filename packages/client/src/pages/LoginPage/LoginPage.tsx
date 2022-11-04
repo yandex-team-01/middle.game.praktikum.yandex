@@ -1,9 +1,9 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import stylesForm from '../../components/Form/Form.module.scss';
+import stylesForm from 'src/components/Form/Form.module.scss';
 import { LoginForm } from './LoginForm';
 
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from 'src/hooks/redux';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { BlankWindow } from 'src/components/BlankWindow';
 

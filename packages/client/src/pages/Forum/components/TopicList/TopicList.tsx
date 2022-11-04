@@ -1,11 +1,13 @@
 import React from 'react';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
-import topics from 'src/static/topics.json';
+import { useAppSelector } from 'src/hooks/redux';
 import { Topic } from '../Topic';
 import { ITopic } from '../Topic/types';
 import styles from './topics.module.scss';
 
 export const TopicList = () => {
+  const topics = useAppSelector(state => state.forum.listTopics);
+
   return (
     <ErrorBoundary>
       <div className={styles.list}>
