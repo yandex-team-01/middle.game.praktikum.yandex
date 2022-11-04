@@ -1,4 +1,4 @@
-import { IComment } from "../Comment/types";
+import { IComment } from '../Comment/types';
 
 export interface ITopic {
   id: string;

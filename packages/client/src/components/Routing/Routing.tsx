@@ -19,6 +19,7 @@ import { ProtectedRoute } from '../ProtectedRoute';
 import { BackgroundLayout } from '../../layouts/BackgroundLayout';
 import { useAppSelector } from '../../hooks/redux';
 import { ErrorBoundary } from '../ErrorBoundary';
+import { CreateTopic } from 'src/pages/CreateTopic';
 
 export const Routing = () => {
   const auth = useAppSelector(state => state.auth.auth);
@@ -36,6 +37,26 @@ export const Routing = () => {
         />
         <Route
           path="/forum"
+          element={
+            <ProtectedRoute flag={auth} redirect="/login">
+              <BackgroundLayout>
+                <Forum />
+              </BackgroundLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/createtopic"
+          element={
+            <ProtectedRoute flag={auth} redirect="/login">
+              <BackgroundLayout>
+                <CreateTopic />
+              </BackgroundLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/topic"
           element={
             <ProtectedRoute flag={auth} redirect="/login">
               <BackgroundLayout>

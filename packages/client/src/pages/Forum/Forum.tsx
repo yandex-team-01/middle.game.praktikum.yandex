@@ -1,17 +1,16 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { Button } from '../../components/Button';
-import { CommentsPage } from './components/CommentsPage';
-import { CreateTopic } from './components/CreateTopic';
 import { TopicList } from './components/TopicList';
 import styles from './forum.module.scss';
 
 export const Forum = () => {
-  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const handleCreateNewTopic = useCallback(() => {
-    setOpen(isOpen => !isOpen);
-  }, []);
+  const handleGoCreateTopic = useCallback(() => {
+    navigate('/createtopic');
+  }, [navigate]);
 
   return (
     <ErrorBoundary>
@@ -21,16 +20,12 @@ export const Forum = () => {
             <Button regular>GO BACK</Button>
             <Button regular>PLAY</Button>
           </div>
-          <Button regular onClick={handleCreateNewTopic}>
+          <Button regular onClick={handleGoCreateTopic}>
             POST NEW TOPIC
           </Button>
         </div>
-        <div className={styles.block_posts}>
-          {open ? (
-            <CreateTopic />
-          ) : (
-            <TopicList />
-          )}
+        <div className={styles.block_topics}>
+          <TopicList />
         </div>
       </div>
     </ErrorBoundary>
