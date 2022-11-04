@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Game from '../../logic/Game/Game';
 
-function GameComponent() {
+const GameComponent = () => {
 
   const canvas = useRef<HTMLCanvasElement>(null);//https://stackoverflow.com/a/63119934
   const game = useRef<Game | null>(null);
