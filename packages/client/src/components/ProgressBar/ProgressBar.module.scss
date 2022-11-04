@@ -1,0 +1,15 @@
+@import 'src/index.module.scss';
+
+.container {
+  height: 30px;
+  width: 100%;
+  background-color: $progress_bar_bg_color;
+  border: 4px solid $progress_bar_border_color;
+}
+
+.filler {
+  height: 100%;
+  border-radius: inherit;
+  text-align: right;
+  transition: width 1s ease-in-out;
+}

@@ -6,6 +6,7 @@ import {
   LoginPage,
   RegistrationPage,
   Leaderboard,
+  GameLoadingPage,
 } from '../../pages';
 import { ProtectedRoute } from '../ProtectedRoute';
 import { BackgroundLayout } from '../../layouts/BackgroundLayout';
@@ -62,6 +63,7 @@ export const Routing = () => {
           </BackgroundLayout>
         }
       />
+      <Route path="/loading" element={<GameLoadingPage />} />
       <Route path="/500" element={<ErrorPage500 />} />
       <Route path="*" element={<ErrorPage404 />} />
     </Routes>

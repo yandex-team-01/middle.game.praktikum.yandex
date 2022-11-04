@@ -1,6 +1,6 @@
 const baseUrl = 'https://ya-praktikum.tech/api/v2/auth';
 
-export const fetchApi = (path: string, options: RequestInit): Promise<any> => {
+export const fetchApi = <T>(path: string, options: RequestInit): Promise<T> => {
   return fetch(`${baseUrl}${path}`, {
     ...options,
     credentials: 'include',
