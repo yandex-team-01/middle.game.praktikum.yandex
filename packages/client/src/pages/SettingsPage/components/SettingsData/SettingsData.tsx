@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { Button } from '../../../../components/Button';
 import { Form } from '../../../../components/Form';
@@ -9,20 +8,25 @@ import styles from '../../SettingsPage.module.scss';
 import stylesForm from '../../../../components/Form/Form.module.scss';
 
 export const SettingsData = () => {
+  let navigate = useNavigate();
   return (
     <>
-      <Link to="edit">Team</Link>
       <SettingsAvatar />
       <Form
         actions={[
           <div key={0}>
             <div className={stylesForm.form_button_box}>
-              <Button regular type="submit">
-                <h1 className={styles.login_button_title}>Edit profile</h1>
+              <Button
+                regular
+                type="submit"
+                onClick={() => {
+                  navigate('edit');
+                }}>
+                Edit profile
               </Button>
-              <a href="/reg" className={stylesForm.form_sign_in_link}>
+              <Link to="password" className={stylesForm.form_sign_in_link}>
                 Change password
-              </a>
+              </Link>
             </div>
           </div>,
         ]}>

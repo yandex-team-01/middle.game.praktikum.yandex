@@ -1,4 +1,6 @@
-const baseUrl = 'https://ya-praktikum.tech/api/v2/auth';
+import env from "../../env"
+
+const baseUrl = env.HOST_API;
 
 export const fetchApi = <T>(path: string, options: RequestInit): Promise<T> => {
   return fetch(`${baseUrl}${path}`, {

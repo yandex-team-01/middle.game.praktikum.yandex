@@ -1,4 +1,5 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { Button } from '../../../../components/Button';
 import { Form } from '../../../../components/Form';
 import { SettingsAvatar } from '../SettingsAvatar';
@@ -8,19 +9,19 @@ import styles from '../../SettingsPage.module.scss';
 import stylesForm from '../../../../components/Form/Form.module.scss';
 
 export const SettingsChangePassword = () => {
+  let navigate = useNavigate();
   return (
     <>
       <Form
         actions={[
           <div key={0}>
             <div className={stylesForm.form_button_box}>
-              <Button regular type="submit">
-                <h1 className={styles.login_button_title}>Save</h1>
+              <Button regular onClick={() => navigate(-1)}>
+                Save
               </Button>
             </div>
           </div>,
         ]}>
-        <div className={stylesForm.form_center}>
           <Input
           label="Old password"
           name="old-password"
@@ -39,7 +40,6 @@ export const SettingsChangePassword = () => {
           type="password"
           className="regular"
         />
-        </div>
       </Form>
     </>
   );
