@@ -144,13 +144,6 @@ export class PlayerTwo implements Player {
         window.addEventListener('keyup', this.keyupCustom);
     }
 
-    destructor(){
-        window.removeEventListener('keydown',function(e){
-            keys[e.keyCode] = true;
-        });
-        window.removeEventListener('keyup', this.keyupCustom);
-    }
-
     keyupCustom(...args:KeyboardEvent[]) {
         if (args.length>0){
             const event = args[0];
@@ -207,4 +200,3 @@ export class PlayerTwo implements Player {
         }
     }
 }
-

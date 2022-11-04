@@ -10,17 +10,9 @@ export const GameComponent = () => {
   useMountEffect (() => { 
     game.current = new Game(canvas.current as HTMLCanvasElement);
     const gameRef = game.current;
+    game.current.start(gameRef);
 
-  if (gameRef) {
-    gameRef.StartAnimating(10);
-
-    const updater = function() {
-      gameRef.animate();
-      requestAnimationFrame( updater );  // for subsequent frames
-    };
-
-    requestAnimationFrame( updater );  // for the first frame https://stackoverflow.com/a/44975010
-  }
+  return () => game.current?.destruct()
   });
 
   return (
@@ -31,10 +23,3 @@ export const GameComponent = () => {
 
   );
 }
-
-
-
-
-
-
-
