@@ -9,7 +9,7 @@ export const BlankWindow = ({
   className
 }: Props): JSX.Element => (
   <ErrorBoundary>
-    <div className={cn(styles.app, className)}>
+    <div className={cn(styles.root, className)}>
       {children}
     </div>
   </ErrorBoundary>

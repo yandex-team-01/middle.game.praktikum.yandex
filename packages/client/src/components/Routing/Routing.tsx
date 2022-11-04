@@ -6,9 +6,13 @@ import {
   LoginPage,
   RegistrationPage,
   Leaderboard,
+  SettingsPage,
   GameLoadingPage,
   HomePage,
 } from '../../pages';
+import { SettingsData } from 'src/pages/SettingsPage/components/SettingsData';
+import { SettingsChangeData } from 'src/pages/SettingsPage/components/SettingsChangeData';
+import { SettingsChangePassword } from 'src/pages/SettingsPage/components/SettingsChangePassword';
 import { ProtectedRoute } from '../ProtectedRoute';
 import { BackgroundLayout } from '../../layouts/BackgroundLayout';
 import { useAppSelector } from '../../hooks/redux';
@@ -58,7 +62,18 @@ export const Routing = () => {
           }
         />
         <Route path="/loading" element={<GameLoadingPage />} />
-        <Route path="/500" element={<ErrorPage500 />} />
+        <Route
+        path="/settings"
+        element={
+          <BackgroundLayout>
+            <SettingsPage />
+          </BackgroundLayout>
+        }>
+        <Route index element={<SettingsData />} />
+        <Route path='edit' element={<SettingsChangeData />} />
+        <Route path='password' element={<SettingsChangePassword />} />
+      </Route>
+      <Route path="/500" element={<ErrorPage500 />} />
         <Route path="*" element={<ErrorPage404 />} />
       </Routes>
     </ErrorBoundary>

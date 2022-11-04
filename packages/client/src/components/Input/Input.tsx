@@ -12,11 +12,14 @@ export const Input = ({
   onChange,
   onBlur,
   className = '',
+  label
 }: Props): JSX.Element => (
   <ErrorBoundary>
     <div className={styles.input_container}>
-      <input
-        name={name}
+      {label && <label htmlFor={name} className={styles.label}>{label}</label>}
+    <input
+        id={name}
+      name={name}
         onChange={onChange}
         onBlur={onBlur}
         type={type}
