@@ -1,33 +1,12 @@
-const keys:boolean[] = [];
-const player = {
-    x: 200,
-    y: 150,
-    width: 40,
-    height: 72,
-    frameX: 0, 
-    frameY: 0, 
-    speed: 7, 
-    moving: false
-};
-
-const playerSecond = {
-    x: 250,
-    y: 200,
-    width: 40,
-    height: 72,
-    frameX: 0, 
-    frameY: 0, 
-    speed: 7, 
-    moving: false
-}; 
+import {PlayerOne,PlayerTwo} from '../../logic/Player/Player';
+import { gameImageProps } from './types'
 
 export class Game {
  
     private ctx: CanvasRenderingContext2D;
     private width = 800;
     private height = 500;
-    private playerSprite!: HTMLImageElement;
-    private playerSpriteSecond!: HTMLImageElement;
+
     private background!: HTMLImageElement;
 
     public fpsInterval!: number; 
@@ -35,40 +14,54 @@ export class Game {
     public then!:number;
     public elapsed!:number;
 
+    private playerOne: PlayerOne
+    private playerTwo: PlayerTwo;
+
     constructor(protected canvas: HTMLCanvasElement) {
         this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
 
         this.canvas.width = this.width;
         this.canvas.height = this.height;
 
-        this.playerSprite = new Image();
-        this.playerSprite.src = "/src/assets/images/game-player.png";
+        this.playerOne = new PlayerOne();
+        this.playerOne.playerSprite = new Image();
+        this.playerOne.playerSprite.src = "/src/assets/images/game-player.png";
+
+        this.playerOne.x = 200;
+        this.playerOne.y = 150;
+        this.playerOne.width = 40;
+        this.playerOne.height = 72;
+        this.playerOne.frameX = 0; 
+        this.playerOne.frameY = 0; 
+        this.playerOne.speed = 7; 
+        this.playerOne.moving = false;
+        this.playerOne.canvasHeight = this.height;
+        this.playerOne.canvasWidth = this.width;
         
-        this.playerSpriteSecond = new Image();
-        this.playerSpriteSecond.src = "/src/assets/images/game-player-second.png";
+        this.playerTwo = new PlayerTwo();
+        this.playerTwo.playerSprite = new Image();
+        this.playerTwo.playerSprite.src = "/src/assets/images/game-player-second.png";
+
+        this.playerTwo.x = 250;
+        this.playerTwo.y = 200;
+        this.playerTwo.width = 40;
+        this.playerTwo.height = 72;
+        this.playerTwo.frameX = 0; 
+        this.playerTwo.frameY = 0; 
+        this.playerTwo.speed = 7; 
+        this.playerTwo.moving = false;
+        this.playerTwo.canvasHeight = this.height;
+        this.playerTwo.canvasWidth = this.width;
 
         this.background = new Image();
         this.background.src = "/src/assets/images/game-background.png";
         
     }
 
-    drawSprite(img:CanvasImageSource, sX:number, sY:number, sW:number, sH:number, dX:number, dY:number, dW:number, dH:number){
-        this.ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
+    drawSprite(props:gameImageProps){
+        this.ctx.drawImage(props.img, props.sX, props.sY, props.sW, props.sH, props.dX, props.dY, props.dW, props.dH);
     }
-
-    handlePlayerFrame (){
-        if (player.frameX < 3 && player.moving ){ 
-            player.frameX++
-        } else {
-            player.frameX = 0;
-        }
-
-        if (playerSecond.frameX < 3 && playerSecond.moving){ 
-            playerSecond.frameX++
-        } else {
-            playerSecond.frameX = 0;
-        }
-    }    
+   
 
     StartAnimating(fps:number){ 
         this.fpsInterval = 1000/fps; 
@@ -82,78 +75,27 @@ export class Game {
             this.then = this.now - (this.elapsed % this.fpsInterval); 
             this.ctx.clearRect (0,0,this.canvas.width, this.canvas.height); 
             this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
-            this.drawSprite (this.playerSprite, 
-                player.width * player.frameX, 
-                player.height * player.frameY,
-                player.width, player.height, 
-                player.x, player.y, 
-                player.width, player.height
-            ); 
+            
+            const propsForPlayerOne = {img: this.playerOne.playerSprite, 
+                sX: this.playerOne.width * this.playerOne.frameX, 
+                sY: this.playerOne.height * this.playerOne.frameY,
+                sW: this.playerOne.width, sH: this.playerOne.height, 
+                dX: this.playerOne.x, dY: this.playerOne.y, 
+                dW: this.playerOne.width, dH: this.playerOne.height};
+            this.drawSprite (propsForPlayerOne as gameImageProps); 
 
-            this.drawSprite (this.playerSpriteSecond, 
-                playerSecond.width * playerSecond.frameX, 
-                playerSecond.height * playerSecond.frameY, 
-                playerSecond.width, playerSecond.height, 
-                playerSecond.x, playerSecond.y, 
-                playerSecond.width, playerSecond.height
-            );    
+            const propsForPlayerTwo = {img: this.playerTwo.playerSprite, 
+                sX: this.playerTwo.width * this.playerTwo.frameX, 
+                sY: this.playerTwo.height * this.playerTwo.frameY,
+                sW: this.playerTwo.width, sH: this.playerTwo.height, 
+                dX: this.playerTwo.x, dY: this.playerTwo.y, 
+                dW: this.playerTwo.width, dH: this.playerTwo.height};
+            this.drawSprite (propsForPlayerTwo as gameImageProps);    
 
-            this.movePlayer();
-            this.handlePlayerFrame();
-        }
-    }
-
-     movePlayer(){
-        if (keys[38] && player.y > 100){
-            player.y -= player.speed;
-            player.frameY = 3;
-            player.moving = true;
-        }
-        if (keys[37] && player.x > 0){ 
-            player.x -= player.speed;
-            player.frameY = 1;
-            player.moving = true;
-        }
-        if (keys[40] && player.y < this.canvas.height - player.height){
-            player.y += player.speed;
-            player.frameY = 0;
-            player.moving = true;
-        }
-        if (keys[39] &&  player.x < this.canvas.width - player.width){
-            player.x += player.speed;    
-            player.frameY = 2;
-            player.moving = true;
-        }
-
-        if (keys[87] && playerSecond.y > 100){
-            playerSecond.y -= playerSecond.speed;
-            playerSecond.frameY = 3;
-            playerSecond.moving = true;
-        }
-        if (keys[65] && playerSecond.x > 0){ 
-            playerSecond.x -= playerSecond.speed;
-            playerSecond.frameY = 1;
-            playerSecond.moving = true;
-        }
-        if (keys[83] && playerSecond.y < this.canvas.height - playerSecond.height){
-            playerSecond.y += playerSecond.speed;
-            playerSecond.frameY = 0;
-            playerSecond.moving = true;
-        }
-        if (keys[68] &&  playerSecond.x < this.canvas.width - playerSecond.width){
-            playerSecond.x += playerSecond.speed;    
-            playerSecond.frameY = 2;
-            playerSecond.moving = true;
+            this.playerOne.movePlayer();
+            this.playerOne.handlePlayerFrame();
+            this.playerTwo.movePlayer();
+            this.playerTwo.handlePlayerFrame();
         }
     }
 }
-
-window.addEventListener("keydown", function(e){
-    keys[e.keyCode] = true;
-});
-
-window.addEventListener ("keyup",function(e){
-    delete keys[e.keyCode];
-    player.moving = false;
-    playerSecond.moving = false;
-});
