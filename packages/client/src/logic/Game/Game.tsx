@@ -1,5 +1,5 @@
 import {PlayerOne,PlayerTwo} from '../../logic/Player/Player';
-import { gameImageProps } from './types'
+import { gameImageProps } from './types';
 
 export class Game {
  
@@ -37,6 +37,7 @@ export class Game {
         this.playerOne.moving = false;
         this.playerOne.canvasHeight = this.height;
         this.playerOne.canvasWidth = this.width;
+        this.playerOne.ctx = this.ctx;
         
         this.playerTwo = new PlayerTwo();
         this.playerTwo.playerSprite = new Image();
@@ -52,10 +53,11 @@ export class Game {
         this.playerTwo.moving = false;
         this.playerTwo.canvasHeight = this.height;
         this.playerTwo.canvasWidth = this.width;
+        this.playerTwo.ctx = this.ctx;
 
         this.background = new Image();
         this.background.src = "/src/assets/images/game-background.png";
-        
+
     }
 
     drawSprite(props:gameImageProps){
@@ -72,30 +74,13 @@ export class Game {
         this.now = Date.now();
         this.elapsed = this.now - this.then;
         if (this.elapsed > this.fpsInterval){
+            
             this.then = this.now - (this.elapsed % this.fpsInterval); 
             this.ctx.clearRect (0,0,this.canvas.width, this.canvas.height); 
             this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
             
-            const propsForPlayerOne = {img: this.playerOne.playerSprite, 
-                sX: this.playerOne.width * this.playerOne.frameX, 
-                sY: this.playerOne.height * this.playerOne.frameY,
-                sW: this.playerOne.width, sH: this.playerOne.height, 
-                dX: this.playerOne.x, dY: this.playerOne.y, 
-                dW: this.playerOne.width, dH: this.playerOne.height};
-            this.drawSprite (propsForPlayerOne as gameImageProps); 
-
-            const propsForPlayerTwo = {img: this.playerTwo.playerSprite, 
-                sX: this.playerTwo.width * this.playerTwo.frameX, 
-                sY: this.playerTwo.height * this.playerTwo.frameY,
-                sW: this.playerTwo.width, sH: this.playerTwo.height, 
-                dX: this.playerTwo.x, dY: this.playerTwo.y, 
-                dW: this.playerTwo.width, dH: this.playerTwo.height};
-            this.drawSprite (propsForPlayerTwo as gameImageProps);    
-
-            this.playerOne.movePlayer();
-            this.playerOne.handlePlayerFrame();
-            this.playerTwo.movePlayer();
-            this.playerTwo.handlePlayerFrame();
+            this.playerOne.animate(); 
+            this.playerTwo.animate();    
         }
     }
 }

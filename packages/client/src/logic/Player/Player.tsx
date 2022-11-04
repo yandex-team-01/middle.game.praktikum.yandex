@@ -1,3 +1,5 @@
+import { gameImageProps } from '../../logic/Game/types';
+
 const keys:boolean[] = [];
 
 enum DirectionPlayerOne {
@@ -15,9 +17,10 @@ enum DirectionPlayerOne {
   }
 
 interface Player {
-    // animate: () => void;
+    animate: () => void;
     handlePlayerFrame: () => void;
     movePlayer: () => void;
+    drawSprite: (props:gameImageProps) => void;
     playerSprite: HTMLImageElement;
     x: number;
     y: number;
@@ -28,7 +31,9 @@ interface Player {
     speed: number;
     moving: boolean;
     canvasHeight: number;
-    canvasWidth: number;   
+    canvasWidth: number; 
+    propsForPlayerImage: gameImageProps; 
+    ctx: CanvasRenderingContext2D;
 }
 
 export class PlayerOne implements Player {
@@ -44,6 +49,8 @@ export class PlayerOne implements Player {
     moving!: boolean;
     canvasHeight!: number;
     canvasWidth!: number;
+    propsForPlayerImage!:gameImageProps;
+    ctx!: CanvasRenderingContext2D;
 
     constructor(){
 
@@ -51,14 +58,35 @@ export class PlayerOne implements Player {
             keys[e.keyCode] = true;
         });
 
-        window.addEventListener ("keyup",function(e){
-            delete keys[e.keyCode];
-            // moving = false;
-        });
+        this.keyupCustom = this.keyupCustom.bind(this);
+
+        window.addEventListener('keyup', this.keyupCustom);
     }
-    // animate: () => {
-    //     //do smth
-    // }
+    
+    keyupCustom(...args:KeyboardEvent[]) {
+        if (args.length>0){
+            const event = args[0];
+            delete keys[event.keyCode];
+            this.moving = false;
+        }
+    }
+    
+    drawSprite(props:gameImageProps){
+        this.ctx.drawImage(props.img, props.sX, props.sY, props.sW, props.sH, props.dX, props.dY, props.dW, props.dH);
+    }
+
+    animate() {
+         this.propsForPlayerImage = {img: this.playerSprite, 
+            sX: this.width * this.frameX, 
+            sY: this.height * this.frameY,
+            sW: this.width, sH: this.height, 
+            dX: this.x, dY: this.y, 
+            dW: this.width, dH: this.height} as gameImageProps;
+        this.drawSprite (this.propsForPlayerImage as gameImageProps);
+
+        this.movePlayer();
+        this.handlePlayerFrame();
+    }
 
     handlePlayerFrame (){
         if (this.frameX < 3 && this.moving ){ 
@@ -104,21 +132,50 @@ export class PlayerTwo implements Player {
     moving!: boolean;
     canvasHeight!: number;
     canvasWidth!: number;
+    propsForPlayerImage!:gameImageProps;
+    ctx!: CanvasRenderingContext2D;
 
     constructor(){
         window.addEventListener("keydown", function(e){
             keys[e.keyCode] = true;
         });
 
-        window.addEventListener ("keyup",function(e){
-            delete keys[e.keyCode];
-            // moving = false;
-        });
+        this.keyupCustom = this.keyupCustom.bind(this);
+        window.addEventListener('keyup', this.keyupCustom);
     }
 
-    // animate: () => {
-    //     //do smth
-    // }
+    destructor(){
+        window.removeEventListener('keydown',function(e){
+            keys[e.keyCode] = true;
+        });
+        window.removeEventListener('keyup', this.keyupCustom);
+    }
+
+    keyupCustom(...args:KeyboardEvent[]) {
+        if (args.length>0){
+            const event = args[0];
+            delete keys[event.keyCode];
+            this.moving = false;
+        }
+    }
+
+    drawSprite(props:gameImageProps){
+        this.ctx.drawImage(props.img, props.sX, props.sY, props.sW, props.sH, props.dX, props.dY, props.dW, props.dH);
+    }
+
+    animate() {
+         this.propsForPlayerImage = {img: this.playerSprite, 
+            sX: this.width * this.frameX, 
+            sY: this.height * this.frameY,
+            sW: this.width, sH: this.height, 
+            dX: this.x, dY: this.y, 
+            dW: this.width, dH: this.height} as gameImageProps;
+        this.drawSprite (this.propsForPlayerImage as gameImageProps);
+
+        this.movePlayer();
+        this.handlePlayerFrame();
+    }
+    
     handlePlayerFrame (){
         if (this.frameX < 3 && this.moving ){ 
             this.frameX++
