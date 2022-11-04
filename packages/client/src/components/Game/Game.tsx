@@ -9,14 +9,18 @@ export const GameComponent = () => {
 
   useMountEffect (() => { 
     game.current = new Game(canvas.current as HTMLCanvasElement);
-    game.current!.StartAnimating(10);
-    
+    const gameRef = game.current;
+
+  if (gameRef) {
+    gameRef.StartAnimating(10);
+
     const updater = function() {
-      game.current!.animate();
+      gameRef.animate();
       requestAnimationFrame( updater );  // for subsequent frames
     };
-  
+
     requestAnimationFrame( updater );  // for the first frame https://stackoverflow.com/a/44975010
+  }
   });
 
   return (
