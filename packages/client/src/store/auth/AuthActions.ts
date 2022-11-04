@@ -15,7 +15,6 @@ export const fetchAuth = createAsyncThunk(
       const res = await fetchApi('/user', {});
       return res;
     } catch (error) {
-      thunkApi.dispatch(addError('Ошибка авторизации'));
       return thunkApi.rejectWithValue('Ошибка авторизации');
     }
   }
@@ -52,6 +51,23 @@ export const fetchSignup = createAsyncThunk(
       return res;
     } catch (error) {
       thunkApi.dispatch(addError('Ошибка регистрации'));
+      return thunkApi.rejectWithValue('Ошибка регистрации');
+    }
+  }
+);
+
+export const fetchLogout = createAsyncThunk(
+  'auth/fetchLogout',
+  async (_, thunkApi) => {
+    try {
+      const res = await fetchApi('/logout', {
+        method: 'POST',
+        headers: defaultHeaders,
+      });
+
+      return res;
+    } catch (error) {
+      thunkApi.dispatch(addError('Ошибка выхода'));
       return thunkApi.rejectWithValue('Ошибка регистрации');
     }
   }

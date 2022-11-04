@@ -1,19 +1,16 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { Navigate } from 'react-router-dom';
 import stylesForm from '../../components/Form/Form.module.scss';
 import { useAppSelector } from '../../hooks/redux';
 import { RegistrationForm } from './RegistrationForm';
 
 export const RegistrationPage: React.FC = (): JSX.Element => {
-  const navigate = useNavigate();
   const auth = useAppSelector(state => state.auth.auth);
 
-  useEffect(() => {
-    if (auth) {
-      navigate('/');
-    }
-  }, [auth, navigate]);
+  if (auth) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <ErrorBoundary>

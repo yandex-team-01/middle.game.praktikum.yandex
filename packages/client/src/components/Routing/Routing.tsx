@@ -7,6 +7,7 @@ import {
   RegistrationPage,
   Leaderboard,
   GameLoadingPage,
+  HomePage,
 } from '../../pages';
 import { ProtectedRoute } from '../ProtectedRoute';
 import { BackgroundLayout } from '../../layouts/BackgroundLayout';
@@ -19,16 +20,7 @@ export const Routing = () => {
   return (
     <ErrorBoundary>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute flag={auth} redirect="/login">
-              <BackgroundLayout>
-                <div>Вот тут будет жить ваше приложение :)</div>
-              </BackgroundLayout>
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/" element={<HomePage />} />
         <Route
           path="/forum"
           element={

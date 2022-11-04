@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchAuth, fetchSignin, fetchSignup } from './AuthActions';
+import {
+  fetchAuth,
+  fetchLogout,
+  fetchSignin,
+  fetchSignup,
+} from './AuthActions';
 import { IUser } from '../../modules/IUser';
 
 import { AuthState } from '../types';
@@ -61,6 +66,19 @@ export const authSlice = createSlice({
       state.loading = false;
       state.checkAuth = true;
       state.auth = false;
+    });
+    //fetchLogout
+    buider.addCase(fetchLogout.pending, state => {
+      state.loading = true;
+    });
+    buider.addCase(fetchLogout.fulfilled, state => {
+      state.loading = false;
+      state.checkAuth = true;
+      state.auth = false;
+    });
+    buider.addCase(fetchLogout.rejected, state => {
+      state.loading = false;
+      state.checkAuth = true;
     });
   },
 });

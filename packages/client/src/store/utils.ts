@@ -14,7 +14,10 @@ export const fetchApi = <T>(path: string, options: RequestInit): Promise<T> => {
     if (contentType && contentType.indexOf('application/json') !== -1) {
       return res.json();
     }
+    if (contentType && contentType.indexOf('text/plain') !== -1) {
+      return res.text();
+    }
 
-    return res.text();
+    return res;
   });
 };
