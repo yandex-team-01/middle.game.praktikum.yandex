@@ -12,7 +12,7 @@ export const fetchAuth = createAsyncThunk(
   'auth/fetchAuth',
   async (_, thunkApi) => {
     try {
-      const res = await fetchApi('/user', {});
+      const res = await fetchApi('/auth/user', {});
       return res;
     } catch (error) {
       return thunkApi.rejectWithValue('Ошибка авторизации');
@@ -24,7 +24,7 @@ export const fetchSignin = createAsyncThunk(
   'auth/fetchSignin',
   async (data: SigninData, thunkApi) => {
     try {
-      const res = await fetchApi('/signin', {
+      const res = await fetchApi('/auth/signin', {
         method: 'POST',
         headers: defaultHeaders,
         body: JSON.stringify(data),
@@ -42,7 +42,7 @@ export const fetchSignup = createAsyncThunk(
   'auth/fetchSignup',
   async (data: SignupData, thunkApi) => {
     try {
-      const res = await fetchApi('/signup', {
+      const res = await fetchApi('/auth/signup', {
         method: 'POST',
         headers: defaultHeaders,
         body: JSON.stringify(data),
