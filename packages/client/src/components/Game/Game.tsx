@@ -12,7 +12,7 @@ export const GameComponent = () => {
     const gameRef = game.current;
     game.current.start(gameRef);
 
-  return () => game.current?.destruct()
+    return () => game.current?.destruct()
   });
 
   return (

@@ -1,4 +1,4 @@
-import {PlayerOne,PlayerTwo} from '../../logic/Player/Player';
+import {PlayerOne,PlayerTwo,keys} from '../../logic/Player/Player';
 import { gameImageProps } from './types';
 
 export class Game {
@@ -60,10 +60,13 @@ export class Game {
 
     }
     destruct(){
-        window.removeEventListener('keydown',function(){
-        });
-        window.removeEventListener('keyup', function(){
-        });
+        this.keyupCustom = this.keyupCustom.bind(this);
+        window.removeEventListener('keyup', this.keyupCustom);
+    }
+
+    keyupCustom(...args:KeyboardEvent[]) {
+        this.playerOne.keyupCustom();
+        this.playerTwo.keyupCustom();    
     }
 
     start(gameRef:Game){

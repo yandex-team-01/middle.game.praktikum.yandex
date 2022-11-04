@@ -1,6 +1,6 @@
 import { gameImageProps } from '../../logic/Game/types';
 
-const keys:boolean[] = [];
+export const keys:boolean[] = [];
 
 enum DirectionPlayerOne {
     Up = 38,
