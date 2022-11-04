@@ -21,7 +21,7 @@ const playerSecond = {
     moving: false
 }; 
 
-export default class Game {
+export class Game {
  
     private ctx: CanvasRenderingContext2D;
     private width = 800;
