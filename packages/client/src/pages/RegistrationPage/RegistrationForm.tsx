@@ -54,7 +54,7 @@ export const RegistrationForm: React.FC = (): JSX.Element => {
           <div key={0}>
             <div className={stylesForm.form_button_box}>
               <Button regular type="submit" disabled={loading}>
-                <p className={styles.reg_button_title}>Sign Up</p>
+                <span className={styles.reg_button_title}>Sign Up</span>
               </Button>
             </div>
 

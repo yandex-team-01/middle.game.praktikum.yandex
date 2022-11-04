@@ -40,7 +40,7 @@ export const LoginForm: React.FC = (): JSX.Element => {
           <div key={0}>
             <div className={stylesForm.form_button_box}>
               <Button regular type="submit" disabled={loading}>
-                <p className={styles.login_button_title}>Sign in</p>
+                <span className={styles.login_button_title}>Sign in</span>
               </Button>
             </div>
 

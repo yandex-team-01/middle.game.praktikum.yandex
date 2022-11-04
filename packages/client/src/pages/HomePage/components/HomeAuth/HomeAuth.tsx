@@ -37,14 +37,14 @@ export const HomeAuth = () => {
           }}>
           FORUM
         </Button>
-        <div className={styles.buttons}>
-          <Button regular className={styles.button}>
-            PROFILE
-          </Button>
-          <Button regular className={styles.button} onClick={logout}>
-            LOGOUT
-          </Button>
-        </div>
+      </div>
+      <div className={styles.buttons}>
+        <Button regular className={styles.button}>
+          PROFILE
+        </Button>
+        <Button regular className={styles.button} onClick={logout}>
+          LOGOUT
+        </Button>
       </div>
     </div>
   );
