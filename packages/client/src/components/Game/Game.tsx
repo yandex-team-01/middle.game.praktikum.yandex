@@ -2,8 +2,6 @@ import {useRef} from 'react';
 import {Game} from '../../logic/Game/Game';
 import {useMountEffect} from '../../utils/useMountEffect';
 
-
-
 export const GameComponent = () => {
 
   const canvas = useRef<HTMLCanvasElement>(null);//https://stackoverflow.com/a/63119934

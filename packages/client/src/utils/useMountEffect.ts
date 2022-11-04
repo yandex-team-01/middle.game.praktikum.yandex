@@ -5,6 +5,6 @@ import {useEffect} from 'react';
  */
 export const useMountEffect = (effectCallback: () => (() => void) | void) => {
     // тут не должно быть зависимостей
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
     useEffect(effectCallback, []);
 };
