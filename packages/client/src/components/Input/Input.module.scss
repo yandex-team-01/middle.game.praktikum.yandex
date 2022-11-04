@@ -16,6 +16,29 @@
   margin: 8px 0px 0;
 }
 
+.label {
+  @include font-face($font_type_Frijole_400_18_px, $main_input_text_color, 0px);
+  @include lg {
+    font-size: 17px;
+    text-align: left;
+  }
+  @include md {
+    font-size: 16px;
+  }
+  @include sm {
+    font-size: 15px;
+  }
+  @include xxs {
+    font-size: 14px;
+  }
+  position: relative;
+
+  margin-top: 22px;
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
 .input_container {
   display: flex;
   flex-direction: column;
