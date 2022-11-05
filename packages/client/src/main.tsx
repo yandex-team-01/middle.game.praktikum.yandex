@@ -9,17 +9,17 @@ import { setupStore } from './store/store';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 const store = setupStore();
-import {ErrorPage404} from './pages/404'
-import {ErrorPage500} from './pages/500'
-import {Forum} from './pages/Forum'
+import {ErrorPage404} from './pages/404';
+import {ErrorPage500} from './pages/500';
+import {Forum} from './pages/Forum';
 
 
-import 'normalize.css'
-import './index.module.scss'
-import {BackgroundLayout} from './layouts/BackgroundLayout'
-import {RegistrationPage} from './pages/RegistrationPage'
+import 'normalize.css';
+import './index.module.scss';
+import {BackgroundLayout} from './layouts/BackgroundLayout';
+import {RegistrationPage} from './pages/RegistrationPage';
 import {LoginPage} from './pages/LoginPage';
-import {GameScreen} from './pages/GameScreen'
+import {GameScreen} from './pages/GameScreen';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

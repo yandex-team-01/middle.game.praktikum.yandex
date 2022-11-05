@@ -2,8 +2,8 @@ import React from 'react';
 import './GameScreen.module.scss';
 
 import {GameComponent} from '../../components/Game';
-export default function GameScreen() {
+export function GameScreen() {
     return (
         <GameComponent/>
-    )
+    );
 }

@@ -87,7 +87,7 @@ export class PlayerOne implements Player {
 
     handlePlayerFrame (){
         if (this.frameX < 3 && this.moving ){ 
-            this.frameX++
+            this.frameX++;
         } else {
             this.frameX = 0;
         }
@@ -179,7 +179,7 @@ export class PlayerTwo implements Player {
     
     handlePlayerFrame (){
         if (this.frameX < 3 && this.moving ){ 
-            this.frameX++
+            this.frameX++;
         } else {
             this.frameX = 0;
         }

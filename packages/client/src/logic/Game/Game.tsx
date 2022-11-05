@@ -1,4 +1,4 @@
-import {PlayerOne,PlayerTwo,keys} from '../../logic/Player/Player';
+import {PlayerOne,PlayerTwo} from '../../logic/Player/Player';
 import { GameImageProps } from './types';
 
 export class Game {
@@ -14,7 +14,7 @@ export class Game {
     public then!:number;
     public elapsed!:number;
 
-    private playerOne: PlayerOne
+    private playerOne: PlayerOne;
     private playerTwo: PlayerTwo;
 
     constructor(protected canvas: HTMLCanvasElement) {
@@ -43,7 +43,7 @@ export class Game {
         window.removeEventListener('keyup', this.keyupCustom);
     }
 
-    keyupCustom(...args:KeyboardEvent[]) {
+    keyupCustom() {
         this.playerOne.keyupCustom();
         this.playerTwo.keyupCustom();    
     }
