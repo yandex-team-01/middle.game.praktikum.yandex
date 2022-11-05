@@ -1,6 +1,6 @@
 import {Game} from './Game';
 
-export interface gameImageProps extends Game {
+export interface GameImageProps extends Game {
     img: CanvasImageSource;
     sX: number;
     sY: number; 

@@ -1,4 +1,4 @@
-import { gameImageProps } from '../../logic/Game/types';
+import { GameImageProps } from '../../logic/Game/types';
 
 export const keys:boolean[] = [];
 
@@ -9,31 +9,18 @@ enum DirectionPlayerOne {
     Right = 39,
   }
 
-  enum DirectionPlayerTwo {
+enum DirectionPlayerTwo {
     Up = 87,
     Down = 83,
     Left = 65,
     Right = 68,
-  }
+ }
 
 interface Player {
     animate: () => void;
     handlePlayerFrame: () => void;
     movePlayer: () => void;
-    drawSprite: (props:gameImageProps) => void;
-    playerSprite: HTMLImageElement;
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    frameX: number; 
-    frameY: number; 
-    speed: number;
-    moving: boolean;
-    canvasHeight: number;
-    canvasWidth: number; 
-    propsForPlayerImage: gameImageProps; 
-    ctx: CanvasRenderingContext2D;
+    drawSprite: (props:GameImageProps) => void;
 }
 
 export class PlayerOne implements Player {
@@ -49,7 +36,7 @@ export class PlayerOne implements Player {
     moving!: boolean;
     canvasHeight!: number;
     canvasWidth!: number;
-    propsForPlayerImage!:gameImageProps;
+    propsForPlayerImage!:GameImageProps;
     ctx!: CanvasRenderingContext2D;
 
     constructor(){
@@ -61,6 +48,16 @@ export class PlayerOne implements Player {
         this.keyupCustom = this.keyupCustom.bind(this);
 
         window.addEventListener('keyup', this.keyupCustom);
+        this.playerSprite = new Image();
+        this.playerSprite.src = "/src/assets/images/game-player.png";
+        this.x = 200;
+        this.y = 150;
+        this.width = 40;
+        this.height = 72;
+        this.frameX = 0; 
+        this.frameY = 0; 
+        this.speed = 7; 
+        this.moving = false;
     }
     
     keyupCustom(...args:KeyboardEvent[]) {
@@ -71,7 +68,7 @@ export class PlayerOne implements Player {
         }
     }
     
-    drawSprite(props:gameImageProps){
+    drawSprite(props:GameImageProps){
         this.ctx.drawImage(props.img, props.sX, props.sY, props.sW, props.sH, props.dX, props.dY, props.dW, props.dH);
     }
 
@@ -81,8 +78,8 @@ export class PlayerOne implements Player {
             sY: this.height * this.frameY,
             sW: this.width, sH: this.height, 
             dX: this.x, dY: this.y, 
-            dW: this.width, dH: this.height} as gameImageProps;
-        this.drawSprite (this.propsForPlayerImage as gameImageProps);
+            dW: this.width, dH: this.height} as GameImageProps;
+        this.drawSprite (this.propsForPlayerImage as GameImageProps);
 
         this.movePlayer();
         this.handlePlayerFrame();
@@ -132,7 +129,7 @@ export class PlayerTwo implements Player {
     moving!: boolean;
     canvasHeight!: number;
     canvasWidth!: number;
-    propsForPlayerImage!:gameImageProps;
+    propsForPlayerImage!:GameImageProps;
     ctx!: CanvasRenderingContext2D;
 
     constructor(){
@@ -142,6 +139,17 @@ export class PlayerTwo implements Player {
 
         this.keyupCustom = this.keyupCustom.bind(this);
         window.addEventListener('keyup', this.keyupCustom);
+       
+        this.playerSprite = new Image();
+        this.playerSprite.src = "/src/assets/images/game-player-second.png";
+        this.x = 250;
+        this.y = 200;
+        this.width = 40;
+        this.height = 72;
+        this.frameX = 0; 
+        this.frameY = 0; 
+        this.speed = 7; 
+        this.moving = false;
     }
 
     keyupCustom(...args:KeyboardEvent[]) {
@@ -152,7 +160,7 @@ export class PlayerTwo implements Player {
         }
     }
 
-    drawSprite(props:gameImageProps){
+    drawSprite(props:GameImageProps){
         this.ctx.drawImage(props.img, props.sX, props.sY, props.sW, props.sH, props.dX, props.dY, props.dW, props.dH);
     }
 
@@ -162,8 +170,8 @@ export class PlayerTwo implements Player {
             sY: this.height * this.frameY,
             sW: this.width, sH: this.height, 
             dX: this.x, dY: this.y, 
-            dW: this.width, dH: this.height} as gameImageProps;
-        this.drawSprite (this.propsForPlayerImage as gameImageProps);
+            dW: this.width, dH: this.height} as GameImageProps;
+        this.drawSprite (this.propsForPlayerImage as GameImageProps);
 
         this.movePlayer();
         this.handlePlayerFrame();

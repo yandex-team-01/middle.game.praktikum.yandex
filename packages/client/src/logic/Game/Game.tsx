@@ -1,5 +1,5 @@
 import {PlayerOne,PlayerTwo,keys} from '../../logic/Player/Player';
-import { gameImageProps } from './types';
+import { GameImageProps } from './types';
 
 export class Game {
  
@@ -24,33 +24,11 @@ export class Game {
         this.canvas.height = this.height;
 
         this.playerOne = new PlayerOne();
-        this.playerOne.playerSprite = new Image();
-        this.playerOne.playerSprite.src = "/src/assets/images/game-player.png";
-
-        this.playerOne.x = 200;
-        this.playerOne.y = 150;
-        this.playerOne.width = 40;
-        this.playerOne.height = 72;
-        this.playerOne.frameX = 0; 
-        this.playerOne.frameY = 0; 
-        this.playerOne.speed = 7; 
-        this.playerOne.moving = false;
         this.playerOne.canvasHeight = this.height;
         this.playerOne.canvasWidth = this.width;
         this.playerOne.ctx = this.ctx;
         
         this.playerTwo = new PlayerTwo();
-        this.playerTwo.playerSprite = new Image();
-        this.playerTwo.playerSprite.src = "/src/assets/images/game-player-second.png";
-
-        this.playerTwo.x = 250;
-        this.playerTwo.y = 200;
-        this.playerTwo.width = 40;
-        this.playerTwo.height = 72;
-        this.playerTwo.frameX = 0; 
-        this.playerTwo.frameY = 0; 
-        this.playerTwo.speed = 7; 
-        this.playerTwo.moving = false;
         this.playerTwo.canvasHeight = this.height;
         this.playerTwo.canvasWidth = this.width;
         this.playerTwo.ctx = this.ctx;
@@ -59,6 +37,7 @@ export class Game {
         this.background.src = "/src/assets/images/game-background.png";
 
     }
+    
     destruct(){
         this.keyupCustom = this.keyupCustom.bind(this);
         window.removeEventListener('keyup', this.keyupCustom);
@@ -82,7 +61,7 @@ export class Game {
           }
     }
 
-    drawSprite(props:gameImageProps){
+    drawSprite(props:GameImageProps){
         this.ctx.drawImage(props.img, props.sX, props.sY, props.sW, props.sH, props.dX, props.dY, props.dW, props.dH);
     }
    
