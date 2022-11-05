@@ -18,4 +18,5 @@ export {
   Leaderboard,
   HomePage,
   GameLoadingPage,
+  SettingsPage
 };
