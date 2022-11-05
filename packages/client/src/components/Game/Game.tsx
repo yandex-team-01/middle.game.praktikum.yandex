@@ -15,7 +15,15 @@ export const GameComponent = () => {
   });
 
   return (
-    <div>
+    <div>         
+      <div className={styles.block_buttons_top}>
+        <Button onClick={() => {
+              navigate('/');
+            }}>GO BACK</Button>
+        <Button regular className={styles.button} onClick={() => {
+            game.current?.end();
+          } } >GAME OVER</Button>
+      </div>   
       <canvas id='game-canvas' ref={canvas} />
 
     </div>
