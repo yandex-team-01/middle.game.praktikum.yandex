@@ -22,7 +22,7 @@ export const Topic = ({
 
   const handlerGoToTopic = useCallback((): void => {
     dispatch(changeActiveTopic(id));
-    navigate('/topic');
+    navigate('/forum/topic');
   }, [dispatch, id, navigate]);
 
   return (

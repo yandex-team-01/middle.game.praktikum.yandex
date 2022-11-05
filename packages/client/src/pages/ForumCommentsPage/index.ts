@@ -1,1 +1,0 @@
-export { ForumCommentsPage } from './ForumCommentsPage';

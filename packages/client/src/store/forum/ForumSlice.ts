@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IComment } from 'src/pages/ForumCommentsPage/components/Comment/types';
+import { IComment } from 'src/pages/Forum/part/Comment/types';
 import { ITopic } from 'src/pages/Forum/components/Topic/types';
 import { initialState } from './initialSlice';
 

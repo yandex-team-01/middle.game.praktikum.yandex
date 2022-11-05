@@ -6,8 +6,6 @@ import { ErrorPage500 } from './500';
 import { Leaderboard } from './Leaderboard';
 import { GameLoadingPage } from './GameLoadingPage';
 import { HomePage } from './HomePage';
-import { ForumCommentsPage } from './ForumCommentsPage';
-import { ForumCreateTopic } from './ForumCreateTopic';
 import { SettingsPage } from './SettingsPage';
 
 export {
@@ -20,6 +18,4 @@ export {
   HomePage,
   GameLoadingPage,
   SettingsPage,
-  ForumCommentsPage,
-  ForumCreateTopic,
 };

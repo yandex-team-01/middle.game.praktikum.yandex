@@ -4,7 +4,7 @@ import styles from './Comment.module.scss';
 import { Props } from './types';
 import avatar from 'src/assets/images/avatar/variant3.png';
 import { AiFillStar } from 'react-icons/ai';
-import { Column } from 'src/pages/Forum/components/Column/Column';
+import { Column } from 'src/pages/Forum/part/Column/Column';
 
 export const Comment = (props: Props) => {
   const { comment } = props;

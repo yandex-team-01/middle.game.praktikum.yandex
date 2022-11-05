@@ -9,8 +9,6 @@ import {
   SettingsPage,
   GameLoadingPage,
   HomePage,
-  ForumCreateTopic,
-  ForumCommentsPage,
 } from 'src/pages';
 import {
   SettingsChangePassword,
@@ -21,6 +19,9 @@ import { ProtectedRoute } from '../ProtectedRoute';
 import { BackgroundLayout } from 'src/layouts/BackgroundLayout';
 import { useAppSelector } from 'src/hooks/redux';
 import { ErrorBoundary } from '../ErrorBoundary';
+import { TopicList } from 'src/pages/Forum/components/TopicList';
+import { BlockComments } from 'src/pages/Forum/components/BlockComments';
+import { BlockCreateTopic } from 'src/pages/Forum/components/BlockCreateTopic';
 
 export const Routing = () => {
   const auth = useAppSelector(state => state.auth.auth);
@@ -44,28 +45,11 @@ export const Routing = () => {
                 <Forum />
               </BackgroundLayout>
             </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/createtopic"
-          element={
-            <ProtectedRoute flag={auth} redirect="/login">
-              <BackgroundLayout>
-                <ForumCreateTopic />
-              </BackgroundLayout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/topic"
-          element={
-            <ProtectedRoute flag={auth} redirect="/login">
-              <BackgroundLayout>
-                <ForumCommentsPage />
-              </BackgroundLayout>
-            </ProtectedRoute>
-          }
-        />
+          }>
+          <Route index element={<TopicList />} />
+          <Route path='topic' element={<BlockComments />} />
+          <Route path='createtopic' element={<BlockCreateTopic />} />
+        </Route>
         <Route
           path="/leaders"
           element={

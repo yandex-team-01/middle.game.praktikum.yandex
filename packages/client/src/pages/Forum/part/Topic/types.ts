@@ -1,4 +1,4 @@
-import { IComment } from 'src/pages/ForumCommentsPage/components/Comment/types';
+import { IComment } from 'src/pages/Forum/part/Comment/types';
 
 export interface ITopic {
   id: string;

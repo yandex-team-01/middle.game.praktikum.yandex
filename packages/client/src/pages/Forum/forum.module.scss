@@ -10,15 +10,10 @@
 
 .block_button {
   display: flex;
-  flex-flow: column;
+  flex-flow: row;
   margin: 0px 50px;
   gap: 10px;
-}
 
-.block_buttons_top {
-  display: flex;
-  flex-flow: row;
-  gap: 10px;
   button {
     width: 100%;
   }
