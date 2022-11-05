@@ -7,7 +7,7 @@ import { useAppSelector } from 'src/hooks/redux';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { BlankWindow } from 'src/components/BlankWindow';
 
-export const LoginPage: React.FC = (): JSX.Element => {
+export const LoginPage: React.FC = () => {
   const auth = useAppSelector(state => state.auth.auth);
 
   if (auth) {

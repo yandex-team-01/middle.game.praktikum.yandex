@@ -29,10 +29,3 @@
   gap: 10px;
   height: 400px;
 }
-
-.block_footer {
-  @include fontTitle(normal, 400, 14px, 20px);
-  color: $text-primary;
-  width: 100%;
-  text-align: center;
-}

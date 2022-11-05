@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IComment } from 'src/pages/ForumCommentsPage/Comment/types';
+import { IComment } from 'src/pages/ForumCommentsPage/components/Comment/types';
 import { ITopic } from 'src/pages/Forum/components/Topic/types';
 import { initialState } from './initialSlice';
 
@@ -8,9 +8,7 @@ export const forumSlice = createSlice({
   initialState,
   reducers: {
     changeActiveTopic(state, action: PayloadAction<string>) {
-      const topic = state.listTopics.filter(
-        topic => topic.id === action.payload
-      )[0];
+      const topic = state.listTopics.find(topic => topic.id === action.payload);
       state.activeTopic = topic;
     },
     addCommentInTopic(
@@ -19,10 +17,10 @@ export const forumSlice = createSlice({
     ) {
       state.activeTopic?.comments.push(action.payload.comment);
 
-      const topic = state.listTopics.filter(
+      const topic = state.listTopics.find(
         topic => topic.id === action.payload.id
-      )[0];
-      topic.comments.push(action.payload.comment);
+      );
+      if (topic) topic.comments.push(action.payload.comment);
     },
     addNewTopic(state, action: PayloadAction<ITopic>) {
       state.listTopics.unshift(action.payload);

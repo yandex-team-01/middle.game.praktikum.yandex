@@ -24,39 +24,3 @@
     gap: 8px;
   }
 }
-
-.comments {
-  width: 15%;
-  display: flex;
-  flex-flow: column;
-
-  .title {
-    text-align: center;
-  }
-
-  .count {
-    @include fontSecondaryText(normal, 600, 14px, 20px);
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.views {
-  width: 10%;
-  display: flex;
-  flex-flow: column;
-
-  .title {
-    text-align: center;
-  }
-
-  .count {
-    @include fontSecondaryText(normal, 600, 14px, 20px);
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}

@@ -12,7 +12,7 @@ import { SigninData } from 'src/modules/IAuth';
 import stylesForm from 'src/components/Form/Form.module.scss';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
-export const LoginForm: React.FC = (): JSX.Element => {
+export const LoginForm: React.FC = () => {
   const dispath = useAppDispatch();
   const loading = useAppSelector(state => state.auth.loading);
   const signinHandler = (values: SigninData) => {
@@ -35,8 +35,8 @@ export const LoginForm: React.FC = (): JSX.Element => {
     <ErrorBoundary>
       <Form
         onSubmit={handleSubmit}
-        actions={
-          <div>
+        buttons={[
+          <div key={0}>
             <div className={stylesForm.form_button_box}>
               <Button regular type="submit" disabled={loading}>
                 Sign in

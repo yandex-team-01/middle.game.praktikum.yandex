@@ -13,7 +13,7 @@ import { SignupData } from 'src/modules/IAuth';
 import { fetchSignup } from 'src/store/auth/AuthActions';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
-export const RegistrationForm: React.FC = (): JSX.Element => {
+export const RegistrationForm: React.FC = () => {
   const dispath = useAppDispatch();
   const loading = useAppSelector(state => state.auth.loading);
 
@@ -50,8 +50,8 @@ export const RegistrationForm: React.FC = (): JSX.Element => {
     <ErrorBoundary>
       <Form
         onSubmit={handleSubmit}
-        actions={
-          <div>
+        buttons={[
+          <div key={0}>
             <div className={stylesForm.form_button_box}>
               <Button regular type="submit" disabled={loading}>
                 Sign Up

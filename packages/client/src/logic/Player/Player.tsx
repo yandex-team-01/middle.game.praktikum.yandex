@@ -1,4 +1,4 @@
-import { GameImageProps } from '../../logic/Game/types';
+import { GameImageProps } from 'src/logic/Game/types';
 
 export const keys: boolean[] = [];
 

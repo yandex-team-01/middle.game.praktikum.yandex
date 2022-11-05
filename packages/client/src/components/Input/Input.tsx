@@ -13,7 +13,7 @@ export const Input = ({
   onBlur,
   className = '',
   label,
-}: Props): JSX.Element => (
+}: Props) => (
   <ErrorBoundary>
     <div className={styles.input_container}>
       {label && (

@@ -6,7 +6,7 @@ import { useAppSelector } from 'src/hooks/redux';
 import { RegistrationForm } from './RegistrationForm';
 import { BlankWindow } from 'src/components/BlankWindow';
 
-export const RegistrationPage: React.FC = (): JSX.Element => {
+export const RegistrationPage: React.FC = () => {
   const auth = useAppSelector(state => state.auth.auth);
 
   if (auth) {

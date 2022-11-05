@@ -1,7 +1,8 @@
-import { PlayerOne, PlayerTwo } from '../../logic/Player/Player';
+import { PlayerOne, PlayerTwo } from 'src/logic/Player/Player';
 import { GameImageProps } from './types';
 
 export class Game {
+
   private ctx: CanvasRenderingContext2D;
   private width = 800;
   private height = 500;
@@ -33,7 +34,8 @@ export class Game {
     this.playerTwo.ctx = this.ctx;
 
     this.background = new Image();
-    this.background.src = '/src/assets/images/game-background.png';
+    this.background.src = "/src/assets/images/game-background.png";
+
   }
 
   destruct() {
@@ -52,26 +54,17 @@ export class Game {
 
       const updater = function () {
         gameRef.animate();
-        requestAnimationFrame(updater); // for subsequent frames
+        requestAnimationFrame(updater);  // for subsequent frames
       };
 
-      requestAnimationFrame(updater); // for the first frame https://stackoverflow.com/a/44975010
+      requestAnimationFrame(updater);  // for the first frame https://stackoverflow.com/a/44975010
     }
   }
 
   drawSprite(props: GameImageProps) {
-    this.ctx.drawImage(
-      props.img,
-      props.sX,
-      props.sY,
-      props.sW,
-      props.sH,
-      props.dX,
-      props.dY,
-      props.dW,
-      props.dH
-    );
+    this.ctx.drawImage(props.img, props.sX, props.sY, props.sW, props.sH, props.dX, props.dY, props.dW, props.dH);
   }
+
 
   StartAnimating(fps: number) {
     this.fpsInterval = 1000 / fps;
@@ -82,15 +75,10 @@ export class Game {
     this.now = Date.now();
     this.elapsed = this.now - this.then;
     if (this.elapsed > this.fpsInterval) {
+
       this.then = this.now - (this.elapsed % this.fpsInterval);
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.ctx.drawImage(
-        this.background,
-        0,
-        0,
-        this.canvas.width,
-        this.canvas.height
-      );
+      this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
 
       this.playerOne.animate();
       this.playerTwo.animate();

@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import { Game } from '../../logic/Game/Game';
-import { useMountEffect } from '../../utils/useMountEffect';
+import { Game } from 'src/logic/Game/Game';
+import { useMountEffect } from 'src/utils/useMountEffect';
 
 export const GameComponent = () => {
   const canvas = useRef<HTMLCanvasElement>(null); //https://stackoverflow.com/a/63119934
@@ -16,7 +16,8 @@ export const GameComponent = () => {
 
   return (
     <div>
-      <canvas id="game-canvas" ref={canvas} />
+      <canvas id='game-canvas' ref={canvas} />
+
     </div>
   );
 };

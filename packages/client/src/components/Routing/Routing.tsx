@@ -92,7 +92,7 @@ export const Routing = () => {
             </BackgroundLayout>
           }
         />
-        <Route path="/loading" element={<GameLoadingPage />} />
+        <Route path="/loadinggame" element={<GameLoadingPage />} />
         <Route
           path="/settings"
           element={
