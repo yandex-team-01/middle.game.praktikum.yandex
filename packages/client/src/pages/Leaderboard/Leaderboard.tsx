@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { BlankWindow } from 'src/components/BlankWindow';
 
@@ -29,12 +31,23 @@ const LeadersMockData = [
 ];
 
 export const Leaderboard = () => {
+  const navigate = useNavigate();
+  const backHandle = () => {
+    navigate(-1);
+  };
+  const gameHandle = () => {
+    navigate('/loading');
+  };
   return (
     <ErrorBoundary>
       <div className={styles.block}>
         <div className={styles.button_wrapper}>
-          <Button regular>Go back</Button>
-          <Button regular>Play</Button>
+          <Button regular onClick={backHandle}>
+            Go back
+          </Button>
+          <Button regular onClick={gameHandle}>
+            Play
+          </Button>
         </div>
         <BlankWindow className={styles.window}>
           <div className={styles.background_overlay}>

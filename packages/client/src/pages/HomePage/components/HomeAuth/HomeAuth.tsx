@@ -9,7 +9,16 @@ export const HomeAuth = () => {
   const dispath = useAppDispatch();
   const navigate = useNavigate();
 
-  const logout = useCallback(() => {
+  const leadersHandle = () => {
+    navigate('/leaders');
+  };
+  const forumHandle = () => {
+    navigate('/forum');
+  };
+  const settingsHandle = () => {
+    navigate('/settings');
+  };
+  const logoutHandle = useCallback(() => {
     dispath(fetchLogout());
   }, [dispath]);
 
@@ -19,32 +28,20 @@ export const HomeAuth = () => {
         Huggy Wuggy <br /> & Kissy Missy
       </h1>
       <div className={styles.block_buttons}>
-        <Button regular className={styles.button}>
-          Play
-        </Button>
-        <Button
-          regular
-          className={styles.button}
-          onClick={() => {
-            navigate('/leaders');
-          }}>
+        <Button regular>Play</Button>
+        <Button regular onClick={leadersHandle}>
           Leaderboard
         </Button>
-        <Button
-          regular
-          className={styles.button}
-          onClick={() => {
-            navigate('/forum');
-          }}>
-          FORUM
+        <Button regular onClick={forumHandle}>
+          Forum
         </Button>
       </div>
       <div className={styles.buttons}>
-        <Button regular className={styles.button}>
-          PROFILE
+        <Button regular onClick={settingsHandle}>
+          Profile
         </Button>
-        <Button regular className={styles.button} onClick={logout}>
-          LOGOUT
+        <Button regular onClick={logoutHandle}>
+          Logout
         </Button>
       </div>
     </div>

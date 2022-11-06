@@ -60,7 +60,7 @@ export const fetchLogout = createAsyncThunk(
   'auth/fetchLogout',
   async (_, thunkApi) => {
     try {
-      const res = await fetchApi('/logout', {
+      const res = await fetchApi('/auth/logout', {
         method: 'POST',
         headers: defaultHeaders,
       });
