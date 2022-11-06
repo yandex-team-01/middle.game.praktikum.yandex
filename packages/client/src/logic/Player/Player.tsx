@@ -1,6 +1,10 @@
 import { GameImageProps } from 'src/logic/Game/types';
 
+<<<<<<< HEAD
 export const keys: boolean[] = [];
+=======
+const keys:boolean[] = [];
+>>>>>>> bug fix
 
 enum DirectionPlayerOne {
   Up = 38,
@@ -58,11 +62,64 @@ export class PlayerOne implements Player {
     this.moving = false;
   }
 
+<<<<<<< HEAD
   keyupCustom(...args: KeyboardEvent[]) {
     if (args.length > 0) {
       const event = args[0];
       delete keys[event.keyCode];
       this.moving = false;
+=======
+    playerSprite!: HTMLImageElement;
+    x!: number;
+    y!: number;
+    width!: number;
+    height!: number;
+    frameX!: number; 
+    frameY!: number; 
+    speed!: number;
+    moving!: boolean;
+    canvasHeight!: number;
+    canvasWidth!: number;
+    propsForPlayerImage!:GameImageProps;
+    ctx!: CanvasRenderingContext2D;
+
+    constructor(){
+        this.playerSprite = new Image();
+        this.playerSprite.src = "/src/assets/images/game-player.png";
+        this.x = 200;
+        this.y = 150;
+        this.width = 40;
+        this.height = 72;
+        this.frameX = 0; 
+        this.frameY = 0; 
+        this.speed = 7; 
+        this.moving = false;
+
+        this.keyDownCustom = this.keyDownCustom.bind(this);
+        window.addEventListener('keydown', this.keyDownCustom);
+
+        this.keyUpCustom = this.keyUpCustom.bind(this);
+        window.addEventListener('keyup', this.keyUpCustom);
+    }
+    
+    keyDownCustom(...args:KeyboardEvent[]){
+        if (args.length>0){
+            const event = args[0];
+            keys[event.keyCode] = true;
+        }
+    }
+
+    keyUpCustom(...args:KeyboardEvent[]) {
+        if (args.length>0){
+            const event = args[0];
+            delete keys[event.keyCode];
+            this.moving = false;
+        }
+    }
+    
+    drawSprite(props:GameImageProps){
+        this.ctx.drawImage(props.img, props.sX, props.sY, props.sW, props.sH, props.dX, props.dY, props.dW, props.dH);
+>>>>>>> bug fix
     }
   }
 
@@ -137,6 +194,7 @@ export class PlayerOne implements Player {
 }
 
 export class PlayerTwo implements Player {
+<<<<<<< HEAD
   playerSprite!: HTMLImageElement;
   x!: number;
   y!: number;
@@ -176,6 +234,54 @@ export class PlayerTwo implements Player {
       const event = args[0];
       delete keys[event.keyCode];
       this.moving = false;
+=======
+    playerSprite!: HTMLImageElement;
+    x!: number;
+    y!: number;
+    width!: number;
+    height!: number;
+    frameX!: number; 
+    frameY!: number; 
+    speed!: number;
+    moving!: boolean;
+    canvasHeight!: number;
+    canvasWidth!: number;
+    propsForPlayerImage!:GameImageProps;
+    ctx!: CanvasRenderingContext2D;
+
+    constructor(){
+        this.playerSprite = new Image();
+        this.playerSprite.src = "/src/assets/images/game-player-second.png";
+        this.x = 250;
+        this.y = 200;
+        this.width = 40;
+        this.height = 72;
+        this.frameX = 0; 
+        this.frameY = 0; 
+        this.speed = 7; 
+        this.moving = false;
+
+        this.keyDownCustom = this.keyDownCustom.bind(this);
+        window.addEventListener('keydown', this.keyDownCustom);
+
+        this.keyUpCustom = this.keyUpCustom.bind(this);
+        window.addEventListener('keyup', this.keyUpCustom);
+    }
+
+    keyDownCustom(...args:KeyboardEvent[]){
+        if (args.length>0){
+            const event = args[0];
+            keys[event.keyCode] = true;
+        }
+    }
+
+    keyUpCustom(...args:KeyboardEvent[]) {
+        if (args.length>0){
+            const event = args[0];
+            delete keys[event.keyCode];
+            this.moving = false;
+        }
+>>>>>>> bug fix
     }
   }
 

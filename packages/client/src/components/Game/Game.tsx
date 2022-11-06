@@ -22,7 +22,7 @@ export const GameComponent = () => {
             }}>GO BACK</Button>
         <Button regular className={styles.button} onClick={() => {
             game.current?.end();
-          } } >GAME OVER</Button>
+          } } >END THE GAME</Button>
       </div>   
       <canvas id='game-canvas' ref={canvas} />
 

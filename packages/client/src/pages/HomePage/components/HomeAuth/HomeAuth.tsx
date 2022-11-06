@@ -31,8 +31,24 @@ export const HomeAuth = () => {
         Huggy Wuggy <br /> & Kissy Missy
       </h1>
       <div className={styles.block_buttons}>
+<<<<<<< HEAD
         <Button regular>Play</Button>
         <Button regular onClick={leadersHandle}>
+=======
+        <Button regular className={styles.button}
+        onClick={
+          useCallback(() => {
+            navigate('/loading');
+          }, [])}>
+          Play
+        </Button>
+        <Button
+          regular
+          className={styles.button}
+          onClick={() => {
+            navigate('/leaders');
+          }}>
+>>>>>>> bug fix
           Leaderboard
         </Button>
         <Button regular onClick={forumHandle}>
