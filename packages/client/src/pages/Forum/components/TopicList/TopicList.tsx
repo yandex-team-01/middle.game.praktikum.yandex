@@ -19,7 +19,7 @@ export const TopicList = () => {
   return (
     <ErrorBoundary>
       <div className={styles.block_topics}>
-        <Button className={styles.button} onClick={handlerCreateTopic}>POST NEW TOPIC</Button>
+        <Button regular className={styles.button_create_topic} onClick={handlerCreateTopic}>POST NEW TOPIC</Button>
         <div className={styles.list}>
           {topics.map((topic: ITopic, index: number) => {
             return <Topic key={index} {...topic} />;

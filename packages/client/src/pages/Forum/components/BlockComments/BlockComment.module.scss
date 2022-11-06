@@ -4,12 +4,10 @@
   display: flex;
   flex-flow: column;
   height: 500px;
+}
 
-  .button_publish {
-    display: flex;
-    flex-flow: column;
-    margin: 10px 50px 40px;
-  }
+.button_new_post {
+  margin: 10px 50px 40px;
 }
 
 .block_topics {
@@ -30,7 +28,7 @@
   flex-flow: column;
   gap: 10px;
   overflow: auto;
-  height: 200px;
+  height: 150px;
   @include scroll($bg-color-main, $main_block_bg_color, $bg-color-secondary);
 }
 
@@ -40,7 +38,6 @@
   width: 100%;
   background: $color-card;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  display: flex;
   box-sizing: border-box;
   flex-flow: column;
 }
@@ -49,7 +46,6 @@
   display: flex;
   flex-flow: row;
   gap: 10px;
-  margin-top: 10px;
 
   .text {
     @include fontTitle(normal, 400, 14px, 20px);
@@ -61,9 +57,10 @@
     flex: 1;
   }
 
-  .button {
+  .button_comment {
     @include fontText(normal, 400, 14px, 20px);
     padding: 0px 20px;
+    height: auto;
   }
 }
 

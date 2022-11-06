@@ -35,7 +35,7 @@ export const LoginForm: React.FC = () => {
     <ErrorBoundary>
       <Form
         onSubmit={handleSubmit}
-        buttons={[
+        buttons={
           <div key={0}>
             <div className={stylesForm.form_button_box}>
               <Button regular type="submit" disabled={loading}>

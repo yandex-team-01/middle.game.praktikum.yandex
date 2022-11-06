@@ -17,10 +17,10 @@ export const Forum = () => {
 
   return (
     <ErrorBoundary>
-      <div className={styles.block}>
+      <div className={styles.forum}>
         <div className={styles.block_button}>
-          <Button onClick={handlerBack}>GO BACK</Button>
-          <Button onClick={handlerLoadGame}>PLAY</Button>
+          <Button regular onClick={handlerBack}>GO BACK</Button>
+          <Button regular onClick={handlerLoadGame}>PLAY</Button>
         </div>
         <Outlet />
       </div>

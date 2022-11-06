@@ -15,8 +15,7 @@ import { ErrorBoundary } from 'src/components/ErrorBoundary';
 export const BlockComments = () => {
   const navigate = useNavigate();
   const [textComment, setTextComment] = useState('');
-  const login = useAppSelector(state => state.auth.user?.login);
-  const topic = useAppSelector(state => state.forum.activeTopic);
+  const [login, topic] = useAppSelector(state => [state.auth.user?.login, state.forum.activeTopic]);
   const dispatch = useAppDispatch();
 
   const changeComment = useCallback((event: ChangeEvent) => {
@@ -49,7 +48,7 @@ export const BlockComments = () => {
   return (
     <ErrorBoundary>
       <div className={styles.block}>
-        <Button className={styles.button_publish} onClick={handlerCreateTopic}>POST NEW TOPIC</Button>
+        <Button regular className={styles.button_new_post} onClick={handlerCreateTopic}>POST NEW TOPIC</Button>
         {topic && <div className={styles.block_topics}>
           <Topic {...topic} />
           <div className={styles.title}>COMMENTS</div>
@@ -67,7 +66,7 @@ export const BlockComments = () => {
                 onChange={changeComment}
                 value={textComment}
               />
-              <Button className={styles.button} onClick={addComment}>
+              <Button regular className={styles.button_comment} onClick={addComment}>
                 Send
               </Button>
             </div>

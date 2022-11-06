@@ -9,15 +9,18 @@ export const HomeAuth = () => {
   const dispath = useAppDispatch();
   const navigate = useNavigate();
 
-  const leadersHandle = () => {
+  const leadersHandle = useCallback(() => {
     navigate('/leaders');
-  };
-  const forumHandle = () => {
+  }, [navigate]);
+
+  const forumHandle = useCallback(() => {
     navigate('/forum');
-  };
-  const settingsHandle = () => {
+  }, [navigate]);
+
+  const settingsHandle = useCallback(() => {
     navigate('/settings');
-  };
+  }, [navigate]);
+
   const logoutHandle = useCallback(() => {
     dispath(fetchLogout());
   }, [dispath]);

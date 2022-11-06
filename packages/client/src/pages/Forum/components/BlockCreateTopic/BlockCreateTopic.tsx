@@ -48,25 +48,27 @@ export const BlockCreateTopic = () => {
   return (
     <ErrorBoundary>
       <div className={styles.block}>
-        <Button className={styles.button_publish} onClick={handleCreateNewTopic}>PUBLISH</Button>
+        <Button regular className={styles.button_publish} onClick={handleCreateNewTopic}>PUBLISH</Button>
         <BlankWindow className={styles.card}>
-          <div className={styles.topic}>
-            <div className={styles.title}>NEW TOPIC: </div>
-            <Input
-              name="name_topic"
-              className={styles.input}
-              onChange={changeName}
-              value={nameTopic}
-            />
-          </div>
-          <div className={styles.title_description}>Topic description: </div>
-          <div className={styles.description}>
-            <Input
-              name="descrioption_topic"
-              className={styles.input}
-              onChange={changeDescription}
-              value={descriptionTopic}
-            />
+          <div className={styles.block_input}>
+            <div className={styles.topic}>
+              <div className={styles.title}>NEW TOPIC: </div>
+              <Input
+                name="name_topic"
+                className={styles.input}
+                onChange={changeName}
+                value={nameTopic}
+              />
+            </div>
+            <div className={styles.title_description}>Topic description: </div>
+            <div className={styles.description}>
+              <Input
+                name="description_topic"
+                className={styles.input}
+                onChange={changeDescription}
+                value={descriptionTopic}
+              />
+            </div>
           </div>
         </BlankWindow>
       </div>

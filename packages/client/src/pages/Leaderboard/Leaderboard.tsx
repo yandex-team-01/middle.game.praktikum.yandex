@@ -2,11 +2,9 @@ import React, { useCallback } from 'react';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { useNavigate } from 'react-router-dom';
 import { BlankWindow } from 'src/components/BlankWindow';
-
 import { Button } from 'src/components/Button';
 import { LeaderboardLine } from './components/LeaderboardLine';
 import styles from './Leaderboard.module.scss';
-import { useNavigate } from 'react-router-dom';
 
 const LeadersMockData = [
   {
