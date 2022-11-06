@@ -20,7 +20,9 @@ export const Forum = () => {
             <Button regular>GO BACK</Button>
             <Button regular>PLAY</Button>
           </div>
-          <Button regular onClick={handleCreateNewTopic}>POST NEW TOPIC</Button>
+          <Button regular onClick={handleCreateNewTopic}>
+            POST NEW TOPIC
+          </Button>
         </div>
         <div className={styles.block_posts}>
           {open ? <CreateTopic /> : <TopicList />}
