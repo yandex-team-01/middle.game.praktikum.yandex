@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './GameLoadingPage.module.scss';
 import { Spinner } from 'src/components/Spinner';
 import { ProgressBar } from 'src/components/ProgressBar';
 import { useProgress } from 'src/components/ProgressBar/hooks/useProgress';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 export const GameLoadingPage: React.FC = () => {
   const [progress] = useProgress();
-  const navigate = useNavigate();
-
+  
   if (progress === 100) {
     return <Navigate to="/game" />;
   }

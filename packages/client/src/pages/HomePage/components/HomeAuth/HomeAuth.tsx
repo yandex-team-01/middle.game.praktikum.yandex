@@ -39,7 +39,7 @@ export const HomeAuth = () => {
         onClick={
           useCallback(() => {
             navigate('/loading');
-          }, [])}>
+          }, [navigate])}>
           Play
         </Button>
         <Button
