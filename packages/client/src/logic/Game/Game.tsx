@@ -71,42 +71,17 @@ export class Game {
     this.then = Date.now();
   }
 
-  animate() {
-    this.now = Date.now();
-    this.elapsed = this.now - this.then;
-    if (this.elapsed > this.fpsInterval) {
-
-      this.then = this.now - (this.elapsed % this.fpsInterval);
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
-
-<<<<<<< HEAD
-      this.playerOne.animate();
-      this.playerTwo.animate();
-=======
-    animate(){
-        this.now = Date.now();
-        this.elapsed = this.now - this.then;
-        if (this.elapsed > this.fpsInterval){
-
-            this.then = this.now - (this.elapsed % this.fpsInterval); 
-            this.ctx.clearRect (0,0,this.canvas.width, this.canvas.height); 
-            this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
-            
-            this.playerOne.animate(); 
-            this.playerTwo.animate();    
-
-        }
-<<<<<<< HEAD
-        // else if(this.isOver){
-        //     // this.background = new Image();
-        //     // this.background.src = "/src/assets/images/game-over-background.png";
-        //     this.ctx.clearRect (0,0,this.canvas.width, this.canvas.height); 
-        //     this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
-        // }
->>>>>>> bug fix
-=======
->>>>>>> bug fix
+  animate(){
+    if (this.then !== undefined && this.fpsInterval !== undefined){
+      this.now = Date.now();
+      this.elapsed = this.now - this.then;
+      if (this.elapsed > this.fpsInterval){
+          this.then = this.now - (this.elapsed % this.fpsInterval); 
+          this.ctx.clearRect (0,0,this.canvas.width, this.canvas.height); 
+          this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
+          this.playerOne.animate(); 
+          this.playerTwo.animate(); 
+      }
     }
   }
 }
