@@ -25,30 +25,20 @@ export const HomeAuth = () => {
     dispath(fetchLogout());
   }, [dispath]);
 
+  const gameLoading = useCallback(() => {
+    navigate('/loading');
+  }, [navigate]);
+
   return (
     <div className={styles.page}>
       <h1 className={styles.title}>
         Huggy Wuggy <br /> & Kissy Missy
       </h1>
       <div className={styles.block_buttons}>
-<<<<<<< HEAD
-        <Button regular>Play</Button>
-        <Button regular onClick={leadersHandle}>
-=======
-        <Button regular className={styles.button}
-        onClick={
-          useCallback(() => {
-            navigate('/loading');
-          }, [navigate])}>
+        <Button regular className={styles.button} onClick={gameLoading}>
           Play
         </Button>
-        <Button
-          regular
-          className={styles.button}
-          onClick={() => {
-            navigate('/leaders');
-          }}>
->>>>>>> bug fix
+        <Button regular onClick={leadersHandle}>
           Leaderboard
         </Button>
         <Button regular onClick={forumHandle}>

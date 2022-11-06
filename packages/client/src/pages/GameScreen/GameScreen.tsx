@@ -1,7 +1,12 @@
 import React from 'react';
 import './GameScreen.module.scss';
 
-import { GameComponent } from 'src/components/Game';
-export function GameScreen() {
-  return <GameComponent />;
-}
+import {GameComponent} from '../../components/Game';
+import { BackgroundLayout } from 'src/layouts/BackgroundLayout';
+export const GameScreen = () => {
+    return ( 
+        <BackgroundLayout>
+             <GameComponent/>
+        </BackgroundLayout>
+    );
+};
