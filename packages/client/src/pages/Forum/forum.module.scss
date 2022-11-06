@@ -1,38 +1,18 @@
 @import 'src/index.module.scss';
 
-.block {
+.forum {
   @include fontSecondaryText(normal, 400, 12px, 20px);
   width: 50vw;
-  color: $text-secondary;
-  display: grid;
-  gap: 40px;
+  color: $text-secondary;  
 }
 
 .block_button {
   display: flex;
-  flex-flow: column;
-  margin: 0px 50px;
-  gap: 10px;
-}
-
-.block_buttons_top {
-  display: flex;
   flex-flow: row;
+  margin: 0px 50px;  
   gap: 10px;
+
   button {
     width: 100%;
   }
-}
-
-.block_posts {
-  display: grid;
-  gap: 10px;
-  height: 300px;
-}
-
-.block_footer {
-  @include fontTitle(normal, 400, 14px, 20px);
-  color: $text-primary;
-  width: 100%;
-  text-align: center;
 }

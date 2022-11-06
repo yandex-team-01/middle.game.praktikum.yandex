@@ -1,4 +1,4 @@
-import stylesForm from '../../../../components/Form/Form.module.scss';
+import stylesForm from 'src/components/Form/Form.module.scss';
 
 export const SettingsUserInfo = () => {
   return (

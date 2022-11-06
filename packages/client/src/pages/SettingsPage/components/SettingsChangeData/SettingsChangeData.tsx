@@ -1,22 +1,25 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Button } from '../../../../components/Button';
-import { Form } from '../../../../components/Form';
+import { Button } from 'src/components/Button';
+import { Form } from 'src/components/Form';
 import { SettingsAvatar } from '../SettingsAvatar';
 import { Input } from 'src/components/Input';
 
-import stylesForm from '../../../../components/Form/Form.module.scss';
+import stylesForm from 'src/components/Form/Form.module.scss';
+import { useCallback } from 'react';
 
 export const SettingsChangeData = () => {
   const navigate = useNavigate();
-  const saveHandle = () => {
+
+  const saveHandle = useCallback(() => {
     navigate(-1);
-  };
+  }, [navigate]);
+
   return (
     <div>
       <SettingsAvatar />
       <Form
-        actions={
+        buttons={
           <div>
             <div className={stylesForm.form_button_box}>
               <Button regular onClick={saveHandle}>

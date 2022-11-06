@@ -11,7 +11,7 @@ export const Button = ({
   disabled = false,
   className = '',
   onClick,
-}: Props): JSX.Element => (
+}: Props) => (
   <ErrorBoundary>
     <button
       className={cn(styles.button, { [styles.regular]: regular }, className)}

@@ -1,5 +1,5 @@
 import styles from './SettingsAvatar.module.scss';
-import img from '../../../../assets/images/no-avatar.png';
+import img from 'src/assets/images/no-avatar.png';
 
 export const SettingsAvatar = () => {
   const url = 0;

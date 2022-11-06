@@ -9,16 +9,19 @@ import {
   SettingsPage,
   GameLoadingPage,
   HomePage,
-} from '../../pages';
+} from 'src/pages';
 import {
   SettingsChangePassword,
   SettingsChangeData,
   SettingsData,
 } from '../../pages/SettingsPage';
 import { ProtectedRoute } from '../ProtectedRoute';
-import { BackgroundLayout } from '../../layouts/BackgroundLayout';
-import { useAppSelector } from '../../hooks/redux';
+import { BackgroundLayout } from 'src/layouts/BackgroundLayout';
+import { useAppSelector } from 'src/hooks/redux';
 import { ErrorBoundary } from '../ErrorBoundary';
+import { TopicList } from 'src/pages/Forum/components/TopicList';
+import { BlockComments } from 'src/pages/Forum/components/BlockComments';
+import { BlockCreateTopic } from 'src/pages/Forum/components/BlockCreateTopic';
 
 export const Routing = () => {
   const auth = useAppSelector(state => state.auth.auth);
@@ -42,8 +45,11 @@ export const Routing = () => {
                 <Forum />
               </BackgroundLayout>
             </ProtectedRoute>
-          }
-        />
+          }>
+          <Route index element={<TopicList />} />
+          <Route path='topic' element={<BlockComments />} />
+          <Route path='createtopic' element={<BlockCreateTopic />} />
+        </Route>
         <Route
           path="/leaders"
           element={
@@ -70,7 +76,7 @@ export const Routing = () => {
             </BackgroundLayout>
           }
         />
-        <Route path="/loading" element={<GameLoadingPage />} />
+        <Route path="/loadinggame" element={<GameLoadingPage />} />
         <Route
           path="/settings"
           element={

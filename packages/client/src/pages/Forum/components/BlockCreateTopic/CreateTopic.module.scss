@@ -1,17 +1,30 @@
 @import 'src/index.module.scss';
 
-.card {
-  padding: 8px 16px;
-  width: 100%;
-  background: $color-card;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+.block {
   display: flex;
-  box-sizing: border-box;
   flex-flow: column;
-  height: 300px;
+  height: 500px;
 }
 
-.topic {
+.button_publish {
+  margin: 10px 50px 40px;
+}
+
+.card {
+  padding: 8px 16px;
+  background: $color-card;
+  width: 100%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.block_input {
+  display: flex;
+  flex-flow: column;
+  height: 300px;
+  box-sizing: border-box;
+}
+
+.new_topic {
   display: flex;
   flex-flow: row;
   margin-top: 10px;
@@ -21,19 +34,24 @@
     color: $text-primary;
     margin: 5px 10px;
   }
+
+  .input {
+    height: 100%;
+  }
 }
 
-.title {
+.title_description {
   @include fontTitle(normal, 400, 14px, 20px);
   color: $text-primary;
   margin: 10px 10px 0px 10px;
 }
 
 .description {
-  display: flex;
-  flex: 1;
+display: flex;
+flex: 1;
 
   .input {
     flex: 1;
+    margin: 5px 0px;
   }
 }

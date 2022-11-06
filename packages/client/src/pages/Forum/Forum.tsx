@@ -1,32 +1,28 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
-import { Button } from '../../components/Button';
-import { CreateTopic } from './components/CreateTopic';
-import { TopicList } from './components/TopicList';
-import styles from './forum.module.scss';
+import { Button } from 'src/components/Button';
+import styles from './Forum.module.scss';
 
 export const Forum = () => {
-  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const handleCreateNewTopic = useCallback(() => {
-    setOpen(isOpen => !isOpen);
-  }, []);
+  const handlerBack = useCallback(() => {
+    navigate('/forum');
+  }, [navigate]);
+
+  const handlerLoadGame = useCallback(() => {
+    navigate('/loadinggame');
+  }, [navigate]);
 
   return (
     <ErrorBoundary>
-      <div className={styles.block}>
+      <div className={styles.forum}>
         <div className={styles.block_button}>
-          <div className={styles.block_buttons_top}>
-            <Button regular>GO BACK</Button>
-            <Button regular>PLAY</Button>
-          </div>
-          <Button regular onClick={handleCreateNewTopic}>
-            POST NEW TOPIC
-          </Button>
+          <Button regular onClick={handlerBack}>GO BACK</Button>
+          <Button regular onClick={handlerLoadGame}>PLAY</Button>
         </div>
-        <div className={styles.block_posts}>
-          {open ? <CreateTopic /> : <TopicList />}
-        </div>
+        <Outlet />
       </div>
     </ErrorBoundary>
   );

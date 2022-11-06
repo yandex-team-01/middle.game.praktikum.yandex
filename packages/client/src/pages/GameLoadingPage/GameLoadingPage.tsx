@@ -4,7 +4,7 @@ import { Spinner } from 'src/components/Spinner';
 import { ProgressBar } from 'src/components/ProgressBar';
 import { useProgress } from 'src/components/ProgressBar/hooks/useProgress';
 
-export const GameLoadingPage: React.FC = (): JSX.Element => {
+export const GameLoadingPage: React.FC = () => {
   const [progress] = useProgress();
 
   return (

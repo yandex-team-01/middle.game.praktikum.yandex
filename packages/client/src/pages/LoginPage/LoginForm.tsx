@@ -1,18 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { Input } from '../../components/Input';
-import { Button } from '../../components/Button';
-import { Form } from '../../components/Form';
-import { loginSchema } from '../../constants/Schemas';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchSignin } from '../../store/auth/AuthActions';
-import { SigninData } from '../../modules/IAuth';
+import { Input } from 'src/components/Input';
+import { Button } from 'src/components/Button';
+import { Form } from 'src/components/Form';
+import { loginSchema } from 'src/constants/Schemas';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
+import { fetchSignin } from 'src/store/auth/AuthActions';
+import { SigninData } from 'src/modules/IAuth';
 
-import stylesForm from '../../components/Form/Form.module.scss';
+import stylesForm from 'src/components/Form/Form.module.scss';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
-export const LoginForm: React.FC = (): JSX.Element => {
+export const LoginForm: React.FC = () => {
   const dispath = useAppDispatch();
   const loading = useAppSelector(state => state.auth.loading);
   const signinHandler = (values: SigninData) => {
@@ -35,8 +35,8 @@ export const LoginForm: React.FC = (): JSX.Element => {
     <ErrorBoundary>
       <Form
         onSubmit={handleSubmit}
-        actions={
-          <div>
+        buttons={
+          <div key={0}>
             <div className={stylesForm.form_button_box}>
               <Button regular type="submit" disabled={loading}>
                 Sign in
