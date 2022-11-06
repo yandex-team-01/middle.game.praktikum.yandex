@@ -1,15 +1,19 @@
-import { useRef } from 'react';
-import { Game } from 'src/logic/Game/Game';
-import { useMountEffect } from 'src/utils/useMountEffect';
+import {useRef} from 'react';
+import {Game} from '../../logic/Game/Game';
+import {useMountEffect} from '../../hooks/useMountEffect';
+import { Button } from '../Button';
+import { useNavigate } from 'react-router-dom';
+import styles from '../../pages/Forum/forum.module.scss';
 
 export const GameComponent = () => {
-  const canvas = useRef<HTMLCanvasElement>(null); //https://stackoverflow.com/a/63119934
+
+  const navigate = useNavigate();
+  const canvas = useRef<HTMLCanvasElement>(null);//https://stackoverflow.com/a/63119934
   const game = useRef<Game | null>(null);
 
-  useMountEffect(() => {
+  useMountEffect (() => { 
     game.current = new Game(canvas.current as HTMLCanvasElement);
-    const gameRef = game.current;
-    game.current.start(gameRef);
+    game.current.start();
 
     return () => game.current?.destruct();
   });
@@ -25,7 +29,7 @@ export const GameComponent = () => {
           } } >END THE GAME</Button>
       </div>   
       <canvas id='game-canvas' ref={canvas} />
-
     </div>
+
   );
 };
