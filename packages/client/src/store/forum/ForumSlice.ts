@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IComment } from 'src/pages/Forum/part/Comment/types';
-import { ITopic } from 'src/pages/Forum/components/Topic/types';
+import { ITopic } from 'src/pages/Forum/part/Topic/types';
 import { initialState } from './initialSlice';
 
 export const forumSlice = createSlice({
@@ -23,7 +23,7 @@ export const forumSlice = createSlice({
       if (topic) topic.comments.push(action.payload.comment);
     },
     addNewTopic(state, action: PayloadAction<ITopic>) {
-      state.listTopics.unshift(action.payload);
+      state.listTopics.push(action.payload);
     },
   },
 });

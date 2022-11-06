@@ -51,7 +51,7 @@ export const BlockCreateTopic = () => {
         <Button regular className={styles.button_publish} onClick={handleCreateNewTopic}>PUBLISH</Button>
         <BlankWindow className={styles.card}>
           <div className={styles.block_input}>
-            <div className={styles.topic}>
+            <div className={styles.new_topic}>
               <div className={styles.title}>NEW TOPIC: </div>
               <Input
                 name="name_topic"
