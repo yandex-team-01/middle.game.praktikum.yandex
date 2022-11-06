@@ -26,7 +26,14 @@ export const Routing = () => {
   return (
     <ErrorBoundary>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/"
+          element={
+            <BackgroundLayout>
+              <HomePage />
+            </BackgroundLayout>
+          }
+        />
         <Route
           path="/forum"
           element={
@@ -39,7 +46,6 @@ export const Routing = () => {
         />
         <Route
           path="/leaders"
-          key={0}
           element={
             <ProtectedRoute flag={auth} redirect="/login">
               <BackgroundLayout>

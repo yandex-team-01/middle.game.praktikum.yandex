@@ -21,8 +21,8 @@
 
 .block_buttons {
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  gap: 20px;
   max-width: 800px;
   margin-bottom: 40px;
 
@@ -71,16 +71,10 @@
   }
 }
 
-.button {
-  width: 100%;
-  margin-top: 15px;
-  font-size: 37px;
-  line-height: 43px;
-}
-
 .buttons {
-  display: flex;
+  display: grid;
   align-items: center;
+  grid-template-columns: repeat(2, 1fr);
   justify-content: stretch;
   width: 100%;
   max-width: 800px;
