@@ -70,7 +70,7 @@ export class Game {
 
 
     start(gameRef:Game){
-        if (gameRef && !this.isOver) {
+        if (gameRef) {
             gameRef.StartAnimating(10);  
             const updater = () => {
                 gameRef.animate();
