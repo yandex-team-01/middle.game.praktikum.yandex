@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
-import styles from './RegistrationPage.module.scss';
+
 import stylesForm from '../../components/Form/Form.module.scss';
 
 import { regSchema } from '../../constants/Schemas';
@@ -50,22 +50,20 @@ export const RegistrationForm: React.FC = (): JSX.Element => {
     <ErrorBoundary>
       <Form
         onSubmit={handleSubmit}
-        actions={[
-          <div key={0}>
+        actions={
+          <div>
             <div className={stylesForm.form_button_box}>
-              <Button regular type="submit" disabled={loading}>
-                <span className={styles.reg_button_title}>Sign Up</span>
+              <Button regular type="submit" disabled={loading}>Sign Up
               </Button>
             </div>
 
             <Link to="/login" className={stylesForm.form_sign_in_link}>
               Sign In
             </Link>
-          </div>,
-        ]}>
+          </div>}>
         <div>
-          <h4 className={stylesForm.form_title}>First Name</h4>
           <Input
+            label='First Name'
             name="first_name"
             value={values.first_name}
             onChange={handleChange}
@@ -76,8 +74,8 @@ export const RegistrationForm: React.FC = (): JSX.Element => {
             }
             error={errors.first_name}
           />
-          <h4 className={stylesForm.form_title}>Second Name</h4>
           <Input
+          label='Second Name'
             name="second_name"
             value={values.second_name}
             onChange={handleChange}
@@ -88,8 +86,8 @@ export const RegistrationForm: React.FC = (): JSX.Element => {
             }
             error={errors.second_name}
           />
-          <h4 className={stylesForm.form_title}>Phone</h4>
           <Input
+          label='Phone'
             name="phone"
             value={values.phone}
             onChange={handleChange}
@@ -98,9 +96,8 @@ export const RegistrationForm: React.FC = (): JSX.Element => {
             showError={Boolean(errors.phone) && Boolean(touched.phone)}
             error={errors.phone}
           />
-
-          <h4 className={stylesForm.form_title}>Email</h4>
           <Input
+          label='Email'
             name="email"
             value={values.email}
             onChange={handleChange}
@@ -109,9 +106,8 @@ export const RegistrationForm: React.FC = (): JSX.Element => {
             showError={Boolean(errors.email) && Boolean(touched.email)}
             error={errors.email}
           />
-
-          <h4 className={stylesForm.form_title}>Login</h4>
           <Input
+          label='Login'
             name="login"
             value={values.login}
             onChange={handleChange}
@@ -120,9 +116,8 @@ export const RegistrationForm: React.FC = (): JSX.Element => {
             showError={Boolean(errors.login) && Boolean(touched.login)}
             error={errors.login}
           />
-
-          <h4 className={stylesForm.form_title}>Password</h4>
           <Input
+          label='Password'
             name="password"
             type="password"
             value={values.password}
@@ -132,9 +127,8 @@ export const RegistrationForm: React.FC = (): JSX.Element => {
             showError={Boolean(errors.password) && Boolean(touched.password)}
             error={errors.password}
           />
-
-          <h4 className={stylesForm.form_title}>Password</h4>
           <Input
+          label='Repeat Password'
             name="repeatPassword"
             type="password"
             value={values.repeatPassword}

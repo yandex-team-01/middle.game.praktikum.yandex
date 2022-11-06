@@ -23,36 +23,36 @@
 }
 
 @mixin tn {
-  @media(max-width: 383px) {
+  @media (max-width: 383px) {
     @content;
   }
 }
 
 @mixin xs {
-  @media(max-width: 575px) {
+  @media (max-width: 575px) {
     @content;
   }
 }
 
 @mixin xxs {
-  @media(max-width: 479px) {
+  @media (max-width: 479px) {
     @content;
   }
 }
 
 @mixin lg {
-  @media(max-width: 1199px) {
+  @media (max-width: 1199px) {
     @content;
   }
 }
 
 @mixin md {
-  @media(max-width: 991px) {
+  @media (max-width: 991px) {
     @content;
   }
 }
 @mixin sm {
-  @media(max-width: 767px) {
+  @media (max-width: 767px) {
     @content;
   }
 }

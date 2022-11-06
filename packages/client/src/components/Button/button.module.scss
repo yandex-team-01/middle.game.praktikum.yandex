@@ -12,10 +12,25 @@
   &:hover {
     background: #4c5c89;
   }
-
   &:disabled {
     opacity: 0.5;
     cursor: auto;
+  }
+  font-size: 33px;
+  @include md {
+    font-size: 29px;
+  }
+  @include sm {
+    font-size: 26px;
+  }
+  @include xs {
+    font-size: 24px;
+  }
+  @include xxs {
+    font-size: 23px;
+  }
+  @include tn {
+    font-size: 21px;
   }
 }
 

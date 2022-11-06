@@ -5,24 +5,25 @@ import { Form } from '../../../../components/Form';
 import { SettingsAvatar } from '../SettingsAvatar';
 import { Input } from 'src/components/Input';
 
-import styles from '../../SettingsPage.module.scss';
 import stylesForm from '../../../../components/Form/Form.module.scss';
 
 export const SettingsChangeData = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const saveHandle = () => {
+    navigate(-1);
+  };
   return (
-    <>
+    <div>
       <SettingsAvatar />
       <Form
-        actions={[
-          <div key={0}>
+        actions={
+          <div>
             <div className={stylesForm.form_button_box}>
-              <Button regular onClick={() => navigate(-1)}>
+              <Button regular onClick={saveHandle}>
                 Save
               </Button>
             </div>
-          </div>,
-        ]}>
+          </div>}>
         <Input label="Email" name="email" type="email" className="regular" />
         <Input label="Login" name="login" type="text" className="regular" />
         <Input label="Nick" name="nickname" type="text" className="regular" />
@@ -35,6 +36,6 @@ export const SettingsChangeData = () => {
         />
         <Input label="Phone" name="phone" type="text" className="regular" />
       </Form>
-    </>
+    </div>
   );
 };

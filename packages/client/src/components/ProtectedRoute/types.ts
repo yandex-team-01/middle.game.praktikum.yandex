@@ -1,5 +1,5 @@
 export type Props = {
-  flag: boolean
-  redirect: string
-  children: JSX.Element
-}
+  flag: boolean;
+  redirect: string;
+  children: JSX.Element;
+};

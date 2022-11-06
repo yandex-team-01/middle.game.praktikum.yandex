@@ -1,7 +1,3 @@
-export interface FindUserData {
-  login: string;
-}
-
 export interface UserData {
   first_name: string;
   second_name: string;

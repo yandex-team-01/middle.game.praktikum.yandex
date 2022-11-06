@@ -1,1 +1,1 @@
-export { SettingsChangeData } from "./SettingsChangeData"
+export { SettingsChangeData } from './SettingsChangeData';

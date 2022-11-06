@@ -2,8 +2,8 @@ import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { EmptyLayout } from '../../layouts/EmptyLayout';
 
 const props = {
-  title: "Нет соединения",
-  description: "500"
+  title: 'Нет соединения',
+  description: '500',
 };
 
 export const ErrorPage500 = () => {

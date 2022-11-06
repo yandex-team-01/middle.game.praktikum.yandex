@@ -1,1 +1,1 @@
-export { SettingsAvatar } from "./SettingsAvatar";
+export { SettingsAvatar } from './SettingsAvatar';
