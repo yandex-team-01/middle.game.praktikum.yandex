@@ -21,7 +21,8 @@ export const SettingsChangePassword = () => {
                 Save
               </Button>
             </div>
-          </div>}>
+          </div>
+        }>
         <Input
           label="Old password"
           name="old-password"

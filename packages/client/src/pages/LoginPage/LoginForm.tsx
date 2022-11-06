@@ -46,35 +46,34 @@ export const LoginForm: React.FC = (): JSX.Element => {
             <Link to="/reg" className={stylesForm.form_sign_in_link}>
               No acc? Sign up
             </Link>
-          </div>}>
-        <div>
-          <Input
-            label="Login"
-            name="login"
-            value={values.login}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className="regular"
-            showError={Boolean(errors.login) && Boolean(touched.login)}
-            error={errors.login}
-          />
+          </div>
+        }>
+        <Input
+          label="Login"
+          name="login"
+          value={values.login}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className="regular"
+          showError={Boolean(errors.login) && Boolean(touched.login)}
+          error={errors.login}
+        />
 
-          <Input
-            label="Password"
-            name="password"
-            type="password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className="regular"
-            showError={Boolean(errors.password) && Boolean(touched.password)}
-            error={errors.password}
-          />
+        <Input
+          label="Password"
+          name="password"
+          type="password"
+          value={values.password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className="regular"
+          showError={Boolean(errors.password) && Boolean(touched.password)}
+          error={errors.password}
+        />
 
-          <a href="resetpassword" className={stylesForm.form_pass_reset_link}>
-            forgot your password?
-          </a>
-        </div>
+        <Link to="/resetpassword" className={stylesForm.form_pass_reset_link}>
+          forgot your password?
+        </Link>
       </Form>
     </ErrorBoundary>
   );

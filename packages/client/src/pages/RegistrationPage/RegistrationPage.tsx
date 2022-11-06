@@ -17,13 +17,13 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
     <ErrorBoundary>
       <BlankWindow>
         <div className={stylesForm.form_block_title}>
-        <h1 className={stylesForm.form_logo_title}>
-          Huggy Wuggy
-          <br />& Kissy Missy
-        </h1>
+          <h1 className={stylesForm.form_logo_title}>
+            Huggy Wuggy
+            <br />& Kissy Missy
+          </h1>
         </div>
         <RegistrationForm />
-        </BlankWindow>
+      </BlankWindow>
     </ErrorBoundary>
   );
 };

@@ -37,12 +37,12 @@ export const Leaderboard = () => {
           <Button regular>Play</Button>
         </div>
         <BlankWindow className={styles.window}>
-        <div className={styles.background_overlay}>
-          <h1 className={styles.header}>Top teams</h1>
-          {LeadersMockData.map((team, idx) => {
-            return <LeaderboardLine team={team} idx={idx} key={idx} />;
-          })}
-        </div>
+          <div className={styles.background_overlay}>
+            <h1 className={styles.header}>Top teams</h1>
+            {LeadersMockData.map((team, idx) => {
+              return <LeaderboardLine team={team} idx={idx} key={idx} />;
+            })}
+          </div>
         </BlankWindow>
       </div>
     </ErrorBoundary>

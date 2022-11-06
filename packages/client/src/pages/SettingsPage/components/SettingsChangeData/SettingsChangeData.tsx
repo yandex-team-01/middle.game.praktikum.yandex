@@ -23,7 +23,8 @@ export const SettingsChangeData = () => {
                 Save
               </Button>
             </div>
-          </div>}>
+          </div>
+        }>
         <Input label="Email" name="email" type="email" className="regular" />
         <Input label="Login" name="login" type="text" className="regular" />
         <Input label="Nick" name="nickname" type="text" className="regular" />
