@@ -6,9 +6,8 @@
 }
 
 .button_wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
@@ -21,7 +20,7 @@
   width: 100%;
   color: $text-primary;
   padding: 80px 0px;
-  background-color: $main_block_bg_color;
+  // background-color: $main_block_bg_color;
   margin-top: 40px;
   display: flex;
   flex-direction: column;
@@ -31,4 +30,14 @@
 .header {
   margin: 0 0 40px;
   font-size: 30px;
+}
+
+.block {
+display: grid;
+gap: 40px;
+width: 70%;
+}
+
+.window {
+width: 100%;
 }

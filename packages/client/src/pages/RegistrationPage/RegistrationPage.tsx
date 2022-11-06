@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import stylesForm from '../../components/Form/Form.module.scss';
 import { useAppSelector } from '../../hooks/redux';
 import { RegistrationForm } from './RegistrationForm';
+import { BlankWindow } from 'src/components/BlankWindow';
 
 export const RegistrationPage: React.FC = (): JSX.Element => {
   const auth = useAppSelector(state => state.auth.auth);
@@ -14,13 +15,15 @@ export const RegistrationPage: React.FC = (): JSX.Element => {
 
   return (
     <ErrorBoundary>
-      <div className={stylesForm.form_root}>
+      <BlankWindow>
+        <div className={stylesForm.form_block_title}>
         <h1 className={stylesForm.form_logo_title}>
           Huggy Wuggy
           <br />& Kissy Missy
         </h1>
+        </div>
         <RegistrationForm />
-      </div>
+        </BlankWindow>
     </ErrorBoundary>
   );
 };

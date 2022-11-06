@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchSignin } from '../../store/auth/AuthActions';
 import { SigninData } from '../../modules/IAuth';
 
-import styles from './LoginPage.module.scss';
 import stylesForm from '../../components/Form/Form.module.scss';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
@@ -36,23 +35,21 @@ export const LoginForm: React.FC = (): JSX.Element => {
     <ErrorBoundary>
       <Form
         onSubmit={handleSubmit}
-        actions={[
-          <div key={0}>
+        actions={
+          <div>
             <div className={stylesForm.form_button_box}>
               <Button regular type="submit" disabled={loading}>
-                <span className={styles.login_button_title}>Sign in</span>
+                Sign in
               </Button>
             </div>
 
             <Link to="/reg" className={stylesForm.form_sign_in_link}>
               No acc? Sign up
             </Link>
-          </div>,
-        ]}>
+          </div>}>
         <div>
-          <h4 className={stylesForm.form_title}>Login</h4>
-
           <Input
+            label="Login"
             name="login"
             value={values.login}
             onChange={handleChange}
@@ -61,9 +58,9 @@ export const LoginForm: React.FC = (): JSX.Element => {
             showError={Boolean(errors.login) && Boolean(touched.login)}
             error={errors.login}
           />
-          <h4 className={stylesForm.form_title}>Password</h4>
 
           <Input
+            label="Password"
             name="password"
             type="password"
             value={values.password}

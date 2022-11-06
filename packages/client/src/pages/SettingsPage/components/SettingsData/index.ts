@@ -1,1 +1,1 @@
-export { SettingsData } from "./SettingsData"
+export { SettingsData } from './SettingsData';

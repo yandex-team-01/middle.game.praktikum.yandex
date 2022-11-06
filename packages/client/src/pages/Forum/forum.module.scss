@@ -4,7 +4,8 @@
   @include fontSecondaryText(normal, 400, 12px, 20px);
   width: 50vw;
   color: $text-secondary;
-  padding: 20px 0px;
+  display: grid;
+  gap: 40px;
 }
 
 .block_button {
@@ -24,9 +25,7 @@
 }
 
 .block_posts {
-  display: flex;
-  flex-flow: column;
-  margin-top: 40px;
+  display: grid;
   gap: 10px;
   height: 300px;
 }

@@ -1,1 +1,1 @@
-export { SettingsChangePassword } from "./SettingsChangePassword"
+export { SettingsChangePassword } from './SettingsChangePassword';

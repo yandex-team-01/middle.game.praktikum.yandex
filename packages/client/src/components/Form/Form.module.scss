@@ -9,29 +9,31 @@
   align-items: center;
 }
 
-.form_logo_title {
+.form_block_title {
   @include h-center-content;
+}
+
+.form_logo_title {
   font: $font_type_Frijole_400_60_px;
   color: $main_logo_text_color;
   text-align: center;
   letter-spacing: 0px;
 
   position: absolute;
-  margin-top: -101px;
-  margin-left: 33px;
+  top: -100px;
 
   @include lg {
     font-size: 53px;
     text-align: center;
-    margin-top: -80px;
+    top: -80px;
   }
   @include md {
     font-size: 46px;
-    margin-top: -60px;
+    top: -60px;
   }
   @include sm {
     font-size: 39px;
-    margin-top: -40px;
+    top: -40px;
   }
   @include xs {
     font-size: 36px;

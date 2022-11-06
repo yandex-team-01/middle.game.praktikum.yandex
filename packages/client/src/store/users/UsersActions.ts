@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { FindUserData, UserData, ChangePasswordData } from './../../modules/IUsers';
+import { UserData, ChangePasswordData } from './../../modules/IUsers';
 import { fetchApi } from '../utils';
 import { addError } from '../error/ErrorSlice';
 
@@ -7,21 +7,6 @@ const defaultHeaders = {
   'content-type': 'application/json',
   mode: 'cors',
 };
-
-export const fetchFindUser = createAsyncThunk(
-  'user/fetchFindUser',
-  async (data: FindUserData, thunkApi) => {
-    try {
-      const res = await fetchApi('/user/search', {
-        method: 'POST',
-        headers: defaultHeaders,
-        body: JSON.stringify(data),
-      });
-      return res;
-    } catch (error) {
-    }
-  }
-);
 
 export const fetchChangeUser = createAsyncThunk(
   'auth/fetchChangeUser',
@@ -34,6 +19,8 @@ export const fetchChangeUser = createAsyncThunk(
       });
       return res;
     } catch (error) {
+      thunkApi.dispatch(addError('Ошибка изменения профиля'));
+      return thunkApi.rejectWithValue('Ошибка изменения профиля');
     }
   }
 );
@@ -49,6 +36,8 @@ export const fetchChangePassword = createAsyncThunk(
       });
       return res;
     } catch (error) {
+      thunkApi.dispatch(addError('Ошибка смены пароля'));
+      return thunkApi.rejectWithValue('Ошибка смены пароля');
     }
   }
 );

@@ -14,7 +14,12 @@ export const CreateTopic = () => {
         </div>
         <div className={styles.title}>Topic description: </div>
         <div className={styles.description}>
-          <Input name="name_topic" className={styles.input} onChange={() => change} value="" />
+          <Input
+            name="name_topic"
+            className={styles.input}
+            onChange={() => change}
+            value=""
+          />
         </div>
       </BlankWindow>
     </ErrorBoundary>

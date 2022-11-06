@@ -17,17 +17,13 @@ export const Forum = () => {
       <div className={styles.block}>
         <div className={styles.block_button}>
           <div className={styles.block_buttons_top}>
-            <Button>GO BACK</Button>
-            <Button>PLAY</Button>
+            <Button regular>GO BACK</Button>
+            <Button regular>PLAY</Button>
           </div>
-          <Button onClick={handleCreateNewTopic}>POST NEW TOPIC</Button>
+          <Button regular onClick={handleCreateNewTopic}>POST NEW TOPIC</Button>
         </div>
         <div className={styles.block_posts}>
-          {open ? (
-            <CreateTopic />
-          ) : (
-            <TopicList />
-          )}
+          {open ? <CreateTopic /> : <TopicList />}
         </div>
       </div>
     </ErrorBoundary>

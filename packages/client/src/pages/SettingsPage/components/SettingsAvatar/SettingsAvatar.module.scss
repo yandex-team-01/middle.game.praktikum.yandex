@@ -1,13 +1,14 @@
 @import 'src/index.module.scss';
 
 .rounded {
-    width: 130px;
-    height: 130px;
-    background-color: $bg-color-secondary;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    top: 60px;
+  width: 130px;
+  height: 130px;
+  background-color: $bg-color-secondary;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -65px;
+  left: calc(50% - 65px);
 }

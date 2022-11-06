@@ -1,4 +1,4 @@
-import env from "../../env"
+import { env } from 'src/constants/Env';
 
 const baseUrl = env.HOST_API;
 
