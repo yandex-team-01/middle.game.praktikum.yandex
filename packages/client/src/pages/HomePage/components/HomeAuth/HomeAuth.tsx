@@ -25,13 +25,19 @@ export const HomeAuth = () => {
     dispath(fetchLogout());
   }, [dispath]);
 
+  const gameLoading = useCallback(() => {
+    navigate('/loadinggame');
+  }, [navigate]);
+
   return (
     <div className={styles.page}>
       <h1 className={styles.title}>
         Huggy Wuggy <br /> & Kissy Missy
       </h1>
       <div className={styles.block_buttons}>
-        <Button regular>Play</Button>
+        <Button regular className={styles.button} onClick={gameLoading}>
+          Play
+        </Button>
         <Button regular onClick={leadersHandle}>
           Leaderboard
         </Button>

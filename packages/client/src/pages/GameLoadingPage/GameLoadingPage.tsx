@@ -3,9 +3,14 @@ import styles from './GameLoadingPage.module.scss';
 import { Spinner } from 'src/components/Spinner';
 import { ProgressBar } from 'src/components/ProgressBar';
 import { useProgress } from 'src/components/ProgressBar/hooks/useProgress';
+import { Navigate } from 'react-router-dom';
 
 export const GameLoadingPage: React.FC = () => {
   const [progress] = useProgress();
+  
+  if (progress === 100) {
+    return <Navigate to="/game" />;
+  }
 
   return (
     <div className={styles.game_loading_root}>
