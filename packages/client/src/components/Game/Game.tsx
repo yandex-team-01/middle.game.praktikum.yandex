@@ -3,7 +3,7 @@ import {Game} from '../../logic/Game/Game';
 import {useMountEffect} from '../../hooks/useMountEffect';
 import { Button } from '../Button';
 import { useNavigate } from 'react-router-dom';
-import styles from '../../pages/Forum/forum.module.scss';
+import styles from '../../pages/GameScreen/GameScreen.module.scss';
 
 export const GameComponent = () => {
 
@@ -19,15 +19,15 @@ export const GameComponent = () => {
   });
 
   return (
-    <div>         
-      <div className={styles.block_buttons_top}>
-        <Button onClick={() => {
-              navigate('/');
-            }}>GO BACK</Button>
-        <Button regular className={styles.button} onClick={() => {
-            game.current?.end();
-          } } >END THE GAME</Button>
-      </div>   
+    <div>
+        <div className={styles.block_button}>
+          <Button regular onClick={() => {
+                navigate('/');
+              }}>GO BACK</Button>
+          <Button regular onClick={() => {
+              game.current?.end();
+            } } >END THE GAME</Button>
+        </div>  
       <canvas id='game-canvas' ref={canvas} />
     </div>
 

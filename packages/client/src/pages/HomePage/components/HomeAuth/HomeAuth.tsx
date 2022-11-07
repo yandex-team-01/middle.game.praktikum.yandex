@@ -26,7 +26,7 @@ export const HomeAuth = () => {
   }, [dispath]);
 
   const gameLoading = useCallback(() => {
-    navigate('/loading');
+    navigate('/loadinggame');
   }, [navigate]);
 
   return (

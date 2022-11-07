@@ -8,3 +8,13 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.block_button {
+  display: flex;
+  flex-flow: row;
+  gap: 10px;
+
+  button {
+    width: 100%;
+  }
+}

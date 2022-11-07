@@ -22,6 +22,7 @@ import { ErrorBoundary } from '../ErrorBoundary';
 import { TopicList } from 'src/pages/Forum/components/TopicList';
 import { BlockComments } from 'src/pages/Forum/components/BlockComments';
 import { BlockCreateTopic } from 'src/pages/Forum/components/BlockCreateTopic';
+import { GameScreen } from 'src/pages/GameScreen';
 
 export const Routing = () => {
   const auth = useAppSelector(state => state.auth.auth);
@@ -77,6 +78,7 @@ export const Routing = () => {
           }
         />
         <Route path="/loadinggame" element={<GameLoadingPage />} />
+        <Route path="/game" element={<GameScreen />} />
         <Route
           path="/settings"
           element={
