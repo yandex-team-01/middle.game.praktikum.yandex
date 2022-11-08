@@ -1,0 +1,31 @@
+@import 'src/index.module.scss';
+
+.error_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+.error {
+  width: 100vw;
+  height: 50px;
+  background: #f35f63;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.error_text {
+  margin: 0;
+  @include fontText(normal, 400, 18px, 50px);
+  color: #ffffff;
+  text-align: center;
+}
+.error_button {
+  position: absolute;
+  top: calc(50% - 8px);
+  right: 10px;
+  cursor: pointer;
+}

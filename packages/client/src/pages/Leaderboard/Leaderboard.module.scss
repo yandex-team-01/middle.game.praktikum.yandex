@@ -1,0 +1,42 @@
+@import 'src/index.module.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.button_wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.button_item {
+  width: 400px;
+}
+
+.background_overlay {
+  @include fontText(normal, 400, 12px, 20px);
+  width: 100%;
+  color: $text-primary;
+  padding: 80px 0px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  margin: 0 0 40px;
+  font-size: 30px;
+}
+
+.block {
+  display: grid;
+  gap: 40px;
+  width: 70%;
+}
+
+.window {
+  width: 100%;
+}

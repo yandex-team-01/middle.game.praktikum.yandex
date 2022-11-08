@@ -1,0 +1,44 @@
+@import 'src/index.module.scss';
+
+.button {
+  @include fontText(normal, 400, 24px, 40px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $text-primary;
+  box-sizing: border-box;
+  padding: 10px;
+  background: $bg-color-secondary;
+  &:hover {
+    background: #4c5c89;
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: auto;
+  }
+  font-size: 33px;
+  @include md {
+    font-size: 29px;
+  }
+  @include sm {
+    font-size: 26px;
+  }
+  @include xs {
+    font-size: 24px;
+  }
+  @include xxs {
+    font-size: 23px;
+  }
+  @include tn {
+    font-size: 21px;
+  }
+}
+
+.regular {
+  background-color: $main_input_bg_color;
+  border: $main_button_border_color;
+  height: 84px;
+  cursor: pointer;
+  box-shadow: inset 0px 0px 2px #222a5c, inset 0px 0px 4px #222a5c,
+    inset 0px -6px 4px #38002c, inset 0px 8px 2px rgba(255, 255, 255, 0.46);
+}
