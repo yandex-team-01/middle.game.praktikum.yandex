@@ -1,92 +1,150 @@
-import {PlayerOne,PlayerTwo} from '../../logic/Player/Player';
-import { GameImageProps } from './types';
+import { PlayerOne } from '../../logic/Player/Player';
+import { Sprite } from '../Sprite';
+import { View } from '../View';
+import { Npc } from '../Npc';
+import { sprites, SPRITE_ID, defaultOptionNpc } from '../const';
+import { GameEntities, AllSprites } from '../types';
 
 export class Game {
- 
-    private ctx: CanvasRenderingContext2D;
-    private width = 800;
-    private height = 500;
+  private ctx: CanvasRenderingContext2D;
+  private width = 800;
+  private height = 500;
 
-    private background: HTMLImageElement;
+  public fpsInterval: number | undefined;
+  public now: number | undefined;
+  public then: number | undefined;
+  public elapsed: number | undefined;
+  public animationRequestId: number | undefined;
 
-    public fpsInterval: number | undefined; 
-    public now: number | undefined;
-    public then: number | undefined;
-    public elapsed: number | undefined;
-    public animationRequestId: number | undefined; 
+  private playerOne: PlayerOne;
+  // private playerTwo: PlayerTwo; //временно убрала второго игрока
+  private gameOverBackgroundAudio: HTMLAudioElement | undefined;
 
-    private playerOne: PlayerOne;
-    private playerTwo: PlayerTwo;
-    private gameOverBackgroundAudio: HTMLAudioElement | undefined;
+  private defoultSprites = sprites;
+  public sprites: AllSprites;
+  public view: View;
+  public arrNpc: Npc[];
 
-    constructor(protected canvas: HTMLCanvasElement) {
-        this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
+  constructor(protected canvas: HTMLCanvasElement) {
+    this.sprites = {};
 
-        this.canvas.width = this.width;
-        this.canvas.height = this.height;
+    this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
+    this.canvas.width = this.width;
+    this.canvas.height = this.height;
 
-        this.playerOne = new PlayerOne(this.ctx, this.height,this.width);    
-        this.playerTwo = new PlayerTwo(this.ctx, this.height,this.width);
+    this.view = new View(this.canvas);
+    this.playerOne = new PlayerOne(this.ctx, this.height, this.width);
+    // this.playerTwo = new PlayerTwo(this.ctx, this.height,this.width);//временно убрала второго игрока
 
-        this.background = new Image();
-        this.background.src = "/src/assets/images/game-background.png";
+    // временно вывожу массив npc
+    this.arrNpc = defaultOptionNpc.map(option => new Npc(option));
+  }
+
+  async init(ignore: boolean, callback: () => void) {
+    await this.prepareSprites();
+    if (ignore) {
+      this.start();
+      callback();
     }
-    
-    destruct(){
-        window.removeEventListener('keydown',  this.playerOne.keyDownCustom);
-        window.removeEventListener('keydown',  this.playerTwo.keyDownCustom);
-        window.removeEventListener('keyup',  this.playerOne.keyUpCustom);
-        window.removeEventListener('keyup',  this.playerTwo.keyUpCustom);
-        if (this.animationRequestId) {
-            cancelAnimationFrame(this.animationRequestId);
-        }
-    }
+  }
 
-    start(){
-        this.startAnimating(10);  
-        const updater = () => {
-            this.animate();
-            this.animationRequestId =requestAnimationFrame( updater );  // for subsequent frames
-        };
-        this.animationRequestId = requestAnimationFrame( updater ); // for the first frame https://stackoverflow.com/a/44975010     
+  private prepareSprite = (sprite: Sprite) => {
+    if (this.sprites[sprite.id]) {
+      throw Error('error');
     }
 
-    end(){     
-        if(typeof this.gameOverBackgroundAudio === 'undefined'){
-            this.gameOverBackgroundAudio = new Audio("/src/assets/audio/game-over.mp3");
-            this.gameOverBackgroundAudio.play();
-        }
-        cancelAnimationFrame(this.animationRequestId as number);
-        this.background = new Image();
-        this.background.onload = () =>{
-            this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
-        }; //https://stackoverflow.com/a/15058168
-        this.background.src = "/src/assets/images/game-over-background.png";          
-    } 
+    this.sprites[sprite.id] = sprite;
+  };
 
+  private async prepareSprites() {
+    const sprites = this.defoultSprites.map(options => new Sprite(options));
 
-    drawSprite(props:GameImageProps){
-        this.ctx.drawImage(props.img, props.sX, props.sY, props.sW, props.sH, props.dX, props.dY, props.dW, props.dH);
+    sprites.forEach(this.prepareSprite);
+    await Promise.all(sprites.map(sprite => sprite.load()));
+  }
+
+  private prepareObjectGame() {
+    // функция чтобы отдать готовые спрайты всем
+    this.view.setSprite(this.sprites);
+    this.playerOne.setSprite(this.sprites[SPRITE_ID.PLAYER]);
+    this.arrNpc.forEach(item => item.setSprite(this.sprites[SPRITE_ID.NPC]));
+  }
+
+  get gameEntities(): GameEntities {
+    return {
+      player: this.playerOne,
+      sprites: this.sprites,
+      view: this.view,
+      arrNpc: this.arrNpc,
+    };
+  }
+
+  destruct() {
+    //TODO: вынести подписку/отписку от событий в отдельный класс Controll
+    window.removeEventListener('keydown', this.playerOne.keyDownCustom);
+    //window.removeEventListener('keydown',  this.playerTwo.keyDownCustom);
+    window.removeEventListener('keyup', this.playerOne.keyUpCustom);
+    //window.removeEventListener('keyup',  this.playerTwo.keyUpCustom);
+
+    if (this.animationRequestId) {
+      cancelAnimationFrame(this.animationRequestId);
     }
-   
+  }
 
-    startAnimating(fps:number){ 
-        this.fpsInterval = 1000/fps; 
-        this.then = Date.now();
+  start() {
+    this.startAnimating(10);
+    this.prepareObjectGame();
+    const updater = () => {
+      this.animate();
+      this.animationRequestId = requestAnimationFrame(updater); // for subsequent frames
+    };
+    this.animationRequestId = requestAnimationFrame(updater); // for the first frame https://stackoverflow.com/a/44975010
+  }
+
+  end() {
+    //TODO: вынести в отдельный контроллер для аудио
+    if (typeof this.gameOverBackgroundAudio === 'undefined') {
+      this.gameOverBackgroundAudio = new Audio(
+        '/src/assets/audio/game-over.mp3'
+      );
+      this.gameOverBackgroundAudio.play();
     }
+    cancelAnimationFrame(this.animationRequestId as number);
+    this.view.renderGameOver();
+  }
 
-    animate(){
-        if (this.then !== undefined && this.fpsInterval !== undefined){
-            this.now = Date.now();
-            this.elapsed = this.now - this.then;
-            if (this.elapsed > this.fpsInterval){
-                this.then = this.now - (this.elapsed % this.fpsInterval); 
-                this.ctx.clearRect (0,0,this.canvas.width, this.canvas.height); 
-                this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
-                this.playerOne.animate(); 
-                this.playerTwo.animate(); 
-            }
-        }
+  startAnimating(fps: number) {
+    this.fpsInterval = 1000 / fps;
+    this.then = Date.now();
+  }
 
+  checkСollision(): void {
+    // простая функция проверки столкновений
+    const [x1, x2, y1, y2] = this.playerOne.position;
+
+    this.arrNpc.forEach(npc => {
+      const [x3, x4, y3, y4] = npc.position;
+      let XColl = false;
+      let YColl = false;
+
+      if (x2 >= x3 && x1 <= x4) XColl = true;
+      if (y2 >= y3 && y1 <= y4) YColl = true;
+
+      if (XColl && YColl) {
+        console.log('столкновение!');
+      }
+    });
+  }
+
+  animate() {
+    if (this.then !== undefined && this.fpsInterval !== undefined) {
+      this.now = Date.now();
+      this.elapsed = this.now - this.then;
+      if (this.elapsed > this.fpsInterval) {
+        this.then = this.now - (this.elapsed % this.fpsInterval);
+        this.checkСollision();
+        this.view.update(this.gameEntities);
+      }
     }
+  }
 }
