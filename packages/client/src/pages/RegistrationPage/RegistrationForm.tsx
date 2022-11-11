@@ -7,15 +7,16 @@ import { Form } from 'src/components/Form';
 
 import stylesForm from 'src/components/Form/Form.module.scss';
 
-import { regSchema } from 'src/constants/Schemas';
+import { regSchema, initialRegValuesSchema } from './RegistrationSchema';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { SignupData } from 'src/modules/IAuth';
 import { fetchSignup } from 'src/store/auth/AuthActions';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { selectLoading } from 'src/store/auth/AuthSelectors';
 
-export const RegistrationForm: React.FC = () => {
+export const RegistrationForm = () => {
   const dispath = useAppDispatch();
-  const loading = useAppSelector(state => state.auth.loading);
+  const loading = useAppSelector(selectLoading);
 
   const signupHandler = (values: SignupData) => {
     dispath(fetchSignup(values));
@@ -23,15 +24,7 @@ export const RegistrationForm: React.FC = () => {
 
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
-      initialValues: {
-        first_name: '',
-        second_name: '',
-        phone: '',
-        email: '',
-        login: '',
-        password: '',
-        repeatPassword: '',
-      },
+      initialValues: initialRegValuesSchema,
       validationSchema: regSchema,
       onSubmit: values => {
         const data: SignupData = {
@@ -50,10 +43,16 @@ export const RegistrationForm: React.FC = () => {
     <ErrorBoundary>
       <Form
         onSubmit={handleSubmit}
-        buttons={
+        buttonsBlock={
           <div key={0}>
             <div className={stylesForm.form_button_box}>
-              <Button regular type="submit" disabled={loading}>
+              <Button
+                regular
+                type="submit"
+                disabled={loading}
+                onClick={() => {
+                  console.log('submit');
+                }}>
                 Sign Up
               </Button>
             </div>

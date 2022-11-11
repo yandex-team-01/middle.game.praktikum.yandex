@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "title": "HELP ME!",
     "description": "Topic description",
     "author": "user_1",
@@ -22,7 +22,7 @@
     "views": 74
   },
   {
-    "id": 2,
+    "id": "2",
     "title": "HELP ME!",
     "description": "Topic description",
     "author": "user_2",
@@ -50,7 +50,7 @@
     "views": 74
   },
   {
-    "id": 3,
+    "id": "3",
     "title": "HELP ME!",
     "description": "Topic description",
     "author": "user_1",
@@ -59,7 +59,7 @@
     "views": 74
   },
   {
-    "id": 4,
+    "id": "4",
     "title": "HELP ME!",
     "description": "Topic description",
     "author": "user_1",
@@ -68,7 +68,7 @@
     "views": 74
   },
   {
-    "id": 5,
+    "id": "5",
     "title": "HELP ME!",
     "description": "Topic description",
     "author": "user_1",

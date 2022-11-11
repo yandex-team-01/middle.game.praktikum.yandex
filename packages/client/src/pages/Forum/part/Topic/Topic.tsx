@@ -1,10 +1,10 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
-import { useAppDispatch } from 'src/hooks/redux';
 import { changeActiveTopic } from 'src/store/forum/ForumSlice';
 import { Column } from '../Column/Column';
+import { useBoundAction } from './helper';
 import styles from './Topic.module.scss';
 import { ITopic } from './types';
 
@@ -18,17 +18,16 @@ export const Topic = ({
   views,
 }: ITopic) => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
-  const handlerGoToTopic = useCallback((): void => {
-    dispatch(changeActiveTopic(id));
+  const handleTopicChange = useBoundAction(() => {
     navigate('/forum/topic');
-  }, [dispatch, id, navigate]);
+    return changeActiveTopic(id);
+  });
 
   return (
     <ErrorBoundary>
       <BlankWindow className={styles.card}>
-        <div onClick={handlerGoToTopic} className={styles.topic}>
+        <div onClick={handleTopicChange} className={styles.topic}>
           <div className={styles.title}>{title}</div>
           <div>{description}</div>
           <div className={styles.author}>

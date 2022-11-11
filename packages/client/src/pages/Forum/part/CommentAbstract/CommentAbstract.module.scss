@@ -1,19 +1,14 @@
 @import 'src/index.module.scss';
 
-.column {
-  width: 10%;
+.comments {
+  padding: 5px 10px;
+  flex: 1;
   display: flex;
   flex-flow: column;
 }
 
-.title {
-  text-align: center;
-}
-
-.content {
+.count {
   @include fontSecondaryText(normal, 600, 14px, 20px);
   flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
 }

@@ -1,14 +1,17 @@
 import { BackgroundLayout } from './layouts/BackgroundLayout';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
+
 import { fetchAuth } from './store/auth/AuthActions';
 import { Preloader } from './components/Preloader';
 import { ErrorsNotification } from './components/ErrorsNotification';
 import { Routing } from './components/Routing';
 import { useMountEffect } from './hooks/useMountEffect';
+import { selectCheckAuth } from './store/auth/AuthSelectors';
 
 export const App = () => {
   const dispath = useAppDispatch();
-  const checkAuth = useAppSelector(state => state.auth.checkAuth);
+
+  const checkAuth = useAppSelector(selectCheckAuth);
 
   useMountEffect(() => {
     dispath(fetchAuth());

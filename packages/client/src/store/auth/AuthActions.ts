@@ -12,8 +12,7 @@ export const fetchAuth = createAsyncThunk(
   'auth/fetchAuth',
   async (_, thunkApi) => {
     try {
-      const res = await fetchApi('/auth/user', {});
-      return res;
+      return await fetchApi('/auth/user', {});
     } catch (error) {
       return thunkApi.rejectWithValue('Ошибка авторизации');
     }

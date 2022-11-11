@@ -1,10 +1,19 @@
-import styles from '../../HomePage.module.scss';
+import styles from './Landing.module.scss';
 import { Button } from 'src/components/Button';
 import gameImg from 'src/assets/images/game.png';
 import { useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
 
-export const HomeNotAuth = () => {
+export const Landing = () => {
   const navigate = useNavigate();
+
+  const navigateLogin = useCallback(() => {
+    navigate('/login');
+  }, [navigate]);
+
+  const navigateSignup = useCallback(() => {
+    navigate('/reg');
+  }, [navigate]);
 
   return (
     <div className={styles.page}>
@@ -28,18 +37,14 @@ export const HomeNotAuth = () => {
           regular
           type="submit"
           className={styles.button}
-          onClick={() => {
-            navigate('/login');
-          }}>
+          onClick={navigateLogin}>
           Sign in
         </Button>
         <Button
           regular
           type="submit"
           className={styles.button}
-          onClick={() => {
-            navigate('/reg');
-          }}>
+          onClick={navigateSignup}>
           Sign Up
         </Button>
       </div>
