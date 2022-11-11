@@ -1,22 +1,36 @@
-import { Npc } from './Npc';
+import { NpcControll } from './Npc';
 import { PlayerOne } from './Player/Player';
+import { AllSpritesType } from './types';
 import { GameEntities } from './types';
-import { AllSprites } from './types';
 
 export class View {
-  public canvas?: HTMLCanvasElement;
-  public ctx?: CanvasRenderingContext2D | null;
-  public sprites: AllSprites;
+  public canvas: HTMLCanvasElement;
+  public ctx: CanvasRenderingContext2D;
+  public sprites: AllSpritesType;
 
-  constructor(canvas: HTMLCanvasElement) {
+  public fpsInterval: number | undefined;
+  public now: number | undefined;
+  public then: number | undefined;
+  public elapsed: number | undefined;
+  public animationRequestId: number | undefined;
+  public playerOne: PlayerOne;
+  public npcControll: NpcControll;
+
+  constructor(
+    canvas: HTMLCanvasElement,
+    ctx: CanvasRenderingContext2D,
+    { player, npcControll }: GameEntities
+  ) {
     this.sprites = {};
     this.canvas = canvas;
-    this.ctx = this.canvas.getContext('2d');
     this.canvas.width = 800;
     this.canvas.height = 500;
+    this.ctx = ctx;
+    this.playerOne = player;
+    this.npcControll = npcControll;
   }
 
-  setSprite(sprites: AllSprites) {
+  setSprite(sprites: AllSpritesType) {
     this.sprites = sprites;
   }
 
@@ -33,47 +47,6 @@ export class View {
         this.canvas.height
       );
     }
-  }
-
-  renderPlayer(player: PlayerOne): void {
-    if (!player.sprite) {
-      return;
-    }
-
-    this.ctx?.drawImage(
-      player.sprite.image,
-      player.width * player.frameX,
-      player.height * player.frameY,
-      player.width,
-      player.height,
-      player.x,
-      player.y,
-      player.width,
-      player.height
-    );
-    this.ctx?.strokeRect(player.x, player.y, player.width, player.height);
-    player.animate();
-  }
-
-  renderNpc(npcArr: Npc[]): void {
-    npcArr.forEach(npc => {
-      if (!npc.sprite) {
-        return;
-      }
-
-      this.ctx?.drawImage(
-        npc.sprite.image,
-        npc.width * npc.frameX,
-        npc.height * npc.frameY,
-        npc.width,
-        npc.height,
-        npc.x,
-        npc.y,
-        npc.width,
-        npc.height
-      );
-      this.ctx?.strokeRect(npc.x, npc.y, npc.width, npc.height);
-    });
   }
 
   renderGameOver() {
@@ -93,9 +66,58 @@ export class View {
     }
   }
 
-  update({ player, arrNpc }: GameEntities): void {
+  update(): void {
     this.prepareCanvas();
-    this.renderPlayer(player);
-    this.renderNpc(arrNpc);
+    this.npcControll.render(this.ctx);
+    this.playerOne.render(this.ctx);
+  }
+
+  startAnimating(fps: number) {
+    this.fpsInterval = 1000 / fps;
+    this.then = Date.now();
+  }
+
+  checkСollision(): void {
+    // TODO: вынесу в отдельный класс когда усложню логику столкновения
+    const posPlayer = this.playerOne.position;
+
+    this.npcControll.arrNpc.forEach(npc => {
+      const posNpc = npc.position;
+      let XColl = false;
+      let YColl = false;
+      if (posPlayer.x2 >= posNpc.x1 && posPlayer.x1 <= posNpc.x2) XColl = true;
+      if (posPlayer.y2 >= posNpc.y1 && posPlayer.y1 <= posNpc.y2) YColl = true;
+      if (XColl && YColl) {
+        console.log('столкновение!');
+      }
+    });
+  }
+
+  animate() {
+    if (this.then !== undefined && this.fpsInterval !== undefined) {
+      this.now = Date.now();
+      this.elapsed = this.now - this.then;
+      if (this.elapsed > this.fpsInterval) {
+        this.then = this.now - (this.elapsed % this.fpsInterval);
+        this.checkСollision();
+        this.update();
+      }
+    }
+  }
+
+  stopCycle() {
+    if (this.animationRequestId) {
+      cancelAnimationFrame(this.animationRequestId);
+    }
+    this.renderGameOver();
+  }
+
+  startCycle() {
+    this.startAnimating(10);
+    const updater = () => {
+      this.animate();
+      this.animationRequestId = requestAnimationFrame(updater); // for subsequent frames
+    };
+    this.animationRequestId = requestAnimationFrame(updater);
   }
 }

@@ -1,4 +1,33 @@
-import { SpriteOptions } from './types';
+import { SpriteOptions, AllSpritesType } from './types';
+import { spritesOptions } from './const';
+
+export class AllSprites {
+  private defoultSprites = spritesOptions;
+  public sprites: AllSpritesType;
+
+  constructor() {
+    this.sprites = {};
+  }
+
+  private prepareSprite = (sprite: Sprite) => {
+    if (this.sprites[sprite.id]) {
+      throw Error('error');
+    }
+
+    this.sprites[sprite.id] = sprite;
+  };
+
+  public async prepareSprites() {
+    const sprites = this.defoultSprites.map(options => new Sprite(options));
+
+    sprites.forEach(this.prepareSprite);
+    await Promise.all(sprites.map(sprite => sprite.load()));
+  }
+
+  public getSprites() {
+    return this.sprites;
+  }
+}
 
 export class Sprite {
   public id: number | string;

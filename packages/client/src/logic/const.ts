@@ -11,7 +11,7 @@ export const SPRITE_ID = {
   NPC: 'npc',
 } as const;
 
-export const sprites: SpriteOptions[] = [
+export const spritesOptions: SpriteOptions[] = [
   { id: SPRITE_ID.MAIN_BACK, src: back, width: 100, height: 100 },
   { id: SPRITE_ID.GAME_OVER_BACK, src: gameOver, width: 100, height: 100 },
   { id: SPRITE_ID.PLAYER, src: player, width: 40, height: 72 },

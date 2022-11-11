@@ -1,7 +1,7 @@
 import { PlayerOne } from './Player/Player';
 import { View } from './View';
 import { Sprite } from './Sprite';
-import { Npc } from './Npc';
+import { NpcControll } from './Npc';
 
 export type SpriteOptions = {
   id: number | string;
@@ -10,7 +10,7 @@ export type SpriteOptions = {
   height: number;
 };
 
-export type AllSprites = Record<number | string, Sprite>;
+export type AllSpritesType = Record<number | string, Sprite>;
 
 export type NpcConstructorOptions = {
   id: number;
@@ -20,7 +20,14 @@ export type NpcConstructorOptions = {
 
 export type GameEntities = {
   player: PlayerOne;
-  arrNpc: Npc[];
+  npcControll: NpcControll;
   view: View;
   sprites: Record<number | string, Sprite>;
+};
+
+export type Position = {
+  x1: number;
+  x2: number;
+  y1: number;
+  y2: number;
 };
