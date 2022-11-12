@@ -1,0 +1,14 @@
+0 silly argv {
+0 silly argv   _: [ 'add' ],
+0 silly argv   scope: 'client',
+0 silly argv   globs: [],
+0 silly argv   lernaVersion: '5.4.3',
+0 silly argv   '$0': 'node_modules\\lerna\\cli.js',
+0 silly argv   pkg: 'i18-next-browser-languagedetector'
+0 silly argv }
+1 notice cli v5.4.3
+2 verbose rootPath C:\HP EliteBook 8440p\Яндекс.Практикум Middle Frontend\middle.game.praktikum.yandex
+3 error HttpErrorGeneral: 404 Not Found - GET https://registry.yarnpkg.com/i18-next-browser-languagedetector - Not found
+3 error     at C:\HP EliteBook 8440p\Яндекс.Практикум Middle Frontend\middle.game.praktikum.yandex\node_modules\npm-registry-fetch\lib\check-response.js:95:15
+3 error     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+3 error     at async RegistryFetcher.packument (C:\HP EliteBook 8440p\Яндекс.Практикум Middle Frontend\middle.game.praktikum.yandex\node_modules\pacote\lib\registry.js:92:19)

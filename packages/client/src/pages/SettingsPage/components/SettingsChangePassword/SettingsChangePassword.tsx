@@ -1,13 +1,15 @@
 import { useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from 'src/components/Button';
 import { Form } from 'src/components/Form';
 import { Input } from 'src/components/Input';
 
 import stylesForm from 'src/components/Form/Form.module.scss';
-import { useCallback } from 'react';
 
 export const SettingsChangePassword = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const saveHandle = useCallback(() => {
@@ -21,14 +23,14 @@ export const SettingsChangePassword = () => {
           <div>
             <div className={stylesForm.form_button_box}>
               <Button regular onClick={saveHandle}>
-                Save
+                {t('save')}
               </Button>
             </div>
           </div>
         }>
         // TODO: change dummy functions
         <Input
-          label="Old password"
+          label={t('oldPassword')}
           name="old-password"
           type="password"
           className="regular"
@@ -37,7 +39,7 @@ export const SettingsChangePassword = () => {
           }}
         />
         <Input
-          label="New password"
+          label={t('newPassword')}
           name="new-password"
           type="password"
           className="regular"
@@ -46,7 +48,7 @@ export const SettingsChangePassword = () => {
           }}
         />
         <Input
-          label="New password again"
+          label={t('newPasswordAgain')}
           name="again-password"
           type="password"
           className="regular"

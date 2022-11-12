@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from 'src/components/Button';
 import { Form } from 'src/components/Form';
@@ -6,9 +8,9 @@ import { SettingsAvatar } from '../SettingsAvatar';
 import { Input } from 'src/components/Input';
 
 import stylesForm from 'src/components/Form/Form.module.scss';
-import { useCallback } from 'react';
 
 export const SettingsChangeData = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleSave = useCallback(() => {
@@ -23,66 +25,22 @@ export const SettingsChangeData = () => {
           <div>
             <div className={stylesForm.form_button_box}>
               <Button regular onClick={handleSave}>
-                Save
+                {t('save')}
               </Button>
             </div>
           </div>
         }>
-        //TODO: change dummy functions
+        <Input label="Email" name="email" type="email" className="regular" />
+        <Input label={t('login')} name="login" type="text" className="regular" />
+        <Input label={t('nickname')} name="nickname" type="text" className="regular" />
+        <Input label={t('firstName')} name="name" type="text" className="regular" />
         <Input
-          label="Email"
-          name="email"
-          type="email"
-          className="regular"
-          onChange={() => {
-            console.log('change');
-          }}
-        />
-        <Input
-          label="Login"
-          name="login"
-          type="text"
-          className="regular"
-          onChange={() => {
-            console.log('change');
-          }}
-        />
-        <Input
-          label="Nick"
-          name="nickname"
-          type="text"
-          className="regular"
-          onChange={() => {
-            console.log('change');
-          }}
-        />
-        <Input
-          label="First Name"
-          name="name"
-          type="text"
-          className="regular"
-          onChange={() => {
-            console.log('change');
-          }}
-        />
-        <Input
-          label="Second Name"
+          label={t('secondName')}
           name="surname"
           type="text"
           className="regular"
-          onChange={() => {
-            console.log('change');
-          }}
         />
-        <Input
-          label="Phone"
-          name="phone"
-          type="text"
-          className="regular"
-          onChange={() => {
-            console.log('change');
-          }}
-        />
+        <Input label={t('phone')} name="phone" type="text" className="regular" />
       </Form>
     </div>
   );

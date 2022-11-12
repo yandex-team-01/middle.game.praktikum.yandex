@@ -1,13 +1,30 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
+import styles from './Topics.module.scss';
+
+import { Topic } from '../../part/Topic';
+import { ITopic } from '../../part/Topic/types';
+
 import { Button } from 'src/components/Button';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
+
 import { useAppSelector } from 'src/hooks/redux';
 import { selectListTopics } from 'src/store/forum/ForumSelectors';
 import { Topic } from '../../part/Topic';
 import styles from './Topics.module.scss';
 
+import { Topic } from '../../part/Topic';
+import { ITopic } from '../../part/Topic/types';
+
+import { Button } from 'src/components/Button';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
+
+import { useAppSelector } from 'src/hooks/redux';
+
 export const TopicList = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const topics = useAppSelector(selectListTopics);
 
@@ -22,7 +39,7 @@ export const TopicList = () => {
           regular
           className={styles.button_create_topic}
           onClick={handleCreateTopic}>
-          POST NEW TOPIC
+          {t('postNewTopic')}
         </Button>
         <div className={styles.list}>
           {Object.keys(topics).map((topicId: string, index: number) => {

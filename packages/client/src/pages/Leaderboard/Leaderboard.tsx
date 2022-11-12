@@ -1,9 +1,13 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
+import styles from './Leaderboard.module.scss';
+
 import { BlankWindow } from 'src/components/BlankWindow';
 import { Button } from 'src/components/Button';
 import { LeaderboardLine } from './components/LeaderboardLine';
-import styles from './Leaderboard.module.scss';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 const LeadersMockData = [
   {
@@ -29,6 +33,7 @@ const LeadersMockData = [
 ];
 
 export const Leaderboard = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleBack = useCallback(() => {
@@ -43,15 +48,15 @@ export const Leaderboard = () => {
     <div className={styles.block}>
       <div className={styles.button_wrapper}>
         <Button regular onClick={handleBack}>
-          Go back
+          {t('goBack')}
         </Button>
         <Button regular onClick={handleLoadGame}>
-          Play
+          {t('play')}
         </Button>
       </div>
       <BlankWindow className={styles.window}>
         <div className={styles.background_overlay}>
-          <h1 className={styles.header}>Top teams</h1>
+          <h1 className={styles.header}>{t('topTeams')}</h1>
           {LeadersMockData.map((team, idx) => {
             return <LeaderboardLine team={team} idx={idx} key={idx} />;
           })}

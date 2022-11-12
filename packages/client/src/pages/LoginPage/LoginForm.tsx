@@ -1,18 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
+
+import stylesForm from 'src/components/Form/Form.module.scss';
+
 import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
 import { Form } from 'src/components/Form';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
+
 import { loginSchema } from './LoginSchema';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { fetchSignin } from 'src/store/auth/AuthActions';
 import { SigninData } from 'src/modules/IAuth';
-import stylesForm from 'src/components/Form/Form.module.scss';
-import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { selectLoading } from 'src/store/auth/AuthSelectors';
 
 export const LoginForm: React.FC = () => {
+  const { t } = useTranslation();
   const dispath = useAppDispatch();
   const loading = useAppSelector(selectLoading);
   const signinHandler = (values: SigninData) => {
@@ -36,7 +41,7 @@ export const LoginForm: React.FC = () => {
       <Form
         onSubmit={handleSubmit}
         buttonsBlock={
-          <div key={0}>
+          <div>
             <div className={stylesForm.form_button_box}>
               <Button
                 regular
@@ -45,17 +50,17 @@ export const LoginForm: React.FC = () => {
                 onClick={() => {
                   console.log('submit');
                 }}>
-                Sign in
+                {t('signIn')}
               </Button>
             </div>
 
             <Link to="/reg" className={stylesForm.form_sign_in_link}>
-              No acc? Sign up
+            {t('signUp')}
             </Link>
           </div>
         }>
         <Input
-          label="Login"
+          label={t('login')}
           name="login"
           value={values.login}
           onChange={handleChange}
@@ -66,7 +71,7 @@ export const LoginForm: React.FC = () => {
         />
 
         <Input
-          label="Password"
+          label={t('password')}
           name="password"
           type="password"
           value={values.password}
@@ -78,7 +83,7 @@ export const LoginForm: React.FC = () => {
         />
 
         <Link to="/resetpassword" className={stylesForm.form_pass_reset_link}>
-          forgot your password?
+        {t('resetPassword')}
         </Link>
       </Form>
     </ErrorBoundary>

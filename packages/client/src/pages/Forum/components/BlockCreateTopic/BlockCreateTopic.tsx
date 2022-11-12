@@ -1,19 +1,25 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { v1 } from 'uuid';
+import { useTranslation } from 'react-i18next';
+
+import styles from './CreateTopic.module.scss';
+
+import { ITopic } from '../../part/Topic/types';
+
 import { BlankWindow } from 'src/components/BlankWindow';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { Button } from 'src/components/Button';
 import { Input } from 'src/components/Input';
-import styles from './CreateTopic.module.scss';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { v1 } from 'uuid';
-import { ITopic } from '../../part/Topic/types';
+
 import { addNewTopic } from 'src/store/forum/ForumSlice';
 import { useAppSelector } from 'src/hooks/redux';
 import { dateFormatting } from 'src/utils/dateFormatting';
 import { selectUserLogin } from 'src/store/auth/AuthSelectors';
 
 export const BlockCreateTopic = () => {
+  const { t } = useTranslation();
   const [nameTopic, setNameTopic] = useState('');
   const [descriptionTopic, setDescriptionTopic] = useState('');
   const navigate = useNavigate();
@@ -49,16 +55,11 @@ export const BlockCreateTopic = () => {
   return (
     <ErrorBoundary>
       <div className={styles.block}>
-        <Button
-          regular
-          className={styles.button_publish}
-          onClick={handleCreateNewTopic}>
-          PUBLISH
-        </Button>
+        <Button regular className={styles.button_publish} onClick={handleCreateNewTopic}>{t('publich')}</Button>
         <BlankWindow className={styles.card}>
           <div className={styles.block_input}>
             <div className={styles.new_topic}>
-              <div className={styles.title}>NEW TOPIC: </div>
+              <div className={styles.title}>{t('newTopic')}: </div>
               <Input
                 name="name_topic"
                 className={styles.input}
@@ -66,7 +67,7 @@ export const BlockCreateTopic = () => {
                 value={nameTopic}
               />
             </div>
-            <div className={styles.title_description}>Topic description: </div>
+            <div className={styles.title_description}>{t('topicDescription')}: </div>
             <div className={styles.description}>
               <Input
                 name="description_topic"
