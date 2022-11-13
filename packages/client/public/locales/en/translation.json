@@ -1,4 +1,5 @@
 {
+  "appTitle": "Game Huggy Wuggy & Kissy Missy",
   "editProfile": "Edit",
   "changePassword": "Change Password",
   "save": "Save",
@@ -31,5 +32,11 @@
   "publich": "Publish",
   "error500": "No Connection",
   "error404": "Page Not Found",
-  "homeDescription": "The main goal of the game is to find the key and collect diamonds. <br /> With the key, you can open the door that will take you to the next level. This game can be played either alone or for two with a friend."
+  "homeDescription": "The main goal of the game is to find the key and collect diamonds. <br /> With the key, you can open the door that will take you to the next level. This game can be played either alone or for two with a friend.",
+  "fetchAuth": "Authorisation Error",
+  "fetchSignIn": "Login Error",
+  "fetchSignUp": "Registration Error",
+  "fetchLogout": "Logout Error",
+  "fetchChangeUser": "Profile Change Error",
+  "fetchChangePassword": "Password Change Error"
 }
