@@ -1,7 +1,7 @@
 import { PlayerOne } from './Player/Player';
 import { View } from './View';
 import { Sprite } from './Sprite';
-import { NpcControll } from './Npc';
+import { NpcControll } from './NpcControll';
 
 export type SpriteOptions = {
   id: number | string;

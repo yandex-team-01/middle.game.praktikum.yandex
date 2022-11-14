@@ -1,4 +1,4 @@
-import { NpcControll } from './Npc';
+import { NpcControll } from './NpcControll';
 import { PlayerOne } from './Player/Player';
 import { AllSpritesType } from './types';
 import { GameEntities } from './types';

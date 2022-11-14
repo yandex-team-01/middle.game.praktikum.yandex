@@ -1,7 +1,7 @@
 import { PlayerOne } from '../../logic/Player/Player';
 import { AllSprites } from '../Sprite';
 import { View } from '../View';
-import { NpcControll } from '../Npc';
+import { NpcControll } from '../NpcControll';
 import { SPRITE_ID } from '../const';
 import { GameEntities, AllSpritesType } from '../types';
 
