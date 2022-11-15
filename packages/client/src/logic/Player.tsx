@@ -27,7 +27,7 @@ abstract class Player {
   frameX: number;
   frameY: number;
   speed: number;
-  moving: boolean;
+  isMoving: boolean;
   canvasHeight: number;
   canvasWidth: number;
   ctx: CanvasRenderingContext2D;
@@ -54,8 +54,8 @@ abstract class Player {
 
     this.frameX = 0;
     this.frameY = 0;
-    this.speed = 7;
-    this.moving = false;
+    this.speed = 5;
+    this.isMoving = false;
 
     this.ctx = ctx;
     this.canvasHeight = canvasHeight;
@@ -87,7 +87,7 @@ abstract class Player {
   }
 
   handlePlayerFrame() {
-    if (this.frameX < 3 && this.moving) {
+    if (this.frameX < 3 && this.isMoving) {
       this.frameX++;
     } else {
       this.frameX = 0;
@@ -190,7 +190,7 @@ export class PlayerOne extends Player {
     if (args.length > 0) {
       const event = args[0];
       delete keys[event.keyCode];
-      this.moving = false;
+      this.isMoving = false;
     }
   };
 
@@ -199,12 +199,12 @@ export class PlayerOne extends Player {
       if (keys[DirectionPlayerOne.Up] && this.y > 100) {
         this.y -= this.speed;
         this.frameY = 1;
-        this.moving = true;
+        this.isMoving = true;
       }
       if (keys[DirectionPlayerOne.Left] && this.x > 0) {
         this.x -= this.speed;
         this.frameY = 2;
-        this.moving = true;
+        this.isMoving = true;
       }
       if (
         keys[DirectionPlayerOne.Down] &&
@@ -212,7 +212,7 @@ export class PlayerOne extends Player {
       ) {
         this.y += this.speed;
         this.frameY = 0;
-        this.moving = true;
+        this.isMoving = true;
       }
       if (
         keys[DirectionPlayerOne.Right] &&
@@ -220,7 +220,7 @@ export class PlayerOne extends Player {
       ) {
         this.x += this.speed;
         this.frameY = 3;
-        this.moving = true;
+        this.isMoving = true;
       }
     }
   };
