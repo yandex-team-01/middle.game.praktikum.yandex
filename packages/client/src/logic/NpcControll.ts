@@ -9,8 +9,6 @@ export class NpcControll {
 
   arrNpc: NpcType[];
   sprites: AllSpritesType | undefined;
-  frameX: number;
-  frameY: number;
   canvasHeight: number;
   canvasWidth: number;
 
@@ -25,8 +23,6 @@ export class NpcControll {
       }
     });
 
-    this.frameX = 0;
-    this.frameY = 0;
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
 

@@ -5,11 +5,18 @@ import { Game } from './Game';
 
 const keys: boolean[] = [];
 
-enum DirectionPlayerOne {
+enum Keys {
   Up = 38,
   Down = 40,
   Left = 37,
   Right = 39,
+}
+
+enum DirectionPlayer {
+  Down = 0,
+  Up,
+  Left,
+  Right,
 }
 
 abstract class Player {
@@ -20,12 +27,10 @@ abstract class Player {
   spritePlayer: Sprite | undefined;
   width: number;
   height: number;
-
   x: number;
   y: number;
-
-  frameX: number;
-  frameY: number;
+  skinLegsFrame: number;
+  skinDirectionFrame: number;
   speed: number;
   isMoving: boolean;
   canvasHeight: number;
@@ -52,8 +57,8 @@ abstract class Player {
     this.x = 0;
     this.y = 0;
 
-    this.frameX = 0;
-    this.frameY = 0;
+    this.skinLegsFrame = 0;
+    this.skinDirectionFrame = 0;
     this.speed = 5;
     this.isMoving = false;
 
@@ -64,7 +69,7 @@ abstract class Player {
   }
   animate() {
     this.movePlayer();
-    this.handlePlayerFrame();
+    this.handlePlayerLegsFrame();
   }
 
   setSprite(sprites: AllSpritesType) {
@@ -86,11 +91,11 @@ abstract class Player {
     this.score = this.score + bonus;
   }
 
-  handlePlayerFrame() {
-    if (this.frameX < 3 && this.isMoving) {
-      this.frameX++;
+  handlePlayerLegsFrame() {
+    if (this.skinLegsFrame < 3 && this.isMoving) {
+      this.skinLegsFrame++;
     } else {
-      this.frameX = 0;
+      this.skinLegsFrame = 0;
     }
   }
 
@@ -135,8 +140,8 @@ abstract class Player {
 
     ctx.drawImage(
       this.spritePlayer.image,
-      this.width * this.frameX,
-      this.height * this.frameY,
+      this.width * this.skinLegsFrame,
+      this.height * this.skinDirectionFrame,
       this.width,
       this.height,
       this.x,
@@ -189,37 +194,37 @@ export class PlayerOne extends Player {
   keyUpCustom = (...args: KeyboardEvent[]) => {
     if (args.length > 0) {
       const event = args[0];
-      delete keys[event.keyCode];
+      keys[event.keyCode] = false;
       this.isMoving = false;
     }
   };
 
   movePlayer = () => {
     if (this.y !== undefined && this.x !== undefined) {
-      if (keys[DirectionPlayerOne.Up] && this.y > 100) {
+      if (keys[Keys.Up] && this.y > 100) {
         this.y -= this.speed;
-        this.frameY = 1;
+        this.skinDirectionFrame = DirectionPlayer.Up;
         this.isMoving = true;
       }
-      if (keys[DirectionPlayerOne.Left] && this.x > 0) {
+      if (keys[Keys.Left] && this.x > 0) {
         this.x -= this.speed;
-        this.frameY = 2;
+        this.skinDirectionFrame = DirectionPlayer.Left;
         this.isMoving = true;
       }
       if (
-        keys[DirectionPlayerOne.Down] &&
+        keys[Keys.Down] &&
         this.y < this.canvasHeight - this.height
       ) {
         this.y += this.speed;
-        this.frameY = 0;
+        this.skinDirectionFrame = DirectionPlayer.Down;
         this.isMoving = true;
       }
       if (
-        keys[DirectionPlayerOne.Right] &&
+        keys[Keys.Right] &&
         this.x < this.canvasWidth - this.width
       ) {
         this.x += this.speed;
-        this.frameY = 3;
+        this.skinDirectionFrame = DirectionPlayer.Right;
         this.isMoving = true;
       }
     }
