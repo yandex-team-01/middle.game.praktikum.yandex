@@ -11,13 +11,14 @@ import { ITopic } from '../../part/Topic/types';
 import { addNewTopic } from 'src/store/forum/ForumSlice';
 import { useAppSelector } from 'src/hooks/redux';
 import { dateFormatting } from 'src/utils/dateFormatting';
+import { selectUserLogin } from 'src/store/auth/AuthSelectors';
 
 export const BlockCreateTopic = () => {
   const [nameTopic, setNameTopic] = useState('');
   const [descriptionTopic, setDescriptionTopic] = useState('');
   const navigate = useNavigate();
 
-  const login = useAppSelector(state => state.auth.user?.login);
+  const login = useAppSelector(selectUserLogin);
   const dispatch = useDispatch();
 
   const changeName = useCallback((event: ChangeEvent) => {
@@ -48,7 +49,12 @@ export const BlockCreateTopic = () => {
   return (
     <ErrorBoundary>
       <div className={styles.block}>
-        <Button regular className={styles.button_publish} onClick={handleCreateNewTopic}>PUBLISH</Button>
+        <Button
+          regular
+          className={styles.button_publish}
+          onClick={handleCreateNewTopic}>
+          PUBLISH
+        </Button>
         <BlankWindow className={styles.card}>
           <div className={styles.block_input}>
             <div className={styles.new_topic}>

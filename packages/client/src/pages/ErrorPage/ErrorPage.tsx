@@ -1,18 +1,18 @@
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { EmptyLayout } from 'src/layouts/EmptyLayout';
 
-const props = {
-  title: 'Страница не найдена',
-  description: '404',
+type ErrorPageProps = {
+  title: string;
+  description: string;
 };
 
-export const ErrorPage404 = () => {
+export const ErrorPage = ({ title, description }: ErrorPageProps) => {
   return (
     <ErrorBoundary>
       <EmptyLayout>
         <div>
-          <h1>{props.title}</h1>
-          <h2>{props.description}</h2>
+          <h1>{title}</h1>
+          <h2>{description}</h2>
         </div>
       </EmptyLayout>
     </ErrorBoundary>

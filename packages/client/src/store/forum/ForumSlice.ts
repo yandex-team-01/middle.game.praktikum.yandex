@@ -8,8 +8,7 @@ export const forumSlice = createSlice({
   initialState,
   reducers: {
     changeActiveTopic(state, action: PayloadAction<string>) {
-      const topic = state.listTopics.find(topic => topic.id === action.payload);
-      state.activeTopic = topic;
+      state.activeTopic = state.topics[action.payload];
     },
     addCommentInTopic(
       state,
@@ -17,13 +16,11 @@ export const forumSlice = createSlice({
     ) {
       state.activeTopic?.comments.push(action.payload.comment);
 
-      const topic = state.listTopics.find(
-        topic => topic.id === action.payload.id
-      );
+      const topic = state.topics[action.payload.id];
       if (topic) topic.comments.push(action.payload.comment);
     },
     addNewTopic(state, action: PayloadAction<ITopic>) {
-      state.listTopics.push(action.payload);
+      state.topics[action.payload.id] = action.payload;
     },
   },
 });

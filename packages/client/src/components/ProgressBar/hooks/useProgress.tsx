@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 
 export const useProgress = () => {
-  const [running, setRunning] = useState(true);
   const [progress, setProgress] = useState(0);
+  const isRunning = progress <= 100;
 
   useEffect(() => {
     let id: ReturnType<typeof setInterval> = 0;
 
-    if (running) {
+    if (isRunning) {
       id = setInterval(() => {
         setProgress(prev => prev + 5);
       }, 500);
@@ -15,13 +15,7 @@ export const useProgress = () => {
     return () => {
       clearInterval(id);
     };
-  }, [running]);
-
-  useEffect(() => {
-    if (progress === 100) {
-      setRunning(false);
-    }
-  }, [progress]);
+  }, [isRunning]);
 
   return [progress];
 };

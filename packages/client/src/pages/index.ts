@@ -1,21 +1,9 @@
-import { Forum } from './Forum';
-import { LoginPage } from './LoginPage';
-import { RegistrationPage } from './RegistrationPage';
-import { ErrorPage404 } from './404';
-import { ErrorPage500 } from './500';
-import { Leaderboard } from './Leaderboard';
-import { GameLoadingPage } from './GameLoadingPage';
-import { HomePage } from './HomePage';
-import { SettingsPage } from './SettingsPage';
-
-export {
-  Forum,
-  LoginPage,
-  RegistrationPage,
-  ErrorPage404,
-  ErrorPage500,
-  Leaderboard,
-  HomePage,
-  GameLoadingPage,
-  SettingsPage,
-};
+export { Forum } from './Forum';
+export { LoginPage } from './LoginPage';
+export { RegistrationPage } from './RegistrationPage';
+export { ErrorPage } from './ErrorPage';
+export { Leaderboard } from './Leaderboard';
+export { GameLoadingPage } from './GameLoadingPage';
+export { SettingsPage } from './SettingsPage';
+export { MainMenu } from './MainMenu';
+export { Landing } from './Landing';

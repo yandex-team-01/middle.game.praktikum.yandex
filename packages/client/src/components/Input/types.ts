@@ -2,7 +2,7 @@ export interface Props {
   name?: string;
   type?: string;
   value?: string;
-  onChange?: (e: React.ChangeEvent) => void;
+  onChange: (e: React.ChangeEvent) => void;
   onBlur?: (e: React.FocusEvent) => void;
   className?: string;
   inputClassName?: string;

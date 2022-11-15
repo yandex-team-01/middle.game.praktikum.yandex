@@ -6,15 +6,13 @@ interface ITeam {
   score: number;
   players: string[];
 }
-
 interface Props {
   team: ITeam;
   idx: number;
 }
 
-export const LeaderboardLine = (props: Props) => {
-  const { idx } = props;
-  const { name, score, players } = props.team;
+export const LeaderboardLine = ({ idx, team }: Props) => {
+  const { name, score, players } = team;
   return (
     <div className={styles.leader_line}>
       <span className={styles.leader_line_item}>{name}</span>

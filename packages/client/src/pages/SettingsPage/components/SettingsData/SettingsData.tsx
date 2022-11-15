@@ -19,7 +19,7 @@ export const SettingsData = () => {
     <div>
       <SettingsAvatar />
       <Form
-        buttons={
+        buttonsBlock={
           <div>
             <div className={stylesForm.form_button_box}>
               <Button regular type="submit" onClick={editHandle}>
