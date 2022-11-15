@@ -22,13 +22,37 @@ export const SettingsChangeData = () => {
     dispatch(fetchAuth());
   }, [dispatch]);
 
+  const navigate = useNavigate();
+  const saveHandle = useCallback(() => {
+    navigate(-1);
+  }, [navigate]);
+
   const changeDataHandler = (values: UserData) => {
-    dispatch(fetchChangeUser(values)).then(() => dispatch(fetchAuth()));
+    dispatch(fetchChangeUser(values)).then(() => dispatch(fetchAuth())).then(() => saveHandle());
   };
 
-  const { t } = useTranslation();
-  const navigator = useNavigator();
-  const handleSave = () => navigator(-1);
+  const email = user.user?.email;
+  const login = user.user?.login;
+  const display_name = user.user?.display_name;
+  const first_name = user.user?.first_name;
+  const second_name = user.user?.second_name;
+  const phone = user.user?.phone;
+
+  const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
+    useFormik({
+      initialValues: {
+        first_name: first_name,
+        second_name: second_name,
+        display_name: display_name,
+        login: login,
+        email: email,
+        phone: phone,
+      },
+      validationSchema: changeDataSchema,
+      onSubmit: values => {
+        changeDataHandler(values as UserData);
+      },
+    });
 
   return (
     <div>
