@@ -4,25 +4,28 @@ import { Spinner } from 'src/components/Spinner';
 import { ProgressBar } from 'src/components/ProgressBar';
 import { useProgress } from 'src/components/ProgressBar/hooks/useProgress';
 import { Navigate } from 'react-router-dom';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 export const GameLoadingPage: React.FC = () => {
   const [progress] = useProgress();
-  
+
   if (progress === 100) {
     return <Navigate to="/game" />;
   }
 
   return (
-    <div className={styles.game_loading_root}>
-      <h1 className={styles.game_loading_title}>
-        Huggy Wuggy
-        <br />& Kissy Missy
-      </h1>
-      <Spinner />
-      <div className={styles.bar_container}>
-        <ProgressBar completed={progress} bgcolor={'#FFCC00'} />
+    <ErrorBoundary>
+      <div className={styles.game_loading_root}>
+        <h1 className={styles.game_loading_title}>
+          Huggy Wuggy
+          <br />& Kissy Missy
+        </h1>
+        <Spinner />
+        <div className={styles.bar_container}>
+          <ProgressBar completed={progress} bgcolor={'#FFCC00'} />
+        </div>
+        <div className={styles.percent}>{progress} %</div>
       </div>
-      <div className={styles.percent}>{progress} %</div>
-    </div>
+    </ErrorBoundary>
   );
 };
