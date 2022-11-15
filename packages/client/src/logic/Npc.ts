@@ -23,7 +23,7 @@ export abstract class NpcModel {
   ySpeed: number ;
   canvasHeight = 0;
   canvasWidth = 0;
-  npcCurrentDirection: boolean[] = [];
+  npcCurrentDirections: boolean[] = [];
 
   constructor(options: NpcConstructorOptions) {
     this.id = options.id;
@@ -41,8 +41,8 @@ export abstract class NpcModel {
 
   startMoving(){
     //начинаем движение вправо-вниз
-    this.npcCurrentDirection[DirectionNpc.Right] = true;
-    this.npcCurrentDirection[DirectionNpc.Down] = true;
+    this.npcCurrentDirections[DirectionNpc.Right] = true;
+    this.npcCurrentDirections[DirectionNpc.Down] = true;
   }
 
   setSprite(sprite: Sprite) {
@@ -100,24 +100,24 @@ export abstract class NpcModel {
     if ( this.x + this.width > this.canvasWidth || this.x - this.width / 2  < 0 ) {
         this.xSpeed = -this.xSpeed;
         //меняем флаг направления анимации ног влево-вправо
-        if(this.npcCurrentDirection[DirectionNpc.Right]){
-            this.npcCurrentDirection[DirectionNpc.Right] = false; 
-            this.npcCurrentDirection[DirectionNpc.Left] = true; 
+        if(this.npcCurrentDirections[DirectionNpc.Right]){
+            this.npcCurrentDirections[DirectionNpc.Right] = false; 
+            this.npcCurrentDirections[DirectionNpc.Left] = true; 
         }else{
-            this.npcCurrentDirection[DirectionNpc.Left] = false; 
-            this.npcCurrentDirection[DirectionNpc.Right] = true; 
+            this.npcCurrentDirections[DirectionNpc.Left] = false; 
+            this.npcCurrentDirections[DirectionNpc.Right] = true; 
         }
 
     }
     if ( this.y + this.height > this.canvasHeight || this.y - this.height / 2 < 0 ) {
         this.ySpeed = -this.ySpeed;
         //меняем флаг направления анимации ног вверх-вниз
-        if(this.npcCurrentDirection[DirectionNpc.Down]){
-            this.npcCurrentDirection[DirectionNpc.Down] = false; 
-            this.npcCurrentDirection[DirectionNpc.Up] = true; 
+        if(this.npcCurrentDirections[DirectionNpc.Down]){
+            this.npcCurrentDirections[DirectionNpc.Down] = false; 
+            this.npcCurrentDirections[DirectionNpc.Up] = true; 
         }else{
-            this.npcCurrentDirection[DirectionNpc.Up] = false; 
-            this.npcCurrentDirection[DirectionNpc.Down] = true; 
+            this.npcCurrentDirections[DirectionNpc.Up] = false; 
+            this.npcCurrentDirections[DirectionNpc.Down] = true; 
         }
 
     }   
@@ -132,16 +132,16 @@ export abstract class NpcModel {
   }
 
   moveNpc() {
-    if (this.npcCurrentDirection[DirectionNpc.Up] && this.y > 100){
+    if (this.npcCurrentDirections[DirectionNpc.Up] && this.y > 100){
         this.skinDirectionFrame = DirectionNpc.Up;
     }
-    if (this.npcCurrentDirection[DirectionNpc.Left] && this.x > 0){ 
+    if (this.npcCurrentDirections[DirectionNpc.Left] && this.x > 0){ 
         this.skinDirectionFrame = DirectionNpc.Left;
     }
-    if (this.npcCurrentDirection[DirectionNpc.Down] && this.y < this.canvasHeight - this.height){
+    if (this.npcCurrentDirections[DirectionNpc.Down] && this.y < this.canvasHeight - this.height){
         this.skinDirectionFrame = DirectionNpc.Down;
     }
-    if (this.npcCurrentDirection[DirectionNpc.Right] &&  this.x < this.canvasWidth - this.width){
+    if (this.npcCurrentDirections[DirectionNpc.Right] &&  this.x < this.canvasWidth - this.width){
         this.skinDirectionFrame = DirectionNpc.Right;
     }
   };

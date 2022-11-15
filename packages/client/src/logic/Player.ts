@@ -3,7 +3,7 @@ import { Position, AllSpritesType, GameEntities } from './types';
 import { SPRITE_ID } from './const';
 import { Game } from './Game';
 
-const playerCurrentDirection: boolean[] = [];
+const playerCurrentDirections: boolean[] = [];
 
 enum PlayerDirectionButtons {
   Up = 38,
@@ -183,32 +183,32 @@ export class PlayerOne extends Player {
   keyDownCustom = (...args: KeyboardEvent[]) => {
     if (args.length > 0) {
       const event = args[0];
-      playerCurrentDirection[event.keyCode] = true;
+      playerCurrentDirections[event.keyCode] = true;
     }
   };
 
   keyUpCustom = (...args: KeyboardEvent[]) => {
     if (args.length > 0) {
       const event = args[0];
-      playerCurrentDirection[event.keyCode] = false;
+      playerCurrentDirections[event.keyCode] = false;
       this.isMoving = false;
     }
   };
 
   movePlayer = () => {
     if (this.y !== undefined && this.x !== undefined) {
-      if (playerCurrentDirection[PlayerDirectionButtons.Up] && this.y > 100) {
+      if (playerCurrentDirections[PlayerDirectionButtons.Up] && this.y > 100) {
         this.y -= this.speed;
         this.skinDirectionFrame = DirectionPlayer.Up;
         this.isMoving = true;
       }
-      if (playerCurrentDirection[PlayerDirectionButtons.Left] && this.x > 0) {
+      if (playerCurrentDirections[PlayerDirectionButtons.Left] && this.x > 0) {
         this.x -= this.speed;
         this.skinDirectionFrame = DirectionPlayer.Left;
         this.isMoving = true;
       }
       if (
-        playerCurrentDirection[PlayerDirectionButtons.Down] &&
+        playerCurrentDirections[PlayerDirectionButtons.Down] &&
         this.y < this.canvasHeight - this.height
       ) {
         this.y += this.speed;
@@ -216,7 +216,7 @@ export class PlayerOne extends Player {
         this.isMoving = true;
       }
       if (
-        playerCurrentDirection[PlayerDirectionButtons.Right] &&
+        playerCurrentDirections[PlayerDirectionButtons.Right] &&
         this.x < this.canvasWidth - this.width
       ) {
         this.x += this.speed;
