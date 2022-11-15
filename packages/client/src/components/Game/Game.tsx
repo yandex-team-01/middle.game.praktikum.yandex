@@ -1,21 +1,16 @@
 import { useCallback, useRef } from 'react';
 import { Game } from 'src/logic/Game';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
-import { Button } from 'src/components/Button';
+import { Button } from '../Button';
 import { useNavigate } from 'react-router-dom';
 import styles from 'src/pages/GameScreen/GameScreen.module.scss';
 import { ErrorBoundary } from '../ErrorBoundary';
 
 export const GameComponent = () => {
   const navigate = useNavigate();
-
-  const handleBack = useCallback(() => {
+  const handlerBack = useCallback(() => {
     navigate('/');
   }, [navigate]);
-  const handleEndGame = useCallback(() => {
-    game.current?.end();
-  }, []);
-
   const canvas = useRef<HTMLCanvasElement>(null); //https://stackoverflow.com/a/63119934
   const game = useRef<Game | null>(null);
 
@@ -31,17 +26,19 @@ export const GameComponent = () => {
   });
 
   return (
+
     <ErrorBoundary>
-      <div>
-        <div className={styles.block_button}>
-          <Button regular onClick={handleBack}>
-            GO BACK
-          </Button>
-          <Button regular onClick={handleEndGame}>
-            END THE GAME
-          </Button>
-        </div>
-        <canvas id="game-canvas" ref={canvas} />
+      <div className={styles.block_button}>
+        <Button regular onClick={handlerBack}>
+          GO BACK
+        </Button>
+        <Button
+          regular
+          onClick={() => {
+            game.current?.end();
+          }}>
+          END THE GAME
+        </Button>
       </div>
     </ErrorBoundary>
   );

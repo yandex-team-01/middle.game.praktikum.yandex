@@ -5,7 +5,7 @@ import { Game } from './Game';
 
 const playerCurrentDirections: boolean[] = [];
 
-enum PlayerDirectionButtons {
+enum DirectionPlayerButtons {
   Up = 38,
   Down = 40,
   Left = 37,
@@ -197,18 +197,18 @@ export class PlayerOne extends Player {
 
   movePlayer = () => {
     if (this.y !== undefined && this.x !== undefined) {
-      if (playerCurrentDirections[PlayerDirectionButtons.Up] && this.y > 100) {
+      if (playerCurrentDirections[DirectionPlayerButtons.Up] && this.y > 100) {
         this.y -= this.speed;
         this.skinDirectionFrame = DirectionPlayer.Up;
         this.isMoving = true;
       }
-      if (playerCurrentDirections[PlayerDirectionButtons.Left] && this.x > 0) {
+      if (playerCurrentDirections[DirectionPlayerButtons.Left] && this.x > 0) {
         this.x -= this.speed;
         this.skinDirectionFrame = DirectionPlayer.Left;
         this.isMoving = true;
       }
       if (
-        playerCurrentDirections[PlayerDirectionButtons.Down] &&
+        playerCurrentDirections[DirectionPlayerButtons.Down] &&
         this.y < this.canvasHeight - this.height
       ) {
         this.y += this.speed;
@@ -216,7 +216,7 @@ export class PlayerOne extends Player {
         this.isMoving = true;
       }
       if (
-        playerCurrentDirections[PlayerDirectionButtons.Right] &&
+        playerCurrentDirections[DirectionPlayerButtons.Right] &&
         this.x < this.canvasWidth - this.width
       ) {
         this.x += this.speed;
