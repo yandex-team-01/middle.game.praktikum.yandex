@@ -1,4 +1,4 @@
-import { ITopic } from 'src/pages/Forum/components/Topic/types';
+import { ITopic } from 'src/pages/Forum/part/Topic/types';
 import { IUser } from '../modules/IUser';
 
 export interface AuthState {
@@ -17,5 +17,5 @@ export interface ErrorState {
 
 export interface ForumState {
   activeTopic: ITopic | undefined;
-  listTopics: ITopic[];
+  topics: Record<string, ITopic>;
 }

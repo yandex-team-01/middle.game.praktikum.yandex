@@ -5,20 +5,16 @@ import { Props } from './types';
 import avatar from 'src/assets/images/avatar/variant3.png';
 import { AiFillStar } from 'react-icons/ai';
 import { Column } from 'src/pages/Forum/part/Column/Column';
+import { AuthorBlock } from '../AuthorBlock';
+import { CommentAbstract } from '../CommentAbstract';
 
 export const Comment = (props: Props) => {
   const { comment } = props;
 
   return (
     <BlankWindow className={styles.card}>
-      <div className={styles.block_author}>
-        <img src={avatar} className={styles.avatar} />
-        <div className={styles.author}>{comment.author}</div>
-      </div>
-      <div className={styles.comments}>
-        <div>{comment.date}</div>
-        <div className={styles.count}>{comment.text}</div>
-      </div>
+      <AuthorBlock avatar={avatar} author={comment.author} />
+      <CommentAbstract text={comment.text} date={comment.date} />
       <Column title={comment.likes}>
         <AiFillStar />
       </Column>

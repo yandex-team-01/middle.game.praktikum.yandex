@@ -7,11 +7,11 @@ import styles from './Forum.module.scss';
 export const Forum = () => {
   const navigate = useNavigate();
 
-  const handlerBack = useCallback(() => {
+  const handleBack = useCallback(() => {
     navigate('/forum');
   }, [navigate]);
 
-  const handlerLoadGame = useCallback(() => {
+  const handlePlay = useCallback(() => {
     navigate('/loadinggame');
   }, [navigate]);
 
@@ -19,8 +19,12 @@ export const Forum = () => {
     <ErrorBoundary>
       <div className={styles.forum}>
         <div className={styles.block_button}>
-          <Button regular onClick={handlerBack}>GO BACK</Button>
-          <Button regular onClick={handlerLoadGame}>PLAY</Button>
+          <Button regular onClick={handleBack}>
+            GO BACK
+          </Button>
+          <Button regular onClick={handlePlay}>
+            PLAY
+          </Button>
         </div>
         <Outlet />
       </div>

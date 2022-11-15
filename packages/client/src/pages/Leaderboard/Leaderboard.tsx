@@ -32,11 +32,11 @@ const LeadersMockData = [
 export const Leaderboard = () => {
   const navigate = useNavigate();
 
-  const handlerBack = useCallback(() => {
+  const handleBack = useCallback(() => {
     navigate('/');
   }, [navigate]);
 
-  const handlerLoadGame = useCallback(() => {
+  const handleLoadGame = useCallback(() => {
     navigate('/loadinggame');
   }, [navigate]);
 
@@ -44,10 +44,10 @@ export const Leaderboard = () => {
     <ErrorBoundary>
       <div className={styles.block}>
         <div className={styles.button_wrapper}>
-          <Button regular onClick={handlerBack}>
+          <Button regular onClick={handleBack}>
             Go back
           </Button>
-          <Button regular onClick={handlerLoadGame}>
+          <Button regular onClick={handleLoadGame}>
             Play
           </Button>
         </div>

@@ -1,1 +1,0 @@
-export { HomeAuth } from './HomeAuth';

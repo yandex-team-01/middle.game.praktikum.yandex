@@ -17,7 +17,7 @@ export const SettingsChangePassword = () => {
   return (
     <div>
       <Form
-        buttons={
+        buttonsBlock={
           <div>
             <div className={stylesForm.form_button_box}>
               <Button regular onClick={saveHandle}>
@@ -26,23 +26,33 @@ export const SettingsChangePassword = () => {
             </div>
           </div>
         }>
+        // TODO: change dummy functions
         <Input
           label="Old password"
           name="old-password"
           type="password"
           className="regular"
+          onChange={() => {
+            console.log('change');
+          }}
         />
         <Input
           label="New password"
           name="new-password"
           type="password"
           className="regular"
+          onChange={() => {
+            console.log('change');
+          }}
         />
         <Input
           label="New password again"
           name="again-password"
           type="password"
           className="regular"
+          onChange={() => {
+            console.log('change');
+          }}
         />
       </Form>
     </div>

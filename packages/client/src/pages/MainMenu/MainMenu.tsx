@@ -1,11 +1,11 @@
-import styles from '../../HomePage.module.scss';
+import styles from './MainMenu.module.scss';
 import { Button } from 'src/components/Button';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'src/hooks/redux';
 import { fetchLogout } from 'src/store/auth/AuthActions';
 import { useCallback } from 'react';
 
-export const HomeAuth = () => {
+export const MainMenu = () => {
   const dispath = useAppDispatch();
   const navigate = useNavigate();
 

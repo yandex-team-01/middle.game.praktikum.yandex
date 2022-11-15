@@ -1,0 +1,1 @@
+export { AuthorBlock } from './AuthorBlock';

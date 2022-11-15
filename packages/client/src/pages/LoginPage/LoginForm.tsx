@@ -4,17 +4,17 @@ import { useFormik } from 'formik';
 import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
 import { Form } from 'src/components/Form';
-import { loginSchema } from 'src/constants/Schemas';
+import { loginSchema } from './LoginSchema';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { fetchSignin } from 'src/store/auth/AuthActions';
 import { SigninData } from 'src/modules/IAuth';
-
 import stylesForm from 'src/components/Form/Form.module.scss';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { selectLoading } from 'src/store/auth/AuthSelectors';
 
 export const LoginForm: React.FC = () => {
   const dispath = useAppDispatch();
-  const loading = useAppSelector(state => state.auth.loading);
+  const loading = useAppSelector(selectLoading);
   const signinHandler = (values: SigninData) => {
     dispath(fetchSignin(values));
   };
@@ -35,10 +35,16 @@ export const LoginForm: React.FC = () => {
     <ErrorBoundary>
       <Form
         onSubmit={handleSubmit}
-        buttons={
+        buttonsBlock={
           <div key={0}>
             <div className={stylesForm.form_button_box}>
-              <Button regular type="submit" disabled={loading}>
+              <Button
+                regular
+                type="submit"
+                disabled={loading}
+                onClick={() => {
+                  console.log('submit');
+                }}>
                 Sign in
               </Button>
             </div>

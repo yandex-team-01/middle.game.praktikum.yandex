@@ -5,9 +5,10 @@ import stylesForm from 'src/components/Form/Form.module.scss';
 import { useAppSelector } from 'src/hooks/redux';
 import { RegistrationForm } from './RegistrationForm';
 import { BlankWindow } from 'src/components/BlankWindow';
+import { selectAuth } from 'src/store/auth/AuthSelectors';
 
 export const RegistrationPage: React.FC = () => {
-  const auth = useAppSelector(state => state.auth.auth);
+  const auth = useAppSelector(selectAuth);
 
   if (auth) {
     return <Navigate to="/" />;

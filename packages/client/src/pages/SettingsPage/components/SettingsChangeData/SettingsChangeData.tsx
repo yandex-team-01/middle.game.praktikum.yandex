@@ -11,7 +11,7 @@ import { useCallback } from 'react';
 export const SettingsChangeData = () => {
   const navigate = useNavigate();
 
-  const saveHandle = useCallback(() => {
+  const handleSave = useCallback(() => {
     navigate(-1);
   }, [navigate]);
 
@@ -19,26 +19,70 @@ export const SettingsChangeData = () => {
     <div>
       <SettingsAvatar />
       <Form
-        buttons={
+        buttonsBlock={
           <div>
             <div className={stylesForm.form_button_box}>
-              <Button regular onClick={saveHandle}>
+              <Button regular onClick={handleSave}>
                 Save
               </Button>
             </div>
           </div>
         }>
-        <Input label="Email" name="email" type="email" className="regular" />
-        <Input label="Login" name="login" type="text" className="regular" />
-        <Input label="Nick" name="nickname" type="text" className="regular" />
-        <Input label="First Name" name="name" type="text" className="regular" />
+        //TODO: change dummy functions
+        <Input
+          label="Email"
+          name="email"
+          type="email"
+          className="regular"
+          onChange={() => {
+            console.log('change');
+          }}
+        />
+        <Input
+          label="Login"
+          name="login"
+          type="text"
+          className="regular"
+          onChange={() => {
+            console.log('change');
+          }}
+        />
+        <Input
+          label="Nick"
+          name="nickname"
+          type="text"
+          className="regular"
+          onChange={() => {
+            console.log('change');
+          }}
+        />
+        <Input
+          label="First Name"
+          name="name"
+          type="text"
+          className="regular"
+          onChange={() => {
+            console.log('change');
+          }}
+        />
         <Input
           label="Second Name"
           name="surname"
           type="text"
           className="regular"
+          onChange={() => {
+            console.log('change');
+          }}
         />
-        <Input label="Phone" name="phone" type="text" className="regular" />
+        <Input
+          label="Phone"
+          name="phone"
+          type="text"
+          className="regular"
+          onChange={() => {
+            console.log('change');
+          }}
+        />
       </Form>
     </div>
   );
