@@ -8,13 +8,11 @@ export class Game {
   private ctx: CanvasRenderingContext2D;
   private width = 800;
   private height = 500;
-
   private playerOne: PlayerOne;
   private gameOverBackgroundAudio: HTMLAudioElement | undefined;
   private allSprites: AllSprites;
   private sprites: AllSpritesType;
   private npcControll: NpcControll;
-
   public view: View;
 
   constructor(protected canvas: HTMLCanvasElement) {

@@ -3,9 +3,9 @@ import { Position, AllSpritesType, GameEntities } from './types';
 import { SPRITE_ID } from './const';
 import { Game } from './Game';
 
-const keys: boolean[] = [];
+const playerCurrentDirection: boolean[] = [];
 
-enum Keys {
+enum PlayerDirectionButtons {
   Up = 38,
   Down = 40,
   Left = 37,
@@ -21,14 +21,13 @@ enum DirectionPlayer {
 
 abstract class Player {
   movePlayer!: () => void;
-
   spriteHeart: Sprite | undefined;
   spriteMoney: Sprite | undefined;
   spritePlayer: Sprite | undefined;
-  width: number;
-  height: number;
   x: number;
   y: number;
+  width: number;
+  height: number;
   skinLegsFrame: number;
   skinDirectionFrame: number;
   speed: number;
@@ -56,12 +55,10 @@ abstract class Player {
     this.height = 0;
     this.x = 0;
     this.y = 0;
-
     this.skinLegsFrame = 0;
     this.skinDirectionFrame = 0;
     this.speed = 5;
     this.isMoving = false;
-
     this.ctx = ctx;
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
@@ -174,7 +171,6 @@ export class PlayerOne extends Player {
     super(ctx, canvasHeight, canvasWidth, game);
     this.x = 200;
     this.y = 150;
-
     this.ctx = ctx;
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
@@ -187,32 +183,32 @@ export class PlayerOne extends Player {
   keyDownCustom = (...args: KeyboardEvent[]) => {
     if (args.length > 0) {
       const event = args[0];
-      keys[event.keyCode] = true;
+      playerCurrentDirection[event.keyCode] = true;
     }
   };
 
   keyUpCustom = (...args: KeyboardEvent[]) => {
     if (args.length > 0) {
       const event = args[0];
-      keys[event.keyCode] = false;
+      playerCurrentDirection[event.keyCode] = false;
       this.isMoving = false;
     }
   };
 
   movePlayer = () => {
     if (this.y !== undefined && this.x !== undefined) {
-      if (keys[Keys.Up] && this.y > 100) {
+      if (playerCurrentDirection[PlayerDirectionButtons.Up] && this.y > 100) {
         this.y -= this.speed;
         this.skinDirectionFrame = DirectionPlayer.Up;
         this.isMoving = true;
       }
-      if (keys[Keys.Left] && this.x > 0) {
+      if (playerCurrentDirection[PlayerDirectionButtons.Left] && this.x > 0) {
         this.x -= this.speed;
         this.skinDirectionFrame = DirectionPlayer.Left;
         this.isMoving = true;
       }
       if (
-        keys[Keys.Down] &&
+        playerCurrentDirection[PlayerDirectionButtons.Down] &&
         this.y < this.canvasHeight - this.height
       ) {
         this.y += this.speed;
@@ -220,7 +216,7 @@ export class PlayerOne extends Player {
         this.isMoving = true;
       }
       if (
-        keys[Keys.Right] &&
+        playerCurrentDirection[PlayerDirectionButtons.Right] &&
         this.x < this.canvasWidth - this.width
       ) {
         this.x += this.speed;
