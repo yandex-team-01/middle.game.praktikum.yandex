@@ -27,6 +27,7 @@ export const GameComponent = () => {
 
     return () => {
       game.current?.destruct();
+      console.log("test");
     };
   });
 
