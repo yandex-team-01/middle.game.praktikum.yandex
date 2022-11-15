@@ -12,6 +12,8 @@ export const Input = ({
   onBlur,
   className = '',
   label,
+  placeholder,
+  value
 }: Props) => (
   <ErrorBoundary>
     <div className={styles.input_container}>
@@ -32,6 +34,8 @@ export const Input = ({
           className,
           showError && styles.input_error
         )}
+        placeholder={placeholder}
+        value={value}
       />
       {showError && <p className={styles.error}>{error}</p>}
     </div>
