@@ -32,7 +32,7 @@
   "publich": "Publish",
   "error500": "No Connection",
   "error404": "Page Not Found",
-  "homeDescription": "The main goal of the game is to find the key and collect diamonds. <br /> With the key, you can open the door that will take you to the next level. This game can be played either alone or for two with a friend.",
+  "homeDescription": "The main goal of the game is to eat as many guards as possible. <br /> Eating the right guards increases points, and eating dangerous guards decreases health. As soon as the health pool or time runs out, the game ends. This game can be played alone or with a friend.",
   "fetchAuth": "Authorisation Error",
   "fetchSignIn": "Login Error",
   "fetchSignUp": "Registration Error",

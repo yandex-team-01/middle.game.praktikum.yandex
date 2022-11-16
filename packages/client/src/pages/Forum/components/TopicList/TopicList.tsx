@@ -5,18 +5,8 @@ import { useTranslation } from 'react-i18next';
 import styles from './Topics.module.scss';
 
 import { Topic } from '../../part/Topic';
-import { ITopic } from '../../part/Topic/types';
 
-import { Button } from 'src/components/Button';
-import { ErrorBoundary } from 'src/components/ErrorBoundary';
-
-import { useAppSelector } from 'src/hooks/redux';
 import { selectListTopics } from 'src/store/forum/ForumSelectors';
-import { Topic } from '../../part/Topic';
-import styles from './Topics.module.scss';
-
-import { Topic } from '../../part/Topic';
-import { ITopic } from '../../part/Topic/types';
 
 import { Button } from 'src/components/Button';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
@@ -29,7 +19,7 @@ export const TopicList = () => {
   const topics = useAppSelector(selectListTopics);
 
   const handleCreateTopic = useCallback(() => {
-    navigate('/forum/createtopic');
+    navigate('createtopic');
   }, [navigate]);
 
   return (
