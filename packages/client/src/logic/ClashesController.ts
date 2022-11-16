@@ -11,10 +11,10 @@ export class ClashesController {
   }
 
   checkClashes() {
-    const posPlayer = this.playerOne.position;
+    const posPlayer = this.playerOne.getPosition();
 
     this.npcControll.arrNpc.forEach(npc => {
-      const posNpc = npc.position;
+      const posNpc = npc.getPosition();
       let XColl = false;
       let YColl = false;
       if (posPlayer.x2 >= posNpc.x1 && posPlayer.x1 <= posNpc.x2) XColl = true;

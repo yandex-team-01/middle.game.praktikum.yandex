@@ -149,7 +149,7 @@ abstract class Player {
     this.animate();
   }
 
-  get position(): Position {
+  getPosition(): Position {
     return {
       x1: this.x,
       x2: this.x + this.width,

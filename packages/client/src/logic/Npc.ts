@@ -32,7 +32,7 @@ export abstract class NpcModel {
     this.frameY = 0;
   }
 
-  get position(): Position {
+  getPosition(): Position {
     return {
       x1: this.x,
       x2: this.x + this.width,
