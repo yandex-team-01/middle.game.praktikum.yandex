@@ -20,7 +20,8 @@ export const fetchChangeUser = createAsyncThunk(
       return res;
     } catch (error) {
       thunkApi.dispatch(addError('Ошибка изменения профиля'));
-      return thunkApi.rejectWithValue('Ошибка изменения профиля');
+      thunkApi.rejectWithValue('Ошибка изменения профиля');
+      throw error
     }
   }
 );
@@ -37,7 +38,8 @@ export const fetchChangePassword = createAsyncThunk(
       return res;
     } catch (error) {
       thunkApi.dispatch(addError('Ошибка смены пароля'));
-      return thunkApi.rejectWithValue('Ошибка смены пароля');
+      thunkApi.rejectWithValue('Ошибка смены пароля');
+      throw error
     }
   }
 );

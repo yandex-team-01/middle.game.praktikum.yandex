@@ -1,5 +1,9 @@
-import { ErrorBoundary } from '../ErrorBoundary';
+import cn from 'classnames';
+
 import styles from './Form.module.scss';
+
+import { ErrorBoundary } from '../ErrorBoundary';
+
 import { Props } from './types';
 
 export const Form = ({ children, buttonsBlock, onSubmit }: Props) => (

@@ -5,6 +5,6 @@ import { ErrorBoundary } from '../ErrorBoundary';
 
 export const BlankWindow = ({ children, className }: Props) => (
   <ErrorBoundary>
-    <div className={cn(styles.root, className)}>{children}</div>
+    <div className={cn(styles.root, styles[className!])}>{children}</div>
   </ErrorBoundary>
 );

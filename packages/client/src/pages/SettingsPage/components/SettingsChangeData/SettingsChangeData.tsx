@@ -23,12 +23,19 @@ export const SettingsChangeData = () => {
   }, [dispatch]);
 
   const navigate = useNavigate();
-  const saveHandle = useCallback(() => {
+  const goBackHandle = useCallback(() => {
     navigate(-1);
   }, [navigate]);
 
   const changeDataHandler = (values: UserData) => {
-    dispatch(fetchChangeUser(values)).then(() => dispatch(fetchAuth())).then(() => saveHandle());
+    dispatch(fetchChangeUser(values))
+      .unwrap()
+      .catch()
+      .then(() => {
+        dispatch(fetchAuth()).then(res => {
+          res ? goBackHandle() : null;
+        });
+      });
   };
 
   const email = user.user?.email;
@@ -60,14 +67,16 @@ export const SettingsChangeData = () => {
       <Form
         onSubmit={handleSubmit}
         buttonsBlock={
-          <div>
             <div className={stylesForm.form_button_box}>
               <Button regular type="submit">
                 Save
               </Button>
+              <Button regular onClick={goBackHandle}>
+                Go Back
+              </Button>
             </div>
-          </div>
-        }>
+        }
+        >
         <Input
           label="Email"
           name="email"

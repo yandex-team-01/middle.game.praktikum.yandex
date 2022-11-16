@@ -21,14 +21,12 @@ export const SettingsData = () => {
       <SettingsAvatar />
       <Form
         buttonsBlock={
-          <div>
             <div className={stylesForm.form_button_box}>
               <Button regular type="submit" onClick={editHandle}>
                 {t('editProfile')}
               </Button>
               <Nav to="password">{t('changePassword')}</Nav>
             </div>
-          </div>
         }>
         <SettingsUserInfo />
       </Form>

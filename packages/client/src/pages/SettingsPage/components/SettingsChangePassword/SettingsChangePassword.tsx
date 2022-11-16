@@ -22,9 +22,12 @@ export const SettingsChangePassword = () => {
   const saveHandle = () => navigator(-1);
   
   const changePasswordHandler = (values: ChangePasswordData) => {
-    dispatch(fetchChangePassword(values)).then(() => saveHandle());
+    dispatch(fetchChangePassword(values))
+      .unwrap()
+      .catch()
+      .then((res) => {res ? goBackHandle() : null});
   };
-  
+
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: {
@@ -43,13 +46,14 @@ export const SettingsChangePassword = () => {
       <Form
         onSubmit={handleSubmit}
         buttonsBlock={
-          <div>
             <div className={stylesForm.form_button_box}>
               <Button regular type="submit">
                 {t('save')}
               </Button>
+              <Button regular onClick={goBackHandle}>
+                Go Back
+              </Button>
             </div>
-          </div>
         }>
         // TODO: change dummy functions
         <Input
@@ -60,7 +64,9 @@ export const SettingsChangePassword = () => {
           value={values.oldPassword}
           onChange={handleChange}
           onBlur={handleBlur}
-          showError={Boolean(errors.oldPassword) && Boolean(touched.oldPassword)}
+          showError={
+            Boolean(errors.oldPassword) && Boolean(touched.oldPassword)
+          }
           error={errors.oldPassword}
         />
         <Input
@@ -71,7 +77,9 @@ export const SettingsChangePassword = () => {
           value={values.newPassword}
           onChange={handleChange}
           onBlur={handleBlur}
-          showError={Boolean(errors.newPassword) && Boolean(touched.newPassword)}
+          showError={
+            Boolean(errors.newPassword) && Boolean(touched.newPassword)
+          }
           error={errors.newPassword}
         />
         <Input
@@ -82,7 +90,9 @@ export const SettingsChangePassword = () => {
           value={values.repeatPassword}
           onChange={handleChange}
           onBlur={handleBlur}
-          showError={Boolean(errors.repeatPassword) && Boolean(touched.repeatPassword)}
+          showError={
+            Boolean(errors.repeatPassword) && Boolean(touched.repeatPassword)
+          }
           error={errors.repeatPassword}
         />
       </Form>
