@@ -1,16 +1,18 @@
-import { useTranslation } from 'react-i18next';
-
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { EmptyLayout } from 'src/layouts/EmptyLayout';
 
-export const ErrorPage404 = () => {
-  const { t } = useTranslation();
+type ErrorPageProps = {
+  title: string;
+  description: string;
+};
+
+export const ErrorPage = ({ title, description }: ErrorPageProps) => {
   return (
     <ErrorBoundary>
       <EmptyLayout>
         <div>
-          <h1>{t('error404')}</h1>
-          <h2>404</h2>
+          <h1>{title}</h1>
+          <h2>{description}</h2>
         </div>
       </EmptyLayout>
     </ErrorBoundary>
