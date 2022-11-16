@@ -1,8 +1,10 @@
 import { Sprite } from './Sprite';
 import { NpcConstructorOptions, Position } from './types';
+import { PlayerOne } from './Player';
 
-export class Npc {
+export abstract class NpcModel {
   id: number;
+  type: string;
   sprite: Sprite | undefined;
   x: number;
   y: number;
@@ -13,6 +15,7 @@ export class Npc {
 
   constructor(options: NpcConstructorOptions) {
     this.id = options.id;
+    this.type = options.type;
     this.x = options.defaultX;
     this.y = options.defaultY;
     this.width = 0;
@@ -54,5 +57,28 @@ export class Npc {
       this.height
     );
     ctx.strokeRect(this.x, this.y, this.width, this.height);
+  }
+}
+
+export class NpcEnemy extends NpcModel {
+  constructor(options: NpcConstructorOptions) {
+    super(options);
+  }
+
+  collisionHandling(player: PlayerOne) {
+    player.subtractHP();
+  }
+}
+
+export class NpcFriend extends NpcModel {
+  defineBonus: number;
+
+  constructor(options: NpcConstructorOptions) {
+    super(options);
+    this.defineBonus = 5;
+  }
+
+  collisionHandling(player: PlayerOne) {
+    player.addScore(this.defineBonus);
   }
 }
