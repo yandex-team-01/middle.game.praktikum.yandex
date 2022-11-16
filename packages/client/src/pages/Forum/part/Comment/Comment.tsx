@@ -7,17 +7,20 @@ import { AiFillStar } from 'react-icons/ai';
 import { Column } from 'src/pages/Forum/part/Column/Column';
 import { AuthorBlock } from '../AuthorBlock';
 import { CommentAbstract } from '../CommentAbstract';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 export const Comment = (props: Props) => {
   const { comment } = props;
 
   return (
-    <BlankWindow className={styles.card}>
-      <AuthorBlock avatar={avatar} author={comment.author} />
-      <CommentAbstract text={comment.text} date={comment.date} />
-      <Column title={comment.likes}>
-        <AiFillStar />
-      </Column>
-    </BlankWindow>
+    <ErrorBoundary>
+      <BlankWindow className={styles.card}>
+        <AuthorBlock avatar={avatar} author={comment.author} />
+        <CommentAbstract text={comment.text} date={comment.date} />
+        <Column title={comment.likes}>
+          <AiFillStar />
+        </Column>
+      </BlankWindow>
+    </ErrorBoundary>
   );
 };

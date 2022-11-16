@@ -20,10 +20,10 @@ import { BackgroundLayout } from 'src/layouts/BackgroundLayout';
 import { useAppSelector } from 'src/hooks/redux';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { TopicList } from 'src/pages/Forum/components/TopicList';
-import { BlockComments } from 'src/pages/Forum/components/BlockComments';
 import { BlockCreateTopic } from 'src/pages/Forum/components/BlockCreateTopic';
 import { GameScreen } from 'src/pages/GameScreen';
 import { selectAuth } from 'src/store/auth/AuthSelectors';
+import { CommentsPage } from 'src/pages/Forum/components/CommentsPage';
 
 export const Routing = () => {
   const auth = useAppSelector(selectAuth);
@@ -49,7 +49,7 @@ export const Routing = () => {
             </ProtectedRoute>
           }>
           <Route index element={<TopicList />} />
-          <Route path="topic" element={<BlockComments />} />
+          <Route path="topic" element={<CommentsPage />} />
           <Route path="createtopic" element={<BlockCreateTopic />} />
         </Route>
         <Route
