@@ -10,8 +10,7 @@ const putIntoAppCache = async (
 
 const canBeCached = (request: Request) => request.method === 'GET';
 
-// eslint-disable-next-line
-self.addEventListener('fetch', (event: any) => {
+self.addEventListener('fetch', (event: FetchEvent) => {
   if (!canBeCached(event.request)) {
     return event.respondWith(fetch(event.request));
   }
@@ -25,7 +24,7 @@ self.addEventListener('fetch', (event: any) => {
         }
         return fetchedResponse;
       } catch {
-        return caches.match(event.request);
+        return caches.match(event.request) as PromiseLike<Response>;
       }
     })()
   );
