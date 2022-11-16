@@ -24,8 +24,12 @@ export const Forum = () => {
     <ErrorBoundary>
       <div className={styles.forum}>
         <div className={styles.block_button}>
-          <Button regular onClick={handlerBack}>{t('goBack')}</Button>
-          <Button regular onClick={handlerLoadGame}>{t('play')}</Button>
+          <Button regular onClick={handlerBack}>
+            {t('goBack')}
+          </Button>
+          <Button regular onClick={handlerLoadGame}>
+            {t('play')}
+          </Button>
         </div>
         <Outlet />
       </div>

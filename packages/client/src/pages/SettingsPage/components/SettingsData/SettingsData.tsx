@@ -25,7 +25,7 @@ export const SettingsData = () => {
           <div>
             <div className={stylesForm.form_button_box}>
               <Button regular type="submit" onClick={editHandle}>
-              {t('editProfile')}
+                {t('editProfile')}
               </Button>
               <Link to="password" className={stylesForm.form_sign_in_link}>
                 {t('changePassword')}

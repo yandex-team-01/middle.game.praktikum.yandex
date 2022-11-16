@@ -60,8 +60,10 @@ export const RegistrationForm = () => {
               </Button>
             </div>
 
-            <Link to={`/${lang}/login`} className={stylesForm.form_sign_in_link}>
-            {t('signIn')}
+            <Link
+              to={`/${lang}/login`}
+              className={stylesForm.form_sign_in_link}>
+              {t('signIn')}
             </Link>
           </div>
         }>

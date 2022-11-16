@@ -56,7 +56,12 @@ export const BlockCreateTopic = () => {
   return (
     <ErrorBoundary>
       <div className={styles.block}>
-        <Button regular className={styles.button_publish} onClick={handleCreateNewTopic}>{t('publich')}</Button>
+        <Button
+          regular
+          className={styles.button_publish}
+          onClick={handleCreateNewTopic}>
+          {t('publich')}
+        </Button>
         <BlankWindow className={styles.card}>
           <div className={styles.block_input}>
             <div className={styles.new_topic}>
@@ -68,7 +73,9 @@ export const BlockCreateTopic = () => {
                 value={nameTopic}
               />
             </div>
-            <div className={styles.title_description}>{t('topicDescription')}: </div>
+            <div className={styles.title_description}>
+              {t('topicDescription')}:{' '}
+            </div>
             <div className={styles.description}>
               <Input
                 name="description_topic"

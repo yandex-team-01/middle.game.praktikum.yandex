@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { selectCheckAuth } from './store/auth/AuthSelectors';
 
 export const App = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const dispath = useAppDispatch();
 
   const checkAuth = useAppSelector(selectCheckAuth);

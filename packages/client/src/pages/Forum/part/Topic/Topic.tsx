@@ -32,7 +32,9 @@ export const Topic = ({
           <div className={styles.title}>{title}</div>
           <div>{description}</div>
           <div className={styles.author}>
-            <div>{t('author')}: {author}</div>
+            <div>
+              {t('author')}: {author}
+            </div>
             <div>{date}</div>
           </div>
         </div>

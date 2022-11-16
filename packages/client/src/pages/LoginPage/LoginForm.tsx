@@ -56,7 +56,7 @@ export const LoginForm: React.FC = () => {
             </div>
 
             <Link to={`/${lang}/reg`} className={stylesForm.form_sign_in_link}>
-            {t('signUp')}
+              {t('signUp')}
             </Link>
           </div>
         }>
@@ -83,8 +83,10 @@ export const LoginForm: React.FC = () => {
           error={errors.password}
         />
 
-        <Link to={`/${lang}/resetpassword`} className={stylesForm.form_pass_reset_link}>
-        {t('resetPassword')}
+        <Link
+          to={`/${lang}/resetpassword`}
+          className={stylesForm.form_pass_reset_link}>
+          {t('resetPassword')}
         </Link>
       </Form>
     </ErrorBoundary>

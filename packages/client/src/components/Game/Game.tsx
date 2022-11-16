@@ -38,10 +38,10 @@ export const GameComponent = () => {
       <div>
         <div className={styles.block_button}>
           <Button regular onClick={handleBack}>
-          {t('goBack')}
+            {t('goBack')}
           </Button>
           <Button regular onClick={handleEndGame}>
-          {t('endGame')}
+            {t('endGame')}
           </Button>
         </div>
         <canvas id="game-canvas" ref={canvas} />

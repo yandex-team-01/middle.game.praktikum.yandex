@@ -49,7 +49,7 @@ export const SendComment = () => {
           value={textComment}
         />
         <Button regular className={styles.button_comment} onClick={addComment}>
-        {t('send')}
+          {t('send')}
         </Button>
       </div>
     </ErrorBoundary>

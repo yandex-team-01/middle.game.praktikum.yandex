@@ -31,16 +31,36 @@ export const SettingsChangeData = () => {
           </div>
         }>
         <Input label="Email" name="email" type="email" className="regular" />
-        <Input label={t('login')} name="login" type="text" className="regular" />
-        <Input label={t('nickname')} name="nickname" type="text" className="regular" />
-        <Input label={t('firstName')} name="name" type="text" className="regular" />
+        <Input
+          label={t('login')}
+          name="login"
+          type="text"
+          className="regular"
+        />
+        <Input
+          label={t('nickname')}
+          name="nickname"
+          type="text"
+          className="regular"
+        />
+        <Input
+          label={t('firstName')}
+          name="name"
+          type="text"
+          className="regular"
+        />
         <Input
           label={t('secondName')}
           name="surname"
           type="text"
           className="regular"
         />
-        <Input label={t('phone')} name="phone" type="text" className="regular" />
+        <Input
+          label={t('phone')}
+          name="phone"
+          type="text"
+          className="regular"
+        />
       </Form>
     </div>
   );

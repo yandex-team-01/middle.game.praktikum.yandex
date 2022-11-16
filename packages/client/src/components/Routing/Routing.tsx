@@ -108,7 +108,14 @@ export const Routing = () => {
           path="/loadinggame"
           element={<Navigate to={`/${lang}/loadinggame`} replace />}
         />
-        <Route path={`/${lang}/resetpassword`} element={<BackgroundLayout><Landing /></BackgroundLayout>} />
+        <Route
+          path={`/${lang}/resetpassword`}
+          element={
+            <BackgroundLayout>
+              <Landing />
+            </BackgroundLayout>
+          }
+        />
         <Route
           path="/resetpassword"
           element={<Navigate to={`/${lang}/resetpassword`} replace />}
