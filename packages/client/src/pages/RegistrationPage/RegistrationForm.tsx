@@ -17,6 +17,7 @@ import { selectLoading } from 'src/store/auth/AuthSelectors';
 
 export const RegistrationForm = () => {
   const { t } = useTranslation();
+  let lang = localStorage.getItem('i18nextLng');
   const dispath = useAppDispatch();
   const loading = useAppSelector(selectLoading);
 
@@ -59,7 +60,7 @@ export const RegistrationForm = () => {
               </Button>
             </div>
 
-            <Link to="/login" className={stylesForm.form_sign_in_link}>
+            <Link to={`/${lang}/login`} className={stylesForm.form_sign_in_link}>
             {t('signIn')}
             </Link>
           </div>

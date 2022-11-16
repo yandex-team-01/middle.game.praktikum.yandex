@@ -26,6 +26,8 @@
   "logout": "Выйти",
   "howToPlay": "Как играть",
   "comments": "Комментарии",
+  "newComment": "Новый комментарий",
+  "send": "Отправить",
   "postNewTopic": "Создать новую тему",
   "newTopic": "Новая тема",
   "topicDescription": "Описание темы",
@@ -38,5 +40,9 @@
   "fetchSignUp": "Ошибка регистрации",
   "fetchLogout": "Ошибка при выходе",
   "fetchChangeUser": "Ошибка при изменении профиля",
-  "fetchChangePassword": "Ошибка при смене пароля"
+  "fetchChangePassword": "Ошибка при смене пароля",
+  "views": "Просмотры",
+  "author": "Автор",
+  "endGame": "Завершить игру",
+  "goHome": "Перейти на главную"
 }

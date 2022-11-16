@@ -18,6 +18,7 @@ import { selectLoading } from 'src/store/auth/AuthSelectors';
 
 export const LoginForm: React.FC = () => {
   const { t } = useTranslation();
+  let lang = localStorage.getItem('i18nextLng');
   const dispath = useAppDispatch();
   const loading = useAppSelector(selectLoading);
   const signinHandler = (values: SigninData) => {
@@ -54,7 +55,7 @@ export const LoginForm: React.FC = () => {
               </Button>
             </div>
 
-            <Link to="/reg" className={stylesForm.form_sign_in_link}>
+            <Link to={`/${lang}/reg`} className={stylesForm.form_sign_in_link}>
             {t('signUp')}
             </Link>
           </div>
@@ -82,7 +83,7 @@ export const LoginForm: React.FC = () => {
           error={errors.password}
         />
 
-        <Link to="/resetpassword" className={stylesForm.form_pass_reset_link}>
+        <Link to={`/${lang}/resetpassword`} className={stylesForm.form_pass_reset_link}>
         {t('resetPassword')}
         </Link>
       </Form>

@@ -7,10 +7,11 @@ import { Navigate } from 'react-router-dom';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 export const GameLoadingPage: React.FC = () => {
+  let lang = localStorage.getItem('i18nextLng');
   const [progress] = useProgress();
 
   if (progress === 100) {
-    return <Navigate to="/game" />;
+    return <Navigate to={`/${lang}/game`} />;
   }
 
   return (

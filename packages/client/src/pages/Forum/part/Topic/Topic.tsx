@@ -1,4 +1,4 @@
-import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
@@ -17,10 +17,11 @@ export const Topic = ({
   comments,
   views,
 }: ITopic) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleTopicChange = useBoundAction(() => {
-    navigate('/forum/topic');
+    navigate('topic');
     return changeActiveTopic(id);
   });
 
@@ -31,14 +32,14 @@ export const Topic = ({
           <div className={styles.title}>{title}</div>
           <div>{description}</div>
           <div className={styles.author}>
-            <div>author: {author}</div>
+            <div>{t('author')}: {author}</div>
             <div>{date}</div>
           </div>
         </div>
-        <Column title="comments">
+        <Column title={t('comments')}>
           <h3>{comments.length}</h3>
         </Column>
-        <Column title="views">
+        <Column title={t('views')}>
           <h3>{views}</h3>
         </Column>
       </BlankWindow>

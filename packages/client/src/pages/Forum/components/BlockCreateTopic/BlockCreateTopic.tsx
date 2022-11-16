@@ -19,6 +19,7 @@ import { dateFormatting } from 'src/utils/dateFormatting';
 import { selectUserLogin } from 'src/store/auth/AuthSelectors';
 
 export const BlockCreateTopic = () => {
+  let lang = localStorage.getItem('i18nextLng');
   const { t } = useTranslation();
   const [nameTopic, setNameTopic] = useState('');
   const [descriptionTopic, setDescriptionTopic] = useState('');
@@ -49,7 +50,7 @@ export const BlockCreateTopic = () => {
       views: 0,
     };
     dispatch(addNewTopic(newtopic));
-    navigate('/forum');
+    navigate(`/${lang}/forum`);
   }, [dispatch, login, navigate, nameTopic, descriptionTopic]);
 
   return (

@@ -1,4 +1,5 @@
 import { useCallback, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Game } from 'src/logic/Game';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
 import { Button } from 'src/components/Button';
@@ -7,10 +8,12 @@ import styles from 'src/pages/GameScreen/GameScreen.module.scss';
 import { ErrorBoundary } from '../ErrorBoundary';
 
 export const GameComponent = () => {
+  let lang = localStorage.getItem('i18nextLng');
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleBack = useCallback(() => {
-    navigate('/');
+    navigate(`/${lang}/`);
   }, [navigate]);
   const handleEndGame = useCallback(() => {
     game.current?.end();
@@ -35,10 +38,10 @@ export const GameComponent = () => {
       <div>
         <div className={styles.block_button}>
           <Button regular onClick={handleBack}>
-            GO BACK
+          {t('goBack')}
           </Button>
           <Button regular onClick={handleEndGame}>
-            END THE GAME
+          {t('endGame')}
           </Button>
         </div>
         <canvas id="game-canvas" ref={canvas} />

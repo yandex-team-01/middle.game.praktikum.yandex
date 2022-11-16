@@ -10,14 +10,15 @@ import { useCallback } from 'react';
 
 export const Landing = () => {
   const { t } = useTranslation();
+  let lang = localStorage.getItem('i18nextLng');
   const navigate = useNavigate();
 
   const navigateLogin = useCallback(() => {
-    navigate('/login');
+    navigate(`/${lang}/login`);
   }, [navigate]);
 
   const navigateSignup = useCallback(() => {
-    navigate('/reg');
+    navigate(`/${lang}/reg`);
   }, [navigate]);
 
   return (

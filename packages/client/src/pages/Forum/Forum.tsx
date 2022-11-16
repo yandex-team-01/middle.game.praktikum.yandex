@@ -9,6 +9,7 @@ import { Button } from 'src/components/Button';
 
 export const Forum = () => {
   const { t } = useTranslation();
+  let lang = localStorage.getItem('i18nextLng');
   const navigate = useNavigate();
 
   const handlerBack = useCallback(() => {
@@ -16,7 +17,7 @@ export const Forum = () => {
   }, [navigate]);
 
   const handlerLoadGame = useCallback(() => {
-    navigate('/loadinggame');
+    navigate(`/${lang}/loadinggame`);
   }, [navigate]);
 
   return (

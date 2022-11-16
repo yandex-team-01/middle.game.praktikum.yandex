@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './CommentsPage.module.scss';
 import { Button } from 'src/components/Button';
 import { useNavigate } from 'react-router-dom';
@@ -8,12 +9,13 @@ import { selectActiveTopic } from 'src/store/forum/ForumSelectors';
 import { BlockComments } from '../../part/BlockComments';
 
 export const CommentsPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [topic] = useAppSelector(selectActiveTopic);
 
   const handleCreateTopic = useCallback(() => {
-    navigate('/forum/createtopic');
+    navigate('createtopic');
   }, [navigate]);
 
   return (
@@ -23,7 +25,7 @@ export const CommentsPage = () => {
           regular
           className={styles.button_new_post}
           onClick={handleCreateTopic}>
-          POST NEW TOPIC
+          {t('postNewTopic')}
         </Button>
         {topic && <BlockComments topic={topic} />}
       </div>

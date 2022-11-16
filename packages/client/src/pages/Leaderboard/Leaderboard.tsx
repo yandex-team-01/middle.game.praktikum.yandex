@@ -7,7 +7,6 @@ import styles from './Leaderboard.module.scss';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { Button } from 'src/components/Button';
 import { LeaderboardLine } from './components/LeaderboardLine';
-import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 const LeadersMockData = [
   {
@@ -34,14 +33,15 @@ const LeadersMockData = [
 
 export const Leaderboard = () => {
   const { t } = useTranslation();
+  let lang = localStorage.getItem('i18nextLng');
   const navigate = useNavigate();
 
   const handleBack = useCallback(() => {
-    navigate('/');
+    navigate(-1);
   }, [navigate]);
 
   const handleLoadGame = useCallback(() => {
-    navigate('/loadinggame');
+    navigate(`/${lang}/loadinggame`);
   }, [navigate]);
 
   return (

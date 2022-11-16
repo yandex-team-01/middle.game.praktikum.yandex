@@ -11,19 +11,20 @@ import { fetchLogout } from 'src/store/auth/AuthActions';
 
 export const MainMenu = () => {
   const { t } = useTranslation();
+  let lang = localStorage.getItem('i18nextLng');
   const dispath = useAppDispatch();
   const navigate = useNavigate();
 
   const leadersHandle = useCallback(() => {
-    navigate('/leaders');
+    navigate(`/${lang}/leaders`);
   }, [navigate]);
 
   const forumHandle = useCallback(() => {
-    navigate('/forum');
+    navigate(`/${lang}/forum`);
   }, [navigate]);
 
   const settingsHandle = useCallback(() => {
-    navigate('/settings');
+    navigate(`/${lang}/settings`);
   }, [navigate]);
 
   const logoutHandle = useCallback(() => {
@@ -31,7 +32,7 @@ export const MainMenu = () => {
   }, [dispath]);
 
   const gameLoading = useCallback(() => {
-    navigate('/loadinggame');
+    navigate(`/${lang}/loadinggame`);
   }, [navigate]);
 
   return (

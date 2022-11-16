@@ -26,6 +26,8 @@
   "logout": "Logout",
   "howToPlay": "How To Play",
   "comments": "Comments",
+  "newComment": "New Comment",
+  "send": "Send",
   "postNewTopic": "Post New Topic",
   "newTopic": "New Topic",
   "topicDescription": "Topic Description",
@@ -38,5 +40,9 @@
   "fetchSignUp": "Registration Error",
   "fetchLogout": "Logout Error",
   "fetchChangeUser": "Profile Change Error",
-  "fetchChangePassword": "Password Change Error"
+  "fetchChangePassword": "Password Change Error",
+  "views": "Views",
+  "author": "Author",
+  "endGame": "End The Game",
+  "goHome": "Go To Homepage"
 }
