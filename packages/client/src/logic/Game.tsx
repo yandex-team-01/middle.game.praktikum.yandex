@@ -1,9 +1,8 @@
-import { PlayerOne } from '../../logic/Player/Player';
-import { AllSprites } from '../Sprite';
-import { View } from '../View';
-import { NpcControll } from '../NpcControll';
-import { SPRITE_ID } from '../const';
-import { GameEntities, AllSpritesType } from '../types';
+import { PlayerOne } from './Player';
+import { AllSprites } from './Sprite';
+import { View } from './View';
+import { NpcControll } from './NpcControll';
+import { GameEntities, AllSpritesType } from './types';
 
 export class Game {
   private ctx: CanvasRenderingContext2D;
@@ -23,7 +22,12 @@ export class Game {
     this.canvas.width = this.width;
     this.canvas.height = this.height;
 
-    this.playerOne = new PlayerOne(this.ctx, this.height, this.width);
+    this.playerOne = new PlayerOne(
+      this.ctx,
+      this.height,
+      this.width,
+      this.gameEntities
+    );
     this.allSprites = new AllSprites();
     this.npcControll = new NpcControll();
     this.view = new View(this.canvas, this.ctx, this.gameEntities);
@@ -32,6 +36,7 @@ export class Game {
 
   async init(callback: () => void) {
     await this.allSprites.prepareSprites();
+    this.gameOverBackgroundAudio = new Audio('/src/assets/audio/game-over.mp3');
     this.sprites = this.allSprites.getSprites();
     this.start();
     callback();
@@ -40,8 +45,8 @@ export class Game {
   private prepareObjectGame() {
     // функция чтобы отдать готовые спрайты всем
     this.view.setSprite(this.sprites);
-    this.playerOne.setSprite(this.sprites[SPRITE_ID.PLAYER]);
-    this.npcControll.setSprite(this.sprites[SPRITE_ID.NPC]);
+    this.playerOne.setSprite(this.sprites);
+    this.npcControll.setSprite(this.sprites);
   }
 
   get gameEntities(): GameEntities {
@@ -50,6 +55,7 @@ export class Game {
       sprites: this.sprites,
       view: this.view,
       npcControll: this.npcControll,
+      game: this,
     };
   }
 
@@ -57,21 +63,22 @@ export class Game {
     //TODO: вынести подписку/отписку от событий в отдельный класс Controll
     window.removeEventListener('keydown', this.playerOne.keyDownCustom);
     window.removeEventListener('keyup', this.playerOne.keyUpCustom);
-
     this.view.stopCycle();
+    if (this.gameOverBackgroundAudio) {
+      this.gameOverBackgroundAudio.pause();
+    }
   }
 
   start() {
     this.prepareObjectGame();
+
     this.view.startCycle();
   }
 
   end() {
     //TODO: вынести в отдельный контроллер для аудио
-    if (typeof this.gameOverBackgroundAudio === 'undefined') {
-      this.gameOverBackgroundAudio = new Audio(
-        '/src/assets/audio/game-over.mp3'
-      );
+    if (this.gameOverBackgroundAudio) {
+      this.gameOverBackgroundAudio.currentTime = 0;
       this.gameOverBackgroundAudio.play();
     }
     this.view.stopCycle();

@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react';
-import { Game } from 'src/logic/Game/Game';
+import { Game } from '../../logic/Game';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
 import { Button } from 'src/components/Button';
 import { useNavigate } from 'react-router-dom';

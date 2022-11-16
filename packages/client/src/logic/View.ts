@@ -1,5 +1,6 @@
+import { ClashesController } from './ClashesController';
 import { NpcControll } from './NpcControll';
-import { PlayerOne } from './Player/Player';
+import { PlayerOne } from './Player';
 import { AllSpritesType } from './types';
 import { GameEntities } from './types';
 
@@ -15,6 +16,8 @@ export class View {
   public animationRequestId: number | undefined;
   public playerOne: PlayerOne;
   public npcControll: NpcControll;
+  public clashesController: ClashesController;
+  public gameOver: boolean;
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -28,6 +31,8 @@ export class View {
     this.ctx = ctx;
     this.playerOne = player;
     this.npcControll = npcControll;
+    this.gameOver = false;
+    this.clashesController = new ClashesController(player, npcControll);
   }
 
   setSprite(sprites: AllSpritesType) {
@@ -77,30 +82,16 @@ export class View {
     this.then = Date.now();
   }
 
-  checkСollision(): void {
-    // TODO: вынесу в отдельный класс когда усложню логику столкновения
-    const posPlayer = this.playerOne.position;
-
-    this.npcControll.arrNpc.forEach(npc => {
-      const posNpc = npc.position;
-      let XColl = false;
-      let YColl = false;
-      if (posPlayer.x2 >= posNpc.x1 && posPlayer.x1 <= posNpc.x2) XColl = true;
-      if (posPlayer.y2 >= posNpc.y1 && posPlayer.y1 <= posNpc.y2) YColl = true;
-      if (XColl && YColl) {
-        console.log('столкновение!');
-      }
-    });
-  }
-
   animate() {
     if (this.then !== undefined && this.fpsInterval !== undefined) {
       this.now = Date.now();
       this.elapsed = this.now - this.then;
+
       if (this.elapsed > this.fpsInterval) {
         this.then = this.now - (this.elapsed % this.fpsInterval);
-        this.checkСollision();
+
         this.update();
+        this.clashesController.checkClashes();
       }
     }
   }
@@ -108,6 +99,7 @@ export class View {
   stopCycle() {
     if (this.animationRequestId) {
       cancelAnimationFrame(this.animationRequestId);
+      this.gameOver = true;
     }
     this.renderGameOver();
   }
@@ -116,7 +108,9 @@ export class View {
     this.startAnimating(10);
     const updater = () => {
       this.animate();
-      this.animationRequestId = requestAnimationFrame(updater); // for subsequent frames
+      if (!this.gameOver) {
+        this.animationRequestId = requestAnimationFrame(updater); // for subsequent frames
+      }
     };
     this.animationRequestId = requestAnimationFrame(updater);
   }
