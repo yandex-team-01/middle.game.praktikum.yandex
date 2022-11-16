@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { useNavigate } from 'react-router-dom';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { Button } from 'src/components/Button';
@@ -41,25 +40,23 @@ export const Leaderboard = () => {
   }, [navigate]);
 
   return (
-    <ErrorBoundary>
-      <div className={styles.block}>
-        <div className={styles.button_wrapper}>
-          <Button regular onClick={handleBack}>
-            Go back
-          </Button>
-          <Button regular onClick={handleLoadGame}>
-            Play
-          </Button>
-        </div>
-        <BlankWindow className={styles.window}>
-          <div className={styles.background_overlay}>
-            <h1 className={styles.header}>Top teams</h1>
-            {LeadersMockData.map((team, idx) => {
-              return <LeaderboardLine team={team} idx={idx} key={idx} />;
-            })}
-          </div>
-        </BlankWindow>
+    <div className={styles.block}>
+      <div className={styles.button_wrapper}>
+        <Button regular onClick={handleBack}>
+          Go back
+        </Button>
+        <Button regular onClick={handleLoadGame}>
+          Play
+        </Button>
       </div>
-    </ErrorBoundary>
+      <BlankWindow className={styles.window}>
+        <div className={styles.background_overlay}>
+          <h1 className={styles.header}>Top teams</h1>
+          {LeadersMockData.map((team, idx) => {
+            return <LeaderboardLine team={team} idx={idx} key={idx} />;
+          })}
+        </div>
+      </BlankWindow>
+    </div>
   );
 };
