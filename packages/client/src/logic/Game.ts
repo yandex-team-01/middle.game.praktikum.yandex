@@ -8,13 +8,11 @@ export class Game {
   private ctx: CanvasRenderingContext2D;
   private width = 800;
   private height = 500;
-
   private playerOne: PlayerOne;
   private gameOverBackgroundAudio: HTMLAudioElement | undefined;
   private allSprites: AllSprites;
   private sprites: AllSpritesType;
   private npcControll: NpcControll;
-
   public view: View;
 
   constructor(protected canvas: HTMLCanvasElement) {
@@ -29,7 +27,7 @@ export class Game {
       this.gameEntities
     );
     this.allSprites = new AllSprites();
-    this.npcControll = new NpcControll();
+    this.npcControll = new NpcControll(this.height, this.width);
     this.view = new View(this.canvas, this.ctx, this.gameEntities);
     this.sprites = {};
   }
