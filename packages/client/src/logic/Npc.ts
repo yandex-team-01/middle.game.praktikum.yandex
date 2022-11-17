@@ -8,6 +8,11 @@ enum DirectionNpc {
   Right,
   Up
 }
+
+enum Direction { 
+  Horizontal = 0,
+  Vertical
+}
   
 export abstract class NpcModel {
   id: number;
@@ -98,30 +103,36 @@ export abstract class NpcModel {
     this.y += this.ySpeed;
   }
 
+  toggleNpcDirection(direction:number){
+    //меняем флаг направления анимации ног влево-вправо
+    if(direction === Direction.Horizontal){
+      if(this.npcCurrentDirections[DirectionNpc.Right]){
+          this.npcCurrentDirections[DirectionNpc.Right] = false; 
+          this.npcCurrentDirections[DirectionNpc.Left] = true; 
+      }else{
+          this.npcCurrentDirections[DirectionNpc.Left] = false; 
+          this.npcCurrentDirections[DirectionNpc.Right] = true; 
+      }
+    }
+    if(direction === Direction.Vertical){
+        //меняем флаг направления анимации ног вверх-вниз
+        if(this.npcCurrentDirections[DirectionNpc.Down]){
+          this.npcCurrentDirections[DirectionNpc.Down] = false; 
+          this.npcCurrentDirections[DirectionNpc.Up] = true; 
+      }else{
+          this.npcCurrentDirections[DirectionNpc.Up] = false; 
+          this.npcCurrentDirections[DirectionNpc.Down] = true; 
+      }
+    }
+  }
   checkForCollisions() {
     if ( this.x + this.width > this.canvasWidth || this.x - this.width / 2  < 0 ) {
         this.xSpeed = -this.xSpeed;
-        //меняем флаг направления анимации ног влево-вправо
-        if(this.npcCurrentDirections[DirectionNpc.Right]){
-            this.npcCurrentDirections[DirectionNpc.Right] = false; 
-            this.npcCurrentDirections[DirectionNpc.Left] = true; 
-        }else{
-            this.npcCurrentDirections[DirectionNpc.Left] = false; 
-            this.npcCurrentDirections[DirectionNpc.Right] = true; 
-        }
-
+        this.toggleNpcDirection(Direction.Horizontal);
     }
     if ( this.y + this.height > this.canvasHeight || this.y - this.height / 2 < 0 ) {
         this.ySpeed = -this.ySpeed;
-        //меняем флаг направления анимации ног вверх-вниз
-        if(this.npcCurrentDirections[DirectionNpc.Down]){
-            this.npcCurrentDirections[DirectionNpc.Down] = false; 
-            this.npcCurrentDirections[DirectionNpc.Up] = true; 
-        }else{
-            this.npcCurrentDirections[DirectionNpc.Up] = false; 
-            this.npcCurrentDirections[DirectionNpc.Down] = true; 
-        }
-
+        this.toggleNpcDirection(Direction.Vertical);
     }   
   }
 
