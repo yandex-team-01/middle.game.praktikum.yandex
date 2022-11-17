@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from 'src/components/Button';
@@ -8,14 +6,13 @@ import { SettingsAvatar } from '../SettingsAvatar';
 import { Input } from 'src/components/Input';
 
 import stylesForm from 'src/components/Form/Form.module.scss';
+import { useNavigator } from 'src/hooks/useNavigator';
 
 export const SettingsChangeData = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigator = useNavigator();
 
-  const handleSave = useCallback(() => {
-    navigate(-1);
-  }, [navigate]);
+  const handleSave = () => navigator(-1)
 
   return (
     <div>

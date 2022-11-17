@@ -17,13 +17,13 @@ import { addNewTopic } from 'src/store/forum/ForumSlice';
 import { useAppSelector } from 'src/hooks/redux';
 import { dateFormatting } from 'src/utils/dateFormatting';
 import { selectUserLogin } from 'src/store/auth/AuthSelectors';
+import { useNavigator } from 'src/hooks/useNavigator';
 
 export const BlockCreateTopic = () => {
-  let lang = localStorage.getItem('i18nextLng');
   const { t } = useTranslation();
+  const navigator = useNavigator()
   const [nameTopic, setNameTopic] = useState('');
   const [descriptionTopic, setDescriptionTopic] = useState('');
-  const navigate = useNavigate();
 
   const login = useAppSelector(selectUserLogin);
   const dispatch = useDispatch();
@@ -50,8 +50,8 @@ export const BlockCreateTopic = () => {
       views: 0,
     };
     dispatch(addNewTopic(newtopic));
-    navigate(`/${lang}/forum`);
-  }, [dispatch, login, navigate, nameTopic, descriptionTopic]);
+    navigator(-1)
+  }, [dispatch, login, navigator, nameTopic, descriptionTopic]);
 
   return (
     <ErrorBoundary>

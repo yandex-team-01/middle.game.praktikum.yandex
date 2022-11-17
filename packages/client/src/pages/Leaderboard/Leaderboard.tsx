@@ -7,6 +7,7 @@ import styles from './Leaderboard.module.scss';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { Button } from 'src/components/Button';
 import { LeaderboardLine } from './components/LeaderboardLine';
+import { useNavigator } from 'src/hooks/useNavigator';
 
 const LeadersMockData = [
   {
@@ -33,16 +34,10 @@ const LeadersMockData = [
 
 export const Leaderboard = () => {
   const { t } = useTranslation();
-  let lang = localStorage.getItem('i18nextLng');
-  const navigate = useNavigate();
+  const navigator = useNavigator();
 
-  const handleBack = useCallback(() => {
-    navigate(-1);
-  }, [navigate]);
-
-  const handleLoadGame = useCallback(() => {
-    navigate(`/${lang}/loadinggame`);
-  }, [navigate]);
+  const handleBack = () => navigator(-1)
+  const handleLoadGame = () => navigator("/loadinggame")
 
   return (
     <div className={styles.block}>

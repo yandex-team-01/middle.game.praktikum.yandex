@@ -6,20 +6,14 @@ import styles from './Landing.module.scss';
 import { Button } from 'src/components/Button';
 
 import gameImg from 'src/assets/images/game.png';
-import { useCallback } from 'react';
+import { useNavigator } from 'src/hooks/useNavigator';
 
 export const Landing = () => {
   const { t } = useTranslation();
-  let lang = localStorage.getItem('i18nextLng');
-  const navigate = useNavigate();
+  const navigator = useNavigator();
 
-  const navigateLogin = useCallback(() => {
-    navigate(`/${lang}/login`);
-  }, [navigate]);
-
-  const navigateSignup = useCallback(() => {
-    navigate(`/${lang}/reg`);
-  }, [navigate]);
+  const navigateLogin = () => navigator('/login');
+  const navigateSignup = () => navigator('/reg');
 
   return (
     <div className={styles.page}>

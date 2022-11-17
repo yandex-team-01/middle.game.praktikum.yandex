@@ -15,10 +15,11 @@ import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { fetchSignin } from 'src/store/auth/AuthActions';
 import { SigninData } from 'src/modules/IAuth';
 import { selectLoading } from 'src/store/auth/AuthSelectors';
+import { getLocalStorageItem, LocalStorageItems } from 'src/utils/getLocalStorageItem';
 
 export const LoginForm: React.FC = () => {
   const { t } = useTranslation();
-  let lang = localStorage.getItem('i18nextLng');
+  let lang = getLocalStorageItem(LocalStorageItems.Lang);
   const dispath = useAppDispatch();
   const loading = useAppSelector(selectLoading);
   const signinHandler = (values: SigninData) => {
@@ -47,10 +48,7 @@ export const LoginForm: React.FC = () => {
               <Button
                 regular
                 type="submit"
-                disabled={loading}
-                onClick={() => {
-                  console.log('submit');
-                }}>
+                disabled={loading}>
                 {t('signIn')}
               </Button>
             </div>

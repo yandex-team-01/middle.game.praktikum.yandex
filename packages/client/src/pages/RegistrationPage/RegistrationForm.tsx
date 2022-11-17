@@ -14,10 +14,14 @@ import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { SignupData } from 'src/modules/IAuth';
 import { fetchSignup } from 'src/store/auth/AuthActions';
 import { selectLoading } from 'src/store/auth/AuthSelectors';
+import {
+  getLocalStorageItem,
+  LocalStorageItems,
+} from 'src/utils/getLocalStorageItem';
 
 export const RegistrationForm = () => {
   const { t } = useTranslation();
-  let lang = localStorage.getItem('i18nextLng');
+  let lang = getLocalStorageItem(LocalStorageItems.Lang);
   const dispath = useAppDispatch();
   const loading = useAppSelector(selectLoading);
 
@@ -47,15 +51,9 @@ export const RegistrationForm = () => {
       <Form
         onSubmit={handleSubmit}
         buttonsBlock={
-          <div key={0}>
+          <div>
             <div className={stylesForm.form_button_box}>
-              <Button
-                regular
-                type="submit"
-                disabled={loading}
-                onClick={() => {
-                  console.log('submit');
-                }}>
+              <Button regular type="submit" disabled={loading}>
                 {t('signUp')}
               </Button>
             </div>

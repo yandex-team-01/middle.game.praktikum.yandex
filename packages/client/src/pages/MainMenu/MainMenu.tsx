@@ -8,33 +8,22 @@ import { Button } from 'src/components/Button';
 
 import { useAppDispatch } from 'src/hooks/redux';
 import { fetchLogout } from 'src/store/auth/AuthActions';
+import { useNavigator } from 'src/hooks/useNavigator';
 
 export const MainMenu = () => {
   const { t } = useTranslation();
-  let lang = localStorage.getItem('i18nextLng');
+  const navigator = useNavigator();
   const dispath = useAppDispatch();
-  const navigate = useNavigate();
 
-  const leadersHandle = useCallback(() => {
-    navigate(`/${lang}/leaders`);
-  }, [navigate]);
-
-  const forumHandle = useCallback(() => {
-    navigate(`/${lang}/forum`);
-  }, [navigate]);
-
-  const settingsHandle = useCallback(() => {
-    navigate(`/${lang}/settings`);
-  }, [navigate]);
+  const leadersHandle = () => navigator("/leaders")
+  const forumHandle = () => navigator("/forum")
+  const settingsHandle = () => navigator("/settings")
+  const gameLoading = () => navigator("/loadinggame")
 
   const logoutHandle = useCallback(() => {
     dispath(fetchLogout());
   }, [dispath]);
-
-  const gameLoading = useCallback(() => {
-    navigate(`/${lang}/loadinggame`);
-  }, [navigate]);
-
+  
   return (
     <div className={styles.page}>
       <h1 className={styles.title}>

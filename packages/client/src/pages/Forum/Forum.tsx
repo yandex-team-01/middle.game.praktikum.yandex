@@ -1,24 +1,19 @@
-import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import styles from './Forum.module.scss';
 
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { Button } from 'src/components/Button';
 
+import { useNavigator } from 'src/hooks/useNavigator';
+
 export const Forum = () => {
   const { t } = useTranslation();
-  let lang = localStorage.getItem('i18nextLng');
-  const navigate = useNavigate();
+  const navigator = useNavigator();
 
-  const handlerBack = useCallback(() => {
-    navigate(-1);
-  }, [navigate]);
-
-  const handlerLoadGame = useCallback(() => {
-    navigate(`/${lang}/loadinggame`);
-  }, [navigate]);
+  const handlerBack = () => navigator(-1);
+  const handlerLoadGame = () => navigator('/loadinggame');
 
   return (
     <ErrorBoundary>

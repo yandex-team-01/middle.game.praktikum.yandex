@@ -15,6 +15,6 @@ i18next
       order: ['path', 'localStorage'],
       caches: ['localStorage'],
     },
-    debug: process.env.DEBUG || false,
+    debug: false,
     saveMissing: true,
   });

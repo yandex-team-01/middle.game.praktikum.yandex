@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from 'src/components/Button';
@@ -8,13 +6,13 @@ import { Input } from 'src/components/Input';
 
 import stylesForm from 'src/components/Form/Form.module.scss';
 
+import { useNavigator } from 'src/hooks/useNavigator';
+
 export const SettingsChangePassword = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigator = useNavigator();
 
-  const saveHandle = useCallback(() => {
-    navigate(-1);
-  }, [navigate]);
+  const saveHandle = () => navigator(-1)
 
   return (
     <div>

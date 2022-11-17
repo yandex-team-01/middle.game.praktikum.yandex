@@ -1,5 +1,3 @@
-import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import styles from './Topics.module.scss';
@@ -12,15 +10,14 @@ import { Button } from 'src/components/Button';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 import { useAppSelector } from 'src/hooks/redux';
+import { useNavigator } from 'src/hooks/useNavigator';
 
 export const TopicList = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigator = useNavigator();
   const topics = useAppSelector(selectListTopics);
 
-  const handleCreateTopic = useCallback(() => {
-    navigate('createtopic');
-  }, [navigate]);
+  const handleCreateTopic = () => navigator('createtopic');
 
   return (
     <ErrorBoundary>

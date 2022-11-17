@@ -1,4 +1,4 @@
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from 'src/components/Button';
@@ -7,15 +7,14 @@ import { SettingsAvatar } from '../../components/SettingsAvatar';
 import { SettingsUserInfo } from '../SettingsUserInfo';
 
 import stylesForm from 'src/components/Form/Form.module.scss';
-import { useCallback } from 'react';
+
+import { useNavigator } from 'src/hooks/useNavigator';
 
 export const SettingsData = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigator = useNavigator();
 
-  const editHandle = useCallback(() => {
-    navigate('edit');
-  }, [navigate]);
+  const editHandle = () => navigator('edit')
 
   return (
     <div>

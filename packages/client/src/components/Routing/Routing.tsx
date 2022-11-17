@@ -1,6 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import { getLocalStorageItem } from 'src/utils/getLocalStorageItem';
+import { LocalStorageItems } from 'src/utils/getLocalStorageItem';
+
 import {
   Forum,
   ErrorPage,
@@ -31,7 +34,7 @@ import { CommentsPage } from 'src/pages/Forum/components/CommentsPage';
 import { BackgroundLayout } from 'src/layouts/BackgroundLayout';
 
 export const Routing = () => {
-  let lang = localStorage.getItem('i18nextLng');
+  let lang = getLocalStorageItem(LocalStorageItems.Lang);
   const { t } = useTranslation();
   const auth = useAppSelector(selectAuth);
 

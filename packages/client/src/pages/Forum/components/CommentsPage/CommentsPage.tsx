@@ -1,22 +1,19 @@
-import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './CommentsPage.module.scss';
 import { Button } from 'src/components/Button';
-import { useNavigate } from 'react-router-dom';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { useAppSelector } from 'src/hooks/redux';
 import { selectActiveTopic } from 'src/store/forum/ForumSelectors';
 import { BlockComments } from '../../part/BlockComments';
+import { useNavigator } from 'src/hooks/useNavigator';
 
 export const CommentsPage = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigator = useNavigator();
 
   const [topic] = useAppSelector(selectActiveTopic);
 
-  const handleCreateTopic = useCallback(() => {
-    navigate('createtopic');
-  }, [navigate]);
+  const handleCreateTopic = () => navigator('/forum/createtopic');
 
   return (
     <ErrorBoundary>

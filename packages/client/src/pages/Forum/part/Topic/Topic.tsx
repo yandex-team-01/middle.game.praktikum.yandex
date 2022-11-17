@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { useNavigator } from 'src/hooks/useNavigator';
 import { changeActiveTopic } from 'src/store/forum/ForumSlice';
 import { Column } from '../Column/Column';
 import { useBoundAction } from './helper';
@@ -18,10 +18,10 @@ export const Topic = ({
   views,
 }: ITopic) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigator = useNavigator();
 
   const handleTopicChange = useBoundAction(() => {
-    navigate('topic');
+    navigator('topic');
     return changeActiveTopic(id);
   });
 
