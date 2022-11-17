@@ -37,8 +37,9 @@ abstract class Player {
   ctx: CanvasRenderingContext2D;
   hitPoints: number;
   score: number;
-
   game: Game;
+  totalNumberOfLegsMovementFrames: number = 3;
+  firstLegsMovementFrame: number = 0;
 
   constructor(
     ctx: CanvasRenderingContext2D,
@@ -89,10 +90,10 @@ abstract class Player {
   }
 
   handlePlayerLegsFrame() {
-    if (this.skinLegsFrame < 3 && this.isMoving) {
+    if (this.skinLegsFrame < this.totalNumberOfLegsMovementFrames && this.isMoving) {
       this.skinLegsFrame++;
     } else {
-      this.skinLegsFrame = 0;
+      this.skinLegsFrame = this.firstLegsMovementFrame;
     }
   }
 

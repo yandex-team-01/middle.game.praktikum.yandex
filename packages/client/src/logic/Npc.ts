@@ -24,6 +24,8 @@ export abstract class NpcModel {
   canvasHeight = 0;
   canvasWidth = 0;
   npcCurrentDirections: boolean[] = [];
+  totalNumberOfLegsMovementFrames: number = 3;
+  firstLegsMovementFrame: number = 0;
 
   constructor(options: NpcConstructorOptions) {
     this.id = options.id;
@@ -124,10 +126,10 @@ export abstract class NpcModel {
   }
 
   handleNpcLegsFrame() {
-    if (this.skinLegsFrame < 3){ 
+    if (this.skinLegsFrame < this.totalNumberOfLegsMovementFrames){ 
         this.skinLegsFrame++;
     } else {
-        this.skinLegsFrame = 0;
+        this.skinLegsFrame = this.firstLegsMovementFrame;
     }
   }
 
