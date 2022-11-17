@@ -38,8 +38,8 @@ abstract class Player {
   hitPoints: number;
   score: number;
   game: Game;
-  totalNumberOfLegsMovementFrames: number = 3;
-  firstLegsMovementFrame: number = 0;
+  totalNumberOfLegsMovementFrames = 3;
+  firstLegsMovementFrame = 0;
 
   constructor(
     ctx: CanvasRenderingContext2D,

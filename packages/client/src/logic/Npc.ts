@@ -24,8 +24,8 @@ export abstract class NpcModel {
   canvasHeight = 0;
   canvasWidth = 0;
   npcCurrentDirections: boolean[] = [];
-  totalNumberOfLegsMovementFrames: number = 3;
-  firstLegsMovementFrame: number = 0;
+  totalNumberOfLegsMovementFrames = 3;
+  firstLegsMovementFrame = 0;
 
   constructor(options: NpcConstructorOptions) {
     this.id = options.id;
