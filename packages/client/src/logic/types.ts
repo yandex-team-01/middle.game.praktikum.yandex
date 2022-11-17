@@ -1,7 +1,8 @@
-import { PlayerOne } from './Player/Player';
+import { PlayerOne } from './Player';
 import { View } from './View';
 import { Sprite } from './Sprite';
 import { NpcControll } from './NpcControll';
+import { Game } from './Game';
 
 export type SpriteOptions = {
   id: number | string;
@@ -16,6 +17,7 @@ export type NpcConstructorOptions = {
   id: number;
   defaultX: number;
   defaultY: number;
+  type: string;
 };
 
 export type GameEntities = {
@@ -23,6 +25,7 @@ export type GameEntities = {
   npcControll: NpcControll;
   view: View;
   sprites: Record<number | string, Sprite>;
+  game: Game;
 };
 
 export type Position = {

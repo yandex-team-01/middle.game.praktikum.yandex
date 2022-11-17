@@ -1,34 +1,45 @@
-import { Npc } from './Npc';
-import { Sprite } from './Sprite';
+import { NpcEnemy, NpcFriend } from './Npc';
+import { AllSpritesType } from './types';
 import { defaultOptionNpc } from './const';
+import { SPRITE_ID } from './const';
+
+type NpcType = NpcEnemy | NpcFriend;
 
 export class NpcControll {
-  arrNpc: Npc[];
-  sprite: Sprite | undefined;
-  width: number;
-  height: number;
-  frameX: number;
-  frameY: number;
+  arrNpc: NpcType[];
+  sprites: AllSpritesType | undefined;
 
   constructor() {
     // временно вывожу массив npc
-    this.arrNpc = defaultOptionNpc.map(option => new Npc(option));
-    this.width = 0;
-    this.height = 0;
-    this.frameX = 0;
-    this.frameY = 0;
+    this.arrNpc = defaultOptionNpc.map(option => {
+      if (option.type === 'friend') {
+        return new NpcFriend(option);
+      } else {
+        return new NpcEnemy(option);
+      }
+    });
   }
 
-  setSprite(sprite: Sprite) {
-    this.sprite = sprite;
-    this.width = sprite.width;
-    this.height = sprite.height;
-    this.frameX = 0;
-    this.frameY = 0;
-    this.arrNpc.forEach(npc => npc.setSprite(sprite));
+  setSprite(sprites: AllSpritesType) {
+    if (!sprites) {
+      return;
+    }
+
+    this.sprites = sprites;
+    this.arrNpc.forEach(npc => {
+      if (npc.type === 'friend') {
+        npc.setSprite(sprites[SPRITE_ID.NPC_FRIEND]);
+      } else {
+        npc.setSprite(sprites[SPRITE_ID.NPC_ENEMY]);
+      }
+    });
   }
 
   render(ctx: CanvasRenderingContext2D) {
     this.arrNpc.forEach(npc => npc.render(ctx));
+  }
+
+  deleteNpc(npc: NpcType) {
+    this.arrNpc = this.arrNpc.filter(item => item.id !== npc.id);
   }
 }

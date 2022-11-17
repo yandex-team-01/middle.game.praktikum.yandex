@@ -6,6 +6,7 @@ import { Input } from 'src/components/Input';
 import styles from './SendComment.module.scss';
 import { Button } from 'src/components/Button';
 import { selectLoginTopic } from 'src/store/forum/ForumSelectors';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 export const SendComment = () => {
   const [textComment, setTextComment] = useState('');
@@ -36,17 +37,19 @@ export const SendComment = () => {
   }, [dispatch, topic, login, textComment]);
 
   return (
-    <div className={styles.new_comment}>
-      <div className={styles.text}>New comment: </div>
-      <Input
-        name="comment"
-        className={styles.input}
-        onChange={changeComment}
-        value={textComment}
-      />
-      <Button regular className={styles.button_comment} onClick={addComment}>
-        Send
-      </Button>
-    </div>
+    <ErrorBoundary>
+      <div className={styles.new_comment}>
+        <div className={styles.text}>New comment: </div>
+        <Input
+          name="comment"
+          className={styles.input}
+          onChange={changeComment}
+          value={textComment}
+        />
+        <Button regular className={styles.button_comment} onClick={addComment}>
+          Send
+        </Button>
+      </div>
+    </ErrorBoundary>
   );
 };

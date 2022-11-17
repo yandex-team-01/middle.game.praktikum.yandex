@@ -1,9 +1,10 @@
 import { useCallback, useRef } from 'react';
-import { Game } from 'src/logic/Game/Game';
+import { Game } from '../../logic/Game';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
 import { Button } from 'src/components/Button';
 import { useNavigate } from 'react-router-dom';
 import styles from 'src/pages/GameScreen/GameScreen.module.scss';
+import { ErrorBoundary } from '../ErrorBoundary';
 
 export const GameComponent = () => {
   const navigate = useNavigate();
@@ -30,16 +31,18 @@ export const GameComponent = () => {
   });
 
   return (
-    <div>
-      <div className={styles.block_button}>
-        <Button regular onClick={handleBack}>
-          GO BACK
-        </Button>
-        <Button regular onClick={handleEndGame}>
-          END THE GAME
-        </Button>
+    <ErrorBoundary>
+      <div>
+        <div className={styles.block_button}>
+          <Button regular onClick={handleBack}>
+            GO BACK
+          </Button>
+          <Button regular onClick={handleEndGame}>
+            END THE GAME
+          </Button>
+        </div>
+        <canvas id="game-canvas" ref={canvas} />
       </div>
-      <canvas id="game-canvas" ref={canvas} />
-    </div>
+    </ErrorBoundary>
   );
 };
