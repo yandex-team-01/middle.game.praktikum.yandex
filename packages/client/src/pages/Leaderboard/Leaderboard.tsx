@@ -36,8 +36,8 @@ export const Leaderboard = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
 
-  const handleBack = () => navigator(-1)
-  const handleLoadGame = () => navigator("/loadinggame")
+  const handleBack = () => navigator(-1);
+  const handleLoadGame = () => navigator('/loadinggame');
 
   return (
     <div className={styles.block}>

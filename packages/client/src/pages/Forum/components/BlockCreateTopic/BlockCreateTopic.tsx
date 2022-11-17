@@ -21,7 +21,7 @@ import { useNavigator } from 'src/hooks/useNavigator';
 
 export const BlockCreateTopic = () => {
   const { t } = useTranslation();
-  const navigator = useNavigator()
+  const navigator = useNavigator();
   const [nameTopic, setNameTopic] = useState('');
   const [descriptionTopic, setDescriptionTopic] = useState('');
 
@@ -50,7 +50,7 @@ export const BlockCreateTopic = () => {
       views: 0,
     };
     dispatch(addNewTopic(newtopic));
-    navigator(-1)
+    navigator(-1);
   }, [dispatch, login, navigator, nameTopic, descriptionTopic]);
 
   return (

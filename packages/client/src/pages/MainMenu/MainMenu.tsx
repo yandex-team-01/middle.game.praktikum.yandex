@@ -15,15 +15,15 @@ export const MainMenu = () => {
   const navigator = useNavigator();
   const dispath = useAppDispatch();
 
-  const leadersHandle = () => navigator("/leaders")
-  const forumHandle = () => navigator("/forum")
-  const settingsHandle = () => navigator("/settings")
-  const gameLoading = () => navigator("/loadinggame")
+  const leadersHandle = () => navigator('/leaders');
+  const forumHandle = () => navigator('/forum');
+  const settingsHandle = () => navigator('/settings');
+  const gameLoading = () => navigator('/loadinggame');
 
   const logoutHandle = useCallback(() => {
     dispath(fetchLogout());
   }, [dispath]);
-  
+
   return (
     <div className={styles.page}>
       <h1 className={styles.title}>

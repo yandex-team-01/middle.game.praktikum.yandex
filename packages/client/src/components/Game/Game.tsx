@@ -9,9 +9,9 @@ import { useNavigator } from 'src/hooks/useNavigator';
 
 export const GameComponent = () => {
   const { t } = useTranslation();
-  const navigator = useNavigator()
+  const navigator = useNavigator();
 
-  const handleBack = () => navigator("/")
+  const handleBack = () => navigator('/');
   const handleEndGame = useCallback(() => {
     game.current?.end();
   }, []);

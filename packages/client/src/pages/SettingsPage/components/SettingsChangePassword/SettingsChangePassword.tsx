@@ -12,7 +12,7 @@ export const SettingsChangePassword = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
 
-  const saveHandle = () => navigator(-1)
+  const saveHandle = () => navigator(-1);
 
   return (
     <div>

@@ -14,7 +14,7 @@ export const SettingsData = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
 
-  const editHandle = () => navigator('edit')
+  const editHandle = () => navigator('edit');
 
   return (
     <div>

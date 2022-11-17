@@ -12,7 +12,7 @@ export const SettingsChangeData = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
 
-  const handleSave = () => navigator(-1)
+  const handleSave = () => navigator(-1);
 
   return (
     <div>
