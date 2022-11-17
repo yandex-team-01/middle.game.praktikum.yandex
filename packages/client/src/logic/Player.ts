@@ -3,38 +3,43 @@ import { Position, AllSpritesType, GameEntities } from './types';
 import { SPRITE_ID } from './const';
 import { Game } from './Game';
 
-const keys: boolean[] = [];
+const playerCurrentDirections: boolean[] = [];
 
-enum DirectionPlayerOne {
+enum DirectionPlayerButtons {
   Up = 38,
   Down = 40,
   Left = 37,
   Right = 39,
 }
 
+enum DirectionPlayer {
+  Down = 0,
+  Up,
+  Left,
+  Right,
+}
+
 abstract class Player {
   movePlayer!: () => void;
-
   spriteHeart: Sprite | undefined;
   spriteMoney: Sprite | undefined;
   spritePlayer: Sprite | undefined;
-  width: number;
-  height: number;
-
   x: number;
   y: number;
-
-  frameX: number;
-  frameY: number;
+  width: number;
+  height: number;
+  skinLegsFrame: number;
+  skinDirectionFrame: number;
   speed: number;
-  moving: boolean;
+  isMoving: boolean;
   canvasHeight: number;
   canvasWidth: number;
   ctx: CanvasRenderingContext2D;
   hitPoints: number;
   score: number;
-
   game: Game;
+  totalNumberOfLegsMovementFrames = 3;
+  firstLegsMovementFrame = 0;
 
   constructor(
     ctx: CanvasRenderingContext2D,
@@ -51,12 +56,10 @@ abstract class Player {
     this.height = 0;
     this.x = 0;
     this.y = 0;
-
-    this.frameX = 0;
-    this.frameY = 0;
-    this.speed = 7;
-    this.moving = false;
-
+    this.skinLegsFrame = 0;
+    this.skinDirectionFrame = 0;
+    this.speed = 5;
+    this.isMoving = false;
     this.ctx = ctx;
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
@@ -64,7 +67,7 @@ abstract class Player {
   }
   animate() {
     this.movePlayer();
-    this.handlePlayerFrame();
+    this.handlePlayerLegsFrame();
   }
 
   setSprite(sprites: AllSpritesType) {
@@ -86,11 +89,11 @@ abstract class Player {
     this.score = this.score + bonus;
   }
 
-  handlePlayerFrame() {
-    if (this.frameX < 3 && this.moving) {
-      this.frameX++;
+  handlePlayerLegsFrame() {
+    if (this.skinLegsFrame < this.totalNumberOfLegsMovementFrames && this.isMoving) {
+      this.skinLegsFrame++;
     } else {
-      this.frameX = 0;
+      this.skinLegsFrame = this.firstLegsMovementFrame;
     }
   }
 
@@ -135,8 +138,8 @@ abstract class Player {
 
     ctx.drawImage(
       this.spritePlayer.image,
-      this.width * this.frameX,
-      this.height * this.frameY,
+      this.width * this.skinLegsFrame,
+      this.height * this.skinDirectionFrame,
       this.width,
       this.height,
       this.x,
@@ -169,7 +172,6 @@ export class PlayerOne extends Player {
     super(ctx, canvasHeight, canvasWidth, game);
     this.x = 200;
     this.y = 150;
-
     this.ctx = ctx;
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
@@ -182,45 +184,45 @@ export class PlayerOne extends Player {
   keyDownCustom = (...args: KeyboardEvent[]) => {
     if (args.length > 0) {
       const event = args[0];
-      keys[event.keyCode] = true;
+      playerCurrentDirections[event.keyCode] = true;
     }
   };
 
   keyUpCustom = (...args: KeyboardEvent[]) => {
     if (args.length > 0) {
       const event = args[0];
-      delete keys[event.keyCode];
-      this.moving = false;
+      playerCurrentDirections[event.keyCode] = false;
+      this.isMoving = false;
     }
   };
 
   movePlayer = () => {
     if (this.y !== undefined && this.x !== undefined) {
-      if (keys[DirectionPlayerOne.Up] && this.y > 100) {
+      if (playerCurrentDirections[DirectionPlayerButtons.Up] && this.y > 100) {
         this.y -= this.speed;
-        this.frameY = 1;
-        this.moving = true;
+        this.skinDirectionFrame = DirectionPlayer.Up;
+        this.isMoving = true;
       }
-      if (keys[DirectionPlayerOne.Left] && this.x > 0) {
+      if (playerCurrentDirections[DirectionPlayerButtons.Left] && this.x > 0) {
         this.x -= this.speed;
-        this.frameY = 2;
-        this.moving = true;
+        this.skinDirectionFrame = DirectionPlayer.Left;
+        this.isMoving = true;
       }
       if (
-        keys[DirectionPlayerOne.Down] &&
+        playerCurrentDirections[DirectionPlayerButtons.Down] &&
         this.y < this.canvasHeight - this.height
       ) {
         this.y += this.speed;
-        this.frameY = 0;
-        this.moving = true;
+        this.skinDirectionFrame = DirectionPlayer.Down;
+        this.isMoving = true;
       }
       if (
-        keys[DirectionPlayerOne.Right] &&
+        playerCurrentDirections[DirectionPlayerButtons.Right] &&
         this.x < this.canvasWidth - this.width
       ) {
         this.x += this.speed;
-        this.frameY = 3;
-        this.moving = true;
+        this.skinDirectionFrame = DirectionPlayer.Right;
+        this.isMoving = true;
       }
     }
   };
