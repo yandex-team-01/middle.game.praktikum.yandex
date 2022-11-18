@@ -10,7 +10,6 @@ import { selectCheckAuth } from './store/auth/AuthSelectors';
 
 export const App = () => {
   const dispath = useAppDispatch();
-
   const checkAuth = useAppSelector(selectCheckAuth);
 
   useMountEffect(() => {

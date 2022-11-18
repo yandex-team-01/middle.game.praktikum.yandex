@@ -1,29 +1,29 @@
-import React, { useCallback } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { ErrorBoundary } from 'src/components/ErrorBoundary';
-import { Button } from 'src/components/Button';
+import { useTranslation } from 'react-i18next';
+import { Outlet } from 'react-router-dom';
+
 import styles from './Forum.module.scss';
 
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { Button } from 'src/components/Button';
+
+import { useNavigator } from 'src/hooks/useNavigator';
+
 export const Forum = () => {
-  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const navigator = useNavigator();
 
-  const handleBack = useCallback(() => {
-    navigate('/forum');
-  }, [navigate]);
-
-  const handlePlay = useCallback(() => {
-    navigate('/loadinggame');
-  }, [navigate]);
+  const handlerBack = () => navigator(-1);
+  const handlerLoadGame = () => navigator('/loadinggame');
 
   return (
     <ErrorBoundary>
       <div className={styles.forum}>
         <div className={styles.block_button}>
-          <Button regular onClick={handleBack}>
-            GO BACK
+          <Button regular onClick={handlerBack}>
+            {t('goBack')}
           </Button>
-          <Button regular onClick={handlePlay}>
-            PLAY
+          <Button regular onClick={handlerLoadGame}>
+            {t('play')}
           </Button>
         </div>
         <Outlet />

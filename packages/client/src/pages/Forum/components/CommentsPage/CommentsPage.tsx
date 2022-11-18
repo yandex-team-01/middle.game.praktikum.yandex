@@ -1,20 +1,19 @@
-import React, { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './CommentsPage.module.scss';
 import { Button } from 'src/components/Button';
-import { useNavigate } from 'react-router-dom';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { useAppSelector } from 'src/hooks/redux';
 import { selectActiveTopic } from 'src/store/forum/ForumSelectors';
 import { BlockComments } from '../../part/BlockComments';
+import { useNavigator } from 'src/hooks/useNavigator';
 
 export const CommentsPage = () => {
-  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const navigator = useNavigator();
 
   const [topic] = useAppSelector(selectActiveTopic);
 
-  const handleCreateTopic = useCallback(() => {
-    navigate('/forum/createtopic');
-  }, [navigate]);
+  const handleCreateTopic = () => navigator('/forum/createtopic');
 
   return (
     <ErrorBoundary>
@@ -23,7 +22,7 @@ export const CommentsPage = () => {
           regular
           className={styles.button_new_post}
           onClick={handleCreateTopic}>
-          POST NEW TOPIC
+          {t('postNewTopic')}
         </Button>
         {topic && <BlockComments topic={topic} />}
       </div>

@@ -1,4 +1,5 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { addCommentInTopic } from 'src/store/forum/ForumSlice';
 import { dateFormatting } from 'src/utils/dateFormatting';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
@@ -9,6 +10,7 @@ import { selectLoginTopic } from 'src/store/forum/ForumSelectors';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 export const SendComment = () => {
+  const { t } = useTranslation();
   const [textComment, setTextComment] = useState('');
   const { login, topic } = useAppSelector(selectLoginTopic);
   const dispatch = useAppDispatch();
@@ -39,7 +41,7 @@ export const SendComment = () => {
   return (
     <ErrorBoundary>
       <div className={styles.new_comment}>
-        <div className={styles.text}>New comment: </div>
+        <div className={styles.text}>{t('newComment')}: </div>
         <Input
           name="comment"
           className={styles.input}
@@ -47,7 +49,7 @@ export const SendComment = () => {
           value={textComment}
         />
         <Button regular className={styles.button_comment} onClick={addComment}>
-          Send
+          {t('send')}
         </Button>
       </div>
     </ErrorBoundary>

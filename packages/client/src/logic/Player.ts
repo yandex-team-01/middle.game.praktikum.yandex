@@ -90,7 +90,10 @@ abstract class Player {
   }
 
   handlePlayerLegsFrame() {
-    if (this.skinLegsFrame < this.totalNumberOfLegsMovementFrames && this.isMoving) {
+    if (
+      this.skinLegsFrame < this.totalNumberOfLegsMovementFrames &&
+      this.isMoving
+    ) {
       this.skinLegsFrame++;
     } else {
       this.skinLegsFrame = this.firstLegsMovementFrame;

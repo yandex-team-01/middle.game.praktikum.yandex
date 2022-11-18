@@ -1,14 +1,18 @@
-import React from 'react';
-import { BlankWindow } from 'src/components/BlankWindow';
+import { useTranslation } from 'react-i18next';
+
 import styles from './BlockComment.module.scss';
+
 import { Topic } from '../Topic';
 import { IComment } from '../Comment/types';
 import { Comment } from '../Comment';
-import { ErrorBoundary } from 'src/components/ErrorBoundary';
-import { SendComment } from '../SendComment';
 import { Props } from './types';
 
+import { SendComment } from '../SendComment';
+import { BlankWindow } from 'src/components/BlankWindow';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
+
 export const BlockComments = ({ topic }: Props) => {
+  const { t } = useTranslation();
 
   return (
     <ErrorBoundary>
@@ -22,7 +26,7 @@ export const BlockComments = ({ topic }: Props) => {
           comments={topic.comments}
           views={topic.views}
         />
-        <div className={styles.title}>COMMENTS</div>
+        <div className={styles.title}>{t('comments')}</div>
         <div className={styles.list}>
           {topic.comments.map((comment: IComment, index: number) => {
             return <Comment key={index} comment={comment} />;

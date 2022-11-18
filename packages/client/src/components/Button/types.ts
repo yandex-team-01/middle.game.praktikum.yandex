@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 export interface Props {
-  onClick: () => void;
+  onClick?: () => void;
   className?: string;
   regular?: boolean;
   color?: string;

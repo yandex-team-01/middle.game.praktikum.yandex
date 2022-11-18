@@ -1,19 +1,23 @@
-import React, { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from 'src/components/Button';
-import { ErrorBoundary } from 'src/components/ErrorBoundary';
-import { useAppSelector } from 'src/hooks/redux';
-import { selectListTopics } from 'src/store/forum/ForumSelectors';
-import { Topic } from '../../part/Topic';
+import { useTranslation } from 'react-i18next';
+
 import styles from './Topics.module.scss';
 
+import { Topic } from '../../part/Topic';
+
+import { selectListTopics } from 'src/store/forum/ForumSelectors';
+
+import { Button } from 'src/components/Button';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
+
+import { useAppSelector } from 'src/hooks/redux';
+import { useNavigator } from 'src/hooks/useNavigator';
+
 export const TopicList = () => {
-  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const navigator = useNavigator();
   const topics = useAppSelector(selectListTopics);
 
-  const handleCreateTopic = useCallback(() => {
-    navigate('/forum/createtopic');
-  }, [navigate]);
+  const handleCreateTopic = () => navigator('createtopic');
 
   return (
     <ErrorBoundary>
@@ -22,7 +26,7 @@ export const TopicList = () => {
           regular
           className={styles.button_create_topic}
           onClick={handleCreateTopic}>
-          POST NEW TOPIC
+          {t('postNewTopic')}
         </Button>
         <div className={styles.list}>
           {Object.keys(topics).map((topicId: string, index: number) => {

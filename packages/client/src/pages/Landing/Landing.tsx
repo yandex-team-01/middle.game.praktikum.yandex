@@ -1,19 +1,18 @@
+import { Trans, useTranslation } from 'react-i18next';
+
 import styles from './Landing.module.scss';
+
 import { Button } from 'src/components/Button';
+
 import gameImg from 'src/assets/images/game.png';
-import { useNavigate } from 'react-router-dom';
-import { useCallback } from 'react';
+import { useNavigator } from 'src/hooks/useNavigator';
 
 export const Landing = () => {
-  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const navigator = useNavigator();
 
-  const navigateLogin = useCallback(() => {
-    navigate('/login');
-  }, [navigate]);
-
-  const navigateSignup = useCallback(() => {
-    navigate('/reg');
-  }, [navigate]);
+  const navigateLogin = () => navigator('/login');
+  const navigateSignup = () => navigator('/reg');
 
   return (
     <div className={styles.page}>
@@ -22,12 +21,9 @@ export const Landing = () => {
       </h1>
       <div className={styles.block}>
         <div>
-          <h2 className={styles.subtitle}>HOW to PLAY</h2>
+          <h2 className={styles.subtitle}>{t('howToPlay')}</h2>
           <p className={styles.text}>
-            The main goal of the game is to find the key and collect diamonds.
-            With the key, you can open the door that will take you to the next
-            level. This game can be played either alone or for two with a
-            friend.
+            <Trans i18nKey="homeDescription" />
           </p>
         </div>
         <img src={gameImg} alt="game screen" className={styles.img} />
@@ -38,14 +34,14 @@ export const Landing = () => {
           type="submit"
           className={styles.button}
           onClick={navigateLogin}>
-          Sign in
+          {t('signIn')}
         </Button>
         <Button
           regular
           type="submit"
           className={styles.button}
           onClick={navigateSignup}>
-          Sign Up
+          {t('signUp')}
         </Button>
       </div>
     </div>
