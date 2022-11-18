@@ -8,7 +8,7 @@ export const Forum = () => {
   const navigate = useNavigate();
 
   const handleBack = useCallback(() => {
-    navigate('/forum');
+    navigate(-1);
   }, [navigate]);
 
   const handlePlay = useCallback(() => {
