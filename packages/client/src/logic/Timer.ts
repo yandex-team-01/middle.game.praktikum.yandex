@@ -1,8 +1,10 @@
 import { Game } from './Game';
 import { GameEntities } from './types';
 
+
 export class Timer {
     private ctx: CanvasRenderingContext2D;
+    private canvasHeight: number;
     private canvasWidth: number;
     private gameRoundDuration: number | undefined;
     private gameStartMoment: Date | undefined;

@@ -94,8 +94,9 @@ export abstract class NpcModel {
     this.moveNpc();
     this.handleNpcLegsFrame();
   }
-
+  /*eslint-disable */
   updateNpcCoordinates(){}
+  /*eslint-enable */
 
   toggleNpcDirection(direction: number) {
     //меняем флаг направления анимации ног влево-вправо
