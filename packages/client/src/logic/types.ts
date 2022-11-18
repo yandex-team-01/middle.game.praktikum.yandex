@@ -3,6 +3,7 @@ import { View } from './View';
 import { Sprite } from './Sprite';
 import { NpcControll } from './NpcControll';
 import { Game } from './Game';
+import { Timer } from './Timer';
 
 export type SpriteOptions = {
   id: number | string;
@@ -26,6 +27,7 @@ export type GameEntities = {
   view: View;
   sprites: Record<number | string, Sprite>;
   game: Game;
+  timer: Timer
 };
 
 export type Position = {

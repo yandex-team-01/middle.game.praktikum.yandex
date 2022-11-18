@@ -3,6 +3,7 @@ import { AllSprites } from './Sprite';
 import { View } from './View';
 import { NpcControll } from './NpcControll';
 import { GameEntities, AllSpritesType } from './types';
+import { Timer } from './Timer';
 
 export class Game {
   private ctx: CanvasRenderingContext2D;
@@ -13,8 +14,9 @@ export class Game {
   private allSprites: AllSprites;
   private sprites: AllSpritesType;
   private npcControll: NpcControll;
+  private timer: Timer;
   public view: View;
-
+  
   constructor(protected canvas: HTMLCanvasElement) {
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
     this.canvas.width = this.width;
@@ -26,16 +28,24 @@ export class Game {
       this.width,
       this.gameEntities
     );
+    this.timer = new Timer(
+      this.ctx,
+      this.height,
+      this.width,
+      this.gameEntities
+    );
     this.allSprites = new AllSprites();
     this.npcControll = new NpcControll(this.height, this.width);
     this.view = new View(this.canvas, this.ctx, this.gameEntities);
     this.sprites = {};
+    
   }
 
   async init(callback: () => void) {
     await this.allSprites.prepareSprites();
     this.gameOverBackgroundAudio = new Audio('/src/assets/audio/game-over.mp3');
     this.sprites = this.allSprites.getSprites();
+
     this.start();
     callback();
   }
@@ -54,6 +64,7 @@ export class Game {
       view: this.view,
       npcControll: this.npcControll,
       game: this,
+      timer: this.timer
     };
   }
 
@@ -73,12 +84,12 @@ export class Game {
     this.view.startCycle();
   }
 
-  end() {
+  end(isWin=false) {
     //TODO: вынести в отдельный контроллер для аудио
     if (this.gameOverBackgroundAudio) {
       this.gameOverBackgroundAudio.currentTime = 0;
       this.gameOverBackgroundAudio.play();
     }
-    this.view.stopCycle();
+    this.view.stopCycle(isWin);
   }
 }

@@ -41,15 +41,9 @@ export abstract class NpcModel {
     this.height = 0;
     this.skinLegsFrame = 0;
     this.skinDirectionFrame = 0;
-    this.xSpeed = 7;
-    this.ySpeed = 7;
-    this.startMoving();
-  }
+    this.xSpeed = 6;
+    this.ySpeed = 6;
 
-  startMoving() {
-    //начинаем движение вправо-вниз
-    this.npcCurrentDirections[DirectionNpc.Right] = true;
-    this.npcCurrentDirections[DirectionNpc.Down] = true;
   }
 
   setSprite(sprite: Sprite) {
@@ -96,15 +90,12 @@ export abstract class NpcModel {
 
   animate() {
     this.updateNpcCoordinates();
-    this.checkForCollisions();
+    this.checkForCollisionsWithCanvasBorders();
     this.moveNpc();
     this.handleNpcLegsFrame();
   }
 
-  updateNpcCoordinates() {
-    this.x += this.xSpeed;
-    this.y += this.ySpeed;
-  }
+  updateNpcCoordinates(){}
 
   toggleNpcDirection(direction: number) {
     //меняем флаг направления анимации ног влево-вправо
@@ -128,6 +119,7 @@ export abstract class NpcModel {
       }
     }
   }
+<<<<<<< HEAD
   checkForCollisions() {
     if (this.x + this.width > this.canvasWidth || this.x - this.width / 2 < 0) {
       this.xSpeed = -this.xSpeed;
@@ -140,6 +132,18 @@ export abstract class NpcModel {
       this.ySpeed = -this.ySpeed;
       this.toggleNpcDirection(Direction.Vertical);
     }
+=======
+  
+  checkForCollisionsWithCanvasBorders() {
+    if ( this.x + this.width > this.canvasWidth || this.x - this.width / 2  < 0 ) {
+        this.xSpeed = -this.xSpeed;
+        this.toggleNpcDirection(Direction.Horizontal);
+    }
+    if ( this.y + this.height > this.canvasHeight || this.y - this.height / 2 < 70 ) {
+        this.ySpeed = -this.ySpeed;
+        this.toggleNpcDirection(Direction.Vertical);
+    }   
+>>>>>>> added a timer to the logic of the game
   }
 
   handleNpcLegsFrame() {
@@ -175,8 +179,18 @@ export abstract class NpcModel {
 export class NpcEnemy extends NpcModel {
   constructor(options: NpcConstructorOptions) {
     super(options);
+    this.startMoving();
   }
 
+  startMoving(){
+    //начинаем движение вправо-вниз
+    this.npcCurrentDirections[DirectionNpc.Right] = true;
+    this.npcCurrentDirections[DirectionNpc.Down] = true;
+  }
+  updateNpcCoordinates() {
+    this.x += this.xSpeed;
+    this.y += this.ySpeed;
+  }
   collisionHandling(player: PlayerOne) {
     player.subtractHP();
   }
@@ -188,9 +202,20 @@ export class NpcFriend extends NpcModel {
   constructor(options: NpcConstructorOptions) {
     super(options);
     this.defineBonus = 5;
+    this.startMoving();
+  }
+
+  updateNpcCoordinates() {
+    this.x -= this.xSpeed;
+    this.y -= this.ySpeed;
   }
 
   collisionHandling(player: PlayerOne) {
     player.addScore(this.defineBonus);
+  }
+  startMoving(){
+    //начинаем движение вправо-вниз
+    this.npcCurrentDirections[DirectionNpc.Left] = true;
+    this.npcCurrentDirections[DirectionNpc.Up] = true;
   }
 }
