@@ -9,7 +9,6 @@ export class View {
   public canvas: HTMLCanvasElement;
   public ctx: CanvasRenderingContext2D;
   public sprites: AllSpritesType;
-
   public fpsInterval: number | undefined;
   public now: number | undefined;
   public then: number | undefined;
@@ -20,7 +19,6 @@ export class View {
   public clashesController: ClashesController;
   public gameOver: boolean;
   public timer: Timer;
-
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -39,8 +37,6 @@ export class View {
     this.clashesController = new ClashesController(player, npcControll);
 
   }
-
-
 
   setSprite(sprites: AllSpritesType) {
     this.sprites = sprites;
