@@ -1,36 +1,6 @@
 @import 'src/index.module.scss';
 
-
 .block_topics {
   display: flex;
   flex-flow: column;
 }
-
-.title {
-  @include fontTitle(normal, 400, 20px, 16px);
-  color: white;
-  margin: 20px 0px;
-  width: 100%;
-  text-align: center;
-}
-
-.list {
-  display: flex;
-  flex-flow: column;
-  gap: 10px;
-  overflow: auto;
-  height: 150px;
-  @include scroll($bg-color-main, $main_block_bg_color, $bg-color-secondary);
-}
-
-.card {
-  margin-top: 10px;
-  padding: 8px 16px;
-  width: 100%;
-  background: $color-card;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  box-sizing: border-box;
-  flex-flow: column;
-}
-
-

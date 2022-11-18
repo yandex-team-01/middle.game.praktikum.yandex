@@ -11,7 +11,7 @@ export const selectListTopics = createSelector(
   forum => forum.topics
 );
 
-export const selectLoginTopic = createSelector(
-  [(state: RootState) => state.auth, (state: RootState) => state.forum],
-  (auth, forum) => ({ login: auth.user?.login, topic: forum.activeTopic })
+export const selectLogin = createSelector(
+  [(state: RootState) => state.auth],
+  (auth) => ({ login: auth.user?.login })
 );
