@@ -7,6 +7,7 @@ import 'normalize.css';
 import './index.module.scss';
 import { setupStore } from './store/store';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { startServiceWorker } from './utils/serviceWorker';
 
 const store = setupStore();
 
@@ -21,3 +22,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
+startServiceWorker();
