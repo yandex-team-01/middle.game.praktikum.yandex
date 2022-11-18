@@ -1,3 +1,4 @@
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import styles from './Topics.module.scss';
@@ -11,6 +12,7 @@ import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 import { useAppSelector } from 'src/hooks/redux';
 import { useNavigator } from 'src/hooks/useNavigator';
+import { ButtonCreateTopic } from '../../part/ButtonCreateTopic';
 
 export const TopicList = () => {
   const { t } = useTranslation();
@@ -28,6 +30,7 @@ export const TopicList = () => {
           onClick={handleCreateTopic}>
           {t('postNewTopic')}
         </Button>
+        <ButtonCreateTopic />
         <div className={styles.list}>
           {Object.keys(topics).map((topicId: string, index: number) => {
             return <Topic key={index} {...topics[topicId]} />;
