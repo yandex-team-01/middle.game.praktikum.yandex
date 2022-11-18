@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from 'src/components/Button';
@@ -27,9 +26,7 @@ export const SettingsData = () => {
               <Button regular type="submit" onClick={editHandle}>
                 {t('editProfile')}
               </Button>
-              <Nav to="password">
-                {t('changePassword')}
-              </Nav>
+              <Nav to="password">{t('changePassword')}</Nav>
             </div>
           </div>
         }>

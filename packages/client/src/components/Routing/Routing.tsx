@@ -39,18 +39,18 @@ export const Routing = () => {
     <ErrorBoundary>
       <Routes>
         <Route
-          path={langPath("/")}
+          path={langPath('/')}
           element={
             <BackgroundLayout>
               {auth ? <MainMenu /> : <Landing />}
             </BackgroundLayout>
           }
         />
-        <Route path="/" element={<Navigate to={langPath("/")} replace />} />
+        <Route path="/" element={<Navigate to={langPath('/')} replace />} />
         <Route
-          path={langPath("/forum")}
+          path={langPath('/forum')}
           element={
-            <ProtectedRoute flag={auth} redirect={langPath("/login")}>
+            <ProtectedRoute flag={auth} redirect={langPath('/login')}>
               <BackgroundLayout>
                 <Forum />
               </BackgroundLayout>
@@ -62,12 +62,12 @@ export const Routing = () => {
         </Route>
         <Route
           path="/forum"
-          element={<Navigate to={langPath("/forum")} replace />}
+          element={<Navigate to={langPath('/forum')} replace />}
         />
         <Route
-          path={langPath("/leaders")}
+          path={langPath('/leaders')}
           element={
-            <ProtectedRoute flag={auth} redirect={langPath("/login")}>
+            <ProtectedRoute flag={auth} redirect={langPath('/login')}>
               <BackgroundLayout>
                 <Leaderboard />
               </BackgroundLayout>
@@ -76,13 +76,13 @@ export const Routing = () => {
         />
         <Route
           path="/leaders"
-          element={<Navigate to={langPath("/leaders")} replace />}
+          element={<Navigate to={langPath('/leaders')} replace />}
         />
         <Route
-          path={langPath("/login")}
+          path={langPath('/login')}
           element={
             auth ? (
-              <Navigate to={langPath("/")} replace />
+              <Navigate to={langPath('/')} replace />
             ) : (
               <BackgroundLayout>
                 <LoginPage />
@@ -92,24 +92,27 @@ export const Routing = () => {
         />
         <Route
           path="/login"
-          element={<Navigate to={langPath("/login")} replace />}
+          element={<Navigate to={langPath('/login')} replace />}
         />
         <Route
-          path={langPath("/reg")}
+          path={langPath('/reg')}
           element={
             <BackgroundLayout>
               <RegistrationPage />
             </BackgroundLayout>
           }
         />
-        <Route path="/reg" element={<Navigate to={langPath("/reg")} replace />} />
-        <Route path={langPath("/loadinggame")} element={<GameLoadingPage />} />
+        <Route
+          path="/reg"
+          element={<Navigate to={langPath('/reg')} replace />}
+        />
+        <Route path={langPath('/loadinggame')} element={<GameLoadingPage />} />
         <Route
           path="/loadinggame"
-          element={<Navigate to={langPath("/loadinggame")} replace />}
+          element={<Navigate to={langPath('/loadinggame')} replace />}
         />
         <Route
-          path={langPath("/resetpassword")}
+          path={langPath('/resetpassword')}
           element={
             <BackgroundLayout>
               <Landing />
@@ -118,15 +121,15 @@ export const Routing = () => {
         />
         <Route
           path="/resetpassword"
-          element={<Navigate to={langPath("/resetpassword")} replace />}
+          element={<Navigate to={langPath('/resetpassword')} replace />}
         />
-        <Route path={langPath("/game")} element={<GameScreen />} />
+        <Route path={langPath('/game')} element={<GameScreen />} />
         <Route
           path="/game"
-          element={<Navigate to={langPath("/game")} replace />}
+          element={<Navigate to={langPath('/game')} replace />}
         />
         <Route
-          path={langPath("/settings")}
+          path={langPath('/settings')}
           element={
             <BackgroundLayout>
               <SettingsPage />
@@ -138,18 +141,21 @@ export const Routing = () => {
         </Route>
         <Route
           path="/settings"
-          element={<Navigate to={langPath("/settings")} replace />}
+          element={<Navigate to={langPath('/settings')} replace />}
         />
         <Route
-          path={langPath("/500")}
+          path={langPath('/500')}
           element={<ErrorPage title="500" description={t('error500')} />}
         />
-        <Route path="/500" element={<Navigate to={langPath("/500")} replace />} />
         <Route
-          path={langPath("/404")}
+          path="/500"
+          element={<Navigate to={langPath('/500')} replace />}
+        />
+        <Route
+          path={langPath('/404')}
           element={<ErrorPage title="404" description={t('error404')} />}
         />
-        <Route path="*" element={<Navigate to={langPath("/404")} replace />} />
+        <Route path="*" element={<Navigate to={langPath('/404')} replace />} />
       </Routes>
     </ErrorBoundary>
   );

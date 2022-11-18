@@ -6,11 +6,11 @@ import { langPath } from 'src/utils/langPath';
 import styles from './Nav.module.scss';
 
 interface Props {
-  children: ReactI18NextChild
-  to: string
+  children: ReactI18NextChild;
+  to: string;
 }
 
-export const Nav = ({to, children}: Props) => {
+export const Nav = ({ to, children }: Props) => {
   let path;
   if (to.indexOf('/') > -1) {
     path = langPath(to);

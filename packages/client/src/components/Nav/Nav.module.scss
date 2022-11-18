@@ -1,23 +1,23 @@
 @import 'src/index.module.scss';
 
 .regular {
-    @include h-center-content;
-    font: $font_type_Frijole_400_18_px;
-    color: $main_input_text_color;
-    letter-spacing: 0px;
-    @include lg {
-      font-size: 17px;
-      margin: 24px;
-    }
-    @include md {
-      font-size: 16px;
-      margin: 14px;
-    }
-    @include sm {
-      font-size: 15px;
-    }
-    @include xxs {
-      font-size: 14px;
-      margin: 18px;
-    }
+  @include h-center-content;
+  font: $font_type_Frijole_400_18_px;
+  color: $main_input_text_color;
+  letter-spacing: 0px;
+  @include lg {
+    font-size: 17px;
+    margin: 24px;
   }
+  @include md {
+    font-size: 16px;
+    margin: 14px;
+  }
+  @include sm {
+    font-size: 15px;
+  }
+  @include xxs {
+    font-size: 14px;
+    margin: 18px;
+  }
+}

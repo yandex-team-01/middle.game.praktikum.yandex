@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 
@@ -42,12 +41,12 @@ export const LoginForm: React.FC = () => {
       <Form
         onSubmit={handleSubmit}
         buttonsBlock={
-            <div className={stylesForm.form_button_box}>
-              <Button regular type="submit" disabled={loading}>
-                {t('signIn')}
-              </Button>
+          <div className={stylesForm.form_button_box}>
+            <Button regular type="submit" disabled={loading}>
+              {t('signIn')}
+            </Button>
             <Nav to="/reg">{t('signUp')}</Nav>
-            </div>
+          </div>
         }>
         <Input
           label={t('login')}
