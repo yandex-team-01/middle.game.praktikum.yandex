@@ -9,20 +9,16 @@ import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
 import { Form } from 'src/components/Form';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { Nav } from 'src/components/Nav';
 
 import { loginSchema } from './LoginSchema';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { fetchSignin } from 'src/store/auth/AuthActions';
 import { SigninData } from 'src/modules/IAuth';
 import { selectLoading } from 'src/store/auth/AuthSelectors';
-import {
-  getLocalStorageItem,
-  LocalStorageItems,
-} from 'src/utils/getLocalStorageItem';
 
 export const LoginForm: React.FC = () => {
   const { t } = useTranslation();
-  let lang = getLocalStorageItem(LocalStorageItems.Lang);
   const dispath = useAppDispatch();
   const loading = useAppSelector(selectLoading);
   const signinHandler = (values: SigninData) => {
@@ -46,17 +42,12 @@ export const LoginForm: React.FC = () => {
       <Form
         onSubmit={handleSubmit}
         buttonsBlock={
-          <div>
             <div className={stylesForm.form_button_box}>
               <Button regular type="submit" disabled={loading}>
                 {t('signIn')}
               </Button>
+            <Nav to="/reg">{t('signUp')}</Nav>
             </div>
-
-            <Link to={`/${lang}/reg`} className={stylesForm.form_sign_in_link}>
-              {t('signUp')}
-            </Link>
-          </div>
         }>
         <Input
           label={t('login')}
@@ -68,7 +59,6 @@ export const LoginForm: React.FC = () => {
           showError={Boolean(errors.login) && Boolean(touched.login)}
           error={errors.login}
         />
-
         <Input
           label={t('password')}
           name="password"
@@ -80,12 +70,9 @@ export const LoginForm: React.FC = () => {
           showError={Boolean(errors.password) && Boolean(touched.password)}
           error={errors.password}
         />
-
-        <Link
-          to={`/${lang}/resetpassword`}
-          className={stylesForm.form_pass_reset_link}>
-          {t('resetPassword')}
-        </Link>
+        <div className={stylesForm.reset_link}>
+          <Nav to="/resetpassword">{t('resetPassword')}</Nav>
+        </div>
       </Form>
     </ErrorBoundary>
   );

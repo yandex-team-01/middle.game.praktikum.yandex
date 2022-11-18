@@ -9,6 +9,7 @@ import { SettingsUserInfo } from '../SettingsUserInfo';
 import stylesForm from 'src/components/Form/Form.module.scss';
 
 import { useNavigator } from 'src/hooks/useNavigator';
+import { Nav } from 'src/components/Nav';
 
 export const SettingsData = () => {
   const { t } = useTranslation();
@@ -26,9 +27,9 @@ export const SettingsData = () => {
               <Button regular type="submit" onClick={editHandle}>
                 {t('editProfile')}
               </Button>
-              <Link to="password" className={stylesForm.form_sign_in_link}>
+              <Nav to="password">
                 {t('changePassword')}
-              </Link>
+              </Nav>
             </div>
           </div>
         }>

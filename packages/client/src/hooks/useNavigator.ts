@@ -1,8 +1,7 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { LocalStorageItems } from 'src/utils/getLocalStorageItem';
-import { getLocalStorageItem } from 'src/utils/getLocalStorageItem';
+import { langPath } from 'src/utils/langPath';
 
 export const useNavigator = () => {
   const navigate = useNavigate();
@@ -10,9 +9,7 @@ export const useNavigator = () => {
     (path: string | number) => {
       if (typeof path == 'string') {
         if (path.indexOf('/') > -1) {
-          return navigate(
-            `/${getLocalStorageItem(LocalStorageItems.Lang)}${path}`
-          );
+          return navigate(langPath(path));
         }
         return navigate(path);
       }

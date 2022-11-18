@@ -6,6 +6,7 @@ import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
 import { Form } from 'src/components/Form';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { Nav } from 'src/components/Nav';
 
 import stylesForm from 'src/components/Form/Form.module.scss';
 
@@ -14,14 +15,9 @@ import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { SignupData } from 'src/modules/IAuth';
 import { fetchSignup } from 'src/store/auth/AuthActions';
 import { selectLoading } from 'src/store/auth/AuthSelectors';
-import {
-  getLocalStorageItem,
-  LocalStorageItems,
-} from 'src/utils/getLocalStorageItem';
 
 export const RegistrationForm = () => {
   const { t } = useTranslation();
-  let lang = getLocalStorageItem(LocalStorageItems.Lang);
   const dispath = useAppDispatch();
   const loading = useAppSelector(selectLoading);
 
@@ -51,18 +47,11 @@ export const RegistrationForm = () => {
       <Form
         onSubmit={handleSubmit}
         buttonsBlock={
-          <div>
-            <div className={stylesForm.form_button_box}>
-              <Button regular type="submit" disabled={loading}>
-                {t('signUp')}
-              </Button>
-            </div>
-
-            <Link
-              to={`/${lang}/login`}
-              className={stylesForm.form_sign_in_link}>
-              {t('signIn')}
-            </Link>
+          <div className={stylesForm.form_button_box}>
+            <Button regular type="submit" disabled={loading}>
+              {t('signUp')}
+            </Button>
+            <Nav to="/login">{t('signIn')}</Nav>
           </div>
         }>
         <Input
