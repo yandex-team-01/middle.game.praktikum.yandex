@@ -6,7 +6,6 @@ import npcFriend from '/src/assets/images/game-npc-1.png';
 import npcEnemy from '/src/assets/images/game-npc-2.png';
 import heart from '/src/assets/images/heart.png';
 import money from '/src/assets/images/money.png';
-import npc from '/src/assets/images/game-npc-huggy.png';
 
 export const SPRITE_ID = {
   MAIN_BACK: 'back',
