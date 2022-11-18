@@ -31,8 +31,10 @@ export abstract class NpcModel {
   npcCurrentDirections: boolean[] = [];
   totalNumberOfLegsMovementFrames = 3;
   firstLegsMovementFrame = 0;
+  ctx: CanvasRenderingContext2D;
 
-  constructor(options: NpcConstructorOptions) {
+  constructor(ctx: CanvasRenderingContext2D,options: NpcConstructorOptions) {
+    this.ctx = ctx;
     this.id = options.id;
     this.type = options.type;
     this.x = options.defaultX;
@@ -63,17 +65,13 @@ export abstract class NpcModel {
     };
   }
 
-  render(
-    ctx: CanvasRenderingContext2D,
-    canvasHeight: number,
-    canvasWidth: number
-  ) {
+  render(canvasHeight:number,canvasWidth:number)   {
     if (!this.sprite) {
       return;
     }
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
-    ctx.drawImage(
+    this.ctx.drawImage(
       this.sprite.image,
       this.width * this.skinLegsFrame,
       this.height * this.skinDirectionFrame,
@@ -84,7 +82,7 @@ export abstract class NpcModel {
       this.width,
       this.height
     );
-    ctx.strokeRect(this.x, this.y, this.width, this.height);
+    this.ctx.strokeRect(this.x, this.y, this.width, this.height);
     this.animate();
   }
 
@@ -178,8 +176,9 @@ export abstract class NpcModel {
 }
 
 export class NpcEnemy extends NpcModel {
-  constructor(options: NpcConstructorOptions) {
-    super(options);
+  constructor(ctx: CanvasRenderingContext2D, options: NpcConstructorOptions) {
+    super(ctx, options);
+    this.ctx = ctx;
     this.startMoving();
   }
 
@@ -200,8 +199,9 @@ export class NpcEnemy extends NpcModel {
 export class NpcFriend extends NpcModel {
   defineBonus: number;
 
-  constructor(options: NpcConstructorOptions) {
-    super(options);
+  constructor(ctx: CanvasRenderingContext2D, options: NpcConstructorOptions) {
+    super(ctx, options);
+    this.ctx = ctx;
     this.defineBonus = 5;
     this.startMoving();
   }

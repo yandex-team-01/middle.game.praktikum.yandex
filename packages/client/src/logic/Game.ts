@@ -35,7 +35,7 @@ export class Game {
       this.gameEntities
     );
     this.allSprites = new AllSprites();
-    this.npcControll = new NpcControll(this.height, this.width);
+    this.npcControll = new NpcControll(this.ctx,this.height, this.width);
     this.view = new View(this.canvas, this.ctx, this.gameEntities);
     this.sprites = {};
     

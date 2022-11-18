@@ -8,16 +8,19 @@ type NpcType = NpcEnemy | NpcFriend;
 export class NpcControll {
   arrNpc: NpcType[];
   sprites: AllSpritesType | undefined;
+  ctx: CanvasRenderingContext2D;
   canvasHeight: number;
   canvasWidth: number;
 
-  constructor(canvasHeight: number, canvasWidth: number) {
+  constructor(ctx: CanvasRenderingContext2D, canvasHeight: number,
+    canvasWidth: number) {
+    this.ctx = ctx;
     // временно вывожу массив npc
     this.arrNpc = defaultOptionNpc.map(option => {
       if (option.type === 'friend') {
-        return new NpcFriend(option);
+        return new NpcFriend(ctx, option);
       } else {
-        return new NpcEnemy(option);
+        return new NpcEnemy(ctx, option);
       }
     });
 
@@ -40,10 +43,15 @@ export class NpcControll {
     });
   }
 
+<<<<<<< HEAD
   render(ctx: CanvasRenderingContext2D) {
     this.arrNpc.forEach(npc =>
       npc.render(ctx, this.canvasHeight, this.canvasWidth)
     );
+=======
+  render() {
+    this.arrNpc.forEach(npc => npc.render(this.canvasHeight,this.canvasWidth));
+>>>>>>> ctx arg was removed from render func
   }
 
   deleteNpc(npc: NpcType) {

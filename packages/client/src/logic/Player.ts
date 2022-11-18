@@ -134,12 +134,12 @@ abstract class Player {
     }
   }
 
-  render(ctx: CanvasRenderingContext2D) {
+  render() {
     if (!this.spritePlayer) {
       return;
     }
 
-    ctx.drawImage(
+    this.ctx.drawImage(
       this.spritePlayer.image,
       this.width * this.skinLegsFrame,
       this.height * this.skinDirectionFrame,

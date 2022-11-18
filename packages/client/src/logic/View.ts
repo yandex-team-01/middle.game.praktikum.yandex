@@ -93,8 +93,8 @@ export class View {
 
   update(): void {
     this.prepareCanvas();
-    this.npcControll.render(this.ctx);
-    this.playerOne.render(this.ctx);
+    this.npcControll.render();
+    this.playerOne.render();
     this.timer.render();
 
 
