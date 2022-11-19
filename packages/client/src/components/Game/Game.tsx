@@ -46,11 +46,9 @@ export const GameComponent = () => {
             GO BACK
           </Button>
           <Button regular className='button' onClick={handleFullScreen}>
-          FullScreen
+          ⛶
           </Button>
-          <Button regular className='button' onClick={handleEndGame}>
-            END THE GAME
-          </Button>
+
         </div>
         <canvas id="game-canvas" ref={canvas} />
       </div>
