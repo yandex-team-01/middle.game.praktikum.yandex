@@ -1,9 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-
 import stylesForm from 'src/components/Form/Form.module.scss';
-
 import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
 import { Form } from 'src/components/Form';
