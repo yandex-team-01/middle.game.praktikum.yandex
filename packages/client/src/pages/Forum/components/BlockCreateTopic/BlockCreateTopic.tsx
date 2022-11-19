@@ -10,6 +10,11 @@ import { selectUserLogin } from 'src/store/auth/AuthSelectors';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { useFormik } from 'formik';
 import { initialRegValuesSchema, regSchema } from './CreateTopicSchema';
+import styles from './CreateTopic.module.scss';
+import { ITopic } from '../../part/Topic/types';
+import { v1 } from 'uuid';
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 export const BlockCreateTopic = () => {
   const { t } = useTranslation();
@@ -23,16 +28,11 @@ export const BlockCreateTopic = () => {
     navigator(-1);
   }, [dispatch, navigator]);
 
-  const handleCreateNewTopic = useCallback(() => {
-    dispatch(addNewTopic(newtopic));
-    navigator(-1);
-  }, [dispatch, navigator]);
-
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: initialRegValuesSchema,
       validationSchema: regSchema,
-      onSubmit: valuors => {
+      onSubmit: values => {
         const newtopic: ITopic = {
           id: v1(),
           title: values.name_topic,

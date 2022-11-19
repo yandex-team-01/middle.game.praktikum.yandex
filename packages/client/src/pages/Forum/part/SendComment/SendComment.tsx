@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { addCommentInTopic } from 'src/store/forum/ForumSlice';
 import { dateFormatting } from 'src/utils/dateFormatting';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
@@ -12,6 +12,7 @@ import { useFormik } from 'formik';
 import { initialRegValuesSchema, regSchema } from './SendCommentSchema';
 import { IComment } from '../Comment/types';
 import { BlankWindow } from 'src/components/BlankWindow';
+import { useTranslation } from 'react-i18next';
 
 export const SendComment = ({ topicId }: Props) => {
   const { t } = useTranslation();

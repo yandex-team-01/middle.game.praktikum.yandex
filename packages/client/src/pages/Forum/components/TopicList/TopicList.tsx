@@ -1,35 +1,17 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-
 import styles from './Topics.module.scss';
-
 import { Topic } from '../../part/Topic';
-
 import { selectListTopics } from 'src/store/forum/ForumSelectors';
-
-import { Button } from 'src/components/Button';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
-
 import { useAppSelector } from 'src/hooks/redux';
-import { useNavigator } from 'src/hooks/useNavigator';
 import { ButtonCreateTopic } from '../../part/ButtonCreateTopic';
 
 export const TopicList = () => {
-  const { t } = useTranslation();
-  const navigator = useNavigator();
   const topics = useAppSelector(selectListTopics);
-
-  const handleCreateTopic = () => navigator('createtopic');
 
   return (
     <ErrorBoundary>
       <div className={styles.block_topics}>
-        <Button
-          regular
-          className={styles.button_create_topic}
-          onClick={handleCreateTopic}>
-          {t('postNewTopic')}
-        </Button>
         <ButtonCreateTopic />
         <div className={styles.list}>
           {Object.keys(topics).map((topicId: string, index: number) => {
