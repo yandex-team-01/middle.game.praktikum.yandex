@@ -37,8 +37,10 @@ export class NpcControll {
     this.arrNpc.forEach(npc => {
       if (npc.type === 'friend') {
         npc.setSprite(sprites[SPRITE_ID.NPC_FRIEND]);
-      } else {
-        npc.setSprite(sprites[SPRITE_ID.NPC_ENEMY]);
+      } else if (npc.type === 'enemy_huggy') {     
+        npc.setSprite(sprites[SPRITE_ID.NPC_ENEMY_HUGGY]);
+      }else if (npc.type === 'enemy_kissy') {      
+        npc.setSprite(sprites[SPRITE_ID.NPC_ENEMY_KISSY]);
       }
     });
   }

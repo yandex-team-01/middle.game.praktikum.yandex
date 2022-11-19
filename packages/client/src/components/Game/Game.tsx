@@ -16,6 +16,14 @@ export const GameComponent = () => {
     game.current?.end();
   }, []);
 
+  const handleFullScreen = useCallback(()=>{
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  },[]);
+
   const canvas = useRef<HTMLCanvasElement>(null); //https://stackoverflow.com/a/63119934
   const game = useRef<Game | null>(null);
 
@@ -34,11 +42,14 @@ export const GameComponent = () => {
     <ErrorBoundary>
       <div>
         <div className={styles.block_button}>
-          <Button regular onClick={handleBack}>
-            {t('goBack')}
+          <Button regular className='button' onClick={handleBack}>
+            GO BACK
           </Button>
-          <Button regular onClick={handleEndGame}>
-            {t('endGame')}
+          <Button regular className='button' onClick={handleFullScreen}>
+          FullScreen
+          </Button>
+          <Button regular className='button' onClick={handleEndGame}>
+            END THE GAME
           </Button>
         </div>
         <canvas id="game-canvas" ref={canvas} />
