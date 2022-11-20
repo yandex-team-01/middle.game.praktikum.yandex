@@ -3,12 +3,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import UserEvent from '@testing-library/user-event';
 import { Input } from './Input';
 
-type TestElement = Document | Element | Window | Node
-
-function hasInputValue(e: TestElement, inputValue: string) {
-    return screen.getByDisplayValue(inputValue) === e
-}
-
 describe('Input', () => {
     it('renders Input', () => {
         render(<Input />);
@@ -20,46 +14,20 @@ describe('Input', () => {
         expect(screen.getByText("new_input")).toBeDefined();
     })
 
-    // it('checking value Input', () => {
+    // it('checking value Input with fireEvent', () => {
     //     const { container } = render(<Input />);
     //     const input = container.firstChild as HTMLInputElement;
 
-    //     fireEvent.change(screen.getByRole('textbox'), {
-    //         target: { value: "123" },
-    //     });
-
-    //     expect(hasInputValue(input, "123")).toBe(true)
+    //     fireEvent.change(input, { target: { value: "23" } });
+    //     expect(input.value).toBe("23");
     // })
 
-    // it('checking value Input', () => {
-    //     render(<Input />)
-
-    //     // userEvent.type(screen.getByRole('textbox'), "test input");
-
-    //     // screen.debug();
-    //     // expect(screen.getByText("test input")).toBeDefined();
-
-    //     const input = screen.getByRole('textbox') as HTMLInputElement;
-    //     // UserEvent.type(input, 'test input');
-
-    //     fireEvent.change(screen.getByRole('textbox'), {
-    //         target: { value: "123" },
-    //     });
-
-    //     expect(input.value).toBe('123');
-    // })
-
-    // it('checking value Input', () => {
+    // it('checking value Input with UserEvent', () => {
     //     const { container } = render(<Input />);
-    //     const input = container.firstChild;
+    //     const input = container.firstChild as HTMLInputElement;
 
-    //     //expect(input).toBeNull();
-    //     fireEvent.change(screen.getByRole('textbox'), {
-    //         target: { value: "test" },
-    //     });
-
-    //     screen.debug();
-    //     expect(screen.queryByText("test")).toBeInTheDocument();
+    //     UserEvent.type(input, 'test input');
+    //     expect(input.value).toMatch("test input");
     // })
 
     // it('checking focus Input', () => {
