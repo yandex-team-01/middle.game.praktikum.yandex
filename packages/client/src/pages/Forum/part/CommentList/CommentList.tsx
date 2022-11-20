@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { Comment } from '../Comment';
@@ -6,7 +6,7 @@ import { IComment } from '../Comment/types';
 import styles from './CommentList.module.scss';
 import { Props } from './types';
 
-export const CommentList = ({ comments }: Props) => {
+export const CommentList = memo(({ comments }: Props) => {
     const { t } = useTranslation();
 
     return (
@@ -19,4 +19,4 @@ export const CommentList = ({ comments }: Props) => {
             </div>
         </ErrorBoundary>
     );
-};
+});

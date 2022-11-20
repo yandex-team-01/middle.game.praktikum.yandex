@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './Topics.module.scss';
-import { Topic } from '../../part/Topic';
+import { Topic } from 'src/pages/Forum/part/Topic';
 import { selectListTopics } from 'src/store/forum/ForumSelectors';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { useAppSelector } from 'src/hooks/redux';
-import { ButtonCreateTopic } from '../../part/ButtonCreateTopic';
+import { ButtonCreateTopic } from 'src/pages/Forum/part/ButtonCreateTopic';
 
-export const TopicList = () => {
+export const TopicList = memo(() => {
   const topics = useAppSelector(selectListTopics);
 
   return (
@@ -21,4 +21,4 @@ export const TopicList = () => {
       </div>
     </ErrorBoundary>
   );
-};
+});

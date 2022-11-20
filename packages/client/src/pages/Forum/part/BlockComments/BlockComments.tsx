@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './BlockComment.module.scss';
 import { Topic } from '../Topic';
 import { Props } from './types';
-import { SendComment } from '../SendComment';
+import { SendComment } from '../CommentEditor';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { CommentList } from '../CommentList';
 

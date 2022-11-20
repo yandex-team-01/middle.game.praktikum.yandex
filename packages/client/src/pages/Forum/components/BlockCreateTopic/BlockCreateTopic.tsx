@@ -11,7 +11,7 @@ import { useNavigator } from 'src/hooks/useNavigator';
 import { useFormik } from 'formik';
 import { initialRegValuesSchema, regSchema } from './CreateTopicSchema';
 import styles from './CreateTopic.module.scss';
-import { ITopic } from '../../part/Topic/types';
+import { ITopic } from 'src/pages/Forum/part/Topic/types';
 import { v1 } from 'uuid';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -56,9 +56,6 @@ export const BlockCreateTopic = () => {
           regular
           className={styles.button_publish}
           type="submit"
-          onClick={() => {
-            console.log('submit');
-          }}
         >
           {t('publich')}
         </Button>
