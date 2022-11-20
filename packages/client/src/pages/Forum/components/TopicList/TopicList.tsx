@@ -1,33 +1,18 @@
-import { useTranslation } from 'react-i18next';
-
+import React, { memo } from 'react';
 import styles from './Topics.module.scss';
-
-import { Topic } from '../../part/Topic';
-
+import { Topic } from 'src/pages/Forum/part/Topic';
 import { selectListTopics } from 'src/store/forum/ForumSelectors';
-
-import { Button } from 'src/components/Button';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
-
 import { useAppSelector } from 'src/hooks/redux';
-import { useNavigator } from 'src/hooks/useNavigator';
+import { ButtonCreateTopic } from 'src/pages/Forum/part/ButtonCreateTopic';
 
-export const TopicList = () => {
-  const { t } = useTranslation();
-  const navigator = useNavigator();
+export const TopicList = memo(() => {
   const topics = useAppSelector(selectListTopics);
-
-  const handleCreateTopic = () => navigator('createtopic');
 
   return (
     <ErrorBoundary>
       <div className={styles.block_topics}>
-        <Button
-          regular
-          className={styles.button_create_topic}
-          onClick={handleCreateTopic}>
-          {t('postNewTopic')}
-        </Button>
+        <ButtonCreateTopic />
         <div className={styles.list}>
           {Object.keys(topics).map((topicId: string, index: number) => {
             return <Topic key={index} {...topics[topicId]} />;
@@ -36,4 +21,4 @@ export const TopicList = () => {
       </div>
     </ErrorBoundary>
   );
-};
+});

@@ -8,7 +8,11 @@ const putIntoAppCache = async (
   return cache.put(request, response);
 };
 
-const canBeCached = (request: Request) => request.method === 'GET';
+const canBeCached = (request: Request) =>
+  request.method === 'GET' &&
+  request.url.startsWith('http') &&
+  !request.url.includes('sockjs-node');
+
 
 self.addEventListener('fetch', (event: FetchEvent) => {
   if (!canBeCached(event.request)) {
