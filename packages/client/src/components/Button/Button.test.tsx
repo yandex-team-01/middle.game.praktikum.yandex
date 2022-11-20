@@ -11,15 +11,28 @@ describe('Button', () => {
         expect(screen.getByText(buttonContent)).toBeDefined();
     })
 
-    it('checking onClick', () => {
+    it('checking onClick button', () => {
         const handleClick = jest.fn();
 
         const { container } = render(<Button onClick={handleClick}>{buttonContent}</Button>);
-        const button = container.firstChild as Element;
+        const button = container.firstChild as HTMLElement;
 
         fireEvent.click(button);
 
         expect(handleClick).toHaveBeenCalledTimes(1)
     })
 
+    it('checking disabled button', () => {
+        const handleClick = jest.fn();
+
+        const { container } = render(<Button disabled={true} onClick={handleClick}>{buttonContent}</Button>);
+        const button = container.firstChild as HTMLElement;
+
+        fireEvent.click(button);
+
+        expect(handleClick).toHaveBeenCalledTimes(0);
+
+        //@ts-ignore
+        expect(button['disabled']).toBe(true);
+    })
 });
