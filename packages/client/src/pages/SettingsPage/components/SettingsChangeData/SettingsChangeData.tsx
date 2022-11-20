@@ -12,20 +12,20 @@ import { fetchAuth } from 'src/store/auth/AuthActions';
 import { UserData } from 'src/modules/IUsers';
 import { fetchChangeUser } from 'src/store/users/UsersActions';
 import { useFormik } from 'formik';
-import { changeDataSchema } from 'src/constants/Schemas';
+import { changeDataSchema } from './SettingsChangeDataSchema';
+import { useNavigator } from 'src/hooks/useNavigator';
 
 export const SettingsChangeData = () => {
+  const {t} = useTranslation()
   const user = useAppSelector(state => state.auth);
   const dispatch = useAppDispatch();
+  const navigator = useNavigator();
 
   useEffect(() => {
     dispatch(fetchAuth());
   }, [dispatch]);
 
-  const navigate = useNavigate();
-  const goBackHandle = useCallback(() => {
-    navigate(-1);
-  }, [navigate]);
+  const goBackHandle = () => navigator(-1);
 
   const changeDataHandler = (values: UserData) => {
     dispatch(fetchChangeUser(values))

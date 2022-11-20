@@ -10,7 +10,7 @@ import { useNavigator } from 'src/hooks/useNavigator';
 import { useAppDispatch } from 'src/hooks/redux';
 import { ChangePasswordData } from 'src/modules/IUsers';
 import { fetchChangePassword } from 'src/store/users/UsersActions';
-import { changePasswordSchema } from 'src/constants/Schemas';
+import { changePasswordSchema } from './SettingsChangePasswordSchema';
 import { useFormik } from 'formik';
 
 export const SettingsChangePassword = () => {
@@ -19,7 +19,7 @@ export const SettingsChangePassword = () => {
   const navigator = useNavigator();
 
   
-  const saveHandle = () => navigator(-1);
+  const goBackHandle = () => navigator(-1);
   
   const changePasswordHandler = (values: ChangePasswordData) => {
     dispatch(fetchChangePassword(values))
@@ -55,7 +55,6 @@ export const SettingsChangePassword = () => {
               </Button>
             </div>
         }>
-        // TODO: change dummy functions
         <Input
           label={t('oldPassword')}
           name="oldPassword"
