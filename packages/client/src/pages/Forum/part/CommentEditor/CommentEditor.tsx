@@ -19,14 +19,17 @@ export const SendComment = ({ topicId }: Props) => {
   const { login } = useAppSelector(selectLogin);
   const dispatch = useAppDispatch();
 
-  const addComment = useCallback((comment: IComment): void => {
-    dispatch(
-      addCommentInTopic({
-        id: topicId,
-        comment: comment,
-      })
-    );
-  }, [dispatch, topicId]);
+  const addComment = useCallback(
+    (comment: IComment): void => {
+      dispatch(
+        addCommentInTopic({
+          id: topicId,
+          comment: comment,
+        })
+      );
+    },
+    [dispatch, topicId]
+  );
 
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
@@ -46,10 +49,7 @@ export const SendComment = ({ topicId }: Props) => {
   return (
     <ErrorBoundary>
       <BlankWindow className={styles.card}>
-        <form
-          className={styles.new_comment}
-          onSubmit={handleSubmit}
-        >
+        <form className={styles.new_comment} onSubmit={handleSubmit}>
           <div className={styles.text}>{t('newComment')}: </div>
           <Input
             name="comment"
@@ -60,11 +60,7 @@ export const SendComment = ({ topicId }: Props) => {
             showError={Boolean(errors.comment) && Boolean(touched.comment)}
             error={errors.comment}
           />
-          <Button
-            regular
-            className={styles.button_comment}
-            type="submit"
-          >
+          <Button regular className={styles.button_comment} type="submit">
             {t('send')}
           </Button>
         </form>

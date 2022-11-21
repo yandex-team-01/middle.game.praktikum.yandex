@@ -13,5 +13,5 @@ export const selectListTopics = createSelector(
 
 export const selectLogin = createSelector(
   [(state: RootState) => state.auth],
-  (auth) => ({ login: auth.user?.login })
+  auth => ({ login: auth.user?.login })
 );

@@ -1,10 +1,4 @@
-import {
-  firstNameRules,
-  loginRules,
-  passwordRules,
-  phoneRules,
-  secondNameRules,
-} from 'src/constants/ValidationRules';
+import { passwordRules } from 'src/constants/ValidationRules';
 import { object, ref, string } from 'yup';
 
 export const initialRegValuesSchema = {

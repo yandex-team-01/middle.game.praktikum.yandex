@@ -1,13 +1,11 @@
 import {
   firstNameRules,
   loginRules,
-  passwordRules,
   phoneRules,
   secondNameRules,
   displayNameRules,
-  emailRules
 } from 'src/constants/ValidationRules';
-import { object, ref, string } from 'yup';
+import { object, string } from 'yup';
 
 export const initialRegValuesSchema = {
   first_name: '',
@@ -36,7 +34,11 @@ export const changeDataSchema = object().shape({
     message:
       'Must be from 3 to 20 characters. Latin letters, digits (but not consisting of digits), hyphens and underscores are allowed',
   }),
-  email: string().required('Required').email('Invalid email address. Valid e-mail can contain only latin letters, numbers, @ and .'),
+  email: string()
+    .required('Required')
+    .email(
+      'Invalid email address. Valid e-mail can contain only latin letters, numbers, @ and .'
+    ),
   phone: string().required('Required').matches(phoneRules, {
     message:
       'From 10 to 15 characters, consists of numbers, can start with a plus',

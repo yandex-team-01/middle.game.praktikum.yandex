@@ -22,7 +22,7 @@ export const authSlice = createSlice({
   reducers: {
     updateUser(state, action: PayloadAction<IUser>) {
       state.user = action.payload;
-    }
+    },
   },
   extraReducers: buider => {
     //fetchAuth

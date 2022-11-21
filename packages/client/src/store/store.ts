@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   error: errorReducer,
   forum: forumReducer,
-  users: usersReducer
+  users: usersReducer,
 });
 
 export const setupStore = () => {

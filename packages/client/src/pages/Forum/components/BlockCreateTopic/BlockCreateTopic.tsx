@@ -23,10 +23,13 @@ export const BlockCreateTopic = () => {
   const login = useAppSelector(selectUserLogin);
   const dispatch = useDispatch();
 
-  const handleCreateNewTopic = useCallback((newtopic: ITopic) => {
-    dispatch(addNewTopic(newtopic));
-    navigator(-1);
-  }, [dispatch, navigator]);
+  const handleCreateNewTopic = useCallback(
+    (newtopic: ITopic) => {
+      dispatch(addNewTopic(newtopic));
+      navigator(-1);
+    },
+    [dispatch, navigator]
+  );
 
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
@@ -48,15 +51,8 @@ export const BlockCreateTopic = () => {
 
   return (
     <ErrorBoundary>
-      <form
-        onSubmit={handleSubmit}
-        className={styles.block}
-      >
-        <Button
-          regular
-          className={styles.button_publish}
-          type="submit"
-        >
+      <form onSubmit={handleSubmit} className={styles.block}>
+        <Button regular className={styles.button_publish} type="submit">
           {t('publich')}
         </Button>
         <BlankWindow className={styles.card}>
@@ -69,7 +65,9 @@ export const BlockCreateTopic = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.name_topic}
-                showError={Boolean(errors.name_topic) && Boolean(touched.name_topic)}
+                showError={
+                  Boolean(errors.name_topic) && Boolean(touched.name_topic)
+                }
                 error={errors.name_topic}
               />
             </div>
@@ -83,7 +81,10 @@ export const BlockCreateTopic = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.description_topic}
-                showError={Boolean(errors.description_topic) && Boolean(touched.description_topic)}
+                showError={
+                  Boolean(errors.description_topic) &&
+                  Boolean(touched.description_topic)
+                }
                 error={errors.description_topic}
               />
             </div>

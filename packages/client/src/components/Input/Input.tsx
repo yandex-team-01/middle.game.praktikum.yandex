@@ -13,7 +13,7 @@ export const Input = ({
   className = '',
   label,
   placeholder = '',
-  value
+  value,
 }: Props) => (
   <ErrorBoundary>
     <div className={styles.input_container}>

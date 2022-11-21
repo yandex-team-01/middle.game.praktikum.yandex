@@ -1,8 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  fetchChangeUser,
-  fetchChangePassword
-} from './UsersActions';
+import { fetchChangeUser, fetchChangePassword } from './UsersActions';
 
 import { ChangeDataState } from '../types';
 

@@ -15,22 +15,22 @@ export const SettingsData = () => {
   const navigator = useNavigator();
 
   const editHandle = () => navigator('edit');
-  const goBackHandle = () => navigator("/");
+  const goBackHandle = () => navigator('/');
 
   return (
     <div>
       <SettingsAvatar />
       <Form
         buttonsBlock={
-            <div className={stylesForm.form_button_box}>
-              <Button regular onClick={editHandle}>
-                {t('editProfile')}
-              </Button>
-              <Button regular onClick={goBackHandle}>
-                {t('goBack')}
-              </Button>
-              <Nav to="password">{t('changePassword')}</Nav>
-            </div>
+          <div className={stylesForm.form_button_box}>
+            <Button regular onClick={editHandle}>
+              {t('editProfile')}
+            </Button>
+            <Button regular onClick={goBackHandle}>
+              {t('goBack')}
+            </Button>
+            <Nav to="password">{t('changePassword')}</Nav>
+          </div>
         }>
         <SettingsUserInfo />
       </Form>
