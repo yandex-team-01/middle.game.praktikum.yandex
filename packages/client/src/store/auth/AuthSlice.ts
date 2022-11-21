@@ -33,7 +33,7 @@ export const authSlice = createSlice({
         state.user = action.payload;
         state.loading = false;
       }
-    );
+    ); 
     buider.addCase(fetchAuth.rejected, state => {
       state.checkAuth = true;
       state.auth = false;
