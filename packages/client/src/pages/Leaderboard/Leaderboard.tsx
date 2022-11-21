@@ -1,9 +1,11 @@
-import React, { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
+import styles from './Leaderboard.module.scss';
+
 import { BlankWindow } from 'src/components/BlankWindow';
 import { Button } from 'src/components/Button';
 import { LeaderboardLine } from './components/LeaderboardLine';
-import styles from './Leaderboard.module.scss';
+import { useNavigator } from 'src/hooks/useNavigator';
 
 const LeadersMockData = [
   {
@@ -29,29 +31,25 @@ const LeadersMockData = [
 ];
 
 export const Leaderboard = () => {
-  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const navigator = useNavigator();
 
-  const handleBack = useCallback(() => {
-    navigate('/');
-  }, [navigate]);
-
-  const handleLoadGame = useCallback(() => {
-    navigate('/loadinggame');
-  }, [navigate]);
+  const handleBack = () => navigator(-1);
+  const handleLoadGame = () => navigator('/loadinggame');
 
   return (
     <div className={styles.block}>
       <div className={styles.button_wrapper}>
         <Button regular onClick={handleBack}>
-          Go back
+          {t('goBack')}
         </Button>
         <Button regular onClick={handleLoadGame}>
-          Play
+          {t('play')}
         </Button>
       </div>
       <BlankWindow className={styles.window}>
         <div className={styles.background_overlay}>
-          <h1 className={styles.header}>Top teams</h1>
+          <h1 className={styles.header}>{t('topTeams')}</h1>
           {LeadersMockData.map((team, idx) => {
             return <LeaderboardLine team={team} idx={idx} key={idx} />;
           })}

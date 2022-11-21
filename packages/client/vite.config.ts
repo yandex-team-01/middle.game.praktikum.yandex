@@ -18,4 +18,12 @@ export default defineConfig({
       src: path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    rollupOptions: {
+      input: {
+        app: './index.html',
+        'service-worker': './sw.ts',
+      },
+    },
+  },
 });

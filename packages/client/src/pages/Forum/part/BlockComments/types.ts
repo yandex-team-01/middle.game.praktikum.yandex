@@ -1,4 +1,4 @@
-import { ITopic } from 'src/pages/Forum/components/Topic/types';
+import { ITopic } from "../Topic/types";
 
 export interface Props {
   topic: ITopic;

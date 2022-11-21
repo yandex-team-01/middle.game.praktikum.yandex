@@ -1,5 +1,7 @@
 import React from 'react';
+
 import stylesForm from 'src/components/Form/Form.module.scss';
+
 import { LoginForm } from './LoginForm';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { BlankWindow } from 'src/components/BlankWindow';

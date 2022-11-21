@@ -1,4 +1,3 @@
-import React from 'react';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import styles from './LeaderboardLine.module.scss';
 

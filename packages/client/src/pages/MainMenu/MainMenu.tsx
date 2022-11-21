@@ -1,33 +1,27 @@
+import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import styles from './MainMenu.module.scss';
+
 import { Button } from 'src/components/Button';
-import { useNavigate } from 'react-router-dom';
+
 import { useAppDispatch } from 'src/hooks/redux';
 import { fetchLogout } from 'src/store/auth/AuthActions';
-import { useCallback } from 'react';
+import { useNavigator } from 'src/hooks/useNavigator';
 
 export const MainMenu = () => {
+  const { t } = useTranslation();
+  const navigator = useNavigator();
   const dispath = useAppDispatch();
-  const navigate = useNavigate();
 
-  const leadersHandle = useCallback(() => {
-    navigate('/leaders');
-  }, [navigate]);
-
-  const forumHandle = useCallback(() => {
-    navigate('/forum');
-  }, [navigate]);
-
-  const settingsHandle = useCallback(() => {
-    navigate('/settings');
-  }, [navigate]);
+  const leadersHandle = () => navigator('/leaders');
+  const forumHandle = () => navigator('/forum');
+  const settingsHandle = () => navigator('/settings');
+  const gameLoading = () => navigator('/loadinggame');
 
   const logoutHandle = useCallback(() => {
     dispath(fetchLogout());
   }, [dispath]);
-
-  const gameLoading = useCallback(() => {
-    navigate('/loadinggame');
-  }, [navigate]);
 
   return (
     <div className={styles.page}>
@@ -36,21 +30,21 @@ export const MainMenu = () => {
       </h1>
       <div className={styles.block_buttons}>
         <Button regular className={styles.button} onClick={gameLoading}>
-          Play
+          {t('play')}
         </Button>
         <Button regular onClick={leadersHandle}>
-          Leaderboard
+          {t('leaderboard')}
         </Button>
         <Button regular onClick={forumHandle}>
-          Forum
+          {t('forum')}
         </Button>
       </div>
       <div className={styles.buttons}>
         <Button regular onClick={settingsHandle}>
-          Profile
+          {t('profile')}
         </Button>
         <Button regular onClick={logoutHandle}>
-          Logout
+          {t('logout')}
         </Button>
       </div>
     </div>

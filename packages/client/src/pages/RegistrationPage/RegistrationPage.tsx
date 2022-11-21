@@ -1,4 +1,3 @@
-import React from 'react';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { Navigate } from 'react-router-dom';
 import stylesForm from 'src/components/Form/Form.module.scss';
@@ -7,7 +6,7 @@ import { RegistrationForm } from './RegistrationForm';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { selectAuth } from 'src/store/auth/AuthSelectors';
 
-export const RegistrationPage: React.FC = () => {
+export const RegistrationPage = () => {
   const auth = useAppSelector(selectAuth);
 
   if (auth) {

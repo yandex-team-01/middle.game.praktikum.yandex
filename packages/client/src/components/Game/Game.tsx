@@ -1,17 +1,17 @@
 import { useCallback, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Game } from 'src/logic/Game';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
 import { Button } from 'src/components/Button';
-import { useNavigate } from 'react-router-dom';
 import styles from 'src/pages/GameScreen/GameScreen.module.scss';
 import { ErrorBoundary } from '../ErrorBoundary';
+import { useNavigator } from 'src/hooks/useNavigator';
 
 export const GameComponent = () => {
-  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const navigator = useNavigator();
 
-  const handleBack = useCallback(() => {
-    navigate('/');
-  }, [navigate]);
+  const handleBack = () => navigator('/');
   const handleEndGame = useCallback(() => {
     game.current?.end();
   }, []);
@@ -35,10 +35,10 @@ export const GameComponent = () => {
       <div>
         <div className={styles.block_button}>
           <Button regular onClick={handleBack}>
-            GO BACK
+            {t('goBack')}
           </Button>
           <Button regular onClick={handleEndGame}>
-            END THE GAME
+            {t('endGame')}
           </Button>
         </div>
         <canvas id="game-canvas" ref={canvas} />

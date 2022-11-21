@@ -1,29 +1,18 @@
-import React, { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from 'src/components/Button';
+import React, { memo } from 'react';
+import styles from './Topics.module.scss';
+import { Topic } from 'src/pages/Forum/part/Topic';
+import { selectListTopics } from 'src/store/forum/ForumSelectors';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { useAppSelector } from 'src/hooks/redux';
-import { selectListTopics } from 'src/store/forum/ForumSelectors';
-import { Topic } from '../../part/Topic';
-import styles from './Topics.module.scss';
+import { ButtonCreateTopic } from 'src/pages/Forum/part/ButtonCreateTopic';
 
-export const TopicList = () => {
-  const navigate = useNavigate();
+export const TopicList = memo(() => {
   const topics = useAppSelector(selectListTopics);
-
-  const handleCreateTopic = useCallback(() => {
-    navigate('/forum/createtopic');
-  }, [navigate]);
 
   return (
     <ErrorBoundary>
       <div className={styles.block_topics}>
-        <Button
-          regular
-          className={styles.button_create_topic}
-          onClick={handleCreateTopic}>
-          POST NEW TOPIC
-        </Button>
+        <ButtonCreateTopic />
         <div className={styles.list}>
           {Object.keys(topics).map((topicId: string, index: number) => {
             return <Topic key={index} {...topics[topicId]} />;
@@ -32,4 +21,4 @@ export const TopicList = () => {
       </div>
     </ErrorBoundary>
   );
-};
+});

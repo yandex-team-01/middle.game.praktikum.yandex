@@ -1,8 +1,9 @@
-import React from 'react';
+import { ReactI18NextChild } from 'react-i18next';
+
 import styles from './Column.module.scss';
 
 type Props = {
-  title: string | number;
+  title: string | number | ReactI18NextChild;
   children: JSX.Element;
 };
 
