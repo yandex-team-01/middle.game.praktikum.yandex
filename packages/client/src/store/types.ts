@@ -1,4 +1,3 @@
-import { UserData } from './../modules/IUsers';
 import { ITopic } from 'src/pages/Forum/part/Topic/types';
 import { IUser } from '../modules/IUser';
 
@@ -11,7 +10,7 @@ export interface AuthState {
 
 export interface ChangeDataState {
   loading: boolean;
-  user: UserData | null;
+  user: IUser | null;
 }
 
 export interface ErrorState {
