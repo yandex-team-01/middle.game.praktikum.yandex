@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Game } from 'src/logic/Game';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
