@@ -12,11 +12,11 @@ enum DirectionPlayerButtons {
   Right = 39,
 }
 
-enum DirectionPlayer { 
+enum DirectionPlayer {
   Down = 0,
   Left,
   Right,
-  Up
+  Up,
 }
 
 abstract class Player {
@@ -81,7 +81,7 @@ abstract class Player {
   subtractHP() {
     this.hitPoints = this.hitPoints - 1;
     if (this.hitPoints === 0) {
-      this.game.end(false);
+      this.game.end();
     }
   }
 

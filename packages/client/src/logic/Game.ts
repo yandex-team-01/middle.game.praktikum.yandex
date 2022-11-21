@@ -16,7 +16,7 @@ export class Game {
   private npcControll: NpcControll;
   private timer: Timer;
   public view: View;
-  
+
   constructor(protected canvas: HTMLCanvasElement) {
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
     this.canvas.width = this.width;
@@ -32,13 +32,12 @@ export class Game {
       this.ctx,
       this.height,
       this.width,
-      this.end.bind(this)
+      this.gameEntities
     );
     this.allSprites = new AllSprites();
-    this.npcControll = new NpcControll(this.ctx,this.height, this.width);
+    this.npcControll = new NpcControll(this.ctx, this.height, this.width);
     this.view = new View(this.canvas, this.ctx, this.gameEntities);
     this.sprites = {};
-    
   }
 
   async init(callback: () => void) {
@@ -64,7 +63,7 @@ export class Game {
       view: this.view,
       npcControll: this.npcControll,
       game: this,
-      timer: this.timer
+      timer: this.timer,
     };
   }
 
@@ -83,7 +82,7 @@ export class Game {
     this.view.startCycle();
   }
 
-  end(isWin = true) {
+  end(isWin = false) {
     //TODO: вынести в отдельный контроллер для аудио
     if (this.gameOverBackgroundAudio) {
       this.gameOverBackgroundAudio.currentTime = 0;
