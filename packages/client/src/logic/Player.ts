@@ -14,9 +14,9 @@ enum DirectionPlayerButtons {
 
 enum DirectionPlayer {
   Down = 0,
-  Up,
   Left,
   Right,
+  Up,
 }
 
 abstract class Player {
@@ -38,7 +38,7 @@ abstract class Player {
   hitPoints: number;
   score: number;
   game: Game;
-  totalNumberOfLegsMovementFrames = 3;
+  totalNumberOfLegsMovementFrames = 4;
   firstLegsMovementFrame = 0;
 
   constructor(
@@ -134,12 +134,12 @@ abstract class Player {
     }
   }
 
-  render(ctx: CanvasRenderingContext2D) {
+  render() {
     if (!this.spritePlayer) {
       return;
     }
 
-    ctx.drawImage(
+    this.ctx.drawImage(
       this.spritePlayer.image,
       this.width * this.skinLegsFrame,
       this.height * this.skinDirectionFrame,
@@ -173,8 +173,8 @@ export class PlayerOne extends Player {
     { game }: GameEntities
   ) {
     super(ctx, canvasHeight, canvasWidth, game);
-    this.x = 200;
-    this.y = 150;
+    this.x = 100;
+    this.y = 400;
     this.ctx = ctx;
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;

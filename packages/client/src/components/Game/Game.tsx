@@ -1,7 +1,8 @@
-import { useCallback, useRef } from 'react';
+import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Game } from 'src/logic/Game';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
+import { useFullScreen } from 'src/hooks/useFullScreen';
 import { Button } from 'src/components/Button';
 import styles from 'src/pages/GameScreen/GameScreen.module.scss';
 import { ErrorBoundary } from '../ErrorBoundary';
@@ -12,10 +13,8 @@ export const GameComponent = () => {
   const navigator = useNavigator();
 
   const handleBack = () => navigator('/');
-  const handleEndGame = useCallback(() => {
-    game.current?.end();
-  }, []);
-
+  const [isFullScreen, toggleIsFullScreen] = useFullScreen();
+  
   const canvas = useRef<HTMLCanvasElement>(null); //https://stackoverflow.com/a/63119934
   const game = useRef<Game | null>(null);
 
@@ -34,12 +33,13 @@ export const GameComponent = () => {
     <ErrorBoundary>
       <div>
         <div className={styles.block_button}>
-          <Button regular onClick={handleBack}>
-            {t('goBack')}
+          <Button regular className='button' onClick={handleBack}>
+          {t('goBack')}
           </Button>
-          <Button regular onClick={handleEndGame}>
-            {t('endGame')}
+          <Button regular className='button' onClick={()=>toggleIsFullScreen()}>
+          {isFullScreen ? '╬' :'⛶'}
           </Button>
+
         </div>
         <canvas id="game-canvas" ref={canvas} />
       </div>

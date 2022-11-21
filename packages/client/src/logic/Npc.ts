@@ -31,8 +31,10 @@ export abstract class NpcModel {
   npcCurrentDirections: boolean[] = [];
   totalNumberOfLegsMovementFrames = 3;
   firstLegsMovementFrame = 0;
+  ctx: CanvasRenderingContext2D;
 
-  constructor(options: NpcConstructorOptions) {
+  constructor(ctx: CanvasRenderingContext2D,options: NpcConstructorOptions) {
+    this.ctx = ctx;
     this.id = options.id;
     this.type = options.type;
     this.x = options.defaultX;
@@ -41,15 +43,9 @@ export abstract class NpcModel {
     this.height = 0;
     this.skinLegsFrame = 0;
     this.skinDirectionFrame = 0;
-    this.xSpeed = 7;
-    this.ySpeed = 7;
-    this.startMoving();
-  }
+    this.xSpeed = 6;
+    this.ySpeed = 6;
 
-  startMoving() {
-    //начинаем движение вправо-вниз
-    this.npcCurrentDirections[DirectionNpc.Right] = true;
-    this.npcCurrentDirections[DirectionNpc.Down] = true;
   }
 
   setSprite(sprite: Sprite) {
@@ -69,17 +65,13 @@ export abstract class NpcModel {
     };
   }
 
-  render(
-    ctx: CanvasRenderingContext2D,
-    canvasHeight: number,
-    canvasWidth: number
-  ) {
+  render(canvasHeight:number,canvasWidth:number)   {
     if (!this.sprite) {
       return;
     }
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
-    ctx.drawImage(
+    this.ctx.drawImage(
       this.sprite.image,
       this.width * this.skinLegsFrame,
       this.height * this.skinDirectionFrame,
@@ -90,20 +82,24 @@ export abstract class NpcModel {
       this.width,
       this.height
     );
-    ctx.strokeRect(this.x, this.y, this.width, this.height);
+    this.ctx.strokeRect(this.x, this.y, this.width, this.height);
     this.animate();
   }
 
   animate() {
     this.updateNpcCoordinates();
-    this.checkForCollisions();
+    this.checkForCollisionsWithCanvasBorders();
     this.moveNpc();
     this.handleNpcLegsFrame();
   }
-
   updateNpcCoordinates() {
-    this.x += this.xSpeed;
-    this.y += this.ySpeed;
+    if (this.type === 'friend') {
+      this.x -= this.xSpeed;
+      this.y -= this.ySpeed;
+    }else{
+      this.x += this.xSpeed;
+      this.y += this.ySpeed;
+    }
   }
 
   toggleNpcDirection(direction: number) {
@@ -128,18 +124,16 @@ export abstract class NpcModel {
       }
     }
   }
-  checkForCollisions() {
-    if (this.x + this.width > this.canvasWidth || this.x - this.width / 2 < 0) {
-      this.xSpeed = -this.xSpeed;
-      this.toggleNpcDirection(Direction.Horizontal);
+  
+  checkForCollisionsWithCanvasBorders() {
+    if ( this.x + this.width > this.canvasWidth || this.x - this.width / 2  < 0 ) {
+        this.xSpeed = -this.xSpeed;
+        this.toggleNpcDirection(Direction.Horizontal);
     }
-    if (
-      this.y + this.height > this.canvasHeight ||
-      this.y - this.height / 2 < 0
-    ) {
-      this.ySpeed = -this.ySpeed;
-      this.toggleNpcDirection(Direction.Vertical);
-    }
+    if ( this.y + this.height > this.canvasHeight || this.y - this.height / 2 < 70 ) {
+        this.ySpeed = -this.ySpeed;
+        this.toggleNpcDirection(Direction.Vertical);
+    }   
   }
 
   handleNpcLegsFrame() {
@@ -173,8 +167,16 @@ export abstract class NpcModel {
 }
 
 export class NpcEnemy extends NpcModel {
-  constructor(options: NpcConstructorOptions) {
-    super(options);
+  constructor(ctx: CanvasRenderingContext2D, options: NpcConstructorOptions) {
+    super(ctx, options);
+    this.ctx = ctx;
+    this.startMoving();
+  }
+
+  startMoving(){
+    //начинаем движение вправо-вниз
+    this.npcCurrentDirections[DirectionNpc.Right] = true;
+    this.npcCurrentDirections[DirectionNpc.Down] = true;
   }
 
   collisionHandling(player: PlayerOne) {
@@ -185,12 +187,19 @@ export class NpcEnemy extends NpcModel {
 export class NpcFriend extends NpcModel {
   defineBonus: number;
 
-  constructor(options: NpcConstructorOptions) {
-    super(options);
+  constructor(ctx: CanvasRenderingContext2D, options: NpcConstructorOptions) {
+    super(ctx, options);
+    this.ctx = ctx;
     this.defineBonus = 5;
+    this.startMoving();
   }
 
   collisionHandling(player: PlayerOne) {
     player.addScore(this.defineBonus);
+  }
+  startMoving(){
+    //начинаем движение вправо-вниз
+    this.npcCurrentDirections[DirectionNpc.Left] = true;
+    this.npcCurrentDirections[DirectionNpc.Up] = true;
   }
 }
