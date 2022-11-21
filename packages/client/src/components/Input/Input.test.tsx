@@ -14,6 +14,8 @@ describe('Input', () => {
         expect(screen.getByText("new_input")).toBeDefined();
     })
 
+    // оставлю это здесь для примера тестов, которые не работают.
+    // Но, как мы обсудили, они не имеют особого смысла 
     // it('checking value Input with fireEvent', () => {
     //     const { container } = render(<Input />);
     //     const input = container.firstChild as HTMLInputElement;
