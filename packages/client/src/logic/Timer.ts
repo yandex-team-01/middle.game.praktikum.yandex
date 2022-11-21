@@ -1,6 +1,3 @@
-import { Game } from './Game';
-import { GameEntities } from './types';
-
 export class Timer {
   private ctx: CanvasRenderingContext2D;
   private canvasHeight: number;
@@ -9,7 +6,7 @@ export class Timer {
   private gameStartMoment: Date | undefined;
   private gameEndMoment: Date | undefined;
   private gameTimer: number | undefined;
-  private game: Game;
+  private onEndGame: ()=>void;
   private now: number | undefined;
   public then: number | undefined;
   private elapsedTimer: number | undefined;
@@ -18,12 +15,12 @@ export class Timer {
     ctx: CanvasRenderingContext2D,
     canvasHeight: number,
     canvasWidth: number,
-    { game }: GameEntities
+    onEndGame: () => void
   ) {
     this.ctx = ctx;
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
-    this.game = game;
+    this.onEndGame = onEndGame;
     this.initGameTimer();
   }
 
@@ -54,7 +51,7 @@ export class Timer {
     }
 
     if (this.gameEndMoment && new Date() >= this.gameEndMoment) {
-      this.game.end(true);
+      this.onEndGame;
     }
   }
 }

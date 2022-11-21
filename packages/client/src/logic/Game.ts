@@ -32,7 +32,7 @@ export class Game {
       this.ctx,
       this.height,
       this.width,
-      this.gameEntities
+      this.end.bind(this)
     );
     this.allSprites = new AllSprites();
     this.npcControll = new NpcControll(this.ctx,this.height, this.width);
@@ -83,7 +83,7 @@ export class Game {
     this.view.startCycle();
   }
 
-  end(isWin = false) {
+  end(isWin = true) {
     //TODO: вынести в отдельный контроллер для аудио
     if (this.gameOverBackgroundAudio) {
       this.gameOverBackgroundAudio.currentTime = 0;
