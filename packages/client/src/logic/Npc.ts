@@ -92,9 +92,15 @@ export abstract class NpcModel {
     this.moveNpc();
     this.handleNpcLegsFrame();
   }
-  /*eslint-disable */
-  updateNpcCoordinates(){}
-  /*eslint-enable */
+  updateNpcCoordinates() {
+    if (this.type === 'friend') {
+      this.x -= this.xSpeed;
+      this.y -= this.ySpeed;
+    }else{
+      this.x += this.xSpeed;
+      this.y += this.ySpeed;
+    }
+  }
 
   toggleNpcDirection(direction: number) {
     //меняем флаг направления анимации ног влево-вправо
@@ -187,10 +193,7 @@ export class NpcEnemy extends NpcModel {
     this.npcCurrentDirections[DirectionNpc.Right] = true;
     this.npcCurrentDirections[DirectionNpc.Down] = true;
   }
-  updateNpcCoordinates() {
-    this.x += this.xSpeed;
-    this.y += this.ySpeed;
-  }
+
   collisionHandling(player: PlayerOne) {
     player.subtractHP();
   }
@@ -204,11 +207,6 @@ export class NpcFriend extends NpcModel {
     this.ctx = ctx;
     this.defineBonus = 5;
     this.startMoving();
-  }
-
-  updateNpcCoordinates() {
-    this.x -= this.xSpeed;
-    this.y -= this.ySpeed;
   }
 
   collisionHandling(player: PlayerOne) {

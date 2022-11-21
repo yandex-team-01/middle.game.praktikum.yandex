@@ -80,11 +80,10 @@ export class Game {
 
   start() {
     this.prepareObjectGame();
-
     this.view.startCycle();
   }
 
-  end(isWin=false) {
+  end(isWin = false) {
     //TODO: вынести в отдельный контроллер для аудио
     if (this.gameOverBackgroundAudio) {
       this.gameOverBackgroundAudio.currentTime = 0;

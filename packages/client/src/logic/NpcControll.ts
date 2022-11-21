@@ -12,8 +12,11 @@ export class NpcControll {
   canvasHeight: number;
   canvasWidth: number;
 
-  constructor(ctx: CanvasRenderingContext2D, canvasHeight: number,
-    canvasWidth: number) {
+  constructor(
+    ctx: CanvasRenderingContext2D,
+    canvasHeight: number,
+    canvasWidth: number
+  ) {
     this.ctx = ctx;
     // временно вывожу массив npc
     this.arrNpc = defaultOptionNpc.map(option => {
@@ -37,23 +40,16 @@ export class NpcControll {
     this.arrNpc.forEach(npc => {
       if (npc.type === 'friend') {
         npc.setSprite(sprites[SPRITE_ID.NPC_FRIEND]);
-      } else if (npc.type === 'enemy_huggy') {     
+      } else if (npc.type === 'enemy_huggy') {
         npc.setSprite(sprites[SPRITE_ID.NPC_ENEMY_HUGGY]);
-      }else if (npc.type === 'enemy_kissy') {      
+      } else if (npc.type === 'enemy_kissy') {
         npc.setSprite(sprites[SPRITE_ID.NPC_ENEMY_KISSY]);
       }
     });
   }
 
-<<<<<<< HEAD
   render(ctx: CanvasRenderingContext2D) {
-    this.arrNpc.forEach(npc =>
-      npc.render(ctx, this.canvasHeight, this.canvasWidth)
-    );
-=======
-  render() {
-    this.arrNpc.forEach(npc => npc.render(this.canvasHeight,this.canvasWidth));
->>>>>>> ctx arg was removed from render func
+    this.arrNpc.forEach(npc => npc.render(this.canvasHeight, this.canvasWidth));
   }
 
   deleteNpc(npc: NpcType) {

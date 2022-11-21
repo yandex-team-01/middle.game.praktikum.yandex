@@ -2,6 +2,7 @@ import { useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Game } from 'src/logic/Game';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
+import { useFullScreen } from 'src/hooks/useFullScreen';
 import { Button } from 'src/components/Button';
 import styles from 'src/pages/GameScreen/GameScreen.module.scss';
 import { ErrorBoundary } from '../ErrorBoundary';
@@ -16,14 +17,8 @@ export const GameComponent = () => {
     game.current?.end();
   }, []);
 
-  const handleFullScreen = useCallback(()=>{
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-    } else if (document.exitFullscreen) {
-      document.exitFullscreen();
-    }
-  },[]);
-
+  const [isFullScreen, toggleIsFullScreen] = useFullScreen();
+  
   const canvas = useRef<HTMLCanvasElement>(null); //https://stackoverflow.com/a/63119934
   const game = useRef<Game | null>(null);
 
@@ -45,8 +40,8 @@ export const GameComponent = () => {
           <Button regular className='button' onClick={handleBack}>
             GO BACK
           </Button>
-          <Button regular className='button' onClick={handleFullScreen}>
-          ⛶
+          <Button regular className='button' onClick={()=>toggleIsFullScreen()}>
+          {isFullScreen ? '╬' :'⛶'}
           </Button>
 
         </div>
