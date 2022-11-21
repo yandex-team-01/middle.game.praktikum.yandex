@@ -7,16 +7,6 @@ import {
 } from 'src/constants/ValidationRules';
 import { object, string } from 'yup';
 
-export const initialRegValuesSchema = {
-  first_name: '',
-  second_name: '',
-  phone: '',
-  email: '',
-  login: '',
-  password: '',
-  repeatPassword: '',
-};
-
 export const changeDataSchema = object().shape({
   first_name: string().required('Required').matches(firstNameRules, {
     message:

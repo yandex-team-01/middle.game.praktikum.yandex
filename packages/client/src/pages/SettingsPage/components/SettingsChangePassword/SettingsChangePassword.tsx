@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { useFormik } from 'formik';
 
 import { Button } from 'src/components/Button';
 import { Form } from 'src/components/Form';
@@ -10,8 +11,10 @@ import { useNavigator } from 'src/hooks/useNavigator';
 import { useAppDispatch } from 'src/hooks/redux';
 import { ChangePasswordData } from 'src/modules/IUsers';
 import { fetchChangePassword } from 'src/store/users/UsersActions';
-import { changePasswordSchema } from './SettingsChangePasswordSchema';
-import { useFormik } from 'formik';
+import {
+  changePasswordSchema,
+  initialChangePasswordValuesSchema,
+} from './SettingsChangePasswordSchema';
 
 export const SettingsChangePassword = () => {
   const dispatch = useAppDispatch();
@@ -31,11 +34,7 @@ export const SettingsChangePassword = () => {
 
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
-      initialValues: {
-        oldPassword: '',
-        newPassword: '',
-        repeatPassword: '',
-      },
+      initialValues: initialChangePasswordValuesSchema,
       validationSchema: changePasswordSchema,
       onSubmit: values => {
         changePasswordHandler(values as ChangePasswordData);

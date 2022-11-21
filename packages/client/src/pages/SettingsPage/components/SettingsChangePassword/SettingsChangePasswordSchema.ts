@@ -1,13 +1,9 @@
 import { passwordRules } from 'src/constants/ValidationRules';
 import { object, ref, string } from 'yup';
 
-export const initialRegValuesSchema = {
-  first_name: '',
-  second_name: '',
-  phone: '',
-  email: '',
-  login: '',
-  password: '',
+export const initialChangePasswordValuesSchema = {
+  oldPassword: '',
+  newPassword: '',
   repeatPassword: '',
 };
 
