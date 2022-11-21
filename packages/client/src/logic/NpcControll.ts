@@ -48,7 +48,7 @@ export class NpcControll {
     });
   }
 
-  render(ctx: CanvasRenderingContext2D) {
+  render() {
     this.arrNpc.forEach(npc => npc.render(this.canvasHeight, this.canvasWidth));
   }
 

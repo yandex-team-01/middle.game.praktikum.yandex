@@ -124,20 +124,6 @@ export abstract class NpcModel {
       }
     }
   }
-<<<<<<< HEAD
-  checkForCollisions() {
-    if (this.x + this.width > this.canvasWidth || this.x - this.width / 2 < 0) {
-      this.xSpeed = -this.xSpeed;
-      this.toggleNpcDirection(Direction.Horizontal);
-    }
-    if (
-      this.y + this.height > this.canvasHeight ||
-      this.y - this.height / 2 < 0
-    ) {
-      this.ySpeed = -this.ySpeed;
-      this.toggleNpcDirection(Direction.Vertical);
-    }
-=======
   
   checkForCollisionsWithCanvasBorders() {
     if ( this.x + this.width > this.canvasWidth || this.x - this.width / 2  < 0 ) {
@@ -148,7 +134,6 @@ export abstract class NpcModel {
         this.ySpeed = -this.ySpeed;
         this.toggleNpcDirection(Direction.Vertical);
     }   
->>>>>>> added a timer to the logic of the game
   }
 
   handleNpcLegsFrame() {

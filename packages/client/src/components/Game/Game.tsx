@@ -13,10 +13,6 @@ export const GameComponent = () => {
   const navigator = useNavigator();
 
   const handleBack = () => navigator('/');
-  const handleEndGame = useCallback(() => {
-    game.current?.end();
-  }, []);
-
   const [isFullScreen, toggleIsFullScreen] = useFullScreen();
   
   const canvas = useRef<HTMLCanvasElement>(null); //https://stackoverflow.com/a/63119934
@@ -38,7 +34,7 @@ export const GameComponent = () => {
       <div>
         <div className={styles.block_button}>
           <Button regular className='button' onClick={handleBack}>
-            GO BACK
+          {t('goBack')}
           </Button>
           <Button regular className='button' onClick={()=>toggleIsFullScreen()}>
           {isFullScreen ? '╬' :'⛶'}
