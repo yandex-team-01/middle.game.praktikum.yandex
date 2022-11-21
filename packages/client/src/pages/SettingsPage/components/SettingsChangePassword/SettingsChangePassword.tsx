@@ -18,14 +18,15 @@ export const SettingsChangePassword = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
 
-  
-  const goBackHandle = () => navigator(-1);
-  
+  const goBackHandle = () => navigator('/settings');
+
   const changePasswordHandler = (values: ChangePasswordData) => {
     dispatch(fetchChangePassword(values))
       .unwrap()
       .catch()
-      .then((res) => {res ? goBackHandle() : null});
+      .then(res => {
+        goBackHandle();
+      });
   };
 
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
@@ -46,14 +47,14 @@ export const SettingsChangePassword = () => {
       <Form
         onSubmit={handleSubmit}
         buttonsBlock={
-            <div className={stylesForm.form_button_box}>
-              <Button regular type="submit">
-                {t('save')}
-              </Button>
-              <Button regular onClick={goBackHandle}>
-                Go Back
-              </Button>
-            </div>
+          <div className={stylesForm.form_button_box}>
+            <Button regular type="submit">
+              {t('save')}
+            </Button>
+            <Button regular onClick={goBackHandle}>
+              {t('goBack')}
+            </Button>
+          </div>
         }>
         <Input
           label={t('oldPassword')}

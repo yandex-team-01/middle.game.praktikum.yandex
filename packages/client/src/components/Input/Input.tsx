@@ -12,7 +12,7 @@ export const Input = ({
   onBlur,
   className = '',
   label,
-  placeholder,
+  placeholder = '',
   value
 }: Props) => (
   <ErrorBoundary>

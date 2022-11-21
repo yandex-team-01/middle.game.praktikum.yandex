@@ -1,16 +1,12 @@
-import { UserData } from './../../modules/IUsers';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchChangeUser,
   fetchChangePassword
 } from './UsersActions';
-import { IUser } from 'src/modules/IUser';
 
-import { AuthState } from '../types';
+import { ChangeDataState } from '../types';
 
-const initialState: AuthState = {
-  checkAuth: false,
-  auth: false,
+const initialState: ChangeDataState = {
   user: null,
   loading: false,
 };
@@ -25,8 +21,6 @@ export const usersSlice = createSlice({
       state.loading = true;
     });
     buider.addCase(fetchChangeUser.rejected, state => {
-      state.checkAuth = true;
-      state.auth = false;
       state.loading = false;
     });
     //fetchChangePassword
@@ -35,13 +29,9 @@ export const usersSlice = createSlice({
     });
     buider.addCase(fetchChangePassword.fulfilled, state => {
       state.loading = false;
-      state.checkAuth = true;
-      state.auth = true;
     });
     buider.addCase(fetchChangePassword.rejected, state => {
       state.loading = false;
-      state.checkAuth = true;
-      state.auth = false;
     });
   },
 });

@@ -10,8 +10,6 @@ export interface AuthState {
 }
 
 export interface ChangeDataState {
-  checkAuth: boolean;
-  auth: boolean;
   loading: boolean;
   user: UserData | null;
 }
