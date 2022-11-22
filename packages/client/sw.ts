@@ -13,7 +13,6 @@ const canBeCached = (request: Request) =>
   request.url.startsWith('http') &&
   !request.url.includes('sockjs-node');
 
-
 self.addEventListener('fetch', (event: FetchEvent) => {
   if (!canBeCached(event.request)) {
     return event.respondWith(fetch(event.request));

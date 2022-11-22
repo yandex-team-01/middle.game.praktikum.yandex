@@ -30,7 +30,6 @@ export const regSchema = object().shape({
     message:
       'From 10 to 15 characters, consists of numbers, can start with a plus',
   }),
-
   email: string().email('Please enter a valid email').required('Required'),
   login: string().required('Required').matches(loginRules, {
     message:

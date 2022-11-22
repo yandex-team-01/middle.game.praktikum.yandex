@@ -10,4 +10,5 @@ export interface Props {
   error?: string;
   autoComplete?: string;
   label?: string;
+  placeholder?: string;
 }

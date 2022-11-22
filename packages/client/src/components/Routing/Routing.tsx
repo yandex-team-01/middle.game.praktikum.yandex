@@ -131,9 +131,11 @@ export const Routing = () => {
         <Route
           path={langPath('/settings')}
           element={
-            <BackgroundLayout>
-              <SettingsPage />
-            </BackgroundLayout>
+            <ProtectedRoute flag={auth} redirect={langPath('/login')}>
+              <BackgroundLayout>
+                <SettingsPage />
+              </BackgroundLayout>
+            </ProtectedRoute>
           }>
           <Route index element={<SettingsData />} />
           <Route path="edit" element={<SettingsChangeData />} />

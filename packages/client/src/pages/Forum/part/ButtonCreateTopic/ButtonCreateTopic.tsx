@@ -5,17 +5,17 @@ import { useNavigator } from 'src/hooks/useNavigator';
 import styles from './ButtonCreateTopic.module.scss';
 
 export const ButtonCreateTopic = () => {
-    const { t } = useTranslation();
-    const navigator = useNavigator();
+  const { t } = useTranslation();
+  const navigator = useNavigator();
 
-    const handleCreateTopic = () => navigator('createtopic');
+  const handleCreateTopic = () => navigator('createtopic');
 
-    return (
-        <Button
-            regular
-            className={styles.button_create_topic}
-            onClick={handleCreateTopic}>
-            {t('postNewTopic')}
-        </Button>
-    );
+  return (
+    <Button
+      regular
+      className={styles.button_create_topic}
+      onClick={handleCreateTopic}>
+      {t('postNewTopic')}
+    </Button>
+  );
 };

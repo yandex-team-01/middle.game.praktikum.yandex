@@ -8,6 +8,11 @@ export interface AuthState {
   user: IUser | null;
 }
 
+export interface ChangeDataState {
+  loading: boolean;
+  user: IUser | null;
+}
+
 export interface ErrorState {
   errorList: {
     text: string;

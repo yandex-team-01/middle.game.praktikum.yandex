@@ -1,7 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { UserData, ChangePasswordData } from './../../modules/IUsers';
+
 import { fetchApi } from '../utils';
 import { addError } from '../error/ErrorSlice';
+
+import { updateUser } from '../auth/AuthSlice';
+import { IUser } from 'src/modules/IUser';
+import { ChangePasswordData } from 'src/modules/IUsers';
 
 const defaultHeaders = {
   'content-type': 'application/json',
@@ -10,17 +14,19 @@ const defaultHeaders = {
 
 export const fetchChangeUser = createAsyncThunk(
   'auth/fetchChangeUser',
-  async (data: UserData, thunkApi) => {
+  async (data: IUser, thunkApi) => {
     try {
-      const res = await fetchApi('/user/profile', {
+      const res: IUser = await fetchApi('/user/profile', {
         method: 'PUT',
         headers: defaultHeaders,
         body: JSON.stringify(data),
       });
+      thunkApi.dispatch(updateUser(res));
       return res;
     } catch (error) {
       thunkApi.dispatch(addError('Ошибка изменения профиля'));
-      return thunkApi.rejectWithValue('Ошибка изменения профиля');
+      thunkApi.rejectWithValue('Ошибка изменения профиля');
+      throw error;
     }
   }
 );
@@ -37,7 +43,8 @@ export const fetchChangePassword = createAsyncThunk(
       return res;
     } catch (error) {
       thunkApi.dispatch(addError('Ошибка смены пароля'));
-      return thunkApi.rejectWithValue('Ошибка смены пароля');
+      thunkApi.rejectWithValue('Ошибка смены пароля');
+      throw error;
     }
   }
 );

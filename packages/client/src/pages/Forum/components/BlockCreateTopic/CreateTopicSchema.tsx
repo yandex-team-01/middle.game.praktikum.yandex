@@ -7,5 +7,5 @@ export const initialRegValuesSchema = {
 
 export const regSchema = object().shape({
   name_topic: string().required('Required'),
-  description_topic: string().required('Required')
+  description_topic: string().required('Required'),
 });
