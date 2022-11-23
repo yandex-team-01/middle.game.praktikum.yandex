@@ -14,8 +14,8 @@ const defaultHeaders = {
 export const fetchAuth = createAsyncThunk(
   'auth/fetchAuth',
   async (_, thunkApi) => {
-    try { 
-      return await fetchApi<IUser>('/auth/user', {});  
+    try {
+      return await fetchApi<IUser>('/auth/user', {});
     } catch (error) {
       return thunkApi.rejectWithValue('Ошибка авторизации');
     }
@@ -31,6 +31,8 @@ export const fetchSignin = createAsyncThunk(
         headers: defaultHeaders,
         body: JSON.stringify(data),
       });
+
+      thunkApi.dispatch(fetchAuth());
 
       return res;
     } catch (error) {
@@ -49,6 +51,7 @@ export const fetchSignup = createAsyncThunk(
         headers: defaultHeaders,
         body: JSON.stringify(data),
       });
+      thunkApi.dispatch(fetchAuth());
 
       return res;
     } catch (error) {

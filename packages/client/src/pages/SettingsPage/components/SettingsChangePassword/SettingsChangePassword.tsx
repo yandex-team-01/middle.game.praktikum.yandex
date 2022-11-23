@@ -27,7 +27,7 @@ export const SettingsChangePassword = () => {
     dispatch(fetchChangePassword(values))
       .unwrap()
       .catch()
-      .then(res => {
+      .then(() => {
         goBackHandle();
       });
   };
