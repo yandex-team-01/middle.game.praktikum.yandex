@@ -14,7 +14,7 @@ import { useNavigator } from 'src/hooks/useNavigator';
 import { IUser } from 'src/modules/IUser';
 
 export const SettingsChangeData = () => {
-  const user = useAppSelector(state => state.auth.user!);
+  const user = useAppSelector(state => state.auth.user as IUser);
 
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -26,7 +26,7 @@ export const SettingsChangeData = () => {
     dispatch(fetchChangeUser(values))
       .unwrap()
       .catch()
-      .then(res => {
+      .then(() => {
         goBackHandle();
       });
   };

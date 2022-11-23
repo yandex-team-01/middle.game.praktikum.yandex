@@ -1,9 +1,10 @@
 import { useAppSelector } from 'src/hooks/redux';
+import { IUser } from 'src/modules/IUser';
 
 import stylesForm from 'src/components/Form/Form.module.scss';
 
 export const SettingsUserInfo = () => {
-  const user = useAppSelector(state => state.auth.user!);
+  const user = useAppSelector(state => state.auth.user as IUser);
 
   return (
     <div className={stylesForm.form_center}>
