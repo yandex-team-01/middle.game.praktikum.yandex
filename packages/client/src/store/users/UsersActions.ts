@@ -51,7 +51,7 @@ export const fetchChangePassword = createAsyncThunk(
 
 export const fetchChangeAvatar = createAsyncThunk(
   'auth/fetchChangeAvatar',
-  async (data: any, thunkApi) => {
+  async (data: File, thunkApi) => {
     try {
       const formData = new FormData();
       formData.append('avatar', data);

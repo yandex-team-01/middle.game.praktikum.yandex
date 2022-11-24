@@ -1,3 +1,4 @@
+import { IUser } from 'src/modules/IUser';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
@@ -20,3 +21,8 @@ export const selectLoading = createSelector(
   (state: RootState) => state.auth,
   auth => auth.loading
 );
+
+  export const selectUser = createSelector(
+    (state: RootState) => state.auth,
+    auth => auth.user as IUser
+  );

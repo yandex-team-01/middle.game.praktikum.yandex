@@ -2,21 +2,25 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './SettingsAvatar.module.scss';
 
-import img from 'src/assets/images/no-avatar.png';
-import { env } from 'src/constants/Env';
+import noAvatarImg from 'src/assets/images/no-avatar.png';
+
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
-import { IUser } from 'src/modules/IUser';
 import { fetchChangeAvatar } from 'src/store/users/UsersActions';
+import { selectUser } from 'src/store/auth/AuthSelectors';
+import { hostResources } from 'src/utils/hostResources';
+import { ChangeEvent } from 'react';
 
 export const SettingsAvatar = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const user = useAppSelector(state => state.auth.user as IUser);
-  const url = `${env.HOST_RESOURCES}${user.avatar}`;
-  const avatar = user.avatar ? url : img;
+  const user = useAppSelector(selectUser);
+  const url = hostResources(user.avatar)
 
-  const uploadAvatar = (event: any) => {
-    const file = event.target.files[0]
+  const avatar: string = user.avatar ? url : noAvatarImg;
+
+  const onUploadAvatar = (event: ChangeEvent) => {
+    const target = event.target as HTMLInputElement;
+    let file: File = (target.files as FileList)[0];
     dispatch(fetchChangeAvatar(file));
   };
 
@@ -25,7 +29,7 @@ export const SettingsAvatar = () => {
       <div className={styles.rounded}>
         <img className={styles.avatar} src={avatar} alt={t('avatar')} />
       </div>
-      <input accept="image/*" type="file" onChange={uploadAvatar} />
+      <input accept="image/*" type="file" onChange={onUploadAvatar} />
     </div>
   );
 };
