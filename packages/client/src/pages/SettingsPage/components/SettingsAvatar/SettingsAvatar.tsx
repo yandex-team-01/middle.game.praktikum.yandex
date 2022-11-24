@@ -14,13 +14,13 @@ export const SettingsAvatar = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
-  const url = hostResources(user.avatar)
+  const url = hostResources(user.avatar);
 
   const avatar: string = user.avatar ? url : noAvatarImg;
 
   const onUploadAvatar = (event: ChangeEvent) => {
     const target = event.target as HTMLInputElement;
-    let file: File = (target.files as FileList)[0];
+    const file: File = (target.files as FileList)[0];
     dispatch(fetchChangeAvatar(file));
   };
 
