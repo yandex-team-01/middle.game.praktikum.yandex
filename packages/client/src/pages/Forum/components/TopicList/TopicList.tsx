@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import styles from './Topics.module.scss';
+import styles from './topics.module.scss';
 import { Topic } from 'src/pages/Forum/part/Topic';
 import { selectListTopics } from 'src/store/forum/ForumSelectors';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';

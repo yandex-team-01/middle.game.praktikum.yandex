@@ -48,3 +48,22 @@ export const fetchChangePassword = createAsyncThunk(
     }
   }
 );
+
+export const fetchChangeAvatar = createAsyncThunk(
+  'auth/fetchChangeAvatar',
+  async (data: File, thunkApi) => {
+    try {
+      const formData = new FormData();
+      formData.append('avatar', data);
+      const res = await fetchApi('/user/profile/avatar', {
+        method: 'PUT',
+        body: formData,
+      });
+      return res;
+    } catch (error) {
+      thunkApi.dispatch(addError('Ошибка смены аватара профиля'));
+      thunkApi.rejectWithValue('Ошибка смены аватара профиля');
+      throw error;
+    }
+  }
+);
