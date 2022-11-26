@@ -22,7 +22,7 @@ export const selectLoading = createSelector(
   auth => auth.loading
 );
 
-  export const selectUser = createSelector(
-    (state: RootState) => state.auth,
-    auth => auth.user as IUser
-  );
+export const selectUser = createSelector(
+  (state: RootState) => state.auth,
+  auth => auth.user as IUser
+);

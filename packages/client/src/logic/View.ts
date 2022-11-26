@@ -23,7 +23,7 @@ export class View {
   constructor(
     canvas: HTMLCanvasElement,
     ctx: CanvasRenderingContext2D,
-    { player, npcControll,timer }: GameEntities
+    { player, npcControll, timer }: GameEntities
   ) {
     this.sprites = {};
     this.canvas = canvas;
@@ -35,7 +35,6 @@ export class View {
     this.npcControll = npcControll;
     this.gameOver = false;
     this.clashesController = new ClashesController(player, npcControll);
-
   }
 
   setSprite(sprites: AllSpritesType) {
@@ -57,23 +56,27 @@ export class View {
     }
   }
 
-  renderGameOver(isWin:boolean) {
+  renderGameOver(isWin: boolean) {
     if (this.canvas && this.ctx) {
       if (isWin) {
         this.renderGameWinScreen();
-      }else{
+      } else {
         this.renderGameLoseScreen();
       }
     }
   }
 
-  renderGameWinScreen(){
+  renderGameWinScreen() {
     this.prepareCanvas();
     this.ctx.font = '30px PixelDigivolve';
-    this.ctx.fillText(`YOU WIN!`, this.canvas.width/2-60, this.canvas.height/2);
+    this.ctx.fillText(
+      `YOU WIN!`,
+      this.canvas.width / 2 - 60,
+      this.canvas.height / 2
+    );
   }
 
-  renderGameLoseScreen(){
+  renderGameLoseScreen() {
     const back = this.sprites.gameOver;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     if (back) {
@@ -92,8 +95,6 @@ export class View {
     this.npcControll.render();
     this.playerOne.render();
     this.timer.render();
-
-
   }
 
   startAnimating(fps: number) {

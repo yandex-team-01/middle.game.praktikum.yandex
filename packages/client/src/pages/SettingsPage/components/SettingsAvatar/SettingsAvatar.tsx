@@ -21,7 +21,9 @@ export const SettingsAvatar = () => {
   const onUploadAvatar = (event: ChangeEvent) => {
     const target = event.target as HTMLInputElement;
     const file: File = (target.files as FileList)[0];
-    dispatch(fetchChangeAvatar(file));
+    if (file.type.indexOf("image") !== -1) {
+      dispatch(fetchChangeAvatar(file));
+    }
   };
 
   return (

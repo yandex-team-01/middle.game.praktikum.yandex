@@ -33,7 +33,7 @@ export abstract class NpcModel {
   firstLegsMovementFrame = 0;
   ctx: CanvasRenderingContext2D;
 
-  constructor(ctx: CanvasRenderingContext2D,options: NpcConstructorOptions) {
+  constructor(ctx: CanvasRenderingContext2D, options: NpcConstructorOptions) {
     this.ctx = ctx;
     this.id = options.id;
     this.type = options.type;
@@ -45,7 +45,6 @@ export abstract class NpcModel {
     this.skinDirectionFrame = 0;
     this.xSpeed = 6;
     this.ySpeed = 6;
-
   }
 
   setSprite(sprite: Sprite) {
@@ -65,7 +64,7 @@ export abstract class NpcModel {
     };
   }
 
-  render(canvasHeight:number,canvasWidth:number)   {
+  render(canvasHeight: number, canvasWidth: number) {
     if (!this.sprite) {
       return;
     }
@@ -96,7 +95,7 @@ export abstract class NpcModel {
     if (this.type === 'friend') {
       this.x -= this.xSpeed;
       this.y -= this.ySpeed;
-    }else{
+    } else {
       this.x += this.xSpeed;
       this.y += this.ySpeed;
     }
@@ -124,16 +123,19 @@ export abstract class NpcModel {
       }
     }
   }
-  
+
   checkForCollisionsWithCanvasBorders() {
-    if ( this.x + this.width > this.canvasWidth || this.x - this.width / 2  < 0 ) {
-        this.xSpeed = -this.xSpeed;
-        this.toggleNpcDirection(Direction.Horizontal);
+    if (this.x + this.width > this.canvasWidth || this.x - this.width / 2 < 0) {
+      this.xSpeed = -this.xSpeed;
+      this.toggleNpcDirection(Direction.Horizontal);
     }
-    if ( this.y + this.height > this.canvasHeight || this.y - this.height / 2 < 70 ) {
-        this.ySpeed = -this.ySpeed;
-        this.toggleNpcDirection(Direction.Vertical);
-    }   
+    if (
+      this.y + this.height > this.canvasHeight ||
+      this.y - this.height / 2 < 70
+    ) {
+      this.ySpeed = -this.ySpeed;
+      this.toggleNpcDirection(Direction.Vertical);
+    }
   }
 
   handleNpcLegsFrame() {
@@ -173,7 +175,7 @@ export class NpcEnemy extends NpcModel {
     this.startMoving();
   }
 
-  startMoving(){
+  startMoving() {
     //начинаем движение вправо-вниз
     this.npcCurrentDirections[DirectionNpc.Right] = true;
     this.npcCurrentDirections[DirectionNpc.Down] = true;
@@ -197,7 +199,7 @@ export class NpcFriend extends NpcModel {
   collisionHandling(player: PlayerOne) {
     player.addScore(this.defineBonus);
   }
-  startMoving(){
+  startMoving() {
     //начинаем движение вправо-вниз
     this.npcCurrentDirections[DirectionNpc.Left] = true;
     this.npcCurrentDirections[DirectionNpc.Up] = true;

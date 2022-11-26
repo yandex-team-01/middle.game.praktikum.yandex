@@ -1,9 +1,8 @@
-
 import { ErrorsNotification } from './components/ErrorsNotification';
 import { Routing } from './components/Routing';
-import { withAuth } from './hocs/withAuth'; 
+import { withAuth } from './hocs/withAuth';
 
- const AppComponent = () => {
+const AppComponent = () => {
   return (
     <>
       <ErrorsNotification />
@@ -11,6 +10,5 @@ import { withAuth } from './hocs/withAuth';
     </>
   );
 };
-
 
 export const App = withAuth(AppComponent);

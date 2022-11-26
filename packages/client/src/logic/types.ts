@@ -27,7 +27,7 @@ export type GameEntities = {
   view: View;
   sprites: Record<number | string, Sprite>;
   game: Game;
-  timer: Timer
+  timer: Timer;
 };
 
 export type Position = {
