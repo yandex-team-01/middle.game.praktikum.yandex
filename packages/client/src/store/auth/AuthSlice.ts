@@ -19,7 +19,11 @@ const initialState: AuthState = {
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    updateUser(state, action: PayloadAction<IUser>) {
+      state.user = action.payload;
+    },
+  },
   extraReducers: buider => {
     //fetchAuth
     buider.addCase(fetchAuth.pending, state => {
@@ -75,6 +79,7 @@ export const authSlice = createSlice({
       state.loading = false;
       state.checkAuth = true;
       state.auth = false;
+      state.user = null;
     });
     buider.addCase(fetchLogout.rejected, state => {
       state.loading = false;
@@ -82,5 +87,7 @@ export const authSlice = createSlice({
     });
   },
 });
+
+export const { updateUser } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

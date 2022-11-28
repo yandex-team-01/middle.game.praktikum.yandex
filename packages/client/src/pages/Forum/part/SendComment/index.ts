@@ -1,1 +1,0 @@
-export { SendComment } from './SendComment';

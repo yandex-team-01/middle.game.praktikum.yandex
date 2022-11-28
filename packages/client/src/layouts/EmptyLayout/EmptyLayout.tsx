@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { BlankWindow } from 'src/components/BlankWindow';
@@ -8,12 +9,14 @@ type Props = {
 };
 
 export const EmptyLayout = ({ children }: Props) => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.wrapped}>
       <BlankWindow>
         <div className={styles.inner}>
           {children}
-          <Link to="/">перейти на главную</Link>
+          <Link to="/">{t('goHome')}</Link>
         </div>
       </BlankWindow>
     </div>

@@ -1,21 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
+
 import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
 import { Form } from 'src/components/Form';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { Nav } from 'src/components/Nav';
 
 import stylesForm from 'src/components/Form/Form.module.scss';
 
-import { regSchema } from 'src/constants/Schemas';
+import { regSchema, initialRegValuesSchema } from './RegistrationSchema';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { SignupData } from 'src/modules/IAuth';
 import { fetchSignup } from 'src/store/auth/AuthActions';
-import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { selectLoading } from 'src/store/auth/AuthSelectors';
 
-export const RegistrationForm: React.FC = () => {
+export const RegistrationForm = () => {
+  const { t } = useTranslation();
   const dispath = useAppDispatch();
-  const loading = useAppSelector(state => state.auth.loading);
+  const loading = useAppSelector(selectLoading);
 
   const signupHandler = (values: SignupData) => {
     dispath(fetchSignup(values));
@@ -23,15 +26,7 @@ export const RegistrationForm: React.FC = () => {
 
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
-      initialValues: {
-        first_name: '',
-        second_name: '',
-        phone: '',
-        email: '',
-        login: '',
-        password: '',
-        repeatPassword: '',
-      },
+      initialValues: initialRegValuesSchema,
       validationSchema: regSchema,
       onSubmit: values => {
         const data: SignupData = {
@@ -50,21 +45,16 @@ export const RegistrationForm: React.FC = () => {
     <ErrorBoundary>
       <Form
         onSubmit={handleSubmit}
-        buttons={
-          <div key={0}>
-            <div className={stylesForm.form_button_box}>
-              <Button regular type="submit" disabled={loading}>
-                Sign Up
-              </Button>
-            </div>
-
-            <Link to="/login" className={stylesForm.form_sign_in_link}>
-              Sign In
-            </Link>
+        buttonsBlock={
+          <div className={stylesForm.form_button_box}>
+            <Button regular type="submit" disabled={loading}>
+              {t('signUp')}
+            </Button>
+            <Nav to="/login">{t('signIn')}</Nav>
           </div>
         }>
         <Input
-          label="First Name"
+          label={t('firstName')}
           name="first_name"
           value={values.first_name}
           onChange={handleChange}
@@ -74,7 +64,7 @@ export const RegistrationForm: React.FC = () => {
           error={errors.first_name}
         />
         <Input
-          label="Second Name"
+          label={t('secondName')}
           name="second_name"
           value={values.second_name}
           onChange={handleChange}
@@ -86,7 +76,7 @@ export const RegistrationForm: React.FC = () => {
           error={errors.second_name}
         />
         <Input
-          label="Phone"
+          label={t('phone')}
           name="phone"
           value={values.phone}
           onChange={handleChange}
@@ -106,7 +96,7 @@ export const RegistrationForm: React.FC = () => {
           error={errors.email}
         />
         <Input
-          label="Login"
+          label={t('login')}
           name="login"
           value={values.login}
           onChange={handleChange}
@@ -116,7 +106,7 @@ export const RegistrationForm: React.FC = () => {
           error={errors.login}
         />
         <Input
-          label="Password"
+          label={t('password')}
           name="password"
           type="password"
           value={values.password}
@@ -127,7 +117,7 @@ export const RegistrationForm: React.FC = () => {
           error={errors.password}
         />
         <Input
-          label="Repeat Password"
+          label={t('passwordAgain')}
           name="repeatPassword"
           type="password"
           value={values.repeatPassword}

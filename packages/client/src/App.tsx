@@ -1,27 +1,8 @@
-import { BackgroundLayout } from './layouts/BackgroundLayout';
-import { useAppDispatch, useAppSelector } from './hooks/redux';
-import { fetchAuth } from './store/auth/AuthActions';
-import { Preloader } from './components/Preloader';
 import { ErrorsNotification } from './components/ErrorsNotification';
 import { Routing } from './components/Routing';
-import { useMountEffect } from './hooks/useMountEffect';
+import { withAuth } from './hocs/withAuth';
 
-export const App = () => {
-  const dispath = useAppDispatch();
-  const checkAuth = useAppSelector(state => state.auth.checkAuth);
-
-  useMountEffect(() => {
-    dispath(fetchAuth());
-  });
-
-  if (!checkAuth) {
-    return (
-      <BackgroundLayout>
-        <Preloader />
-      </BackgroundLayout>
-    );
-  }
-
+const AppComponent = () => {
   return (
     <>
       <ErrorsNotification />
@@ -29,3 +10,5 @@ export const App = () => {
     </>
   );
 };
+
+export const App = withAuth(AppComponent);

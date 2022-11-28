@@ -1,0 +1,12 @@
+@import 'src/index.module.scss';
+
+.error {
+  @include fontTitle(normal, 400, 16px, 16px);
+  color: $boundary_error;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}

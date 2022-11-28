@@ -1,31 +1,24 @@
-import React, { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from 'src/components/Button';
+import React, { memo } from 'react';
+import styles from './topics.module.scss';
+import { Topic } from 'src/pages/Forum/part/Topic';
+import { selectListTopics } from 'src/store/forum/ForumSelectors';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { useAppSelector } from 'src/hooks/redux';
-import { Topic } from '../../part/Topic';
-import { ITopic } from '../../part/Topic/types';
-import styles from './Topics.module.scss';
+import { ButtonCreateTopic } from 'src/pages/Forum/part/ButtonCreateTopic';
 
-export const TopicList = () => {
-  const navigate = useNavigate();
-  const topics = useAppSelector(state => state.forum.listTopics);
-
-  const handlerCreateTopic = useCallback(() => {
-    navigate('/forum/createtopic');
-  }, [navigate]);
-
+export const TopicList = memo(() => {
+  const topics = useAppSelector(selectListTopics);
 
   return (
     <ErrorBoundary>
       <div className={styles.block_topics}>
-        <Button regular className={styles.button_create_topic} onClick={handlerCreateTopic}>POST NEW TOPIC</Button>
+        <ButtonCreateTopic />
         <div className={styles.list}>
-          {topics.map((topic: ITopic, index: number) => {
-            return <Topic key={index} {...topic} />;
+          {Object.keys(topics).map((topicId: string, index: number) => {
+            return <Topic key={index} {...topics[topicId]} />;
           })}
         </div>
       </div>
     </ErrorBoundary>
   );
-};
+});

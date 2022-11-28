@@ -1,0 +1,83 @@
+@import 'src/index.module.scss';
+
+.page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.block {
+  display: flex;
+  width: 100%;
+  max-width: 956px;
+  margin-bottom: 85px;
+
+  @media screen and (max-height: 800px) {
+    margin-bottom: 20px;
+  }
+}
+
+.block_buttons {
+  width: 100%;
+  display: grid;
+  gap: 20px;
+  max-width: 800px;
+  margin-bottom: 40px;
+
+  @media screen and (max-height: 800px) {
+    margin-bottom: 0;
+  }
+}
+
+.title {
+  @include h-center-content;
+  @include fontTitle(normal, 400, 100px, 100%);
+  color: $main_logo_text_color;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 40px;
+
+  @include lg {
+    font-size: 80px;
+    margin-bottom: 20px;
+  }
+  @include md {
+    font-size: 60px;
+  }
+}
+
+.subtitle {
+  @include fontText(normal, 400, 36px, 120%);
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ede5ce;
+  margin-bottom: 20px;
+}
+
+.text {
+  @include fontSecondaryText(normal, 400, 17px, 150%);
+  color: #b3b3b3;
+}
+
+.img {
+  width: 50%;
+  margin-left: 46px;
+  object-fit: cover;
+  @include lg {
+    margin-left: 20px;
+  }
+}
+
+.buttons {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: stretch;
+  width: 100%;
+  max-width: 800px;
+  gap: 15px;
+}

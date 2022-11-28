@@ -1,7 +1,8 @@
-import React, { ErrorInfo } from 'react';
+import React, { ErrorInfo, Component } from 'react';
 import { Props, State } from './types';
+import styles from './ErrorBoundary.module.scss';
 
-export class ErrorBoundary extends React.Component<Props, State> {
+export class ErrorBoundary extends Component<Props, State> {
   message = 'Sorry, there was an error';
 
   constructor(props: Props) {
@@ -19,7 +20,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
   render() {
     if (this.state.hasError) {
-      return <div>{this.message}</div>;
+      return <div className={styles.error}>{this.message}</div>;
     }
 
     return this.props.children;

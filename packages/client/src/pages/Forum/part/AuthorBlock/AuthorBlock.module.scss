@@ -1,0 +1,11 @@
+@import 'src/index.module.scss';
+
+.block_author {
+  @include fontSecondaryText(normal, 400, 12px, 16px);
+  color: $text-primary;
+}
+
+.avatar {
+  height: 45px;
+  width: 50px;
+}

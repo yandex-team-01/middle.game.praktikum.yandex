@@ -1,0 +1,18 @@
+@import 'src/index.module.scss';
+
+.title {
+  @include fontTitle(normal, 400, 20px, 16px);
+  color: white;
+  margin: 20px 0px;
+  width: 100%;
+  text-align: center;
+}
+
+.list {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  overflow: auto;
+  height: 250px;
+  @include scroll($bg-color-main, $main_block_bg_color, $bg-color-secondary);
+}
