@@ -6,6 +6,11 @@ on:
     branches:
       - main
       - dev
+      - sprint_5
+      - sprint_6
+      - sprint_7
+      - sprint_8
+      - sprint_9
 
 jobs:
   eslint:
