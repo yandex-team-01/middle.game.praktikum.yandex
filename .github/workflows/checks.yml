@@ -2,17 +2,16 @@ name: Lint
 
 on:
   pull_request:
-  push:
     branches:
-      - main
-      - dev
-      - deploy
-      - sprint_5
-      - sprint_6
-      - sprint_7
-      - sprint_8
-      - sprint_9
-      - pra-*
+      - "main"
+      - "dev"
+      - "deploy"
+      - "sprint_5"
+      - "sprint_6"
+      - "sprint_7"
+      - "sprint_8"
+      - "sprint_9"
+      - "pra-*"
 
 jobs:
   eslint:
