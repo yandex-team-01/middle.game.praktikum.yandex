@@ -1,11 +1,17 @@
 name: Lint
 
 on:
-  pull_request:
   push:
     branches:
       - main
       - dev
+      - deploy
+      - sprint_5
+      - sprint_6
+      - sprint_7
+      - sprint_8
+      - sprint_9
+      - pra-*
 
 jobs:
   eslint:
@@ -23,3 +29,5 @@ jobs:
         run: yarn lint
       - name: Test
         run: yarn test
+      - name: Format
+        run: yarn format
