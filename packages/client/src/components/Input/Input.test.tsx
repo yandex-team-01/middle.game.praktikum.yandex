@@ -13,23 +13,4 @@ describe('Input', () => {
 
         expect(screen.getByText("new_input")).toBeDefined();
     })
-
-    // оставлю это здесь для примера тестов, которые не работают.
-    // Но, как мы обсудили, они не имеют особого смысла. 
-    // Вариант с асинхронностью тоже не прошел
-    // it('checking value Input with fireEvent', async () => {
-    //     const { container } = render(<Input />);
-    //     const input = container.firstChild as HTMLInputElement;
-
-    //     await fireEvent.change(input, { target: { value: "23" } });
-    //     expect(input.value).toBe("23");
-    // })
-
-    // it('checking value Input with UserEvent', async () => {
-    //     const { container } = render(<Input />);
-    //     const input = container.firstChild as HTMLInputElement;
-
-    //     await UserEvent.type(input, 'test input');
-    //     expect(input.value).toMatch("test input");
-    // })
 });
