@@ -33,7 +33,7 @@ import { BackgroundLayout } from 'src/layouts/BackgroundLayout';
 
 export const Routing = () => {
   const { t } = useTranslation();
-const auth = useAppSelector(selectAuth);
+  const auth = useAppSelector(selectAuth);
 
   return (
     <ErrorBoundary>
