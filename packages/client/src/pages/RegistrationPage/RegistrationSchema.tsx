@@ -1,6 +1,7 @@
 import {
   firstNameRules,
   loginRules,
+  emailRules,
   passwordRules,
   phoneRules,
   secondNameRules,
@@ -30,7 +31,9 @@ export const regSchema = object().shape({
     message:
       'From 10 to 15 characters, consists of numbers, can start with a plus',
   }),
-  email: string().email('Please enter a valid email').required('Required'),
+  email: string().required('Required').matches(emailRules, {
+    message: 'Please enter a valid email',
+  }),
   login: string().required('Required').matches(loginRules, {
     message:
       'Must be from 3 to 20 characters. Latin letters, digits (but not consisting of digits), hyphens and underscores are allowed',
