@@ -1,9 +1,14 @@
+import { TFunction } from 'i18next';
 import { object, string } from 'yup';
 
-export const initialRegValuesSchema = {
+export const initialCommentValuesSchema = {
   comment: '',
 };
 
-export const regSchema = object().shape({
-  comment: string().required('Required'),
-});
+export const commentSchema = (translation: TFunction) => {
+  const requiredMessage = String(translation('required'));
+
+  return object().shape({
+    comment: string().required(requiredMessage),
+  });
+};
