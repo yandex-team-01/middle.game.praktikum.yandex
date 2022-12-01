@@ -6,7 +6,7 @@ import { Game } from './Game';
 import { Timer } from './Timer';
 
 export type SpriteOptions = {
-  id: number | string;
+  id: string;
   src: string;
   width: number;
   height: number;

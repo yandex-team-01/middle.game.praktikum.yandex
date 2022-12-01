@@ -172,6 +172,8 @@ export class NpcEnemy extends NpcModel {
   constructor(ctx: CanvasRenderingContext2D, options: NpcConstructorOptions) {
     super(ctx, options);
     this.ctx = ctx;
+    this.xSpeed = 8;
+    this.ySpeed = 8;
     this.startMoving();
   }
 

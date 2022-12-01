@@ -8,16 +8,16 @@ import money from '/src/assets/images/money.png';
 import npcEnemyHuggy from '/src/assets/images/game-npc-huggy.png';
 import npcEnemyKissy from '/src/assets/images/game-npc-kissy.png';
 
-export const SPRITE_ID = {
-  MAIN_BACK: 'back',
-  GAME_OVER_BACK: 'gameOver',
-  PLAYER: 'player',
-  NPC_FRIEND: 'npc_friend',
-  NPC_ENEMY_HUGGY: 'npc_enemy_huggy',
-  NPC_ENEMY_KISSY: 'npc_enemy_kissy',
-  HEART: 'heart',
-  MONEY: 'money',
-} as const;
+export enum SPRITE_ID {
+  MAIN_BACK = 'back',
+  GAME_OVER_BACK = 'gameOver',
+  PLAYER = 'player',
+  NPC_FRIEND = 'npc_friend',
+  NPC_ENEMY_HUGGY = 'npc_enemy_huggy',
+  NPC_ENEMY_KISSY = 'npc_enemy_kissy',
+  HEART = 'heart',
+  MONEY = 'money',
+}
 
 export const spritesOptions: SpriteOptions[] = [
   { id: SPRITE_ID.MAIN_BACK, src: back, width: 100, height: 100 },

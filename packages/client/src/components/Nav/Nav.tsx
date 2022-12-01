@@ -9,19 +9,12 @@ interface Props {
   children: ReactI18NextChild;
   to: string;
 }
+const getPath = (to: string) => (to.indexOf('/') > -1 ? langPath(to) : to);
 
 export const Nav = ({ to, children }: Props) => {
-  let path;
-  if (to.indexOf('/') > -1) {
-    path = langPath(to);
-  } else {
-    path = to;
-  }
   return (
-    <>
-      <Link to={path} className={styles.regular}>
-        {children}
-      </Link>
-    </>
+    <Link to={getPath(to)} className={styles.regular}>
+      {children}
+    </Link>
   );
 };
