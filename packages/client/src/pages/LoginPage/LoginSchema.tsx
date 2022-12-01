@@ -1,13 +1,16 @@
+import { TFunction } from 'i18next';
 import { loginRules, passwordRules } from 'src/constants/ValidationRules';
 import { object, string } from 'yup';
 
-export const loginSchema = object().shape({
-  login: string().required('Required').matches(loginRules, {
-    message:
-      'Must be from 3 to 20 characters. Latin letters, digits (but not consisting of digits), hyphens and underscores are allowed',
-  }),
-  password: string().required('Required').matches(passwordRules, {
-    message:
-      'Must be from 8 to 40 characters. At least one capital letter and a number are required.',
-  }),
-});
+export const loginSchema = (translation: TFunction) => {
+  const requiredMessage = String(translation('required'));
+
+  return object().shape({
+    login: string().required(requiredMessage).matches(loginRules, {
+      message: translation('messageValidationLogin'),
+    }),
+    password: string().required(requiredMessage).matches(passwordRules, {
+      message: translation('messageValidationPassword'),
+    }),
+  });
+};

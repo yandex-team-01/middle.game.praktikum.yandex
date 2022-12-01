@@ -1,14 +1,11 @@
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-
 import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
 import { Form } from 'src/components/Form';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { Nav } from 'src/components/Nav';
-
 import stylesForm from 'src/components/Form/Form.module.scss';
-
 import { regSchema, initialRegValuesSchema } from './RegistrationSchema';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { SignupData } from 'src/modules/IAuth';
@@ -27,7 +24,7 @@ export const RegistrationForm = () => {
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: initialRegValuesSchema,
-      validationSchema: regSchema,
+      validationSchema: regSchema(t),
       onSubmit: values => {
         const data: SignupData = {
           first_name: values.first_name,

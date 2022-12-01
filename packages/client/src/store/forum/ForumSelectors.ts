@@ -3,7 +3,7 @@ import { RootState } from '../store';
 
 export const selectActiveTopic = createSelector(
   (state: RootState) => state.forum,
-  forum => [forum.activeTopic]
+  forum => forum.activeTopic
 );
 
 export const selectListTopics = createSelector(

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import stylesForm from 'src/components/Form/Form.module.scss';
@@ -28,24 +28,26 @@ export const LoginForm: React.FC = () => {
         login: '',
         password: '',
       },
-      validationSchema: loginSchema,
+      validationSchema: loginSchema(t),
       onSubmit: values => {
         signinHandler(values as SigninData);
       },
     });
 
+  const buttonsBlock = useMemo(() => (
+    <div className={stylesForm.form_button_box}>
+      <Button regular type="submit" disabled={loading}>
+        {t('signIn')}
+      </Button>
+      <Nav to="/reg">{t('signUp')}</Nav>
+    </div>
+  ), [loading, t]);
+
   return (
     <ErrorBoundary>
       <Form
         onSubmit={handleSubmit}
-        buttonsBlock={
-          <div className={stylesForm.form_button_box}>
-            <Button regular type="submit" disabled={loading}>
-              {t('signIn')}
-            </Button>
-            <Nav to="/reg">{t('signUp')}</Nav>
-          </div>
-        }>
+        buttonsBlock={buttonsBlock}>
         <Input
           label={t('login')}
           name="login"

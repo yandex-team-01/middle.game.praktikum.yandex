@@ -5,6 +5,7 @@ import { useAppSelector } from 'src/hooks/redux';
 import { RegistrationForm } from './RegistrationForm';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { selectAuth } from 'src/store/auth/AuthSelectors';
+import { TitleGame } from 'src/components/TitleGame';
 
 export const RegistrationPage = () => {
   const auth = useAppSelector(selectAuth);
@@ -17,10 +18,7 @@ export const RegistrationPage = () => {
     <ErrorBoundary>
       <BlankWindow>
         <div className={stylesForm.form_block_title}>
-          <h1 className={stylesForm.form_logo_title}>
-            Huggy Wuggy
-            <br />& Kissy Missy
-          </h1>
+          <TitleGame className={stylesForm.form_logo_title} />
         </div>
         <RegistrationForm />
       </BlankWindow>

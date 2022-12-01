@@ -1,33 +1,27 @@
-import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import styles from './MainMenu.module.scss';
-
 import { Button } from 'src/components/Button';
-
-import { useAppDispatch } from 'src/hooks/redux';
 import { fetchLogout } from 'src/store/auth/AuthActions';
 import { useNavigator } from 'src/hooks/useNavigator';
+import { useBoundAction } from '../Forum/part/Topic/helper';
+import { TitleGame } from 'src/components/TitleGame';
 
 export const MainMenu = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
-  const dispath = useAppDispatch();
 
   const leadersHandle = () => navigator('/leaders');
   const forumHandle = () => navigator('/forum');
   const settingsHandle = () => navigator('/settings');
   const gameLoading = () => navigator('/loadinggame');
 
-  const logoutHandle = useCallback(() => {
-    dispath(fetchLogout());
-  }, [dispath]);
+  const logoutHandle = useBoundAction(() => {
+    return fetchLogout();
+  });
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>
-        Huggy Wuggy <br /> & Kissy Missy
-      </h1>
+      <TitleGame className={styles.title} />
       <div className={styles.block_buttons}>
         <Button regular className={styles.button} onClick={gameLoading}>
           {t('play')}
