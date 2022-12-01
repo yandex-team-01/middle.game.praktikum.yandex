@@ -1,6 +1,5 @@
 import { expect, it, describe } from '@jest/globals';
 import { render, screen, fireEvent } from '@testing-library/react';
-import UserEvent from '@testing-library/user-event';
 import { Input } from './Input';
 
 describe('Input', () => {

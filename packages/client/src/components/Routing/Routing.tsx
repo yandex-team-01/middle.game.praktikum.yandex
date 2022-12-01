@@ -4,13 +4,12 @@ import { useTranslation } from 'react-i18next';
 import {
   Forum,
   ErrorPage,
-  LoginPage,
-  RegistrationPage,
   Leaderboard,
   SettingsPage,
   GameLoadingPage,
   MainMenu,
   Landing,
+  AuthPage,
 } from 'src/pages';
 import {
   SettingsChangePassword,
@@ -31,6 +30,9 @@ import { selectAuth } from 'src/store/auth/AuthSelectors';
 import { CommentsPage } from 'src/pages/Forum/components/CommentsPage';
 import { BackgroundLayout } from 'src/layouts/BackgroundLayout';
 
+import { LoginForm } from 'src/pages/AuthPage/components/LoginForm';
+import { RegistrationForm } from 'src/pages/AuthPage/components/RegistrationForm';
+
 export const Routing = () => {
   const { t } = useTranslation();
   const auth = useAppSelector(selectAuth);
@@ -38,6 +40,21 @@ export const Routing = () => {
   return (
     <ErrorBoundary>
       <Routes>
+        <Route
+          path={langPath('/auth')}
+          element={
+            <BackgroundLayout>
+              <AuthPage />
+            </BackgroundLayout>
+          }>
+          <Route index element={<LoginForm />} />
+          <Route path="reg" element={<RegistrationForm />} />
+        </Route>
+        <Route
+          path="/auth"
+          element={<Navigate to={langPath('/auth')} replace />}
+        />
+
         <Route
           path={langPath('/')}
           element={
@@ -50,7 +67,7 @@ export const Routing = () => {
         <Route
           path={langPath('/forum')}
           element={
-            <ProtectedRoute flag={auth} redirect={langPath('/login')}>
+            <ProtectedRoute flag={auth} redirect={langPath('/auth')}>
               <BackgroundLayout>
                 <Forum />
               </BackgroundLayout>
@@ -67,7 +84,7 @@ export const Routing = () => {
         <Route
           path={langPath('/leaders')}
           element={
-            <ProtectedRoute flag={auth} redirect={langPath('/login')}>
+            <ProtectedRoute flag={auth} redirect={langPath('/auth')}>
               <BackgroundLayout>
                 <Leaderboard />
               </BackgroundLayout>
@@ -77,34 +94,6 @@ export const Routing = () => {
         <Route
           path="/leaders"
           element={<Navigate to={langPath('/leaders')} replace />}
-        />
-        <Route
-          path={langPath('/login')}
-          element={
-            auth ? (
-              <Navigate to={langPath('/')} replace />
-            ) : (
-              <BackgroundLayout>
-                <LoginPage />
-              </BackgroundLayout>
-            )
-          }
-        />
-        <Route
-          path="/login"
-          element={<Navigate to={langPath('/login')} replace />}
-        />
-        <Route
-          path={langPath('/reg')}
-          element={
-            <BackgroundLayout>
-              <RegistrationPage />
-            </BackgroundLayout>
-          }
-        />
-        <Route
-          path="/reg"
-          element={<Navigate to={langPath('/reg')} replace />}
         />
         <Route path={langPath('/loadinggame')} element={<GameLoadingPage />} />
         <Route
@@ -131,7 +120,7 @@ export const Routing = () => {
         <Route
           path={langPath('/settings')}
           element={
-            <ProtectedRoute flag={auth} redirect={langPath('/login')}>
+            <ProtectedRoute flag={auth} redirect={langPath('/auth')}>
               <BackgroundLayout>
                 <SettingsPage />
               </BackgroundLayout>
