@@ -52,6 +52,7 @@ export abstract class NpcModel {
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
     this.isMoving = true;
+    this.startMoving();
   }
 
   getRandomPosition(a: number, b: number, isY = false) {
@@ -212,6 +213,16 @@ export abstract class NpcModel {
       this.x += this.speed;
     }
   }
+  startMoving() {
+    const horizontalDirection = [DirectionNpc.Left, DirectionNpc.Right][
+      Math.round(Math.random())
+    ];
+    const verticalDirection = [DirectionNpc.Up, DirectionNpc.Down][
+      Math.round(Math.random())
+    ];
+    this.npcCurrentDirections[horizontalDirection] = true;
+    this.npcCurrentDirections[verticalDirection] = true;
+  }
 }
 
 export class NpcEnemy extends NpcModel {
@@ -224,13 +235,6 @@ export class NpcEnemy extends NpcModel {
     super(ctx, options, canvasHeight, canvasWidth);
     this.ctx = ctx;
     this.speed = 8;
-    this.startMoving();
-  }
-
-  startMoving() {
-    //начинаем движение вправо-вниз
-    this.npcCurrentDirections[DirectionNpc.Right] = true;
-    this.npcCurrentDirections[DirectionNpc.Down] = true;
   }
 
   collisionHandling(player: PlayerOne) {
@@ -250,16 +254,9 @@ export class NpcFriend extends NpcModel {
     super(ctx, options, canvasHeight, canvasWidth);
     this.ctx = ctx;
     this.defineBonus = 1;
-    this.startMoving();
   }
 
   collisionHandling(player: PlayerOne) {
     player.addScore(this.defineBonus);
-  }
-  startMoving() {
-    //начинаем движение вправо-вниз
-    this.npcCurrentDirections[DirectionNpc.Left] = true;
-    this.npcCurrentDirections[DirectionNpc.Up] = true;
-    this.isMoving = true;
   }
 }
