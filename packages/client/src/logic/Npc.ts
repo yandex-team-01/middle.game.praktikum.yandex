@@ -2,14 +2,14 @@ import { Sprite } from './Sprite';
 import { NpcConstructorOptions, Position } from './types';
 import { PlayerOne } from './Player';
 
-enum DirectionNpc {
+export enum DirectionNpc {
   Down = 0,
   Left,
   Right,
   Up,
 }
 
-enum Direction {
+export enum Direction {
   Horizontal = 0,
   Vertical,
 }
@@ -24,33 +24,64 @@ export abstract class NpcModel {
   height: number;
   skinLegsFrame: number;
   skinDirectionFrame: number;
-  xSpeed: number;
-  ySpeed: number;
-  canvasHeight = 0;
-  canvasWidth = 0;
+  speed: number;
+  isMoving: boolean;
+  isHorizontalCollisions = true;
+  canvasHeight: number;
+  canvasWidth: number;
   npcCurrentDirections: boolean[] = [];
   totalNumberOfLegsMovementFrames = 3;
   firstLegsMovementFrame = 0;
   ctx: CanvasRenderingContext2D;
 
-  constructor(ctx: CanvasRenderingContext2D, options: NpcConstructorOptions) {
+  constructor(
+    ctx: CanvasRenderingContext2D,
+    options: NpcConstructorOptions,
+    canvasHeight: number,
+    canvasWidth: number
+  ) {
     this.ctx = ctx;
     this.id = options.id;
     this.type = options.type;
-    this.x = options.defaultX;
-    this.y = options.defaultY;
+    this.x = 0;
+    this.y = 0;
     this.width = 0;
     this.height = 0;
     this.skinLegsFrame = 0;
     this.skinDirectionFrame = 0;
-    this.xSpeed = 6;
-    this.ySpeed = 6;
+    this.speed = 6;
+    this.canvasHeight = canvasHeight;
+    this.canvasWidth = canvasWidth;
+    this.isMoving = true;
+  }
+
+  getRandomPosition(a: number, b: number, isY = false) {
+    let position = Math.min(a, Math.random() * b);
+    if (isY) {
+      while (position < 210) {
+        position = Math.min(a, Math.random() * b);
+      }
+    }
+    return position;
   }
 
   setSprite(sprite: Sprite) {
+    const randomX = this.getRandomPosition(
+      this.canvasWidth - sprite.width,
+      this.canvasWidth
+    );
+    const randomY = this.getRandomPosition(
+      this.canvasHeight - sprite.height,
+      this.canvasHeight,
+      true
+    );
+
     this.sprite = sprite;
     this.width = sprite.width;
     this.height = sprite.height;
+
+    this.x = randomX;
+    this.y = randomY;
     this.skinLegsFrame = 0;
     this.skinDirectionFrame = 0;
   }
@@ -64,12 +95,11 @@ export abstract class NpcModel {
     };
   }
 
-  render(canvasHeight: number, canvasWidth: number) {
+  render() {
     if (!this.sprite) {
       return;
     }
-    this.canvasHeight = canvasHeight;
-    this.canvasWidth = canvasWidth;
+
     this.ctx.drawImage(
       this.sprite.image,
       this.width * this.skinLegsFrame,
@@ -81,23 +111,30 @@ export abstract class NpcModel {
       this.width,
       this.height
     );
-    this.ctx.strokeRect(this.x, this.y, this.width, this.height);
     this.animate();
   }
 
   animate() {
-    this.updateNpcCoordinates();
+    this.checkForCollisionsBetweenNpc();
     this.checkForCollisionsWithCanvasBorders();
     this.moveNpc();
     this.handleNpcLegsFrame();
   }
-  updateNpcCoordinates() {
-    if (this.type === 'friend') {
-      this.x -= this.xSpeed;
-      this.y -= this.ySpeed;
-    } else {
-      this.x += this.xSpeed;
-      this.y += this.ySpeed;
+
+  getRandomArbitrary(min: number, max: number) {
+    return Math.random() * (max - min) + min;
+  }
+
+  checkForCollisionsBetweenNpc() {
+    if (!this.isMoving) {
+      if (this.isHorizontalCollisions) {
+        this.toggleNpcDirection(Direction.Horizontal);
+        this.isHorizontalCollisions = false;
+      } else {
+        this.toggleNpcDirection(Direction.Vertical);
+        this.isHorizontalCollisions = true;
+      }
+      this.isMoving = true;
     }
   }
 
@@ -126,20 +163,21 @@ export abstract class NpcModel {
 
   checkForCollisionsWithCanvasBorders() {
     if (this.x + this.width > this.canvasWidth || this.x - this.width / 2 < 0) {
-      this.xSpeed = -this.xSpeed;
       this.toggleNpcDirection(Direction.Horizontal);
     }
     if (
       this.y + this.height > this.canvasHeight ||
       this.y - this.height / 2 < 70
     ) {
-      this.ySpeed = -this.ySpeed;
       this.toggleNpcDirection(Direction.Vertical);
     }
   }
 
   handleNpcLegsFrame() {
-    if (this.skinLegsFrame < this.totalNumberOfLegsMovementFrames) {
+    if (
+      this.skinLegsFrame < this.totalNumberOfLegsMovementFrames &&
+      this.isMoving
+    ) {
       this.skinLegsFrame++;
     } else {
       this.skinLegsFrame = this.firstLegsMovementFrame;
@@ -147,33 +185,51 @@ export abstract class NpcModel {
   }
 
   moveNpc() {
-    if (this.npcCurrentDirections[DirectionNpc.Up] && this.y > 100) {
+    if (
+      this.npcCurrentDirections[DirectionNpc.Up] &&
+      this.y > 100 &&
+      this.isMoving
+    ) {
       this.skinDirectionFrame = DirectionNpc.Up;
+      this.y -= this.speed;
     }
-    if (this.npcCurrentDirections[DirectionNpc.Left] && this.x > 0) {
+    if (
+      this.npcCurrentDirections[DirectionNpc.Left] &&
+      this.x > 0 &&
+      this.isMoving
+    ) {
       this.skinDirectionFrame = DirectionNpc.Left;
+      this.x -= this.speed;
     }
     if (
       this.npcCurrentDirections[DirectionNpc.Down] &&
-      this.y < this.canvasHeight - this.height
+      this.y < this.canvasHeight - this.height &&
+      this.isMoving
     ) {
+      this.y += this.speed;
       this.skinDirectionFrame = DirectionNpc.Down;
     }
     if (
       this.npcCurrentDirections[DirectionNpc.Right] &&
-      this.x < this.canvasWidth - this.width
+      this.x < this.canvasWidth - this.width &&
+      this.isMoving
     ) {
       this.skinDirectionFrame = DirectionNpc.Right;
+      this.x += this.speed;
     }
   }
 }
 
 export class NpcEnemy extends NpcModel {
-  constructor(ctx: CanvasRenderingContext2D, options: NpcConstructorOptions) {
-    super(ctx, options);
+  constructor(
+    ctx: CanvasRenderingContext2D,
+    options: NpcConstructorOptions,
+    canvasHeight: number,
+    canvasWidth: number
+  ) {
+    super(ctx, options, canvasHeight, canvasWidth);
     this.ctx = ctx;
-    this.xSpeed = 8;
-    this.ySpeed = 8;
+    this.speed = 8;
     this.startMoving();
   }
 
@@ -191,10 +247,15 @@ export class NpcEnemy extends NpcModel {
 export class NpcFriend extends NpcModel {
   defineBonus: number;
 
-  constructor(ctx: CanvasRenderingContext2D, options: NpcConstructorOptions) {
-    super(ctx, options);
+  constructor(
+    ctx: CanvasRenderingContext2D,
+    options: NpcConstructorOptions,
+    canvasHeight: number,
+    canvasWidth: number
+  ) {
+    super(ctx, options, canvasHeight, canvasWidth);
     this.ctx = ctx;
-    this.defineBonus = 5;
+    this.defineBonus = 1;
     this.startMoving();
   }
 
@@ -205,5 +266,6 @@ export class NpcFriend extends NpcModel {
     //начинаем движение вправо-вниз
     this.npcCurrentDirections[DirectionNpc.Left] = true;
     this.npcCurrentDirections[DirectionNpc.Up] = true;
+    this.isMoving = true;
   }
 }

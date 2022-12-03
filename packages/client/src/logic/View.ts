@@ -27,8 +27,8 @@ export class View {
   ) {
     this.sprites = {};
     this.canvas = canvas;
-    this.canvas.width = 800;
-    this.canvas.height = 500;
+    this.canvas.width = canvas.width;
+    this.canvas.height = canvas.height;
     this.ctx = ctx;
     this.playerOne = player;
     this.timer = timer;

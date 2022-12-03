@@ -21,9 +21,9 @@ export class NpcControll {
     // временно вывожу массив npc
     this.arrNpc = defaultOptionNpc.map(option => {
       if (option.type === 'friend') {
-        return new NpcFriend(ctx, option);
+        return new NpcFriend(ctx, option, canvasHeight, canvasWidth);
       } else {
-        return new NpcEnemy(ctx, option);
+        return new NpcEnemy(ctx, option, canvasHeight, canvasWidth);
       }
     });
 
@@ -49,10 +49,25 @@ export class NpcControll {
   }
 
   render() {
-    this.arrNpc.forEach(npc => npc.render(this.canvasHeight, this.canvasWidth));
+    this.arrNpc.forEach(npc => npc.render());
   }
 
   deleteNpc(npc: NpcType) {
     this.arrNpc = this.arrNpc.filter(item => item.id !== npc.id);
+  }
+
+  restoreNpc(npc: NpcType) {
+    if (!this.sprites) {
+      return;
+    }
+    const newNpcOptions = defaultOptionNpc.filter(item => item.id === npc.id);
+    const newNpc = new NpcFriend(
+      this.ctx,
+      newNpcOptions[0],
+      this.canvasHeight,
+      this.canvasWidth
+    );
+    newNpc.setSprite(this.sprites[SPRITE_ID.NPC_FRIEND]);
+    this.arrNpc.push(newNpc);
   }
 }

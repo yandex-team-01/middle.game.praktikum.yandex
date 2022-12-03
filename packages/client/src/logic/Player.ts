@@ -58,7 +58,7 @@ abstract class Player {
     this.y = 0;
     this.skinLegsFrame = 0;
     this.skinDirectionFrame = 0;
-    this.speed = 5;
+    this.speed = 7;
     this.isMoving = false;
     this.ctx = ctx;
     this.canvasHeight = canvasHeight;
@@ -150,7 +150,6 @@ abstract class Player {
       this.width,
       this.height
     );
-    this.ctx.strokeRect(this.x, this.y, this.width, this.height);
     this.renderHPandScore(this.ctx);
     this.animate();
   }

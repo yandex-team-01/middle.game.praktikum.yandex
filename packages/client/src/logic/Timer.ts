@@ -28,7 +28,7 @@ export class Timer {
   }
 
   initGameTimer() {
-    this.gameRoundDuration = 1 * 60 * 1000;
+    this.gameRoundDuration = 5 * 60 * 1000;
     this.gameStartMoment = new Date();
     this.gameEndMoment = new Date(
       this.gameStartMoment.getTime() + this.gameRoundDuration

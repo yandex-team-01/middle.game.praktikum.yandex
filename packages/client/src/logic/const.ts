@@ -1,5 +1,5 @@
 import { SpriteOptions } from './types';
-import back from '/src/assets/images/game-background.png';
+import background from '/src/assets/images/game-background.png';
 import gameOver from '/src/assets/images/game-over-background.png';
 import player from '/src/assets/images/game-player-1.png';
 import npcFriend from '/src/assets/images/game-npc-friend.png';
@@ -20,64 +20,48 @@ export enum SPRITE_ID {
 }
 
 export const spritesOptions: SpriteOptions[] = [
-  { id: SPRITE_ID.MAIN_BACK, src: back, width: 100, height: 100 },
+  { id: SPRITE_ID.MAIN_BACK, src: background, width: 100, height: 100 },
   { id: SPRITE_ID.GAME_OVER_BACK, src: gameOver, width: 100, height: 100 },
-  { id: SPRITE_ID.NPC_FRIEND, src: npcFriend, width: 40, height: 60 },
-  { id: SPRITE_ID.PLAYER, src: player, width: 38.6, height: 65.75 },
-  { id: SPRITE_ID.NPC_ENEMY_HUGGY, src: npcEnemyHuggy, width: 40, height: 72 },
-  { id: SPRITE_ID.NPC_ENEMY_KISSY, src: npcEnemyKissy, width: 40, height: 72 },
+  { id: SPRITE_ID.NPC_FRIEND, src: npcFriend, width: 45, height: 90 },
+  { id: SPRITE_ID.PLAYER, src: player, width: 54, height: 84 },
+  { id: SPRITE_ID.NPC_ENEMY_HUGGY, src: npcEnemyHuggy, width: 49, height: 101 },
+  { id: SPRITE_ID.NPC_ENEMY_KISSY, src: npcEnemyKissy, width: 49, height: 101 },
   { id: SPRITE_ID.HEART, src: heart, width: 40, height: 40 },
   { id: SPRITE_ID.MONEY, src: money, width: 40, height: 40 },
 ];
 
-// временная константа для вывода 3 npc
+// временная константа для вывода npc
 export const defaultOptionNpc = [
   {
     id: 1,
-    defaultX: 150,
-    defaultY: 150,
     type: 'enemy_kissy',
   },
   {
     id: 2,
-    defaultX: 200,
-    defaultY: 200,
-    type: 'enemy_kissy',
+    type: 'enemy_huggy',
   },
   {
     id: 3,
-    defaultX: 150,
-    defaultY: 200,
     type: 'friend',
   },
   {
     id: 4,
-    defaultX: 200,
-    defaultY: 250,
     type: 'friend',
   },
   {
     id: 5,
-    defaultX: 250,
-    defaultY: 250,
-    type: 'enemy_huggy',
+    type: 'friend',
   },
   {
     id: 6,
-    defaultX: 250,
-    defaultY: 300,
     type: 'friend',
   },
   {
     id: 7,
-    defaultX: 300,
-    defaultY: 350,
     type: 'friend',
   },
   {
     id: 8,
-    defaultX: 300,
-    defaultY: 300,
-    type: 'enemy_huggy',
+    type: 'friend',
   },
 ];
