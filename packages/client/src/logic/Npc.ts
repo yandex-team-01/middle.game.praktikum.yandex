@@ -26,7 +26,6 @@ export abstract class NpcModel {
   skinDirectionFrame: number;
   speed: number;
   isMoving: boolean;
-  isHorizontalCollisions = true;
   canvasHeight: number;
   canvasWidth: number;
   npcCurrentDirections: boolean[] = [];
@@ -127,13 +126,8 @@ export abstract class NpcModel {
 
   checkForCollisionsBetweenNpc() {
     if (!this.isMoving) {
-      if (this.isHorizontalCollisions) {
-        this.toggleNpcDirection(Direction.Horizontal);
-        this.isHorizontalCollisions = false;
-      } else {
-        this.toggleNpcDirection(Direction.Vertical);
-        this.isHorizontalCollisions = true;
-      }
+      this.toggleNpcDirection(Direction.Horizontal);
+      this.toggleNpcDirection(Direction.Vertical);
       this.isMoving = true;
     }
   }

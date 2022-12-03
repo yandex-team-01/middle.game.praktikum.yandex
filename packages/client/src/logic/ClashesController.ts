@@ -45,14 +45,13 @@ export class ClashesController {
         let YColl = false;
         if (posNpc.x2 >= posPrevNpc.x1 && posNpc.x1 <= posPrevNpc.x2)
           XColl = true;
+
         if (posNpc.y2 >= posPrevNpc.y1 && posNpc.y1 <= posPrevNpc.y2)
           YColl = true;
+
         if (XColl && YColl) {
           prevNpc.isMoving = false;
           npc.isMoving = false;
-          if (npc.type === 'friend' && prevNpc.type === 'friend') {
-            prevNpc.x = prevNpc.x - prevNpc.width / 2;
-          }
           if (
             npc.type === 'friend' &&
             ['enemy_huggy', 'enemy_kissy'].includes(prevNpc.type)
