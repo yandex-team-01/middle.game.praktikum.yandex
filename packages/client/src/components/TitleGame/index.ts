@@ -1,0 +1,1 @@
+export { TitleGame } from './TitleGame';

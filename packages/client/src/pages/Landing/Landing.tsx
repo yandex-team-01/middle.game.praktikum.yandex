@@ -6,6 +6,7 @@ import { Button } from 'src/components/Button';
 
 import gameImg from 'src/assets/images/game.png';
 import { useNavigator } from 'src/hooks/useNavigator';
+import { TitleGame } from 'src/components/TitleGame';
 
 export const Landing = () => {
   const { t } = useTranslation();
@@ -16,9 +17,7 @@ export const Landing = () => {
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>
-        Huggy Wuggy <br /> & Kissy Missy
-      </h1>
+      <TitleGame className={styles.title} />
       <div className={styles.block}>
         <div>
           <h2 className={styles.subtitle}>{t('howToPlay')}</h2>
