@@ -168,13 +168,23 @@ export abstract class NpcModel {
 
   checkForCollisionsWithCanvasBorders() {
     if (this.x + this.width > this.canvasWidth || this.x - this.width / 2 < 0) {
-      this.toggleNpcDirection(Direction.Horizontal);
+      if (!this.hasCollision) {
+        this.toggleNpcDirection(Direction.Horizontal);
+        this.hasCollision = true;
+      } else {
+        this.isMoving = false;
+      }
     }
     if (
       this.y + this.height > this.canvasHeight ||
       this.y - this.height / 2 < 70
     ) {
-      this.toggleNpcDirection(Direction.Vertical);
+      if (!this.hasCollision) {
+        this.toggleNpcDirection(Direction.Vertical);
+        this.hasCollision = true;
+      } else {
+        this.isMoving = false;
+      }
     }
   }
 
