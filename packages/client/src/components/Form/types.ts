@@ -8,11 +8,11 @@ export type Props = {
   onSubmit?: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
 };
 
-export type PropsFormikForm = {
+export type PropsGenericForm = {
   children?: ReactNode;
   buttonsBlock: ReactNode;
 
   initialValues: FormikValues;
   validationSchema: AnySchema;
-  submitHandler: (values: FormikValues) => void;
+  onSubmit: (values: FormikValues) => void;
 };

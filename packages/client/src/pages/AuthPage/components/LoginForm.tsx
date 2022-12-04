@@ -3,30 +3,30 @@ import { useTranslation } from 'react-i18next';
 
 import { loginSchema, initialLoginValuesSchema } from './schema';
 import { Button } from 'src/components/Button';
-import { FormikForm } from 'src/components/Form';
+import { GenericForm } from 'src/components/Form';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { Nav } from 'src/components/Nav';
 
-import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
+import { useAppSelector } from 'src/hooks/redux';
 import { fetchSignin } from 'src/store/auth/AuthActions';
 import { SigninData } from 'src/modules/IAuth';
 import { selectLoading } from 'src/store/auth/AuthSelectors';
 import { FormikValues } from 'formik';
+import { useBoundAction } from 'src/hooks/useBoundAction';
 
-export const LoginForm: React.FC = () => {
+export const LoginForm = () => {
   const { t } = useTranslation();
-  const dispath = useAppDispatch();
   const loading = useAppSelector(selectLoading);
-  const signinHandler = (values: FormikValues) => {
-    dispath(fetchSignin(values as SigninData));
-  };
+  const onSubmit = useBoundAction((values: FormikValues) =>
+    fetchSignin(values as SigninData)
+  );
 
   return (
     <ErrorBoundary>
-      <FormikForm
+      <GenericForm
         initialValues={initialLoginValuesSchema}
         validationSchema={loginSchema(t)}
-        submitHandler={signinHandler}
+        onSubmit={onSubmit}
         buttonsBlock={
           <div className={stylesForm.form_button_box}>
             <Button regular type="submit" disabled={loading}>
@@ -38,7 +38,7 @@ export const LoginForm: React.FC = () => {
         <div className={stylesForm.reset_link}>
           <Nav to="/resetpassword">{t('resetPassword')}</Nav>
         </div>
-      </FormikForm>
+      </GenericForm>
     </ErrorBoundary>
   );
 };

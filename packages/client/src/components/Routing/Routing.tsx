@@ -43,9 +43,11 @@ export const Routing = () => {
         <Route
           path={langPath('/auth')}
           element={
-            <BackgroundLayout>
-              <AuthPage />
-            </BackgroundLayout>
+            <ProtectedRoute flag={!auth} redirect={langPath('/')}>
+              <BackgroundLayout>
+                <AuthPage />
+              </BackgroundLayout>
+            </ProtectedRoute>
           }>
           <Route index element={<LoginForm />} />
           <Route path="reg" element={<RegistrationForm />} />

@@ -1,29 +1,27 @@
 import styles from './Form.module.scss';
 
-import { ErrorBoundary } from '../ErrorBoundary';
-import { Input } from '../Input';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { Input } from 'src/components/Input';
 
-import { PropsFormikForm } from './types';
+import { PropsGenericForm } from './types';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 
-export const FormikForm = ({
+export const GenericForm = ({
   children,
   buttonsBlock,
 
   initialValues,
   validationSchema,
-  submitHandler,
-}: PropsFormikForm) => {
+  onSubmit,
+}: PropsGenericForm) => {
   const { t } = useTranslation();
 
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: initialValues,
       validationSchema: validationSchema,
-      onSubmit: values => {
-        submitHandler(values);
-      },
+      onSubmit: onSubmit,
     });
 
   return (
