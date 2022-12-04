@@ -45,6 +45,7 @@ export class ClashesController {
           this.npcControll.restoreNpc(npc);
         } else {
           npc.isMoving = false;
+          npc.hasCollision = true;
           npc.speed = npc.speed + 0.5;
           this.setColisionImgCoordinats(npc);
         }
