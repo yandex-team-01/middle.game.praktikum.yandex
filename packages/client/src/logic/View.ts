@@ -112,7 +112,7 @@ export class View {
         this.then = this.now - (this.elapsed % this.fpsInterval);
 
         this.update();
-        this.clashesController.checkClashes();
+        this.clashesController.checkForCollisionsBetweenUserAndNpc();
       }
     }
   }

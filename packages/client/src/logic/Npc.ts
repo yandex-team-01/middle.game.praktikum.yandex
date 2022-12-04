@@ -32,6 +32,7 @@ export abstract class NpcModel {
   totalNumberOfLegsMovementFrames = 3;
   firstLegsMovementFrame = 0;
   ctx: CanvasRenderingContext2D;
+  hasCollision = false;
 
   constructor(
     ctx: CanvasRenderingContext2D,
@@ -115,7 +116,7 @@ export abstract class NpcModel {
   }
 
   animate() {
-    this.checkForCollisionsBetweenNpc();
+    this.correctCollisionResult();
     this.checkForCollisionsWithCanvasBorders();
     this.moveNpc();
     this.handleNpcLegsFrame();
@@ -125,12 +126,21 @@ export abstract class NpcModel {
     return Math.random() * (max - min) + min;
   }
 
-  checkForCollisionsBetweenNpc() {
+  correctCollisionResult() {
     if (!this.isMoving) {
-      this.toggleNpcDirection(Direction.Horizontal);
-      this.toggleNpcDirection(Direction.Vertical);
-      this.isMoving = true;
+      //после первого столкновения меняем направление движения на противоположное
+      //если это не помогло то устанавливаем рандомное направление движения
+      if (!this.hasCollision) {
+        this.toggleNpcDirection(Direction.Horizontal);
+        this.toggleNpcDirection(Direction.Vertical);
+        this.hasCollision = true;
+      } else {
+        this.npcCurrentDirections = [];
+        this.startMoving();
+        this.hasCollision = false;
+      }
     }
+    this.isMoving = true;
   }
 
   toggleNpcDirection(direction: number) {

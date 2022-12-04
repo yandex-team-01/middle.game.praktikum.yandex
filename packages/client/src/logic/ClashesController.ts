@@ -11,7 +11,7 @@ export class ClashesController {
     this.npcControll = npcControll;
   }
 
-  checkClashes() {
+  checkForCollisionsBetweenUserAndNpc() {
     const posPlayer = this.playerOne.getPosition();
     this.npcControll.arrNpc.forEach(npc => {
       const posNpc = npc.getPosition();
@@ -26,42 +26,54 @@ export class ClashesController {
           this.npcControll.restoreNpc(npc);
         } else {
           npc.isMoving = false;
+          npc.npcCurrentDirections = [];
           npc.speed = npc.speed + 0.5;
         }
       }
     });
     //в цикле проверяем каждый npc с другими npc на столкновение
     this.npcControll.arrNpc.forEach(npc => {
-      this.checkClashesBetweenNpc(npc);
+      this.checkForCollisionsBetweenNpc(npc);
     });
   }
 
-  checkClashesBetweenNpc(prevNpc: NpcEnemy | NpcFriend) {
+  checkForCollisionsBetweenNpc(prevNpc: NpcEnemy | NpcFriend) {
     this.npcControll.arrNpc.forEach(npc => {
       if (prevNpc !== npc) {
-        const posNpc = npc.getPosition();
-        const posPrevNpc = prevNpc.getPosition();
-        let XColl = false;
-        let YColl = false;
-        if (posNpc.x2 >= posPrevNpc.x1 && posNpc.x1 <= posPrevNpc.x2)
-          XColl = true;
+        let isCollision = false;
 
-        if (posNpc.y2 >= posPrevNpc.y1 && posNpc.y1 <= posPrevNpc.y2)
-          YColl = true;
+        if (
+          npc.x <= prevNpc.x + prevNpc.width &&
+          prevNpc.x <= npc.x + npc.width &&
+          npc.y <= prevNpc.y + prevNpc.height &&
+          prevNpc.y <= npc.y + npc.height
+        ) {
+          isCollision = true;
+        }
 
-        if (XColl && YColl) {
+        if (isCollision) {
+          //обездвиживаем npc, затем в классе npc в animate проверяем, если npc обездвижено,
+          // то задаем новое случайное направление движения
           prevNpc.isMoving = false;
           npc.isMoving = false;
-          if (
-            npc.type === 'friend' &&
-            ['enemy_huggy', 'enemy_kissy'].includes(prevNpc.type)
-          ) {
-            this.npcControll.deleteNpc(npc);
-            this.npcControll.restoreNpc(npc);
-            prevNpc.speed = prevNpc.speed + 0.1;
-          }
+          //логика столкновения вражеского с дружеским
+          this.checkCollisionsBetweenFriendAndEnemyNpc(npc, prevNpc);
         }
       }
     });
+  }
+
+  private checkCollisionsBetweenFriendAndEnemyNpc(
+    npc: NpcEnemy | NpcFriend,
+    prevNpc: NpcEnemy | NpcFriend
+  ) {
+    if (
+      npc.type === 'friend' &&
+      ['enemy_huggy', 'enemy_kissy'].includes(prevNpc.type)
+    ) {
+      this.npcControll.deleteNpc(npc);
+      this.npcControll.restoreNpc(npc);
+      prevNpc.speed = prevNpc.speed + 0.1;
+    }
   }
 }
