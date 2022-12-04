@@ -67,13 +67,21 @@ export class ClashesController {
     npc: NpcEnemy | NpcFriend,
     prevNpc: NpcEnemy | NpcFriend
   ) {
-    if (
-      npc.type === 'friend' &&
-      ['enemy_huggy', 'enemy_kissy'].includes(prevNpc.type)
-    ) {
-      this.npcControll.deleteNpc(npc);
-      this.npcControll.restoreNpc(npc);
+    if (['enemy_huggy', 'enemy_kissy'].includes(npc.type)) {
+      npc.speed = prevNpc.speed + 0.1;
+    }
+
+    if (['enemy_huggy', 'enemy_kissy'].includes(prevNpc.type)) {
       prevNpc.speed = prevNpc.speed + 0.1;
     }
+
+    if (prevNpc.type === 'friend') {
+      this.deleteAndRestoreNpc(prevNpc);
+    }
+  }
+
+  deleteAndRestoreNpc(npc: NpcEnemy | NpcFriend) {
+    this.npcControll.deleteNpc(npc);
+    this.npcControll.restoreNpc(npc);
   }
 }
