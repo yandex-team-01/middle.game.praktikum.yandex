@@ -4,6 +4,7 @@ import { PlayerOne } from './Player';
 import { Timer } from './Timer';
 import { AllSpritesType } from './types';
 import { GameEntities } from './types';
+import { SPRITE_ID } from './const';
 
 export class View {
   public canvas: HTMLCanvasElement;
@@ -34,11 +35,12 @@ export class View {
     this.timer = timer;
     this.npcControll = npcControll;
     this.gameOver = false;
-    this.clashesController = new ClashesController(player, npcControll);
+    this.clashesController = new ClashesController(ctx, player, npcControll);
   }
 
   setSprite(sprites: AllSpritesType) {
     this.sprites = sprites;
+    this.clashesController.setSprite(sprites[SPRITE_ID.COLLISION_BLOOD]);
   }
 
   prepareCanvas(): void {
@@ -95,6 +97,7 @@ export class View {
     this.npcControll.render();
     this.playerOne.render();
     this.timer.render();
+    this.clashesController.render();
   }
 
   startAnimating(fps: number) {

@@ -1,12 +1,31 @@
 import { NpcEnemy, NpcFriend } from './Npc';
 import { NpcControll } from './NpcControll';
 import { PlayerOne } from './Player';
-
+import { Sprite } from './Sprite';
+import { Collision } from './Collision';
 export class ClashesController {
   public playerOne: PlayerOne;
   public npcControll: NpcControll;
+  ctx: CanvasRenderingContext2D;
+  x: number;
+  y: number;
 
-  constructor(player: PlayerOne, npcControll: NpcControll) {
+  sprite: Sprite | undefined;
+  skinHorizontalFrame = 0;
+  skinTotalNumberOfHorizontalFrames = 3;
+  skinFirstHorizontalFrame = 0;
+  skinVerticalFrame = 0;
+  arrCollision: Collision[] = [];
+
+  constructor(
+    ctx: CanvasRenderingContext2D,
+    player: PlayerOne,
+    npcControll: NpcControll
+  ) {
+    this.ctx = ctx;
+    this.x = 0;
+    this.y = 0;
+
     this.playerOne = player;
     this.npcControll = npcControll;
   }
@@ -26,8 +45,8 @@ export class ClashesController {
           this.npcControll.restoreNpc(npc);
         } else {
           npc.isMoving = false;
-          npc.npcCurrentDirections = [];
           npc.speed = npc.speed + 0.5;
+          this.setColisionImgCoordinats(npc);
         }
       }
     });
@@ -67,15 +86,16 @@ export class ClashesController {
     npc: NpcEnemy | NpcFriend,
     prevNpc: NpcEnemy | NpcFriend
   ) {
-    if (['enemy_huggy', 'enemy_kissy'].includes(npc.type)) {
-      npc.speed = npc.speed + 0.1;
-    }
-
-    if (['enemy_huggy', 'enemy_kissy'].includes(prevNpc.type)) {
+    if (
+      ['enemy_huggy', 'enemy_kissy'].includes(npc.type) &&
+      prevNpc.type === 'friend'
+    ) {
       prevNpc.speed = prevNpc.speed + 0.1;
+      this.setColisionImgCoordinats(prevNpc);
+      this.deleteAndRestoreNpc(prevNpc);
     }
 
-    if (prevNpc.type === 'friend') {
+    if (npc.type === 'friend' && prevNpc.type === 'friend') {
       this.deleteAndRestoreNpc(prevNpc);
     }
   }
@@ -83,5 +103,27 @@ export class ClashesController {
   deleteAndRestoreNpc(npc: NpcEnemy | NpcFriend) {
     this.npcControll.deleteNpc(npc);
     this.npcControll.restoreNpc(npc);
+  }
+  setColisionImgCoordinats(npc: NpcEnemy | NpcFriend) {
+    this.x = npc.x;
+    this.y = npc.y + npc.height;
+    const collision = new Collision(this.ctx, this.x, this.y);
+    collision.setSprite(this.sprite as Sprite);
+    this.arrCollision.push(collision);
+  }
+  setSprite(sprite: Sprite) {
+    this.sprite = sprite;
+  }
+
+  render() {
+    this.arrCollision.forEach(collision => {
+      collision.render();
+      if (
+        collision.skinHorizontalFrame ===
+        collision.skinTotalNumberOfHorizontalFrames
+      ) {
+        this.arrCollision = this.arrCollision.filter(key => key !== key);
+      }
+    });
   }
 }
