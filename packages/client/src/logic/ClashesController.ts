@@ -63,7 +63,7 @@ export class ClashesController {
     });
   }
 
-  private checkCollisionsBetweenFriendAndEnemyNpc(
+  checkCollisionsBetweenFriendAndEnemyNpc(
     npc: NpcEnemy | NpcFriend,
     prevNpc: NpcEnemy | NpcFriend
   ) {

@@ -116,7 +116,7 @@ export abstract class NpcModel {
   }
 
   animate() {
-    this.correctCollisionResult();
+    this.correctCollisionResultBettweenNpc();
     this.checkForCollisionsWithCanvasBorders();
     this.moveNpc();
     this.handleNpcLegsFrame();
@@ -126,7 +126,7 @@ export abstract class NpcModel {
     return Math.random() * (max - min) + min;
   }
 
-  correctCollisionResult() {
+  correctCollisionResultBettweenNpc() {
     if (!this.isMoving) {
       //после первого столкновения меняем направление движения на противоположное
       //если это не помогло то устанавливаем рандомное направление движения
@@ -168,23 +168,22 @@ export abstract class NpcModel {
 
   checkForCollisionsWithCanvasBorders() {
     if (this.x + this.width > this.canvasWidth || this.x - this.width / 2 < 0) {
-      if (!this.hasCollision) {
-        this.toggleNpcDirection(Direction.Horizontal);
-        this.hasCollision = true;
-      } else {
-        this.isMoving = false;
-      }
+      this.correctCollisionResultWithCanvasBorders(Direction.Horizontal);
     }
     if (
       this.y + this.height > this.canvasHeight ||
       this.y - this.height / 2 < 70
     ) {
-      if (!this.hasCollision) {
-        this.toggleNpcDirection(Direction.Vertical);
-        this.hasCollision = true;
-      } else {
-        this.isMoving = false;
-      }
+      this.correctCollisionResultWithCanvasBorders(Direction.Vertical);
+    }
+  }
+
+  correctCollisionResultWithCanvasBorders(direction: number) {
+    if (!this.hasCollision) {
+      this.toggleNpcDirection(direction);
+      this.hasCollision = true;
+    } else {
+      this.isMoving = false;
     }
   }
 
