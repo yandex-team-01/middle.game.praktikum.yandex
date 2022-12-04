@@ -68,7 +68,7 @@ export class ClashesController {
     prevNpc: NpcEnemy | NpcFriend
   ) {
     if (['enemy_huggy', 'enemy_kissy'].includes(npc.type)) {
-      npc.speed = prevNpc.speed + 0.1;
+      npc.speed = npc.speed + 0.1;
     }
 
     if (['enemy_huggy', 'enemy_kissy'].includes(prevNpc.type)) {
