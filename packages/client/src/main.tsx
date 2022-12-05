@@ -15,19 +15,19 @@ import { startServiceWorker } from './utils/serviceWorker';
 const store = setupStore();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <React.Suspense>
-      <BrowserRouter>
-        <Provider store={store}>
-          <I18nextProvider i18n={i18next}>
-            <ErrorBoundary>
-              <App />
-            </ErrorBoundary>
-          </I18nextProvider>
-        </Provider>
-      </BrowserRouter>
-    </React.Suspense>
-  </React.StrictMode>
-);
+    <React.StrictMode>
+        <React.Suspense>
+            <BrowserRouter>
+                <Provider store={store}>
+                    <I18nextProvider i18n={i18next}>
+                        <ErrorBoundary>
+                            <App />
+                        </ErrorBoundary>
+                    </I18nextProvider>
+                </Provider>
+            </BrowserRouter>
+        </React.Suspense>
+    </React.StrictMode>
+)
 
 startServiceWorker();
