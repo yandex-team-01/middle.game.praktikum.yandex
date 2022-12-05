@@ -132,9 +132,6 @@ export class ClashesController {
         collision.skinTotalNumberOfHorizontalFrames
       ) {
         this.arrCollision = this.arrCollision.filter(key => key !== key);
-        // if (this.npcScreamingAudio) {
-        //   this.npcScreamingAudio.pause();
-        // }
       }
     });
   }
