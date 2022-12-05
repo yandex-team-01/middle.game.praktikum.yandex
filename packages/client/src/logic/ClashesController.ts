@@ -127,12 +127,6 @@ export class ClashesController {
         this.npcScreamingAudio.currentTime = 0;
         this.npcScreamingAudio.play();
       }
-      if (
-        collision.skinHorizontalFrame ===
-        collision.skinTotalNumberOfHorizontalFrames
-      ) {
-        this.arrCollision = this.arrCollision.filter(key => key !== key);
-      }
     });
   }
 }

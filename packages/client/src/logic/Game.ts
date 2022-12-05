@@ -8,7 +8,7 @@ import { Timer } from './Timer';
 export class Game {
   private ctx: CanvasRenderingContext2D;
   private width = 1240;
-  private height = 700;
+  private height = 600;
   private playerOne: PlayerOne;
   private gameOverBackgroundAudio: HTMLAudioElement | undefined;
   private allSprites: AllSprites;
