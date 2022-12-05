@@ -11,8 +11,7 @@
     "lint": "lerna run lint",
     "lint:fix": "lerna run lint:fix",
     "format": "lerna run format",
-    "preview": "lerna run preview",
-    "generate": "lerna run generate --scope=client"
+    "preview": "lerna run preview"
   },
   "license": "MIT",
   "workspaces": [

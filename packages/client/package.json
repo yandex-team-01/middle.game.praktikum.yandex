@@ -4,15 +4,14 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "tsc && vite build",
+        "build": "npm run build:client && npm run build:ssr && node prerender.mjs",
         "preview": "vite preview",
         "lint": "eslint .",
         "lint:fix": "eslint --fix .",
         "format": "prettier --write .",
         "test": "jest ./",
         "build:client": "tsc && vite build --outDir dist/client",
-        "build:ssr": "tsc && vite build --ssr src/entry-server.tsx --outDir dist/ssr",
-        "generate": "tsc && vite build --outDir dist/client && npm run build:ssr && node prerender.mjs"
+        "build:ssr": "tsc && vite build --outDir dist/ssr --ssr src/entry-server.tsx"
     },
     "dependencies": {
         "@reduxjs/toolkit": "1.8.6",
