@@ -94,10 +94,10 @@ export class View {
 
   update(): void {
     this.prepareCanvas();
+    this.clashesController.render();
     this.npcControll.render();
     this.playerOne.render();
     this.timer.render();
-    this.clashesController.render();
   }
 
   startAnimating(fps: number) {
