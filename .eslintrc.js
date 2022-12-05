@@ -22,7 +22,8 @@ module.exports = {
     'semi': ["error", "always"],
     'react-hooks/rules-of-hooks': "error",
     'react-hooks/exhaustive-deps': "error",
-    'import/no-default-export': 2
+    'import/no-default-export': 2,
+    '@typescript-eslint/ban-ts-comment': 0
   },
   "ignorePatterns": ["**/*.test.*", "**/*.config.*", "**/dist"]
 };

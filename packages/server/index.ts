@@ -1,14 +1,14 @@
 import dotenv from 'dotenv';
 import cors from 'cors';
-import path from 'path'
-import fs from 'fs'
+import path from 'path';
+import fs from 'fs';
 dotenv.config();
 
 import express from 'express';
 import { createClientAndConnect } from './db';
 
 // @ts-ignore
-import {render} from '../client/dist/server/entry-server.cjs'
+import { render } from '../client/dist/server/entry-server.cjs';
 
 const app = express();
 app.use(cors());
@@ -22,14 +22,14 @@ app.get('/', (_, res) => {
 });
 
 app.get('/ssr-example', (_, res) => {
-  const result = render()
-  const template = path.resolve(__dirname, '../client/dist/client/index.html')
-  const htmlString = fs.readFileSync(template, 'utf-8')
-  const newString = htmlString.replace('<!--ssr-outlet-->', result)
-  res.send(newString)
-})
+  const result = render();
+  const template = path.resolve(__dirname, '../client/dist/client/index.html');
+  const htmlString = fs.readFileSync(template, 'utf-8');
+  const newString = htmlString.replace('<!--ssr-outlet-->', result);
+  res.send(newString);
+});
 
-app.use(express.static(path.resolve(__dirname, '../client/dist/client')))
+app.use(express.static(path.resolve(__dirname, '../client/dist/client')));
 
 app.listen(port, () => {
   console.log(`  ➜ 🎸 Server is listening on port: ${port}`);

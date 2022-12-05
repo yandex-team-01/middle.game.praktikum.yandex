@@ -6,8 +6,8 @@ import { i18next } from '../i18next.config';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { setupStore } from './store/store';
 
-import { renderToString } from 'react-dom/server'
-import { App } from './App'
+import { renderToString } from 'react-dom/server';
+import { App } from './App';
 
 const store = setupStore();
 
@@ -26,4 +26,4 @@ export const render = () => renderToString(
       </BrowserRouter>
     </React.Suspense>
   </React.StrictMode>
-)
+);
