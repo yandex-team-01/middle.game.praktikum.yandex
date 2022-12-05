@@ -184,6 +184,7 @@ export abstract class NpcModel {
       this.hasCollision = true;
     } else {
       this.npcCurrentDirections = [];
+      this.hasCollision = false;
       this.startMoving();
     }
   }
