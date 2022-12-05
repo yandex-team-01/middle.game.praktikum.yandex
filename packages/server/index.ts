@@ -8,7 +8,7 @@ import express from 'express';
 import { createClientAndConnect } from './db';
 
 // @ts-ignore
-import { render } from '../client/dist/server/entry-server.cjs';
+import { render } from '../client/dist/ssr/entry-server.cjs';
 
 const app = express();
 app.use(cors());
