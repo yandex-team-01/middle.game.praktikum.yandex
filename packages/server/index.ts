@@ -14,13 +14,10 @@ app.use(cors());
 
 const port = Number(process.env.SERVER_PORT) || 3001;
 
+//! Временно отключено для тестирования
 // createClientAndConnect();
 
-app.get('/', (_, res) => {
-  res.json('👋 Howdy from the server :)');
-});
-
-app.get('/ssr-example', (req, res) => {
+app.get('/ru/', (req, res) => {
   const result = render(req.url);
   const template = path.resolve(__dirname, '../client/dist/client/index.html');
   const htmlString = fs.readFileSync(template, 'utf-8');
