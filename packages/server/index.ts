@@ -5,7 +5,7 @@ import fs from 'fs';
 dotenv.config();
 
 import express from 'express';
-import { createClientAndConnect } from './db';
+
 
 // @ts-ignore
 import { render } from '../client/dist/ssr/entry-server.cjs';
@@ -15,7 +15,7 @@ app.use(cors());
 
 const port = Number(process.env.SERVER_PORT) || 3001;
 
-createClientAndConnect();
+// createClientAndConnect();
 
 app.get('/', (_, res) => {
   res.json('👋 Howdy from the server :)');
