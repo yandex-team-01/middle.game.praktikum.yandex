@@ -129,7 +129,7 @@ export class ClashesController {
     }
 
     this.arrCollision.push(collision);
-    if (this.npcScreamingAudio) {
+    if (this.npcScreamingAudio && isCollisionWithEnemy) {
       this.npcScreamingAudio.currentTime = 0;
       this.npcScreamingAudio.play();
     }
