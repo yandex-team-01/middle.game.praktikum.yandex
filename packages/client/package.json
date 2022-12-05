@@ -10,11 +10,9 @@
         "lint:fix": "eslint --fix .",
         "format": "prettier --write .",
         "test": "jest ./",
-        "build:vite": "npm run build:client && npm run build:server",
         "build:client": "vite build --outDir dist/client",
         "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
-        "generate": "vite build --outDir dist/static && npm run build:server && node prerender.mjs",
-        "dev:server": "nodemon watchvite.mjs"
+        "generate": "vite build --outDir dist/static && npm run build:server && node prerender.mjs"
     },
     "dependencies": {
         "@reduxjs/toolkit": "1.8.6",
