@@ -10,7 +10,8 @@ export class ClashesController {
   x: number;
   y: number;
 
-  sprite: Sprite | undefined;
+  spriteBlood: Sprite | undefined;
+  spriteTeleport: Sprite | undefined;
   skinHorizontalFrame = 0;
   skinTotalNumberOfHorizontalFrames = 3;
   skinFirstHorizontalFrame = 0;
@@ -45,13 +46,13 @@ export class ClashesController {
       if (XColl && YColl) {
         npc.collisionHandling(this.playerOne);
         if (npc.type === 'friend') {
-          this.npcControll.deleteNpc(npc);
-          this.npcControll.restoreNpc(npc);
+          this.deleteAndRestoreNpc(npc);
+          this.setColisionImgCoordinats(npc, false);
         } else {
           npc.isMoving = false;
           npc.hasCollision = true;
           npc.speed = npc.speed + 0.5;
-          this.setColisionImgCoordinats(npc);
+          this.setColisionImgCoordinats(npc, true);
         }
       }
     });
@@ -96,11 +97,12 @@ export class ClashesController {
       prevNpc.type === 'friend'
     ) {
       prevNpc.speed = prevNpc.speed + 0.1;
-      this.setColisionImgCoordinats(prevNpc);
+      this.setColisionImgCoordinats(prevNpc, true);
       this.deleteAndRestoreNpc(prevNpc);
     }
 
     if (npc.type === 'friend' && prevNpc.type === 'friend') {
+      this.setColisionImgCoordinats(prevNpc, false);
       this.deleteAndRestoreNpc(prevNpc);
     }
   }
@@ -109,24 +111,44 @@ export class ClashesController {
     this.npcControll.deleteNpc(npc);
     this.npcControll.restoreNpc(npc);
   }
-  setColisionImgCoordinats(npc: NpcEnemy | NpcFriend) {
+  setColisionImgCoordinats(
+    npc: NpcEnemy | NpcFriend,
+    isCollisionWithEnemy: boolean
+  ) {
     this.x = npc.x;
     this.y = npc.y + npc.height;
     const collision = new Collision(this.ctx, this.x, this.y);
-    collision.setSprite(this.sprite as Sprite);
+    collision.isCollisionWithEnemy = isCollisionWithEnemy;
+
+    if (isCollisionWithEnemy) {
+      collision.setSprite(this.spriteBlood as Sprite);
+    } else {
+      collision.x = npc.x + npc.width / 2;
+      collision.y = npc.y - npc.height / 2;
+      collision.setSprite(this.spriteTeleport as Sprite);
+    }
+
     this.arrCollision.push(collision);
     if (this.npcScreamingAudio) {
       this.npcScreamingAudio.currentTime = 0;
       this.npcScreamingAudio.play();
     }
   }
-  setSprite(sprite: Sprite) {
-    this.sprite = sprite;
+  setSprite(spriteTeleport: Sprite, spriteBlood: Sprite) {
+    this.spriteTeleport = spriteTeleport;
+    this.spriteBlood = spriteBlood;
   }
 
   render() {
-    this.arrCollision.forEach(collision => {
+    this.arrCollision.forEach((collision, index) => {
       collision.render();
+      if (
+        !collision.isCollisionWithEnemy &&
+        collision.skinHorizontalFrame ===
+          collision.skinTotalNumberOfHorizontalFrames
+      ) {
+        this.arrCollision = this.arrCollision.filter((_, key) => key !== index);
+      }
     });
   }
 }

@@ -11,6 +11,7 @@ export class Collision {
   skinTotalNumberOfHorizontalFrames = 3;
   skinFirstHorizontalFrame = 0;
   skinVerticalFrame = 0;
+  isCollisionWithEnemy: boolean | undefined;
   constructor(ctx: CanvasRenderingContext2D, x: number, y: number) {
     this.ctx = ctx;
     this.x = x;

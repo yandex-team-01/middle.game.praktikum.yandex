@@ -40,7 +40,10 @@ export class View {
 
   setSprite(sprites: AllSpritesType) {
     this.sprites = sprites;
-    this.clashesController.setSprite(sprites[SPRITE_ID.COLLISION_BLOOD]);
+    this.clashesController.setSprite(
+      sprites[SPRITE_ID.COLLISION_TELEPORT],
+      sprites[SPRITE_ID.COLLISION_BLOOD]
+    );
   }
 
   prepareCanvas(): void {

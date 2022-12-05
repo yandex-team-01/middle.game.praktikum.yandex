@@ -8,6 +8,7 @@ import money from '/src/assets/images/money.png';
 import npcEnemyHuggy from '/src/assets/images/game-npc-huggy.png';
 import npcEnemyKissy from '/src/assets/images/game-npc-kissy.png';
 import collisionBood from '/src/assets/images/game-collision-blood.png';
+import collisionTeleport from '/src/assets/images/game-collision-teleport.png';
 
 export enum SPRITE_ID {
   MAIN_BACK = 'back',
@@ -19,6 +20,7 @@ export enum SPRITE_ID {
   HEART = 'heart',
   MONEY = 'money',
   COLLISION_BLOOD = 'collision_bood',
+  COLLISION_TELEPORT = 'collision_teleport',
 }
 
 export const spritesOptions: SpriteOptions[] = [
@@ -31,6 +33,12 @@ export const spritesOptions: SpriteOptions[] = [
   { id: SPRITE_ID.HEART, src: heart, width: 40, height: 40 },
   { id: SPRITE_ID.MONEY, src: money, width: 40, height: 40 },
   { id: SPRITE_ID.COLLISION_BLOOD, src: collisionBood, width: 49, height: 33 },
+  {
+    id: SPRITE_ID.COLLISION_TELEPORT,
+    src: collisionTeleport,
+    width: 70.75,
+    height: 90,
+  },
 ];
 
 // временная константа для вывода npc
