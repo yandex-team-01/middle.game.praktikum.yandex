@@ -10,9 +10,9 @@
         "lint:fix": "eslint --fix .",
         "format": "prettier --write .",
         "test": "jest ./",
-        "build:client": "vite build --outDir dist/client",
-        "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist/ssr",
-        "generate": "vite build --outDir dist/client && npm run build:ssr && node prerender.mjs"
+        "build:client": "tsc && vite build --outDir dist/client",
+        "build:ssr": "tsc && vite build --ssr src/entry-server.tsx --outDir dist/ssr",
+        "generate": "tsc && vite build --outDir dist/client && npm run build:ssr && node prerender.mjs"
     },
     "dependencies": {
         "@reduxjs/toolkit": "1.8.6",
