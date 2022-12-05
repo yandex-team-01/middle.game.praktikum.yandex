@@ -183,7 +183,8 @@ export abstract class NpcModel {
       this.toggleNpcDirection(direction);
       this.hasCollision = true;
     } else {
-      this.isMoving = false;
+      this.npcCurrentDirections = [];
+      this.startMoving();
     }
   }
 
