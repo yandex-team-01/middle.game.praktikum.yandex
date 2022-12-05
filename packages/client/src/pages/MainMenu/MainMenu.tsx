@@ -3,8 +3,8 @@ import styles from './MainMenu.module.scss';
 import { Button } from 'src/components/Button';
 import { fetchLogout } from 'src/store/auth/AuthActions';
 import { useNavigator } from 'src/hooks/useNavigator';
-import { useBoundAction } from '../Forum/part/Topic/helper';
 import { TitleGame } from 'src/components/TitleGame';
+import { useBoundAction } from 'src/hooks/useBoundAction';
 
 export const MainMenu = () => {
   const { t } = useTranslation();

@@ -12,8 +12,8 @@ export const Landing = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
 
-  const navigateLogin = () => navigator('/login');
-  const navigateSignup = () => navigator('/reg');
+  const navigateLogin = () => navigator('auth');
+  const navigateSignup = () => navigator('/auth/reg');
 
   return (
     <div className={styles.page}>
