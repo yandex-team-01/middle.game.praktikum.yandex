@@ -16,6 +16,7 @@ export class ClashesController {
   skinFirstHorizontalFrame = 0;
   skinVerticalFrame = 0;
   arrCollision: Collision[] = [];
+  npcScreamingAudio: HTMLAudioElement;
 
   constructor(
     ctx: CanvasRenderingContext2D,
@@ -28,6 +29,9 @@ export class ClashesController {
 
     this.playerOne = player;
     this.npcControll = npcControll;
+    this.npcScreamingAudio = new Audio(
+      '/src/assets/audio/game-npc-friend-screaming.mp3'
+    );
   }
 
   checkForCollisionsBetweenUserAndNpc() {
@@ -119,11 +123,18 @@ export class ClashesController {
   render() {
     this.arrCollision.forEach(collision => {
       collision.render();
+      if (this.npcScreamingAudio) {
+        this.npcScreamingAudio.currentTime = 0;
+        this.npcScreamingAudio.play();
+      }
       if (
         collision.skinHorizontalFrame ===
         collision.skinTotalNumberOfHorizontalFrames
       ) {
         this.arrCollision = this.arrCollision.filter(key => key !== key);
+        // if (this.npcScreamingAudio) {
+        //   this.npcScreamingAudio.pause();
+        // }
       }
     });
   }
