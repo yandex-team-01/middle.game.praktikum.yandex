@@ -43,6 +43,7 @@ export class Game {
   async init(callback: () => void) {
     await this.allSprites.prepareSprites();
     this.gameOverBackgroundAudio = new Audio('/src/assets/audio/game-over.mp3');
+
     this.sprites = this.allSprites.getSprites();
 
     this.start();

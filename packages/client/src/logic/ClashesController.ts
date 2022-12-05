@@ -115,6 +115,10 @@ export class ClashesController {
     const collision = new Collision(this.ctx, this.x, this.y);
     collision.setSprite(this.sprite as Sprite);
     this.arrCollision.push(collision);
+    if (this.npcScreamingAudio) {
+      this.npcScreamingAudio.currentTime = 0;
+      this.npcScreamingAudio.play();
+    }
   }
   setSprite(sprite: Sprite) {
     this.sprite = sprite;
@@ -123,10 +127,6 @@ export class ClashesController {
   render() {
     this.arrCollision.forEach(collision => {
       collision.render();
-      if (this.npcScreamingAudio) {
-        this.npcScreamingAudio.currentTime = 0;
-        this.npcScreamingAudio.play();
-      }
     });
   }
 }
