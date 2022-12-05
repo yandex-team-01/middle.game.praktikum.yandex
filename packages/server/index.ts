@@ -6,7 +6,6 @@ dotenv.config();
 
 import express from 'express';
 
-
 // @ts-ignore
 import { render } from '../client/dist/ssr/entry-server.cjs';
 

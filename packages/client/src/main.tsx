@@ -14,20 +14,21 @@ import { startServiceWorker } from './utils/serviceWorker';
 
 const store = setupStore();
 
-// Вот тут убрал suspance и strictMode 
 ReactDOM.hydrateRoot(
-    document.getElementById('root') as HTMLElement,
-    <React.StrictMode>
-        <BrowserRouter>
-            <Provider store={store}>
-                <I18nextProvider i18n={i18next}>
-                    <ErrorBoundary>
-                        <App />
-                    </ErrorBoundary>
-                </I18nextProvider>
-            </Provider>
-        </BrowserRouter>
-    </React.StrictMode>
+  document.getElementById('root') as HTMLElement,
+  <React.StrictMode>
+    <React.Suspense>
+      <BrowserRouter>
+        <Provider store={store}>
+          <I18nextProvider i18n={i18next}>
+            <ErrorBoundary>
+              <App />
+            </ErrorBoundary>
+          </I18nextProvider>
+        </Provider>
+      </BrowserRouter>
+    </React.Suspense>
+  </React.StrictMode>
 );
 
 startServiceWorker();
