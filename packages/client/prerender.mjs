@@ -5,8 +5,8 @@ import { fileURLToPath } from 'node:url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const toAbsolute = (p) => path.resolve(__dirname, p)
 
-const template = fs.readFileSync(toAbsolute('dist/static/index.html'), 'utf-8')
-const { render } = await import('./dist/server/entry-server.cjs')
+const template = fs.readFileSync(toAbsolute('dist/client/index.html'), 'utf-8')
+const { render } = await import('./dist/ssr/entry-server.cjs')
 
 // determine routes to pre-render from src/pages
 const routesToPrerender = fs
@@ -23,7 +23,7 @@ const routesToPrerender = fs
 
     const html = template.replace(`<!--ssr-outlet-->`, appHtml)
 
-    const filePath = `dist/static${url === '/' ? '/index' : url}.html`
+    const filePath = `dist/client${url === '/' ? '/index' : url}.html`
     fs.writeFileSync(toAbsolute(filePath), html)
     console.log('pre-rendered:', filePath)
   }
