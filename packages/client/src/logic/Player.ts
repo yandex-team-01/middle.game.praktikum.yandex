@@ -38,7 +38,7 @@ abstract class Player {
   hitPoints: number;
   score: number;
   game: Game;
-  totalNumberOfLegsMovementFrames = 4;
+  totalNumberOfLegsMovementFrames = 3;
   firstLegsMovementFrame = 0;
 
   constructor(
