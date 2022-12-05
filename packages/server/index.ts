@@ -21,8 +21,8 @@ app.get('/', (_, res) => {
   res.json('👋 Howdy from the server :)');
 });
 
-app.get('/ssr-example', (_, res) => {
-  const result = render();
+app.get('/ssr-example', (req, res) => {
+  const result = render(req.url);
   const template = path.resolve(__dirname, '../client/dist/client/index.html');
   const htmlString = fs.readFileSync(template, 'utf-8');
   const newString = htmlString.replace('<!--ssr-outlet-->', result);
