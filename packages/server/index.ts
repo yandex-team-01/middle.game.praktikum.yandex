@@ -4,6 +4,9 @@ import path from 'path';
 import fs from 'fs';
 dotenv.config();
 
+//! Временно отключено для тестирования
+// import { createClientAndConnect } from './db';
+
 import express from 'express';
 
 // @ts-ignore
@@ -12,7 +15,7 @@ import { render } from '../client/dist/ssr/entry-server.cjs';
 const app = express();
 app.use(cors());
 
-const port = Number(process.env.SERVER_PORT) || 3001;
+const port = Number(process.env.PORT) || 3001;
 
 //! Временно отключено для тестирования
 // createClientAndConnect();
