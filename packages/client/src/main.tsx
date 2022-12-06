@@ -14,7 +14,8 @@ import { startServiceWorker } from './utils/serviceWorker';
 
 const store = setupStore();
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.hydrateRoot(
+  document.getElementById('root') as HTMLElement,
   <React.StrictMode>
     <React.Suspense>
       <BrowserRouter>
