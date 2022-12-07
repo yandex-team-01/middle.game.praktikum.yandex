@@ -109,7 +109,7 @@ export class ClashesController {
       ['enemy_huggy', 'enemy_kissy'].includes(npc.type) &&
       prevNpc.type === 'friend'
     ) {
-      prevNpc.speed = prevNpc.speed + 1;
+      npc.speed = prevNpc.speed + 1;
       this.setColisionImgCoordinats(prevNpc, true);
       this.deleteAndRestoreNpc(prevNpc);
     }
