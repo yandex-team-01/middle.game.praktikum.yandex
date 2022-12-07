@@ -5,14 +5,19 @@ import { BrowserRouter } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
 import { i18next } from '../i18next.config';
 
-import { App } from './App';
+import { App } from 'src/App';
 import 'normalize.css';
 import './index.module.scss';
-import { setupStore } from './store/store';
-import { ErrorBoundary } from './components/ErrorBoundary';
-import { startServiceWorker } from './utils/serviceWorker';
+import { setupStore } from 'src/store/store';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { startServiceWorker } from 'src/utils/serviceWorker';
+import { PreloadedState } from 'src/store/types';
 
-const store = setupStore();
+const defineStore = window.__PRELOADED_STATE__ as PreloadedState;
+console.log('window defaultStore', window.__PRELOADED_STATE__);
+delete window.__PRELOADED_STATE__;
+console.log('window delete defaultStore', window.__PRELOADED_STATE__);
+const store = setupStore(defineStore);
 
 ReactDOM.hydrateRoot(
   document.getElementById('root') as HTMLElement,

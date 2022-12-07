@@ -2,17 +2,19 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';
 import { I18nextProvider } from 'react-i18next';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { setupStore } from 'src/store/store';
+import { App } from 'src/App';
 import { i18next } from '../i18next.config';
-import { ErrorBoundary } from './components/ErrorBoundary';
-import { setupStore } from './store/store';
 
 import ReactDOMServer from 'react-dom/server';
+import { PreloadedState } from 'src/store/types';
 
-import { App } from './App';
+export const render = (url: string, defaultStore: PreloadedState) => {
+  const store = setupStore(defaultStore);
 
-const store = setupStore();
+  console.log('render defaultStore', defaultStore);
 
-export const render = (url: string) => {
   return ReactDOMServer.renderToString(
     <React.StrictMode>
       <React.Suspense>

@@ -14,6 +14,7 @@ const routesToPrerender = fs.readdirSync(toAbsolute('src/pages')).map(file => {
   return name === 'home' ? `/` : `/${name}`;
 });
 
+console.log('routesToPrerender', routesToPrerender);
 (async () => {
   // pre-render each route...
   for (const url of routesToPrerender) {

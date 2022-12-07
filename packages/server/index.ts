@@ -2,6 +2,9 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
 import fs from 'fs';
+import { renderObject } from './utils/renderObject';
+import { defaultStore } from './defaultStore';
+
 dotenv.config();
 
 //! Временно отключено для тестирования
@@ -21,10 +24,20 @@ const port = Number(process.env.PORT) || 3001;
 // createClientAndConnect();
 
 app.get('/ru/', (req, res) => {
-  const result = render(req.url);
+  const result = render(req.url, defaultStore);
+
+  console.log('defaultStore server', defaultStore);
   const template = path.resolve(__dirname, '../client/dist/client/index.html');
   const htmlString = fs.readFileSync(template, 'utf-8');
-  const newString = htmlString.replace('<!--ssr-outlet-->', result);
+  let newString = htmlString.replace('<!--ssr-outlet-->', result);
+  newString = newString.replace(
+    '<!--ssr-redux-->',
+    ` <script>window.__PRELOADED_STATE__ = ${renderObject(
+      defaultStore
+    )}</script>`
+  );
+  console.log('newString', newString);
+
   res.send(newString);
 });
 
