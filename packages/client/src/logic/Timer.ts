@@ -39,6 +39,7 @@ export class Timer {
 
   render() {
     this.ctx.font = '30px PixelDigivolve';
+    this.ctx.fillStyle = '#fff';
     this.ctx.fillText(`${this.gameTimer}`, this.canvasWidth / 2, 40);
     this.animate();
   }

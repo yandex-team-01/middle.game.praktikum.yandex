@@ -16,6 +16,7 @@ export class ClashesController {
   skinTotalNumberOfHorizontalFrames = 3;
   skinFirstHorizontalFrame = 0;
   skinVerticalFrame = 0;
+  inaccuracyOfCharacterSprite = 10;
   arrCollision: Collision[] = [];
   npcScreamingAudio: HTMLAudioElement;
 
@@ -41,8 +42,20 @@ export class ClashesController {
       const posNpc = npc.getPosition();
       let XColl = false;
       let YColl = false;
-      if (posPlayer.x2 >= posNpc.x1 && posPlayer.x1 <= posNpc.x2) XColl = true;
-      if (posPlayer.y2 >= posNpc.y1 && posPlayer.y1 <= posNpc.y2) YColl = true;
+      if (
+        posPlayer.x2 - this.inaccuracyOfCharacterSprite >=
+          posNpc.x1 - this.inaccuracyOfCharacterSprite &&
+        posPlayer.x1 - this.inaccuracyOfCharacterSprite <=
+          posNpc.x2 - this.inaccuracyOfCharacterSprite
+      )
+        XColl = true;
+      if (
+        posPlayer.y2 - this.inaccuracyOfCharacterSprite >=
+          posNpc.y1 - this.inaccuracyOfCharacterSprite &&
+        posPlayer.y1 - this.inaccuracyOfCharacterSprite <=
+          posNpc.y2 - this.inaccuracyOfCharacterSprite
+      )
+        YColl = true;
       if (XColl && YColl) {
         npc.collisionHandling(this.playerOne);
         if (npc.type === 'friend') {
@@ -130,7 +143,6 @@ export class ClashesController {
 
     this.arrCollision.push(collision);
     if (this.npcScreamingAudio && isCollisionWithEnemy) {
-      this.npcScreamingAudio.currentTime = 0;
       this.npcScreamingAudio.play();
     }
   }

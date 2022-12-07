@@ -81,8 +81,10 @@ export abstract class NpcModel {
     this.width = sprite.width;
     this.height = sprite.height;
 
-    this.x = randomX;
-    this.y = randomY;
+    if (this.type === 'friend') {
+      this.x = randomX;
+      this.y = randomY;
+    }
     this.skinLegsFrame = 0;
     this.skinDirectionFrame = 0;
   }
@@ -254,7 +256,18 @@ export class NpcEnemy extends NpcModel {
   ) {
     super(ctx, options, canvasHeight, canvasWidth);
     this.ctx = ctx;
+
+    this.setEnemyNpcStartCoodinats(canvasWidth);
     this.speed = 8;
+  }
+
+  private setEnemyNpcStartCoodinats(canvasWidth: number) {
+    if (this.type === 'enemy_huggy') {
+      this.x = 100;
+    } else {
+      this.x = canvasWidth - 100;
+    }
+    this.y = 250;
   }
 
   collisionHandling(player: PlayerOne) {
