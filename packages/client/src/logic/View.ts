@@ -4,6 +4,7 @@ import { PlayerOne } from './Player';
 import { Timer } from './Timer';
 import { AllSpritesType } from './types';
 import { GameEntities } from './types';
+import { SPRITE_ID } from './const';
 
 export class View {
   public canvas: HTMLCanvasElement;
@@ -27,18 +28,22 @@ export class View {
   ) {
     this.sprites = {};
     this.canvas = canvas;
-    this.canvas.width = 800;
-    this.canvas.height = 500;
+    this.canvas.width = canvas.width;
+    this.canvas.height = canvas.height;
     this.ctx = ctx;
     this.playerOne = player;
     this.timer = timer;
     this.npcControll = npcControll;
     this.gameOver = false;
-    this.clashesController = new ClashesController(player, npcControll);
+    this.clashesController = new ClashesController(ctx, player, npcControll);
   }
 
   setSprite(sprites: AllSpritesType) {
     this.sprites = sprites;
+    this.clashesController.setSprite(
+      sprites[SPRITE_ID.COLLISION_TELEPORT],
+      sprites[SPRITE_ID.COLLISION_BLOOD]
+    );
   }
 
   prepareCanvas(): void {
@@ -92,6 +97,7 @@ export class View {
 
   update(): void {
     this.prepareCanvas();
+    this.clashesController.render();
     this.npcControll.render();
     this.playerOne.render();
     this.timer.render();
@@ -112,7 +118,7 @@ export class View {
         this.then = this.now - (this.elapsed % this.fpsInterval);
 
         this.update();
-        this.clashesController.checkClashes();
+        this.clashesController.checkForCollisionsBetweenUserAndNpc();
       }
     }
   }

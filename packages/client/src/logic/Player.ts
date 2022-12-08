@@ -1,6 +1,6 @@
 import { Sprite } from './Sprite';
 import { Position, AllSpritesType, GameEntities } from './types';
-import { SPRITE_ID } from './const';
+import { SPRITE_ID, GAME_SETTINGS } from './const';
 import { Game } from './Game';
 
 const playerCurrentDirections: boolean[] = [];
@@ -24,10 +24,11 @@ abstract class Player {
   spriteHeart: Sprite | undefined;
   spriteMoney: Sprite | undefined;
   spritePlayer: Sprite | undefined;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
+  x = 0;
+  y = 0;
+  width = 0;
+  height = 0;
+  score = 0;
   skinLegsFrame: number;
   skinDirectionFrame: number;
   speed: number;
@@ -36,10 +37,9 @@ abstract class Player {
   canvasWidth: number;
   ctx: CanvasRenderingContext2D;
   hitPoints: number;
-  score: number;
   game: Game;
-  totalNumberOfLegsMovementFrames = 4;
-  firstLegsMovementFrame = 0;
+  firstLegsMovementFrame: number;
+  totalNumberOfLegsMovementFrames: number;
 
   constructor(
     ctx: CanvasRenderingContext2D,
@@ -48,17 +48,13 @@ abstract class Player {
     game: Game
   ) {
     // очки жизни, после 3 столкновений игрок "умирает"
-    this.hitPoints = 3;
-    // счет очков
-    this.score = 0;
-
-    this.width = 0;
-    this.height = 0;
-    this.x = 0;
-    this.y = 0;
-    this.skinLegsFrame = 0;
-    this.skinDirectionFrame = 0;
-    this.speed = 5;
+    this.hitPoints = GAME_SETTINGS.HIT_POINTS;
+    this.skinLegsFrame = GAME_SETTINGS.SKIN_FIRST_HORIZONTAL_FRAME;
+    this.skinDirectionFrame = GAME_SETTINGS.SKIN_VERTICAL_FRAME;
+    this.totalNumberOfLegsMovementFrames =
+      GAME_SETTINGS.SKIN_TOTAL_NUMBER_OF_HORIZONTAL_FRAMES;
+    this.firstLegsMovementFrame = GAME_SETTINGS.SKIN_FIRST_HORIZONTAL_FRAME;
+    this.speed = GAME_SETTINGS.PLAYER_SPEED;
     this.isMoving = false;
     this.ctx = ctx;
     this.canvasHeight = canvasHeight;
@@ -150,7 +146,6 @@ abstract class Player {
       this.width,
       this.height
     );
-    this.ctx.strokeRect(this.x, this.y, this.width, this.height);
     this.renderHPandScore(this.ctx);
     this.animate();
   }
@@ -173,8 +168,8 @@ export class PlayerOne extends Player {
     { game }: GameEntities
   ) {
     super(ctx, canvasHeight, canvasWidth, game);
-    this.x = 100;
-    this.y = 400;
+    this.x = GAME_SETTINGS.PLAYER_ONE_X;
+    this.y = GAME_SETTINGS.PLAYER_ONE_Y;
     this.ctx = ctx;
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
@@ -201,7 +196,10 @@ export class PlayerOne extends Player {
 
   movePlayer = () => {
     if (this.y !== undefined && this.x !== undefined) {
-      if (playerCurrentDirections[DirectionPlayerButtons.Up] && this.y > 100) {
+      if (
+        playerCurrentDirections[DirectionPlayerButtons.Up] &&
+        this.y > GAME_SETTINGS.BACKGROUND_VERTICAL_LIMIT
+      ) {
         this.y -= this.speed;
         this.skinDirectionFrame = DirectionPlayer.Up;
         this.isMoving = true;
