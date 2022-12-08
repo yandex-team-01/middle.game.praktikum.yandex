@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-// import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
 import { i18next } from '../i18next.config';
 
@@ -13,7 +13,7 @@ import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { startServiceWorker } from 'src/utils/serviceWorker';
 import { PreloadedState } from 'src/store/types';
 
-import { ConnectedRouter } from 'connected-react-router';
+// import { ConnectedRouter } from 'connected-react-router';
 
 const defineStore = window.__PRELOADED_STATE__ as PreloadedState;
 console.log('window defaultStore', window.__PRELOADED_STATE__);
@@ -27,19 +27,19 @@ ReactDOM.hydrateRoot(
   document.getElementById('root') as HTMLElement,
   <React.StrictMode>
     <React.Suspense>
-      {/* <BrowserRouter> */}
-      <Provider store={store}>
-        <ConnectedRouter history={history}>
+      <BrowserRouter>
+        <Provider store={store}>
+          {/* <ConnectedRouter history={history}> */}
           <I18nextProvider i18n={i18next}>
             <ErrorBoundary>
               <App />
             </ErrorBoundary>
           </I18nextProvider>
-        </ConnectedRouter>
-      </Provider>
-      {/* </BrowserRouter> */}
+          {/* </ConnectedRouter> */}
+        </Provider>
+      </BrowserRouter>
     </React.Suspense>
-  </React.StrictMode>
+  </React.StrictMode >
 );
 
 startServiceWorker();

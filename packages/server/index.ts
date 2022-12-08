@@ -23,8 +23,16 @@ const port = Number(process.env.PORT) || 3001;
 //! Временно отключено для тестирования
 // createClientAndConnect();
 
-app.get('/ru/', (req, res) => {
+app.get('/', (req, res) => {
+
+  try {
+    render(req.url, defaultStore);
+  } catch (error) {
+    console.log(error);
+  }
+
   const result = render(req.url, defaultStore);
+
 
   console.log('defaultStore server', defaultStore);
   const template = path.resolve(__dirname, '../client/dist/client/index.html');

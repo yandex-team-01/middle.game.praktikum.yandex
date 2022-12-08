@@ -7,6 +7,9 @@ const LOCAL_STORAGE_DEFAULTS: Record<LocalStorageItems, string> = {
 };
 
 export function getLocalStorageItem(key: LocalStorageItems) {
-  const res = localStorage.getItem(key);
-  return res || LOCAL_STORAGE_DEFAULTS[key];
+  if (typeof localStorage !== 'undefined') {
+    const res = localStorage.getItem(key);
+    return res || LOCAL_STORAGE_DEFAULTS[key];
+  }
+  return LOCAL_STORAGE_DEFAULTS[key];
 }
