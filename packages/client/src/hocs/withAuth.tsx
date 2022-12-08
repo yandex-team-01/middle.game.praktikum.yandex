@@ -5,10 +5,10 @@ import { ComponentType } from 'react';
 
 export const withAuth = (Component: ComponentType) => {
   return () => {
-    const dispath = useAppDispatch();
+    const dispatch = useAppDispatch();
 
     useMountEffect(() => {
-      dispath(fetchAuth());
+      dispatch(fetchAuth());
     });
 
     return <Component />;

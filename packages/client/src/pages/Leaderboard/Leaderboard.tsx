@@ -4,31 +4,17 @@ import styles from './Leaderboard.module.scss';
 
 import { BlankWindow } from 'src/components/BlankWindow';
 import { Button } from 'src/components/Button';
-import { LeaderboardLine } from './components/LeaderboardLine';
+import { ILeader, LeaderboardLine } from './components/LeaderboardLine';
 import { useNavigator } from 'src/hooks/useNavigator';
-
-const LeadersMockData = [
-  {
-    name: 'Team 1',
-    score: 12345,
-    players: ['player 1', 'player 2'],
-  },
-  {
-    name: 'Team 3',
-    score: 1000,
-    players: ['player 6', 'player 10'],
-  },
-  {
-    name: 'Team 5',
-    score: 933,
-    players: ['player 33', 'player 24'],
-  },
-  {
-    name: 'Team 6',
-    score: 600,
-    players: ['player 122', 'player 442'],
-  },
-];
+import { useMountEffect } from 'src/hooks/useMountEffect';
+import { getAllLeaderboard } from 'src/store/leaderboard/LeaderboardActions';
+import { BackgroundLayout } from 'src/layouts/BackgroundLayout';
+import { Spinner } from 'src/components/Spinner';
+import {
+  selectLeaderboard,
+  selectLoading,
+} from 'src/store/leaderboard/LeaderboardSelectors';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 
 export const Leaderboard = () => {
   const { t } = useTranslation();
@@ -36,6 +22,28 @@ export const Leaderboard = () => {
 
   const handleBack = () => navigator(-1);
   const handleLoadGame = () => navigator('/loadinggame');
+  const isLoading = useAppSelector(selectLoading);
+  const leaderboard = useAppSelector(selectLeaderboard);
+  const dispatch = useAppDispatch();
+
+  const requestData = {
+    teamName: 'team-01',
+    ratingFieldName: 'huggywuggyscore',
+    cursor: 0,
+    limit: 1000,
+  };
+
+  useMountEffect(() => {
+    dispatch(getAllLeaderboard(requestData));
+  });
+
+  if (isLoading) {
+    return (
+      <BackgroundLayout>
+        <Spinner />
+      </BackgroundLayout>
+    );
+  }
 
   return (
     <div className={styles.block}>
@@ -50,9 +58,18 @@ export const Leaderboard = () => {
       <BlankWindow className={styles.window}>
         <div className={styles.background_overlay}>
           <h1 className={styles.header}>{t('topTeams')}</h1>
-          {LeadersMockData.map((team, idx) => {
-            return <LeaderboardLine team={team} idx={idx} key={idx} />;
-          })}
+          <table className={styles.table}>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Score</th>
+            </tr>
+            {leaderboard.map((leader: { data: ILeader }, idx) => {
+              return (
+                <LeaderboardLine leader={leader.data} idx={idx} key={idx} />
+              );
+            })}
+          </table>
         </div>
       </BlankWindow>
     </div>

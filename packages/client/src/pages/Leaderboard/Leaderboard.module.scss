@@ -19,11 +19,16 @@
   @include fontText(normal, 400, 12px, 20px);
   width: 100%;
   color: $text-primary;
-  padding: 80px 0px;
+  padding: 0px 0px 80px;
   margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.table {
+  width: 80%;
+  max-width: 500px;
 }
 
 .header {

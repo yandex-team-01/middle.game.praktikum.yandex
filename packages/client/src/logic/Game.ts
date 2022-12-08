@@ -16,11 +16,13 @@ export class Game {
   private npcControll: NpcControll;
   private timer: Timer;
   public view: View;
+  private onEndGame: (score: number) => void;
 
   constructor(protected canvas: HTMLCanvasElement) {
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
     this.canvas.width = this.width;
     this.canvas.height = this.height;
+    this.onEndGame = () => console.log('game ended');
 
     this.playerOne = new PlayerOne(
       this.ctx,
@@ -40,11 +42,12 @@ export class Game {
     this.sprites = {};
   }
 
-  async init(callback: () => void) {
+  async init(callback: () => void, onEndGame: (score: number) => void) {
     await this.allSprites.prepareSprites();
     this.gameOverBackgroundAudio = new Audio('/src/assets/audio/game-over.mp3');
 
     this.sprites = this.allSprites.getSprites();
+    this.onEndGame = onEndGame;
 
     this.start();
     callback();
@@ -83,12 +86,13 @@ export class Game {
     this.view.startCycle();
   }
 
-  end(isWin = false) {
+  end(isWin = false, score: number) {
     //TODO: вынести в отдельный контроллер для аудио
     if (this.gameOverBackgroundAudio) {
       this.gameOverBackgroundAudio.currentTime = 0;
       this.gameOverBackgroundAudio.play();
     }
     this.view.stopCycle(isWin);
+    this.onEndGame(score);
   }
 }
