@@ -6,12 +6,15 @@
     "build": "tsc --p ./tsconfig.prod.json",
     "preview": "node ./dist/index.js",
     "dev": "nodemon index.ts",
+    "start": "nodemon index.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "jest ."
   },
   "dependencies": {
+    "@types/cookie-parser": "1.4.3",
     "@types/serialize-javascript": "^5.0.2",
+    "cookie-parser": "1.4.6",
     "cors": "2.8.5",
     "dotenv": "16.0.2",
     "eslint-config-prettier": "8.5.0",

@@ -14,9 +14,7 @@ import { startServiceWorker } from 'src/utils/serviceWorker';
 import { PreloadedState } from 'src/store/types';
 
 const defineStore = window.__PRELOADED_STATE__ as PreloadedState;
-console.log('window defaultStore', window.__PRELOADED_STATE__);
 delete window.__PRELOADED_STATE__;
-console.log('window delete defaultStore', window.__PRELOADED_STATE__);
 const store = setupStore(defineStore);
 
 ReactDOM.hydrateRoot(

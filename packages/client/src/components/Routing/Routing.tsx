@@ -20,7 +20,7 @@ import {
 import { ErrorBoundary } from '../ErrorBoundary';
 import { ProtectedRoute } from '../ProtectedRoute';
 import { useAppSelector } from 'src/hooks/redux';
-import { langPath } from 'src/utils/langPath';
+// import { langPath } from 'src/utils/langPath';
 
 import { TopicList } from 'src/pages/Forum/components/TopicList';
 import { BlockCreateTopic } from 'src/pages/Forum/components/BlockCreateTopic';
@@ -41,9 +41,9 @@ export const Routing = () => {
     <ErrorBoundary>
       <Routes>
         <Route
-          path={langPath('/auth')}
+          path="/auth"
           element={
-            <ProtectedRoute flag={!auth} redirect={langPath('/')}>
+            <ProtectedRoute flag={!auth} redirect="/">
               <BackgroundLayout>
                 <AuthPage />
               </BackgroundLayout>
@@ -52,24 +52,20 @@ export const Routing = () => {
           <Route index element={<LoginForm />} />
           <Route path="reg" element={<RegistrationForm />} />
         </Route>
-        <Route
-          path="/auth"
-          element={<Navigate to={langPath('/auth')} replace />}
-        />
 
         <Route
-          path={langPath('/')}
+          path="/"
           element={
             <BackgroundLayout>
               {auth ? <MainMenu /> : <Landing />}
             </BackgroundLayout>
           }
         />
-        <Route path="/" element={<Navigate to={langPath('/')} replace />} />
+
         <Route
-          path={langPath('/forum')}
+          path="/forum"
           element={
-            <ProtectedRoute flag={auth} redirect={langPath('/auth')}>
+            <ProtectedRoute flag={auth} redirect="/auth">
               <BackgroundLayout>
                 <Forum />
               </BackgroundLayout>
@@ -79,30 +75,66 @@ export const Routing = () => {
           <Route path="topic" element={<CommentsPage />} />
           <Route path="createtopic" element={<BlockCreateTopic />} />
         </Route>
+
         <Route
-          path="/forum"
-          element={<Navigate to={langPath('/forum')} replace />}
-        />
-        <Route
-          path={langPath('/leaders')}
+          path="/leaders"
           element={
-            <ProtectedRoute flag={auth} redirect={langPath('/auth')}>
+            <ProtectedRoute flag={auth} redirect="/auth">
               <BackgroundLayout>
                 <Leaderboard />
               </BackgroundLayout>
             </ProtectedRoute>
           }
         />
+
+        <Route path="/loadinggame" element={<GameLoadingPage />} />
+
+        <Route path="/game" element={<GameScreen />} />
+
         <Route
+          path="/settings"
+          element={
+            <ProtectedRoute flag={auth} redirect="/auth">
+              <BackgroundLayout>
+                <SettingsPage />
+              </BackgroundLayout>
+            </ProtectedRoute>
+          }>
+          <Route index element={<SettingsData />} />
+          <Route path="edit" element={<SettingsChangeData />} />
+          <Route path="password" element={<SettingsChangePassword />} />
+        </Route>
+
+        <Route
+          path="/500"
+          element={<ErrorPage title="500" description={t('error500')} />}
+        />
+
+        <Route
+          path="/404"
+          element={<ErrorPage title="404" description={t('error404')} />}
+        />
+
+        <Route path="*" element={<Navigate to="'/404'" replace />} />
+
+        {/* <Route
+          path="/auth"
+          element={<Navigate to={langPath('/auth')} replace />}
+        /> */}
+        {/* <Route path="/" element={<Navigate to={langPath('/')} replace />} /> */}
+        {/* <Route
+          path="/forum"
+          element={<Navigate to={langPath('/forum')} replace />}
+        /> */}
+        {/* <Route
           path="/leaders"
           element={<Navigate to={langPath('/leaders')} replace />}
-        />
-        <Route path={langPath('/loadinggame')} element={<GameLoadingPage />} />
-        <Route
+        /> */}
+        {/* <Route
           path="/loadinggame"
           element={<Navigate to={langPath('/loadinggame')} replace />}
-        />
-        <Route
+        /> */}
+        {/* <Route
           path={langPath('/resetpassword')}
           element={
             <BackgroundLayout>
@@ -113,42 +145,19 @@ export const Routing = () => {
         <Route
           path="/resetpassword"
           element={<Navigate to={langPath('/resetpassword')} replace />}
-        />
-        <Route path={langPath('/game')} element={<GameScreen />} />
-        <Route
+        /> */}
+        {/* <Route
           path="/game"
           element={<Navigate to={langPath('/game')} replace />}
-        />
-        <Route
-          path={langPath('/settings')}
-          element={
-            <ProtectedRoute flag={auth} redirect={langPath('/auth')}>
-              <BackgroundLayout>
-                <SettingsPage />
-              </BackgroundLayout>
-            </ProtectedRoute>
-          }>
-          <Route index element={<SettingsData />} />
-          <Route path="edit" element={<SettingsChangeData />} />
-          <Route path="password" element={<SettingsChangePassword />} />
-        </Route>
-        <Route
+        /> */}
+        {/* <Route
           path="/settings"
           element={<Navigate to={langPath('/settings')} replace />}
-        />
-        <Route
-          path={langPath('/500')}
-          element={<ErrorPage title="500" description={t('error500')} />}
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="/500"
           element={<Navigate to={langPath('/500')} replace />}
-        />
-        <Route
-          path={langPath('/404')}
-          element={<ErrorPage title="404" description={t('error404')} />}
-        />
-        <Route path="*" element={<Navigate to={langPath('/404')} replace />} />
+        /> */}
       </Routes>
     </ErrorBoundary>
   );
