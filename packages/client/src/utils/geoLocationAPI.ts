@@ -1,23 +1,27 @@
-import { GeoCoordinates } from "src/store/geolocation/GeoActions";
+import { TFunction } from 'i18next';
+import { GeoCoordinates } from 'src/store/geolocation/GeoActions';
 
-export const geolocation = (callback: (date: GeoCoordinates) => void) => {
-    let coordinates: GeoCoordinates | null = null;
+export const geolocation = (
+  callback: (date: GeoCoordinates) => void,
+  translation: TFunction
+) => {
+  let coordinates: GeoCoordinates | null = null;
 
-    const success = (position: GeolocationPosition) => {
-        const latitude: number = position.coords.latitude;
-        const longitude: number = position.coords.longitude;
-        coordinates = { lat: latitude, lon: longitude };
+  const success = (position: GeolocationPosition) => {
+    const latitude: number = position.coords.latitude;
+    const longitude: number = position.coords.longitude;
+    coordinates = { lat: latitude, lon: longitude };
 
-        callback(coordinates);
-    };
+    callback(coordinates);
+  };
 
-    const error = () => {
-        console.log('Не удалось получить информацию о местонахождении');
-    };
+  const error = () => {
+    console.log(translation('errorGetLocation'));
+  };
 
-    if (!navigator.geolocation) {
-        console.log('Геолокация не поддерживается вашим браузером');
-    } else {
-        navigator.geolocation.getCurrentPosition(success, error);
-    }
+  if (!navigator.geolocation) {
+    console.log(translation('errorGeolocation'));
+  } else {
+    navigator.geolocation.getCurrentPosition(success, error);
+  }
 };

@@ -8,7 +8,7 @@ const AppComponent = () => {
     <Location>
       <ErrorsNotification />
       <Routing />
-    </Location >
+    </Location>
   );
 };
 

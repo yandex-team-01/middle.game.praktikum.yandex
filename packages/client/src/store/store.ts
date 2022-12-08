@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   forum: forumReducer,
   users: usersReducer,
   leaderboard: leaderboardReducer,
-  geolocation: geolocationReducer
+  geolocation: geolocationReducer,
 });
 
 export const setupStore = (preloadedState: PreloadedState) => {

@@ -2,22 +2,22 @@ import { createSlice } from '@reduxjs/toolkit';
 import { fetchGeoLocation } from './GeoActions';
 
 interface IData {
-  country_iso_code: string
+  country_iso_code: string;
 }
 
 interface ISuggestions {
-  value: string,
-  unrestricted_value: string
-  data: IData
+  value: string;
+  unrestricted_value: string;
+  data: IData;
 }
 
 export interface ILocation {
-  suggestions: ISuggestions[]
+  suggestions: ISuggestions[];
 }
 
 interface IGeoLocation {
-  location: ILocation | undefined,
-  loading: boolean,
+  location: ILocation | undefined;
+  loading: boolean;
 }
 
 const initialState: IGeoLocation = {

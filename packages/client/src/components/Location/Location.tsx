@@ -1,49 +1,52 @@
 import i18next from 'i18next';
 import React, { ReactNode, useEffect, memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
-import { useMountEffect } from 'src/hooks/useMountEffect';
+import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { fetchGeoLocation } from 'src/store/geolocation/GeoActions';
 import { selectGeoLocation } from 'src/store/geolocation/GeoSelectors';
 import { geolocation } from 'src/utils/geoLocationAPI';
 
 export interface Props {
-    children: ReactNode;
+  children: ReactNode;
 }
 
+const languagesCode = ['ru', 'RU'];
+
 export const Location = memo(({ children }: Props) => {
-    const location = useAppSelector(selectGeoLocation);
-    const dispatch = useAppDispatch();
-    const navigator = useNavigator();
+  const location = useAppSelector(selectGeoLocation);
+  const dispatch = useAppDispatch();
+  const navigator = useNavigator();
 
-    useEffect(() => {
-        if (!location) return;
+  const { t } = useTranslation();
 
-        const countryIsoCode = location?.suggestions[0].data.country_iso_code;
-        let switchLanguage = false;
+  useMountEffectOneCall(() => {
+    geolocation(data => dispatch(fetchGeoLocation(data)), t);
+  });
 
-        if (countryIsoCode === 'RU' && i18next.language !== 'ru') {
-            switchLanguage = confirm("Вы находитесь в России, переключить язык на русский?");
-            // console.log(switchLanguage);
-            if (!switchLanguage) return;
+  useEffect(() => {
+    if (!location) return;
 
-            i18next.changeLanguage('ru', (err) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                navigator('/');
-            });
+    const countryIsoCode = location.suggestions[0].data.country_iso_code;
+    let switchLanguage = false;
+
+    if (
+      languagesCode.includes(countryIsoCode) &&
+      !languagesCode.includes(i18next.language)
+    ) {
+      switchLanguage = confirm(t('switchLanguage'));
+      if (!switchLanguage) return;
+
+      i18next.changeLanguage('ru', err => {
+        if (err) {
+          console.log(err);
+          return;
         }
-    }, [location, navigator]);
+        navigator('/');
+      });
+    }
+  }, [location, navigator, t]);
 
-    useMountEffect(() => {
-        geolocation((data) => dispatch(fetchGeoLocation(data)));
-    });
-
-    return (
-        <>
-            {children}
-        </>
-    );
+  return <>{children}</>;
 });
