@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { SCORE_FIELD_NAME } from 'src/constants/LeaderboardConsts';
 import { addError } from '../error/ErrorSlice';
 import { fetchApi } from '../utils';
 
@@ -9,7 +10,7 @@ const defaultHeaders = {
 
 export interface IScore {
   data: {
-    huggywuggyscore: number;
+    [SCORE_FIELD_NAME]: number;
     user: string;
   };
   ratingFieldName: string;
