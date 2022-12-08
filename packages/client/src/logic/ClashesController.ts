@@ -1,24 +1,26 @@
-import { NpcEnemy, NpcFriend } from './Npc';
+import { NpcEnemy, NpcFriend, NpcTypes } from './Npc';
 import { NpcControll } from './NpcControll';
 import { PlayerOne } from './Player';
 import { Sprite } from './Sprite';
 import { Collision } from './Collision';
-export class ClashesController {
-  public playerOne: PlayerOne;
-  public npcControll: NpcControll;
-  ctx: CanvasRenderingContext2D;
-  x: number;
-  y: number;
+import { GAME_SETTINGS } from './const';
 
+export class ClashesController {
+  playerOne: PlayerOne;
+  npcControll: NpcControll;
+  ctx: CanvasRenderingContext2D;
   spriteBlood: Sprite | undefined;
   spriteTeleport: Sprite | undefined;
-  skinHorizontalFrame = 0;
-  skinTotalNumberOfHorizontalFrames = 3;
-  skinFirstHorizontalFrame = 0;
-  skinVerticalFrame = 0;
-  inaccuracyOfCharacterSprite = 10;
   arrCollision: Collision[] = [];
   npcScreamingAudio: HTMLAudioElement;
+  x = 0;
+  y = 0;
+  skinHorizontalFrame = GAME_SETTINGS.SKIN_HORIZONTAL_FRAME;
+  skinTotalNumberOfHorizontalFrames =
+    GAME_SETTINGS.SKIN_TOTAL_NUMBER_OF_HORIZONTAL_FRAMES;
+  skinFirstHorizontalFrame = GAME_SETTINGS.SKIN_FIRST_HORIZONTAL_FRAME;
+  skinVerticalFrame = GAME_SETTINGS.SKIN_VERTICAL_FRAME;
+  inaccuracyOfCharacterSprite = GAME_SETTINGS.INACCURACY_OF_CHARACTER_SPRITE;
 
   constructor(
     ctx: CanvasRenderingContext2D,
@@ -26,8 +28,6 @@ export class ClashesController {
     npcControll: NpcControll
   ) {
     this.ctx = ctx;
-    this.x = 0;
-    this.y = 0;
 
     this.playerOne = player;
     this.npcControll = npcControll;
@@ -58,13 +58,15 @@ export class ClashesController {
         YColl = true;
       if (XColl && YColl) {
         npc.collisionHandling(this.playerOne);
-        if (npc.type === 'friend') {
+        if (npc.type === NpcTypes.Friend) {
+          this.playerOne.speed =
+            this.playerOne.speed + GAME_SETTINGS.PLAYER_COLLISION_SPEED_BONUS;
           this.deleteAndRestoreNpc(npc);
           this.setColisionImgCoordinats(npc, false);
         } else {
           npc.isMoving = false;
           npc.hasCollision = true;
-          npc.speed = npc.speed + 0.5;
+          npc.speed = npc.speed + GAME_SETTINGS.NPC_ENEMY_COLLISION_SPEED_BONUS;
           this.setColisionImgCoordinats(npc, true);
         }
       }
@@ -106,15 +108,16 @@ export class ClashesController {
     prevNpc: NpcEnemy | NpcFriend
   ) {
     if (
-      ['enemy_huggy', 'enemy_kissy'].includes(npc.type) &&
-      prevNpc.type === 'friend'
+      (npc.type === NpcTypes.Enemy_huggy ||
+        npc.type === NpcTypes.Enemy_kissy) &&
+      prevNpc.type === NpcTypes.Friend
     ) {
-      npc.speed = npc.speed + 0.3;
+      npc.speed = npc.speed + GAME_SETTINGS.NPC_ENEMY_COLLISION_SPEED_BONUS;
       this.setColisionImgCoordinats(prevNpc, true);
       this.deleteAndRestoreNpc(prevNpc);
     }
 
-    if (npc.type === 'friend' && prevNpc.type === 'friend') {
+    if (npc.type === NpcTypes.Friend && prevNpc.type === NpcTypes.Friend) {
       this.setColisionImgCoordinats(prevNpc, false);
       this.deleteAndRestoreNpc(prevNpc);
     }

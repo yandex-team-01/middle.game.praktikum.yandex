@@ -10,6 +10,27 @@ import npcEnemyKissy from '/src/assets/images/game-npc-kissy.png';
 import collisionBood from '/src/assets/images/game-collision-blood.png';
 import collisionTeleport from '/src/assets/images/game-collision-teleport.png';
 
+export enum GAME_SETTINGS {
+  BACKGROUND_VERTICAL_LIMIT = 100,
+  SKIN_HORIZONTAL_FRAME = 0,
+  SKIN_TOTAL_NUMBER_OF_HORIZONTAL_FRAMES = 3,
+  SKIN_FIRST_HORIZONTAL_FRAME = 0,
+  SKIN_VERTICAL_FRAME = 0,
+  INACCURACY_OF_CHARACTER_SPRITE = 10,
+  PLAYER_ONE_X = 100,
+  PLAYER_ONE_Y = 400,
+  PLAYER_SPEED = 7,
+  ENEMY_SPEED = 8,
+  FRIEND_SPEED = 6,
+  HIT_POINTS = 3,
+  DEFINE_BONUS = 1,
+  PLAYER_COLLISION_SPEED_BONUS = 0.1,
+  NPC_ENEMY_COLLISION_SPEED_BONUS = 0.2,
+  ENEMY_HUGGY_START_X = 500,
+  ENEMY_KISSY_START_X = 700,
+  ENEMY_START_Y = 200,
+}
+
 export enum SPRITE_ID {
   MAIN_BACK = 'back',
   GAME_OVER_BACK = 'gameOver',

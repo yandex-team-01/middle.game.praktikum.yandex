@@ -1,4 +1,4 @@
-import { NpcEnemy, NpcFriend } from './Npc';
+import { NpcEnemy, NpcFriend, NpcTypes } from './Npc';
 import { AllSpritesType } from './types';
 import { defaultOptionNpc } from './const';
 import { SPRITE_ID } from './const';
@@ -20,7 +20,7 @@ export class NpcControll {
     this.ctx = ctx;
     // временно вывожу массив npc
     this.arrNpc = defaultOptionNpc.map(option => {
-      if (option.type === 'friend') {
+      if (option.type === NpcTypes.Friend) {
         return new NpcFriend(ctx, option, canvasHeight, canvasWidth);
       } else {
         return new NpcEnemy(ctx, option, canvasHeight, canvasWidth);
@@ -38,11 +38,11 @@ export class NpcControll {
 
     this.sprites = sprites;
     this.arrNpc.forEach(npc => {
-      if (npc.type === 'friend') {
+      if (npc.type === NpcTypes.Friend) {
         npc.setSprite(sprites[SPRITE_ID.NPC_FRIEND]);
-      } else if (npc.type === 'enemy_huggy') {
+      } else if (npc.type === NpcTypes.Enemy_huggy) {
         npc.setSprite(sprites[SPRITE_ID.NPC_ENEMY_HUGGY]);
-      } else if (npc.type === 'enemy_kissy') {
+      } else if (npc.type === NpcTypes.Enemy_kissy) {
         npc.setSprite(sprites[SPRITE_ID.NPC_ENEMY_KISSY]);
       }
     });
@@ -61,13 +61,16 @@ export class NpcControll {
       return;
     }
     const newNpcOptions = defaultOptionNpc.filter(item => item.id === npc.id);
-    const newNpc = new NpcFriend(
-      this.ctx,
-      newNpcOptions[0],
-      this.canvasHeight,
-      this.canvasWidth
-    );
-    newNpc.setSprite(this.sprites[SPRITE_ID.NPC_FRIEND]);
-    this.arrNpc.push(newNpc);
+    const newNpcFriendOptions = newNpcOptions.shift();
+    if (newNpcFriendOptions) {
+      const newNpc = new NpcFriend(
+        this.ctx,
+        newNpcFriendOptions,
+        this.canvasHeight,
+        this.canvasWidth
+      );
+      newNpc.setSprite(this.sprites[SPRITE_ID.NPC_FRIEND]);
+      this.arrNpc.push(newNpc);
+    }
   }
 }

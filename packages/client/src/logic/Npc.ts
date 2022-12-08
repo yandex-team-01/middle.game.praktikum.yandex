@@ -1,7 +1,13 @@
 import { Sprite } from './Sprite';
 import { NpcConstructorOptions, Position } from './types';
 import { PlayerOne } from './Player';
+import { GAME_SETTINGS } from './const';
 
+export enum NpcTypes {
+  Friend = 'friend',
+  Enemy_huggy = 'enemy_huggy',
+  Enemy_kissy = 'enemy_kissy',
+}
 export enum DirectionNpc {
   Down = 0,
   Left,
@@ -18,22 +24,23 @@ export abstract class NpcModel {
   id: number;
   type: string;
   sprite: Sprite | undefined;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  skinLegsFrame: number;
-  skinDirectionFrame: number;
-  speed: number;
+  x = 0;
+  y = 0;
+  width = 0;
+  height = 0;
+  speed = 0;
   isMoving: boolean;
   canvasHeight: number;
   canvasWidth: number;
-  npcCurrentDirections: boolean[] = [];
-  totalNumberOfLegsMovementFrames = 3;
-  firstLegsMovementFrame = 0;
-  ctx: CanvasRenderingContext2D;
-  hasCollision = false;
 
+  skinLegsFrame: number;
+  skinDirectionFrame: number;
+  totalNumberOfLegsMovementFrames: number;
+  firstLegsMovementFrame: number;
+
+  npcCurrentDirections: boolean[] = [];
+  hasCollision = false;
+  ctx: CanvasRenderingContext2D;
   constructor(
     ctx: CanvasRenderingContext2D,
     options: NpcConstructorOptions,
@@ -43,16 +50,15 @@ export abstract class NpcModel {
     this.ctx = ctx;
     this.id = options.id;
     this.type = options.type;
-    this.x = 0;
-    this.y = 0;
-    this.width = 0;
-    this.height = 0;
-    this.skinLegsFrame = 0;
-    this.skinDirectionFrame = 0;
-    this.speed = 6;
+
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
     this.isMoving = true;
+    this.skinLegsFrame = GAME_SETTINGS.SKIN_FIRST_HORIZONTAL_FRAME;
+    this.skinDirectionFrame = GAME_SETTINGS.SKIN_VERTICAL_FRAME;
+    this.totalNumberOfLegsMovementFrames =
+      GAME_SETTINGS.SKIN_TOTAL_NUMBER_OF_HORIZONTAL_FRAMES;
+    this.firstLegsMovementFrame = GAME_SETTINGS.SKIN_FIRST_HORIZONTAL_FRAME;
     this.startMoving();
   }
 
@@ -257,17 +263,17 @@ export class NpcEnemy extends NpcModel {
     super(ctx, options, canvasHeight, canvasWidth);
     this.ctx = ctx;
 
-    this.setEnemyNpcStartCoodinats(canvasWidth);
-    this.speed = 8;
+    this.setEnemyNpcStartCoodinats();
+    this.speed = GAME_SETTINGS.ENEMY_SPEED;
   }
 
-  private setEnemyNpcStartCoodinats(canvasWidth: number) {
-    if (this.type === 'enemy_huggy') {
-      this.x = 100;
+  private setEnemyNpcStartCoodinats() {
+    if (this.type === NpcTypes.Enemy_huggy) {
+      this.x = GAME_SETTINGS.ENEMY_HUGGY_START_X;
     } else {
-      this.x = canvasWidth - 100;
+      this.x = GAME_SETTINGS.ENEMY_KISSY_START_X;
     }
-    this.y = 250;
+    this.y = GAME_SETTINGS.ENEMY_START_Y;
   }
 
   collisionHandling(player: PlayerOne) {
@@ -286,7 +292,8 @@ export class NpcFriend extends NpcModel {
   ) {
     super(ctx, options, canvasHeight, canvasWidth);
     this.ctx = ctx;
-    this.defineBonus = 1;
+    this.defineBonus = GAME_SETTINGS.DEFINE_BONUS;
+    this.speed = GAME_SETTINGS.FRIEND_SPEED;
   }
 
   collisionHandling(player: PlayerOne) {

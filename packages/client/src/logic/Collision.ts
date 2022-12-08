@@ -1,5 +1,5 @@
 import { Sprite } from './Sprite';
-
+import { GAME_SETTINGS } from './const';
 export class Collision {
   ctx: CanvasRenderingContext2D;
   x: number;
@@ -7,10 +7,10 @@ export class Collision {
   width = 0;
   height = 0;
   sprite: Sprite | undefined;
-  skinHorizontalFrame = 0;
-  skinTotalNumberOfHorizontalFrames = 3;
-  skinFirstHorizontalFrame = 0;
-  skinVerticalFrame = 0;
+  skinHorizontalFrame = GAME_SETTINGS.SKIN_HORIZONTAL_FRAME;
+  skinTotalNumberOfHorizontalFrames =
+    GAME_SETTINGS.SKIN_TOTAL_NUMBER_OF_HORIZONTAL_FRAMES;
+  skinVerticalFrame = GAME_SETTINGS.SKIN_VERTICAL_FRAME;
   isCollisionWithEnemy: boolean | undefined;
   constructor(ctx: CanvasRenderingContext2D, x: number, y: number) {
     this.ctx = ctx;
