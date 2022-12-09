@@ -1,60 +1,34 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { SCORE_FIELD_NAME } from 'src/constants/LeaderboardConsts';
+import { addLeader, getLeaderboard } from 'src/api/leaderboardApi';
 import { addError } from '../error/ErrorSlice';
-import { fetchApi } from '../utils';
+import { RootState } from '../store';
+import { ILeaderboardRequest, Leader } from './types';
 
-const defaultHeaders = {
-  'content-type': 'application/json',
-  mode: 'cors',
-};
-
-export interface IScore {
-  data: {
-    [SCORE_FIELD_NAME]: number;
-    user: string;
-  };
-  ratingFieldName: string;
-  teamName: string;
-}
-
-export interface ILeaderboardRequest {
-  ratingFieldName: string;
-  cursor: number;
-  limit: number;
-}
-
-export const recordScore = createAsyncThunk(
-  'leaderboard',
-  async (data: IScore, thunkApi) => {
-    try {
-      const res = await fetchApi('/leaderboard', {
-        method: 'POST',
-        headers: defaultHeaders,
-        body: JSON.stringify(data),
-      });
-      return res;
-    } catch (error) {
-      thunkApi.dispatch(addError('Ошибка записи результата игры'));
-      thunkApi.rejectWithValue('Ошибка записи результата игры');
-      throw error;
-    }
+export const recordScore = createAsyncThunk<
+  Leader[],
+  number,
+  { state: RootState }
+>('leaderboard', async (score, thunkApi) => {
+  const state = thunkApi.getState();
+  const login = state.auth.user?.login;
+  try {
+    return addLeader(score, login);
+  } catch (error) {
+    thunkApi.dispatch(addError('Ошибка записи результата игры'));
+    thunkApi.rejectWithValue('Ошибка записи результата игры');
+    throw error;
   }
-);
+});
 
-export const getAllLeaderboard = createAsyncThunk(
-  'leaderboard',
-  async (data: ILeaderboardRequest, thunkApi) => {
-    try {
-      const res = await fetchApi('/leaderboard/all', {
-        method: 'POST',
-        headers: defaultHeaders,
-        body: JSON.stringify(data),
-      });
-      return res;
-    } catch (error) {
-      thunkApi.dispatch(addError('Ошибка запроса лидерборда'));
-      thunkApi.rejectWithValue('Ошибка запроса лидерборда');
-      throw error;
-    }
+export const getAllLeaderboard = createAsyncThunk<
+  Leader[],
+  ILeaderboardRequest
+>('leaderboard', async (data: ILeaderboardRequest, thunkApi) => {
+  try {
+    return getLeaderboard(data);
+  } catch (error) {
+    thunkApi.dispatch(addError('Ошибка запроса лидерборда'));
+    thunkApi.rejectWithValue('Ошибка запроса лидерборда');
+    throw error;
   }
-);
+});

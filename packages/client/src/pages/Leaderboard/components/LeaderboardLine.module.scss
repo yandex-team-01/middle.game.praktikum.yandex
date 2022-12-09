@@ -1,9 +1,11 @@
 .leader_line {
   margin: 20px 0 0;
-  text-align: center;
   font-size: 30px;
 }
 
 .leader_line_item {
   padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

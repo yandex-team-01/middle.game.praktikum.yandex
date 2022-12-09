@@ -1,10 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getAllLeaderboard } from './LeaderboardActions';
-
-interface ILeaderBoardState {
-  leaderboard: [];
-  isLoading: boolean;
-}
+import { ILeaderBoardState } from './types';
 
 const initialState: ILeaderBoardState = {
   leaderboard: [],
@@ -20,7 +16,7 @@ export const leaderboardSlice = createSlice({
       state.isLoading = true;
     });
     buider.addCase(getAllLeaderboard.fulfilled, (state, action) => {
-      state.leaderboard = action.payload as [];
+      state.leaderboard = action.payload;
       state.isLoading = false;
     });
   },

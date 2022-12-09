@@ -16,13 +16,12 @@ export class Game {
   private npcControll: NpcControll;
   private timer: Timer;
   public view: View;
-  private onEndGame: (score: number) => void;
+  private onEndGame?: (score: number) => void;
 
   constructor(protected canvas: HTMLCanvasElement) {
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
     this.canvas.width = this.width;
     this.canvas.height = this.height;
-    this.onEndGame = () => console.log('game ended');
 
     this.playerOne = new PlayerOne(
       this.ctx,
@@ -93,6 +92,6 @@ export class Game {
       this.gameOverBackgroundAudio.play();
     }
     this.view.stopCycle(isWin);
-    this.onEndGame(score);
+    this.onEndGame?.(score);
   }
 }

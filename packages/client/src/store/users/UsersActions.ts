@@ -6,11 +6,7 @@ import { addError } from '../error/ErrorSlice';
 import { updateUser } from '../auth/AuthSlice';
 import { IUser } from 'src/modules/IUser';
 import { ChangePasswordData } from 'src/modules/IUsers';
-
-const defaultHeaders = {
-  'content-type': 'application/json',
-  mode: 'cors',
-};
+import { defaultHeaders } from 'src/constants/http';
 
 export const fetchChangeUser = createAsyncThunk(
   'auth/fetchChangeUser',

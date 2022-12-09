@@ -5,11 +5,7 @@ import { SignupData, SigninData } from 'src/modules/IAuth';
 import { fetchApi } from '../utils';
 import { addError } from '../error/ErrorSlice';
 import { IUser } from 'src/modules/IUser';
-
-const defaultHeaders = {
-  'content-type': 'application/json',
-  mode: 'cors',
-};
+import { defaultHeaders } from 'src/constants/http';
 
 export const fetchAuth = createAsyncThunk(
   'auth/fetchAuth',

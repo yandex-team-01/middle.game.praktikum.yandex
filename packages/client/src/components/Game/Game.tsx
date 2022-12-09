@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Game } from 'src/logic/Game';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
@@ -8,9 +8,8 @@ import styles from 'src/pages/GameScreen/GameScreen.module.scss';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { recordScore } from 'src/store/leaderboard/LeaderboardActions';
-import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
-import { selectUser } from 'src/store/auth/AuthSelectors';
-import { SCORE_FIELD_NAME, TEAM_NAME } from 'src/constants/LeaderboardConsts';
+import { useAppDispatch } from 'src/hooks/redux';
+import { useBoundAction } from 'src/hooks/useBoundAction';
 
 export const GameComponent = () => {
   const { t } = useTranslation();
@@ -20,20 +19,9 @@ export const GameComponent = () => {
   const handleBack = () => navigator('/');
   const [isFullScreen, toggleIsFullScreen] = useFullScreen();
 
-  const user = useAppSelector(selectUser);
-
-  const onEndGame = useCallback(
-    (score: number) => {
-      dispatch(
-        recordScore({
-          data: { [SCORE_FIELD_NAME]: score, user: user.login },
-          teamName: TEAM_NAME,
-          ratingFieldName: SCORE_FIELD_NAME,
-        })
-      );
-    },
-    [dispatch, user]
-  );
+  const onEndGame = useBoundAction((score: number) => {
+    dispatch(recordScore(score));
+  });
 
   const canvas = useRef<HTMLCanvasElement>(null); //https://stackoverflow.com/a/63119934
   const game = useRef<Game | null>(null);

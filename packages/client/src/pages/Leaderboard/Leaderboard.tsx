@@ -4,7 +4,7 @@ import styles from './Leaderboard.module.scss';
 
 import { BlankWindow } from 'src/components/BlankWindow';
 import { Button } from 'src/components/Button';
-import { ILeader, LeaderboardLine } from './components/LeaderboardLine';
+import { LeaderboardLine } from './components/LeaderboardLine';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { useMountEffect } from 'src/hooks/useMountEffect';
 import { getAllLeaderboard } from 'src/store/leaderboard/LeaderboardActions';
@@ -14,7 +14,10 @@ import {
   selectLeaderboard,
   selectLoading,
 } from 'src/store/leaderboard/LeaderboardSelectors';
-import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
+import { useAppSelector } from 'src/hooks/redux';
+import { leaderboardRequestData } from 'src/constants/LeaderboardConsts';
+import { useBoundAction } from 'src/hooks/useBoundAction';
+import { Leader } from 'src/store/leaderboard/types';
 
 export const Leaderboard = () => {
   const { t } = useTranslation();
@@ -24,17 +27,10 @@ export const Leaderboard = () => {
   const handleLoadGame = () => navigator('/loadinggame');
   const isLoading = useAppSelector(selectLoading);
   const leaderboard = useAppSelector(selectLeaderboard);
-  const dispatch = useAppDispatch();
 
-  const requestData = {
-    teamName: 'team-01',
-    ratingFieldName: 'huggywuggyscore',
-    cursor: 0,
-    limit: 1000,
-  };
-
+  const handleGetLeaderboard = useBoundAction(getAllLeaderboard);
   useMountEffect(() => {
-    dispatch(getAllLeaderboard(requestData));
+    handleGetLeaderboard(leaderboardRequestData);
   });
 
   if (isLoading) {
@@ -58,18 +54,17 @@ export const Leaderboard = () => {
       <BlankWindow className={styles.window}>
         <div className={styles.background_overlay}>
           <h1 className={styles.header}>{t('topTeams')}</h1>
-          <table className={styles.table}>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Score</th>
-            </tr>
-            {leaderboard.map((leader: { data: ILeader }, idx) => {
+          <div className={styles.table}>
+            <div className={styles.header_item}>#</div>
+            <div className={styles.header_item}>{t('Name')}</div>
+            <div className={styles.header_item}>{t('Score')}</div>
+
+            {leaderboard.map((leader: Leader, idx) => {
               return (
                 <LeaderboardLine leader={leader.data} idx={idx} key={idx} />
               );
             })}
-          </table>
+          </div>
         </div>
       </BlankWindow>
     </div>
