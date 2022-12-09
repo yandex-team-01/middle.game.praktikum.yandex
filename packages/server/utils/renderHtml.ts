@@ -5,15 +5,14 @@ import fs from 'fs';
 import { render } from '../../client/dist/ssr/entry-server.cjs';
 import { renderObject } from './renderObject';
 import { defaultStore } from '../constants/defaultStore';
-import { allRoutes } from '../constants/allRoutes';
 
 export const renderHtml = (req: Request, res: Response) => {
-  if (!allRoutes.find(url => url === req.url)) {
-    res.redirect('/404');
+  const { html, httpContext } = render(req.url, defaultStore);
+
+  if (httpContext.redirectLocation) {
+    res.redirect(httpContext.redirectLocation);
     return;
   }
-
-  const html = render(req.url, defaultStore);
 
   const template = path.resolve(
     __dirname,

@@ -17,8 +17,8 @@ const defineStore = window.__PRELOADED_STATE__ as PreloadedState;
 delete window.__PRELOADED_STATE__;
 const store = setupStore(defineStore);
 
-ReactDOM.hydrateRoot(
-  document.getElementById('root') as HTMLElement,
+const isSsr = import.meta.env.SSR;
+const dom = (
   <React.StrictMode>
     <React.Suspense>
       <BrowserRouter>
@@ -33,5 +33,13 @@ ReactDOM.hydrateRoot(
     </React.Suspense>
   </React.StrictMode>
 );
+
+if (isSsr) {
+  ReactDOM.hydrateRoot(document.getElementById('root') as HTMLElement, dom);
+} else {
+  ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+    dom
+  );
+}
 
 startServiceWorker();

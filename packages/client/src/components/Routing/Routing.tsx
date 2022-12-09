@@ -1,5 +1,6 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Redirect } from 'src/components/Redirect';
 
 import {
   Forum,
@@ -115,7 +116,7 @@ export const Routing = () => {
           element={<ErrorPage title="404" description={t('error404')} />}
         />
 
-        <Route path="*" element={<Navigate to="'/404'" replace />} />
+        <Route path="*" element={<Redirect to="/404" />} />
 
         {/* <Route
           path="/auth"
