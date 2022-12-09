@@ -1,14 +1,16 @@
-import { ErrorsNotification } from './components/ErrorsNotification';
-import { Location } from './components/Location/Location';
-import { Routing } from './components/Routing';
-import { withAuth } from './hocs/withAuth';
+import { ErrorsNotification } from 'src/components/ErrorsNotification';
+import { useLocation } from 'src/hooks/useLocation';
+import { Routing } from 'src/components/Routing';
+import { withAuth } from 'src/hocs/withAuth';
 
 const AppComponent = () => {
+  useLocation();
+
   return (
-    <Location>
+    <>
       <ErrorsNotification />
       <Routing />
-    </Location>
+    </>
   );
 };
 

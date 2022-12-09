@@ -16,11 +16,11 @@ export const geolocation = (
   };
 
   const error = () => {
-    console.log(translation('errorGetLocation'));
+    console.error(translation('errorGetLocation'));
   };
 
   if (!navigator.geolocation) {
-    console.log(translation('errorGeolocation'));
+    console.error(translation('errorGeolocation'));
   } else {
     navigator.geolocation.getCurrentPosition(success, error);
   }

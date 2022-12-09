@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-type UseBoundAction = {
+export type UseBoundAction = {
   // eslint-disable-next-line
   <I extends any[], R extends any>(actionCreator: (...args: I) => R): (
     ...args: I

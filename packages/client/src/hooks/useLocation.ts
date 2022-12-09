@@ -1,28 +1,27 @@
 import i18next from 'i18next';
-import React, { ReactNode, useEffect, memo } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
+import { useAppSelector } from 'src/hooks/redux';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { fetchGeoLocation } from 'src/store/geolocation/GeoActions';
 import { selectGeoLocation } from 'src/store/geolocation/GeoSelectors';
 import { geolocation } from 'src/utils/geoLocationAPI';
+import { useBoundAction } from './useBoundAction';
 
 export interface Props {
   children: ReactNode;
 }
 
-const languagesCode = ['ru', 'RU'];
-
-export const Location = memo(({ children }: Props) => {
+export const useLocation = () => {
   const location = useAppSelector(selectGeoLocation);
-  const dispatch = useAppDispatch();
   const navigator = useNavigator();
 
   const { t } = useTranslation();
+  const callback = useBoundAction((data) => fetchGeoLocation(data));
 
   useMountEffectOneCall(() => {
-    geolocation(data => dispatch(fetchGeoLocation(data)), t);
+    geolocation(callback, t);
   });
 
   useEffect(() => {
@@ -32,21 +31,23 @@ export const Location = memo(({ children }: Props) => {
     let switchLanguage = false;
 
     if (
-      languagesCode.includes(countryIsoCode) &&
-      !languagesCode.includes(i18next.language)
+      countryIsoCode.toLowerCase() === 'ru' &&
+      i18next.language.toLowerCase() === 'en'
     ) {
       switchLanguage = confirm(t('switchLanguage'));
       if (!switchLanguage) return;
 
+      const pathname = window.location.pathname.split('/en')[1];
+
       i18next.changeLanguage('ru', err => {
         if (err) {
-          console.log(err);
+          console.error(err);
           return;
         }
-        navigator('/');
+        // т.к. при смене языка нас перебрасывает на 404, 
+        // мы запоминаем текущий pathname и восстанавливаем страницу 
+        navigator(`${pathname}`);
       });
     }
   }, [location, navigator, t]);
-
-  return <>{children}</>;
-});
+};
