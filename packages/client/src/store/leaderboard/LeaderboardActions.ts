@@ -12,7 +12,7 @@ export const recordScore = createAsyncThunk<
   const state = thunkApi.getState();
   const login = state.auth.user?.login;
   try {
-    return addLeader(score, login);
+    return await addLeader(score, login);
   } catch (error) {
     thunkApi.dispatch(addError('Ошибка записи результата игры'));
     thunkApi.rejectWithValue('Ошибка записи результата игры');
@@ -25,7 +25,7 @@ export const getAllLeaderboard = createAsyncThunk<
   ILeaderboardRequest
 >('leaderboard', async (data: ILeaderboardRequest, thunkApi) => {
   try {
-    return getLeaderboard(data);
+    return await getLeaderboard(data);
   } catch (error) {
     thunkApi.dispatch(addError('Ошибка запроса лидерборда'));
     thunkApi.rejectWithValue('Ошибка запроса лидерборда');

@@ -1,12 +1,14 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-export const selectLoading = createSelector(
-  (state: RootState) => state.leaderboard,
-  leaderboard => leaderboard.isLoading
+export const selectLeaderboardState = (state: RootState) => state.leaderboard;
+
+export const selectLeaderboardRecords = createSelector(
+  selectLeaderboardState,
+  leaderboard => leaderboard.leaderboard
 );
 
-export const selectLeaderboard = createSelector(
-  (state: RootState) => state.leaderboard,
-  leaderboard => leaderboard.leaderboard
+export const selectLoading = createSelector(
+  selectLeaderboardState,
+  leaderboard => leaderboard.isLoading
 );

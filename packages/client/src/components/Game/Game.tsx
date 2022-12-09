@@ -8,19 +8,17 @@ import styles from 'src/pages/GameScreen/GameScreen.module.scss';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { recordScore } from 'src/store/leaderboard/LeaderboardActions';
-import { useAppDispatch } from 'src/hooks/redux';
 import { useBoundAction } from 'src/hooks/useBoundAction';
 
 export const GameComponent = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
-  const dispatch = useAppDispatch();
 
   const handleBack = () => navigator('/');
   const [isFullScreen, toggleIsFullScreen] = useFullScreen();
 
   const onEndGame = useBoundAction((score: number) => {
-    dispatch(recordScore(score));
+    recordScore(score);
   });
 
   const canvas = useRef<HTMLCanvasElement>(null); //https://stackoverflow.com/a/63119934

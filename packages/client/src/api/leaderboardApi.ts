@@ -1,9 +1,16 @@
 import { defaultHeaders } from 'src/constants/http';
 import { SCORE_FIELD_NAME, TEAM_NAME } from 'src/constants/LeaderboardConsts';
-import { ILeaderboardRequest, Leader } from 'src/store/leaderboard/types';
+import {
+  ILeaderboardRequest,
+  IScore,
+  Leader,
+} from 'src/store/leaderboard/types';
 import { fetchApi } from 'src/store/utils';
 
-const extData = (score: number, login: string | undefined) => {
+const prepareLeaderboardRequestData = (
+  score: number,
+  login: string
+): IScore => {
   return {
     data: { [SCORE_FIELD_NAME]: score, user: login },
     teamName: TEAM_NAME,
@@ -11,11 +18,11 @@ const extData = (score: number, login: string | undefined) => {
   };
 };
 
-export const addLeader = async (score: number, login: string | undefined) => {
+export const addLeader = async (score: number, login = '') => {
   return await fetchApi<Leader[]>('/leaderboard', {
     method: 'POST',
     headers: defaultHeaders,
-    body: JSON.stringify(extData(score, login)),
+    body: JSON.stringify(prepareLeaderboardRequestData(score, login)),
   });
 };
 

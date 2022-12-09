@@ -11,7 +11,7 @@ import { getAllLeaderboard } from 'src/store/leaderboard/LeaderboardActions';
 import { BackgroundLayout } from 'src/layouts/BackgroundLayout';
 import { Spinner } from 'src/components/Spinner';
 import {
-  selectLeaderboard,
+  selectLeaderboardRecords,
   selectLoading,
 } from 'src/store/leaderboard/LeaderboardSelectors';
 import { useAppSelector } from 'src/hooks/redux';
@@ -26,7 +26,7 @@ export const Leaderboard = () => {
   const handleBack = () => navigator(-1);
   const handleLoadGame = () => navigator('/loadinggame');
   const isLoading = useAppSelector(selectLoading);
-  const leaderboard = useAppSelector(selectLeaderboard);
+  const leaderboard = useAppSelector(selectLeaderboardRecords);
 
   const handleGetLeaderboard = useBoundAction(getAllLeaderboard);
   useMountEffect(() => {
