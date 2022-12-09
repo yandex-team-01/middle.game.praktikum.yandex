@@ -82,7 +82,7 @@ export const fetchLogout = createAsyncThunk(
 export const fetchOAuthStepOneGetServiceId = async () => {
   try {
     const res: oAuthServiceIdData = await fetchApi(
-      `/oauth/yandex/service-id?redirect_uri=${env.REDIRECT_URI}`,
+      `/oauth/yandex/service-id`,
       {
         method: 'GET',
         headers: defaultHeaders,
