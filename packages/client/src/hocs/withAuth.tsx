@@ -1,14 +1,13 @@
-import { useAppDispatch } from '../hooks/redux';
 import { useMountEffect } from '../hooks/useMountEffect';
 import { fetchAuth } from 'src/store/auth/AuthActions';
 import { ComponentType } from 'react';
+import { useBoundAction } from 'src/hooks/useBoundAction';
 
 export const withAuth = (Component: ComponentType) => {
   return () => {
-    const dispatch = useAppDispatch();
-
+    const handleFetchAuth = useBoundAction(fetchAuth);
     useMountEffect(() => {
-      dispatch(fetchAuth());
+      handleFetchAuth();
     });
 
     return <Component />;
