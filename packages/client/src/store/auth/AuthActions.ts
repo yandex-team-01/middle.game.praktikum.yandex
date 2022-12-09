@@ -99,27 +99,21 @@ const oAuthStepTwoRedirectToProvider = (service_id: string) => {
   window.location.href = url;
 };
 
-export const fetchOAuthStepThreeGetApprove =
-  // createAsyncThunk(
-  // 'oAuth',
-  async (code: string) => {
-    try {
-      const data = {
-        code: code,
-        redirect_uri: env.REDIRECT_URI,
-      };
-      const res = await fetchApi('/oauth/yandex', {
-        method: 'POST',
-        headers: defaultHeaders,
-        body: JSON.stringify(data),
-        credentials: 'include',
-      });
-      // thunkApi.dispatch(fetchAuth());
-      // oAuthStepTwoRedirectToProvider(res.service_id);
-      console.log(res);
-    } catch (error) {
-      // thunkApi.dispatch(addError('Ошибка регистрации'));
-      // return thunkApi.rejectWithValue('Ошибка регистрации');
-    }
-  };
-// );
+export const fetchOAuthStepThreeGetApprove = async (code: string) => {
+  try {
+    const data = {
+      code: code,
+      redirect_uri: env.REDIRECT_URI,
+    };
+    const res = await fetchApi('/oauth/yandex', {
+      method: 'POST',
+      headers: defaultHeaders,
+      body: JSON.stringify(data),
+      credentials: 'include',
+    });
+    // oAuthStepTwoRedirectToProvider(res.service_id);
+    console.log(res);
+  } catch (error) {
+    console.error(error);
+  }
+};
