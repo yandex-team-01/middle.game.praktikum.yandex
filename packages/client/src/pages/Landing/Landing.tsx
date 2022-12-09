@@ -8,7 +8,6 @@ import gameImg from 'src/assets/images/game.png';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { TitleGame } from 'src/components/TitleGame';
 import { fetchOAuthStepOneGetServiceId,fetchOAuthStepThreeGetApprove } from 'src/store/auth/AuthActions';
-import { useBoundAction } from 'src/hooks/useBoundAction';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
 
 export const Landing = () => {
@@ -18,9 +17,9 @@ export const Landing = () => {
   const navigateLogin = () => navigator('auth');
   const navigateSignup = () => navigator('/auth/reg');
 //первый шаг oAuth - получаем service_id с api practicum
-  const oAuthHandle = useBoundAction(() => {
+  const oAuthHandle = () => {
     fetchOAuthStepOneGetServiceId();
-  });
+  };
 
   //третий шаг oAuth - отправляем код полученный после редиректа на страницу согласия на авторизацию
   useMountEffectOneCall(() => {
