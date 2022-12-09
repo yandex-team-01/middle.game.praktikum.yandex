@@ -80,26 +80,28 @@ export const fetchLogout = createAsyncThunk(
 );
 
 //первый шаг oAuth - получаем service_id с api practicum
-export const fetchOAuthStepOneGetServiceId = async () => {
+export const fetchOAuthStepOneGetServiceIdFromApiPracticum = async () => {
   try {
     const res: oAuthServiceIdData = await fetchApi(`/oauth/yandex/service-id`, {
       method: 'GET',
       headers: defaultHeaders,
     });
-    oAuthStepTwoRedirectToProvider(res.service_id);
+    oAuthStepTwoRedirectToOAuthProvider(res.service_id);
   } catch (error) {
     console.error(error);
   }
 };
 
 //второй шаг oAuth - редирект на страницу получения согласия
-const oAuthStepTwoRedirectToProvider = (service_id: string) => {
+const oAuthStepTwoRedirectToOAuthProvider = (service_id: string) => {
   const url = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${service_id}&redirect_uri=${env.REDIRECT_URI}`;
   window.location.href = url;
 };
 
 //третий шаг oAuth - получаем подтвержедние от api practicum взамен на код полученный на странице согласия
-export const fetchOAuthStepThreeGetApprove = async (code: string) => {
+export const fetchOAuthStepThreeGetApproveFromApiPracticum = async (
+  code: string
+) => {
   try {
     const data = {
       code: code,

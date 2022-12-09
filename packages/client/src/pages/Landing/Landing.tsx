@@ -7,7 +7,7 @@ import { Button } from 'src/components/Button';
 import gameImg from 'src/assets/images/game.png';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { TitleGame } from 'src/components/TitleGame';
-import { fetchOAuthStepOneGetServiceId,fetchOAuthStepThreeGetApprove } from 'src/store/auth/AuthActions';
+import { fetchOAuthStepOneGetServiceIdFromApiPracticum,fetchOAuthStepThreeGetApproveFromApiPracticum } from 'src/store/auth/AuthActions';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
 
 export const Landing = () => {
@@ -18,7 +18,7 @@ export const Landing = () => {
   const navigateSignup = () => navigator('/auth/reg');
 //первый шаг oAuth - получаем service_id с api practicum
   const oAuthHandle = () => {
-    fetchOAuthStepOneGetServiceId();
+    fetchOAuthStepOneGetServiceIdFromApiPracticum();
   };
 
   //третий шаг oAuth - отправляем код полученный после редиректа на страницу согласия на авторизацию
@@ -28,7 +28,7 @@ export const Landing = () => {
     const code = urlParams.get('code');
     if(code) { 
       console.log(code); 
-      fetchOAuthStepThreeGetApprove(code);
+      fetchOAuthStepThreeGetApproveFromApiPracticum(code);
     }
   });
 
