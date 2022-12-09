@@ -17,9 +17,7 @@ export const GameComponent = () => {
   const handleBack = () => navigator('/');
   const [isFullScreen, toggleIsFullScreen] = useFullScreen();
 
-  const onEndGame = useBoundAction((score: number) => {
-    recordScore(score);
-  });
+  const onEndGame = useBoundAction((score: number) => recordScore(score));
 
   const canvas = useRef<HTMLCanvasElement>(null); //https://stackoverflow.com/a/63119934
   const game = useRef<Game | null>(null);

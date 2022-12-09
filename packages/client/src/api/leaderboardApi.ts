@@ -18,16 +18,16 @@ const prepareLeaderboardRequestData = (
   };
 };
 
-export const addLeader = async (score: number, login = '') => {
-  return await fetchApi<Leader[]>('/leaderboard', {
+export const addLeader = (score: number, login = '') => {
+  return fetchApi<Leader[]>('/leaderboard', {
     method: 'POST',
     headers: defaultHeaders,
     body: JSON.stringify(prepareLeaderboardRequestData(score, login)),
   });
 };
 
-export const getLeaderboard = async (data: ILeaderboardRequest) => {
-  const res = await fetchApi<Leader[]>('/leaderboard/all', {
+export const getLeaderboard = (data: ILeaderboardRequest) => {
+  const res = fetchApi<Leader[]>('/leaderboard/all', {
     method: 'POST',
     headers: defaultHeaders,
     body: JSON.stringify(data),

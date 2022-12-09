@@ -8,9 +8,17 @@ export const recordScore = createAsyncThunk<
   Leader[],
   number,
   { state: RootState }
->('leaderboard', async (score, thunkApi) => {
+>('leaderboard/score', async (score, thunkApi) => {
   const state = thunkApi.getState();
-  const login = state.auth.user?.login;
+
+  if (!state.auth.user) {
+    thunkApi.dispatch(addError('Ошибка записи результата игры'));
+    thunkApi.rejectWithValue('Ошибка записи результата игры');
+    throw new Error();
+  }
+
+  const login = state.auth.user.login;
+
   try {
     return await addLeader(score, login);
   } catch (error) {
@@ -23,9 +31,10 @@ export const recordScore = createAsyncThunk<
 export const getAllLeaderboard = createAsyncThunk<
   Leader[],
   ILeaderboardRequest
->('leaderboard', async (data: ILeaderboardRequest, thunkApi) => {
+>('leaderboard/all', async (data: ILeaderboardRequest, thunkApi) => {
   try {
-    return await getLeaderboard(data);
+    const res = await getLeaderboard(data);
+    return res;
   } catch (error) {
     thunkApi.dispatch(addError('Ошибка запроса лидерборда'));
     thunkApi.rejectWithValue('Ошибка запроса лидерборда');

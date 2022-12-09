@@ -18,6 +18,7 @@ import { useAppSelector } from 'src/hooks/redux';
 import { leaderboardRequestData } from 'src/constants/LeaderboardConsts';
 import { useBoundAction } from 'src/hooks/useBoundAction';
 import { Leader } from 'src/store/leaderboard/types';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
 
 export const Leaderboard = () => {
   const { t } = useTranslation();
@@ -42,31 +43,33 @@ export const Leaderboard = () => {
   }
 
   return (
-    <div className={styles.block}>
-      <div className={styles.button_wrapper}>
-        <Button regular onClick={handleBack}>
-          {t('goBack')}
-        </Button>
-        <Button regular onClick={handleLoadGame}>
-          {t('play')}
-        </Button>
-      </div>
-      <BlankWindow className={styles.window}>
-        <div className={styles.background_overlay}>
-          <h1 className={styles.header}>{t('topTeams')}</h1>
-          <div className={styles.table}>
-            <div className={styles.header_item}>#</div>
-            <div className={styles.header_item}>{t('Name')}</div>
-            <div className={styles.header_item}>{t('Score')}</div>
-
-            {leaderboard.map((leader: Leader, idx) => {
-              return (
-                <LeaderboardLine leader={leader.data} idx={idx} key={idx} />
-              );
-            })}
-          </div>
+    <ErrorBoundary>
+      <div className={styles.block}>
+        <div className={styles.button_wrapper}>
+          <Button regular onClick={handleBack}>
+            {t('goBack')}
+          </Button>
+          <Button regular onClick={handleLoadGame}>
+            {t('play')}
+          </Button>
         </div>
-      </BlankWindow>
-    </div>
+        <BlankWindow className={styles.window}>
+          <div className={styles.background_overlay}>
+            <h1 className={styles.header}>{t('topTeams')}</h1>
+            <div className={styles.table}>
+              <div className={styles.header_item}>#</div>
+              <div className={styles.header_item}>{t('Name')}</div>
+              <div className={styles.header_item}>{t('Score')}</div>
+
+              {leaderboard.map((leader: Leader, idx) => {
+                return (
+                  <LeaderboardLine leader={leader.data} idx={idx} key={idx} />
+                );
+              })}
+            </div>
+          </div>
+        </BlankWindow>
+      </div>
+    </ErrorBoundary>
   );
 };
