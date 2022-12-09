@@ -53,7 +53,6 @@ export const Routing = () => {
           <Route index element={<LoginForm />} />
           <Route path="reg" element={<RegistrationForm />} />
         </Route>
-
         <Route
           path="/"
           element={
@@ -62,7 +61,6 @@ export const Routing = () => {
             </BackgroundLayout>
           }
         />
-
         <Route
           path="/forum"
           element={
@@ -76,7 +74,6 @@ export const Routing = () => {
           <Route path="topic" element={<CommentsPage />} />
           <Route path="createtopic" element={<BlockCreateTopic />} />
         </Route>
-
         <Route
           path="/leaders"
           element={
@@ -87,11 +84,8 @@ export const Routing = () => {
             </ProtectedRoute>
           }
         />
-
         <Route path="/loadinggame" element={<GameLoadingPage />} />
-
         <Route path="/game" element={<GameScreen />} />
-
         <Route
           path="/settings"
           element={
@@ -105,19 +99,16 @@ export const Routing = () => {
           <Route path="edit" element={<SettingsChangeData />} />
           <Route path="password" element={<SettingsChangePassword />} />
         </Route>
-
         <Route
           path="/500"
           element={<ErrorPage title="500" description={t('error500')} />}
         />
-
         <Route
           path="/404"
           element={<ErrorPage title="404" description={t('error404')} />}
         />
-
         <Route path="*" element={<Redirect to="/404" />} />
-
+        {/* Временно убрала логику с langPath */}
         {/* <Route
           path="/auth"
           element={<Navigate to={langPath('/auth')} replace />}

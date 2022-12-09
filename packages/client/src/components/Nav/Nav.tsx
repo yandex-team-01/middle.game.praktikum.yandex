@@ -15,6 +15,8 @@ export const Nav = ({ to, children }: Props) => {
   );
 };
 
+// Временно убрала логику с langPath
+
 // import { Link } from 'react-router-dom';
 // import { ReactI18NextChild } from 'react-i18next';
 

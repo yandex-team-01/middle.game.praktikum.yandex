@@ -15,6 +15,8 @@ export const useNavigator = () => {
   return navigator;
 };
 
+// Временно убрала логику с langPath
+
 // import { useCallback } from 'react';
 // import { useNavigate } from 'react-router-dom';
 

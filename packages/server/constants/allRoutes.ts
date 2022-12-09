@@ -4,13 +4,13 @@ export const allRoutes = [
   '/auth',
   '/auth/reg',
   '/loadinggame',
-  '/leaders', // html c ошибкой
-  '/forum', // html c ошибкой
-  '/forum/topic', // html c ошибкой
-  '/forum/createtopic', // html c ошибкой
-  '/settings', // html c ошибкой
-  '/settings/edit', // html c ошибкой
-  '/settings/password', // html c ошибкой
+  '/leaders', // происходит редирект на "/" т к auth=false
+  '/forum', // происходит редирект на "/" т к auth=false
+  '/forum/topic', // происходит редирект на "/" т к auth=false
+  '/forum/createtopic', // происходит редирект на "/" т к auth=false
+  '/settings', // происходит редирект на "/" т к auth=false
+  '/settings/edit', // происходит редирект на "/" т к auth=false
+  '/settings/password', // происходит редирект на "/" т к auth=false
   '/500',
   '/404',
   '*',
