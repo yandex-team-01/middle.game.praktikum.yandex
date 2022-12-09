@@ -54,5 +54,6 @@
   "messageValidationPhone": "От 10 до 15 символов, состоит из цифр, может начинаться с плюса",
   "messageValidationEmail": "Пожалуйста, введите действительный адрес электронной почты",
   "messageValidationRepeatPassword": "Пароли должны совпадать",
-  "required": "Обязательно"
+  "required": "Обязательно",
+  "loginWithYandexID": "Войти с Яндекс ID"
 }

@@ -54,5 +54,6 @@
   "messageValidationPhone": "From 10 to 15 characters, consists of numbers, can start with a plus",
   "messageValidationEmail": "Please enter a valid email",
   "messageValidationRepeatPassword": "Passwords must match",
-  "required": "Required"
+  "required": "Required",
+  "loginWithYandexID": "Login with Yandex ID"
 }

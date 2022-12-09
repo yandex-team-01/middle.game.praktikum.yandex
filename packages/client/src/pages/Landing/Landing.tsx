@@ -7,6 +7,9 @@ import { Button } from 'src/components/Button';
 import gameImg from 'src/assets/images/game.png';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { TitleGame } from 'src/components/TitleGame';
+import { fetchOAuthStepOneGetServiceId,fetchOAuthStepThreeGetApprove } from 'src/store/auth/AuthActions';
+import { useBoundAction } from 'src/hooks/useBoundAction';
+import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
 
 export const Landing = () => {
   const { t } = useTranslation();
@@ -14,6 +17,21 @@ export const Landing = () => {
 
   const navigateLogin = () => navigator('auth');
   const navigateSignup = () => navigator('/auth/reg');
+//первый шаг oAuth - получаем service_id с api practicum
+  const oAuthHandle = useBoundAction(() => {
+    fetchOAuthStepOneGetServiceId();
+  });
+
+  //третий шаг oAuth - отправляем код полученный после редиректа на страницу согласия на авторизацию
+  useMountEffectOneCall(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const code = urlParams.get('code');
+    if(code) { 
+      console.log(code); 
+      fetchOAuthStepThreeGetApprove(code);
+    }
+  });
 
   return (
     <div className={styles.page}>
@@ -41,6 +59,14 @@ export const Landing = () => {
           className={styles.button}
           onClick={navigateSignup}>
           {t('signUp')}
+        </Button>
+
+        <Button
+          regular
+          type="submit"
+          className={styles.button}
+          onClick={oAuthHandle}>
+          {t('loginWithYandexID')}
         </Button>
       </div>
     </div>

@@ -1,10 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { SignupData, SigninData } from 'src/modules/IAuth';
+import { SignupData, SigninData, oAuthServiceIdData } from 'src/modules/IAuth';
 
 import { fetchApi } from '../utils';
 import { addError } from '../error/ErrorSlice';
 import { IUser } from 'src/modules/IUser';
+import { env } from 'src/constants/Env';
 
 const defaultHeaders = {
   'content-type': 'application/json',
@@ -73,7 +74,52 @@ export const fetchLogout = createAsyncThunk(
       return res;
     } catch (error) {
       thunkApi.dispatch(addError('Ошибка выхода'));
-      return thunkApi.rejectWithValue('Ошибка регистрации');
+      return thunkApi.rejectWithValue('Ошибка выхода');
     }
   }
 );
+
+export const fetchOAuthStepOneGetServiceId = async () => {
+  try {
+    const res: oAuthServiceIdData = await fetchApi(
+      `/oauth/yandex/service-id?redirect_uri=${env.REDIRECT_URI}`,
+      {
+        method: 'GET',
+        headers: defaultHeaders,
+      }
+    );
+    oAuthStepTwoRedirectToProvider(res.service_id);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const oAuthStepTwoRedirectToProvider = (service_id: string) => {
+  const url = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${service_id}&redirect_uri=${env.REDIRECT_URI}`;
+  window.location.href = url;
+};
+
+export const fetchOAuthStepThreeGetApprove =
+  // createAsyncThunk(
+  // 'oAuth',
+  async (code: string) => {
+    try {
+      const data = {
+        code: code,
+        redirect_uri: env.REDIRECT_URI,
+      };
+      const res = await fetchApi('/oauth/yandex', {
+        method: 'POST',
+        headers: defaultHeaders,
+        body: JSON.stringify(data),
+        credentials: 'include',
+      });
+      // thunkApi.dispatch(fetchAuth());
+      // oAuthStepTwoRedirectToProvider(res.service_id);
+      console.log(res);
+    } catch (error) {
+      // thunkApi.dispatch(addError('Ошибка регистрации'));
+      // return thunkApi.rejectWithValue('Ошибка регистрации');
+    }
+  };
+// );

@@ -65,7 +65,11 @@ export const Routing = () => {
             </BackgroundLayout>
           }
         />
-        <Route path="/" element={<Navigate to={langPath('/')} replace />} />
+        <Route path="/"        element={
+             <BackgroundLayout>
+               {auth ? <MainMenu /> : <Landing />}
+             </BackgroundLayout>
+           } />
         <Route
           path={langPath('/forum')}
           element={
