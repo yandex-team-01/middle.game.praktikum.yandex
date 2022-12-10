@@ -55,5 +55,8 @@
   "messageValidationEmail": "Пожалуйста, введите действительный адрес электронной почты",
   "messageValidationRepeatPassword": "Пароли должны совпадать",
   "required": "Обязательно",
-  "loginWithYandexID": "Войти с Яндекс ID"
+  "loginWithYandexID": "Войти с Яндекс ID",
+  "loginError": "Ошибка авторизации",
+  "regError": "Ошибка регистрации",
+  "logoutError": "Ошибка выхода"
 }

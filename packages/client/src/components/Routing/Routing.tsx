@@ -65,7 +65,9 @@ export const Routing = () => {
             </BackgroundLayout>
           }
         />
-        <Route path="/"        element={
+        <Route 
+          path="/" 
+          element={
              <BackgroundLayout>
                {auth ? <MainMenu /> : <Landing />}
              </BackgroundLayout>

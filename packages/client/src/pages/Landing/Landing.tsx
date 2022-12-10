@@ -9,28 +9,30 @@ import { useNavigator } from 'src/hooks/useNavigator';
 import { TitleGame } from 'src/components/TitleGame';
 import { fetchOAuthStepOneGetServiceIdFromApiPracticum,fetchOAuthStepThreeGetApproveFromApiPracticum } from 'src/store/auth/AuthActions';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
+import { useAppDispatch } from 'src/hooks/redux';
+import { useOAuth } from 'src/hooks/useOAuth';
 
 export const Landing = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
+  const dispatch = useAppDispatch();
+  const queryString = window.location.search;
+  const code = useOAuth(queryString);
 
   const navigateLogin = () => navigator('auth');
   const navigateSignup = () => navigator('/auth/reg');
 //первый шаг oAuth - получаем service_id с api practicum
   const oAuthHandle = () => {
-    fetchOAuthStepOneGetServiceIdFromApiPracticum();
+    dispatch(fetchOAuthStepOneGetServiceIdFromApiPracticum());
   };
 
   //третий шаг oAuth - отправляем код полученный после редиректа на страницу согласия на авторизацию
   useMountEffectOneCall(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const code = urlParams.get('code');
     if(code) { 
-      console.log(code); 
-      fetchOAuthStepThreeGetApproveFromApiPracticum(code);
+      dispatch(fetchOAuthStepThreeGetApproveFromApiPracticum(code));
     }
   });
+
 
   return (
     <div className={styles.page}>

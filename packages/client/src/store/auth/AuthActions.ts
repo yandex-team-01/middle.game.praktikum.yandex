@@ -80,17 +80,24 @@ export const fetchLogout = createAsyncThunk(
 );
 
 //первый шаг oAuth - получаем service_id с api practicum
-export const fetchOAuthStepOneGetServiceIdFromApiPracticum = async () => {
-  try {
-    const res: oAuthServiceIdData = await fetchApi(`/oauth/yandex/service-id`, {
-      method: 'GET',
-      headers: defaultHeaders,
-    });
-    oAuthStepTwoRedirectToOAuthProvider(res.service_id);
-  } catch (error) {
-    console.error(error);
+export const fetchOAuthStepOneGetServiceIdFromApiPracticum = createAsyncThunk(
+  'oauth/fetchServiceIdFromYaApi',
+  async (_, thunkApi) => {
+    try {
+      const res: oAuthServiceIdData = await fetchApi(
+        `/oauth/yandex/service-id`,
+        {
+          method: 'GET',
+          headers: defaultHeaders,
+        }
+      );
+      oAuthStepTwoRedirectToOAuthProvider(res.service_id);
+    } catch (error) {
+      thunkApi.dispatch(addError('Ошибка авторизации'));
+      throw error;
+    }
   }
-};
+);
 
 //второй шаг oAuth - редирект на страницу получения согласия
 const oAuthStepTwoRedirectToOAuthProvider = (service_id: string) => {
@@ -99,22 +106,24 @@ const oAuthStepTwoRedirectToOAuthProvider = (service_id: string) => {
 };
 
 //третий шаг oAuth - получаем подтвержедние от api practicum взамен на код полученный на странице согласия
-export const fetchOAuthStepThreeGetApproveFromApiPracticum = async (
-  code: string
-) => {
-  try {
-    const data = {
-      code: code,
-      redirect_uri: env.REDIRECT_URI,
-    };
-    const res = await fetchApi('/oauth/yandex', {
-      method: 'POST',
-      headers: defaultHeaders,
-      body: JSON.stringify(data),
-      credentials: 'include',
-    });
-    console.log(res);
-  } catch (error) {
-    console.error(error);
+export const fetchOAuthStepThreeGetApproveFromApiPracticum = createAsyncThunk(
+  'oauth',
+  async (code: string, thunkApi) => {
+    try {
+      const data = {
+        code: code,
+        redirect_uri: env.REDIRECT_URI,
+      };
+      const res = await fetchApi('/oauth/yandex', {
+        method: 'POST',
+        headers: defaultHeaders,
+        body: JSON.stringify(data),
+        credentials: 'include',
+      });
+      return res;
+    } catch (error) {
+      thunkApi.dispatch(addError('Ошибка авторизации'));
+      throw error;
+    }
   }
-};
+);

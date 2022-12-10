@@ -55,5 +55,8 @@
   "messageValidationEmail": "Please enter a valid email",
   "messageValidationRepeatPassword": "Passwords must match",
   "required": "Required",
-  "loginWithYandexID": "Login with Yandex ID"
+  "loginWithYandexID": "Login with Yandex ID",
+  "loginError": "Login error",
+  "regError": "Registration error",
+  "logoutError": "Logout error"
 }
