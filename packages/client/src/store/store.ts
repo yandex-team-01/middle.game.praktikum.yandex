@@ -4,6 +4,7 @@ import { usersReducer } from './users/UsersSlice';
 import { authReducer } from './auth/AuthSlice';
 import { errorReducer } from './error/ErrorSlice';
 import { forumReducer } from './forum/ForumSlice';
+import { PreloadedState } from './types';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -12,9 +13,10 @@ const rootReducer = combineReducers({
   users: usersReducer,
 });
 
-export const setupStore = () => {
+export const setupStore = (preloadedState: PreloadedState) => {
   return configureStore({
     reducer: rootReducer,
+    preloadedState: preloadedState,
   });
 };
 

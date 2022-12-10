@@ -1,3 +1,6 @@
+// Файл для того, чтобы создавть все index.html заранее в dist
+// Можно сделать auth.html authreg.html и т д, а на сервере заранее отдавать готовые файлы, но пока генерирую index файлы на сервере.
+
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
