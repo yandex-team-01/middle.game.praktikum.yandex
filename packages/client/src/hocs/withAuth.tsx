@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { selectCheckAuth } from 'src/store/auth/AuthSelectors';
-import { useMountEffect } from '../hooks/useMountEffect';
+import { useMountEffectOneCall } from '../hooks/useMountEffectOneCall';
 import { fetchAuth } from 'src/store/auth/AuthActions';
 import { BackgroundLayout } from 'src/layouts/BackgroundLayout';
 import { Spinner } from 'src/components/Spinner';
@@ -11,7 +11,7 @@ export const withAuth = (Component: ComponentType) => {
     const dispath = useAppDispatch();
     const checkAuth = useAppSelector(selectCheckAuth);
 
-    useMountEffect(() => {
+    useMountEffectOneCall(() => {
       dispath(fetchAuth());
     });
 
