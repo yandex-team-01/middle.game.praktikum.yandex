@@ -60,5 +60,10 @@
   "errorGetLocation": "Couldn't get location information",
   "errorGeolocation": "Geolocation is not supported by your browser",
   "Name": "Name",
-  "Score": "Score"
+  "Score": "Score",
+  "title": {
+    "app": "Game Huggy Wuggy & Kissy Missy",
+    "home": "Home page",
+    "leaderboard": "Leaderboard"
+  }
 }

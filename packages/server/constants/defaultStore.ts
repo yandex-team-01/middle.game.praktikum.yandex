@@ -1,5 +1,5 @@
 export const defaultStore = {
-  auth: { checkAuth: false, auth: false, user: null, loading: false },
+  auth: { checkAuth: false, auth: true, user: null, loading: false },
   error: { errorList: [] },
   forum: {
     activeTopic: undefined,

@@ -74,7 +74,7 @@ export const Routing = () => {
           <Route path="topic" element={<CommentsPage />} />
           <Route path="createtopic" element={<BlockCreateTopic />} />
         </Route>
-        <Route
+        {/* <Route
           path="/leaders"
           element={
             <ProtectedRoute flag={auth} redirect="/auth">
@@ -82,6 +82,14 @@ export const Routing = () => {
                 <Leaderboard />
               </BackgroundLayout>
             </ProtectedRoute>
+          }
+        /> */}
+        <Route
+          path="/leaders"
+          element={
+            <BackgroundLayout>
+              <Leaderboard />
+            </BackgroundLayout>
           }
         />
         <Route path="/loadinggame" element={<GameLoadingPage />} />

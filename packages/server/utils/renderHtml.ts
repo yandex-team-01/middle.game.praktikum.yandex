@@ -7,7 +7,8 @@ import { renderObject } from './renderObject';
 import { defaultStore } from '../constants/defaultStore';
 
 export const renderHtml = (req: Request, res: Response) => {
-  const { html, httpContext } = render(req.url, defaultStore);
+  const { html, httpContext, helmetContext } = render(req.url, defaultStore);
+  const { helmet } = helmetContext;
 
   if (httpContext.redirectLocation) {
     res.redirect(httpContext.redirectLocation);
@@ -23,6 +24,11 @@ export const renderHtml = (req: Request, res: Response) => {
     ` <script>window.__PRELOADED_STATE__ = ${renderObject(
       defaultStore
     )}</script>`
+  );
+  newString = newString.replace(
+    '<head>',
+    `<head>
+    ${helmet.title.toString()}`
   );
 
   res.send(newString);

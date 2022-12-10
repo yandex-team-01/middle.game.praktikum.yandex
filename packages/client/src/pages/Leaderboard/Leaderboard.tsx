@@ -19,6 +19,7 @@ import { useBoundAction } from 'src/hooks/useBoundAction';
 import { Leader } from 'src/store/leaderboard/types';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
+import { SEO } from 'src/components/SEO';
 
 export const Leaderboard = () => {
   const { t } = useTranslation();
@@ -45,6 +46,7 @@ export const Leaderboard = () => {
   return (
     <ErrorBoundary>
       <div className={styles.block}>
+        <SEO title={t('title.leaderboard')} />
         <div className={styles.button_wrapper}>
           <Button regular onClick={handleBack}>
             {t('goBack')}
