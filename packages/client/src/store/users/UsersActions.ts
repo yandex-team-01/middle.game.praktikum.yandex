@@ -53,11 +53,12 @@ export const fetchChangeAvatar = createAsyncThunk(
     try {
       const formData = new FormData();
       formData.append('avatar', data);
-      const res = await fetchApi('/user/profile/avatar', {
+      const res: IUser = await fetchApi('/user/profile/avatar', {
         method: 'PUT',
         credentials: 'include',
         body: formData,
       });
+      thunkApi.dispatch(updateUser(res));
       return res;
     } catch (error) {
       thunkApi.dispatch(addError('Ошибка смены аватара профиля'));
