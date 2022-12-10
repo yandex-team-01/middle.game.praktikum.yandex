@@ -7,6 +7,8 @@ import { Button } from 'src/components/Button';
 import styles from 'src/pages/GameScreen/GameScreen.module.scss';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { useNavigator } from 'src/hooks/useNavigator';
+import { recordScore } from 'src/store/leaderboard/LeaderboardActions';
+import { useBoundAction } from 'src/hooks/useBoundAction';
 
 export const GameComponent = () => {
   const { t } = useTranslation();
@@ -15,6 +17,8 @@ export const GameComponent = () => {
   const handleBack = () => navigator('/');
   const [isFullScreen, toggleIsFullScreen] = useFullScreen();
 
+  const onEndGame = useBoundAction((score: number) => recordScore(score));
+
   const canvas = useRef<HTMLCanvasElement>(null); //https://stackoverflow.com/a/63119934
   const game = useRef<Game | null>(null);
 
@@ -22,7 +26,7 @@ export const GameComponent = () => {
     game.current = new Game(canvas.current as HTMLCanvasElement);
     game.current.init(() => {
       console.log('Игра загружена');
-    });
+    }, onEndGame);
 
     return () => {
       game.current?.destruct();
