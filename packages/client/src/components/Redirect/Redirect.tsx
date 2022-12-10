@@ -1,13 +1,14 @@
 import { useContext } from 'react';
 import { HttpContext } from '../HttpProvider';
 import { Navigate } from 'react-router-dom';
+import { getEnvSsr } from 'src/utils/getEnvSsr';
 
 export type RedirectProps = {
   to: string;
 };
 
 export const Redirect = ({ to }: RedirectProps) => {
-  const isSsr = import.meta.env.SSR;
+  const isSsr = getEnvSsr();
   const ctx = useContext(HttpContext);
 
   if (!isSsr) {

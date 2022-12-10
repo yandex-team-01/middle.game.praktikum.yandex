@@ -6,8 +6,8 @@ import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { setupStore } from 'src/store/store';
 import { App } from 'src/App';
 import { i18next } from '../i18next.config';
-import { HttpProvider } from './components/HttpProvider/HttpProvider';
-import { HttpContextData } from './components/HttpProvider/types';
+import { HttpProvider } from 'src/components/HttpProvider/HttpProvider';
+import { HttpContextData } from 'src/components/HttpProvider/types';
 
 import 'normalize.css';
 import './index.module.scss';

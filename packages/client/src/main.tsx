@@ -12,12 +12,13 @@ import { setupStore } from 'src/store/store';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { startServiceWorker } from 'src/utils/serviceWorker';
 import { PreloadedState } from 'src/store/types';
+import { getEnvSsr } from 'src/utils/getEnvSsr';
 
 const defineStore = window.__PRELOADED_STATE__ as PreloadedState;
 delete window.__PRELOADED_STATE__;
 const store = setupStore(defineStore);
 
-const isSsr = import.meta.env.SSR;
+const isSsr = getEnvSsr();
 const dom = (
   <React.StrictMode>
     <React.Suspense>

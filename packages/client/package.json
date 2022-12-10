@@ -4,9 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build:client": "vite build --outDir=dist/client",
-    "build:ssr": "vite build --outDir=dist/ssr --ssr src/entry-server.tsx",
-    "build": "rm -rf ./dist && yarn build:client && yarn build:ssr ",
+    "build:client": "vite build --outDir=../server/public/client",
+    "build:ssr": "vite build --outDir=../server/public/ssr --ssr src/entry-server.tsx",
+    "build": "rm -rf ../server/public && yarn build:client && yarn build:ssr ",
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",

@@ -20,11 +20,11 @@ const port = Number(process.env.PORT) || 3001;
 
 app.use(
   '/assets',
-  express.static(path.resolve(__dirname, '../client/dist/client/assets'))
+  express.static(path.resolve(__dirname, 'public/client/assets'))
 );
 app.use(
   '/locales',
-  express.static(path.resolve(__dirname, '../client/dist/client/locales'))
+  express.static(path.resolve(__dirname, 'public/client/locales'))
 );
 
 app.use(router);

@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
 export const setupStore = (preloadedState: PreloadedState) => {
   return configureStore({
     reducer: rootReducer,
-    preloadedState: preloadedState || {},
+    preloadedState: preloadedState,
   });
 };
 
