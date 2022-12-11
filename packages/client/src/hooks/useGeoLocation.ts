@@ -16,7 +16,7 @@ export const useGeoLocation = () => {
   const location = useAppSelector(selectGeoLocation);
 
   const { t } = useTranslation();
-  const callback = useBoundAction((data) => fetchGeoLocation(data));
+  const callback = useBoundAction(data => fetchGeoLocation(data));
 
   useMountEffectOneCall(() => {
     geolocation(callback, t);

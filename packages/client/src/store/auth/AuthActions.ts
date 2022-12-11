@@ -12,7 +12,7 @@ export const fetchAuth = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       return await fetchApi<IUser>('/auth/user', {
-        credentials: 'include'
+        credentials: 'include',
       });
     } catch (error) {
       return thunkApi.rejectWithValue('Ошибка авторизации');

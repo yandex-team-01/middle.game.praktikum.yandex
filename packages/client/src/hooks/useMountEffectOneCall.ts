@@ -14,7 +14,10 @@ export const useMountEffectOneCall = (
     const isProd = getEnvSsr();
 
     return () => {
-      if ((isRepeatCall && callbackUnmounting) || (callbackUnmounting && isProd)) {
+      if (
+        (isRepeatCall && callbackUnmounting) ||
+        (callbackUnmounting && isProd)
+      ) {
         callbackUnmounting();
       }
 
