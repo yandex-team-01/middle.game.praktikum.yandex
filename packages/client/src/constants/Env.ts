@@ -4,3 +4,11 @@ export const env = {
   HOST_WS: 'wss://ya-praktikum.tech/ws',
   REDIRECT_URI: 'http://localhost:5000',
 };
+
+export const getEnvSsr = () => {
+  let isSsr = true;
+  if (typeof document !== undefined && typeof document !== 'undefined') {
+    isSsr = false;
+  }
+  return isSsr;
+};
