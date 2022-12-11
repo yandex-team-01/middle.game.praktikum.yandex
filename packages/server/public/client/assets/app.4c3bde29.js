@@ -25432,18 +25432,14 @@ attempted value: ${o}
   Bn.prototype = M_.prototype;
   const s6 = { oldPassword: '', newPassword: '', repeatPassword: '' },
     u6 = Bn().shape({
-      oldPassword: ye()
-        .required('Required')
-        .matches(eu, {
-          message:
-            'Must be from 8 to 40 characters. At least one capital letter and a number are required.',
-        }),
-      newPassword: ye()
-        .required('Required')
-        .matches(eu, {
-          message:
-            'Must be from 8 to 40 characters. At least one capital letter and a number are required.',
-        }),
+      oldPassword: ye().required('Required').matches(eu, {
+        message:
+          'Must be from 8 to 40 characters. At least one capital letter and a number are required.',
+      }),
+      newPassword: ye().required('Required').matches(eu, {
+        message:
+          'Must be from 8 to 40 characters. At least one capital letter and a number are required.',
+      }),
       repeatPassword: ye()
         .oneOf([d_('newPassword'), null], 'Passwords must match')
         .required('Required'),
@@ -25577,39 +25573,29 @@ attempted value: ${o}
       });
     },
     v6 = Bn().shape({
-      first_name: ye()
-        .required('Required')
-        .matches(Fw, {
-          message:
-            'The first letter must be uppercase. Latin or Cyrillic letters, hyphens are allowed',
-        }),
-      second_name: ye()
-        .required('Required')
-        .matches(Rw, {
-          message:
-            'The first letter must be uppercase. Latin or Cyrillic letters, hyphens are allowed',
-        }),
-      display_name: ye()
-        .required('Required')
-        .matches(P4, {
-          message:
-            'Must be from 8 to 40 characters. At least one capital letter and a number are required.',
-        }),
-      login: ye()
-        .required('Required')
-        .matches(Tp, {
-          message:
-            'Must be from 3 to 20 characters. Latin letters, digits (but not consisting of digits), hyphens and underscores are allowed',
-        }),
+      first_name: ye().required('Required').matches(Fw, {
+        message:
+          'The first letter must be uppercase. Latin or Cyrillic letters, hyphens are allowed',
+      }),
+      second_name: ye().required('Required').matches(Rw, {
+        message:
+          'The first letter must be uppercase. Latin or Cyrillic letters, hyphens are allowed',
+      }),
+      display_name: ye().required('Required').matches(P4, {
+        message:
+          'Must be from 8 to 40 characters. At least one capital letter and a number are required.',
+      }),
+      login: ye().required('Required').matches(Tp, {
+        message:
+          'Must be from 3 to 20 characters. Latin letters, digits (but not consisting of digits), hyphens and underscores are allowed',
+      }),
       email: ye()
         .required('Required')
         .matches(jw, { message: 'Please enter a valid email' }),
-      phone: ye()
-        .required('Required')
-        .matches(Lw, {
-          message:
-            'From 10 to 15 characters, consists of numbers, can start with a plus',
-        }),
+      phone: ye().required('Required').matches(Lw, {
+        message:
+          'From 10 to 15 characters, consists of numbers, can start with a plus',
+      }),
     }),
     y6 = () => {
       const e = Gt(c => c.auth.user),
