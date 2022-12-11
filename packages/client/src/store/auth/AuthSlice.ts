@@ -10,8 +10,8 @@ import { IUser } from 'src/modules/IUser';
 import { AuthState } from '../types';
 
 const initialState: AuthState = {
-  checkAuth: true,
-  auth: true,
+  checkAuth: false,
+  auth: false,
   user: null,
   loading: false,
 };
