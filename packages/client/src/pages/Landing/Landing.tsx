@@ -1,39 +1,26 @@
 import { Trans, useTranslation } from 'react-i18next';
-
 import styles from './Landing.module.scss';
-
 import { Button } from 'src/components/Button';
-
 import gameImg from 'src/assets/images/game.png';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { TitleGame } from 'src/components/TitleGame';
-import { fetchOAuthStepOneGetServiceIdFromApiPracticum,fetchOAuthStepThreeGetApproveFromApiPracticum } from 'src/store/auth/AuthActions';
-import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
+import { fetchOAuthStepOneGetServiceIdFromApiPracticum } from 'src/store/auth/AuthActions';
 import { useAppDispatch } from 'src/hooks/redux';
-import { useOAuth } from 'src/hooks/useOAuth';
+import { useCheckOauthCode } from 'src/App';
 
 export const Landing = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
   const dispatch = useAppDispatch();
-  const queryString = window.location.search;
-  const code = useOAuth(queryString);
-
   const navigateLogin = () => navigator('auth');
   const navigateSignup = () => navigator('/auth/reg');
 //первый шаг oAuth - получаем service_id с api practicum
   const oAuthHandle = () => {
     dispatch(fetchOAuthStepOneGetServiceIdFromApiPracticum());
   };
-
   //третий шаг oAuth - отправляем код полученный после редиректа на страницу согласия на авторизацию
-  useMountEffectOneCall(() => {
-    if(code) { 
-      dispatch(fetchOAuthStepThreeGetApproveFromApiPracticum(code));
-    }
-  });
-
-
+  useCheckOauthCode();
+  
   return (
     <div className={styles.page}>
       <TitleGame className={styles.title} />

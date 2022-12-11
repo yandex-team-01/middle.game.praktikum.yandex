@@ -18,7 +18,7 @@ export const fetchAuth = createAsyncThunk(
     try {
       return await fetchApi<IUser>('/auth/user', {});
     } catch (error) {
-      return thunkApi.rejectWithValue('loginError');
+      return thunkApi.rejectWithValue('Login error');
     }
   }
 );
@@ -37,8 +37,8 @@ export const fetchSignin = createAsyncThunk(
 
       return res;
     } catch (error) {
-      thunkApi.dispatch(addError('loginError'));
-      return thunkApi.rejectWithValue('loginError');
+      thunkApi.dispatch(addError('Login error'));
+      return thunkApi.rejectWithValue('Login error');
     }
   }
 );
@@ -56,8 +56,8 @@ export const fetchSignup = createAsyncThunk(
 
       return res;
     } catch (error) {
-      thunkApi.dispatch(addError('regError'));
-      return thunkApi.rejectWithValue('regError');
+      thunkApi.dispatch(addError('Registration error'));
+      return thunkApi.rejectWithValue('Registration error');
     }
   }
 );
@@ -73,8 +73,8 @@ export const fetchLogout = createAsyncThunk(
 
       return res;
     } catch (error) {
-      thunkApi.dispatch(addError('logoutError'));
-      return thunkApi.rejectWithValue('logoutError');
+      thunkApi.dispatch(addError('Logout error'));
+      return thunkApi.rejectWithValue('Logout error');
     }
   }
 );
@@ -93,7 +93,7 @@ export const fetchOAuthStepOneGetServiceIdFromApiPracticum = createAsyncThunk(
       );
       oAuthStepTwoRedirectToOAuthProvider(res.service_id);
     } catch (error) {
-      thunkApi.dispatch(addError('loginError'));
+      thunkApi.dispatch(addError('Login error'));
       throw error;
     }
   }
@@ -120,9 +120,11 @@ export const fetchOAuthStepThreeGetApproveFromApiPracticum = createAsyncThunk(
         body: JSON.stringify(data),
         credentials: 'include',
       });
+      thunkApi.dispatch(fetchAuth());
+
       return res;
     } catch (error) {
-      thunkApi.dispatch(addError('loginError'));
+      thunkApi.dispatch(addError('Login error'));
       throw error;
     }
   }
