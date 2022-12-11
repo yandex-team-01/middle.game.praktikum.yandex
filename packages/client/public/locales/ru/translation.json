@@ -10,12 +10,13 @@
   "newPassword": "Новый пароль",
   "newPasswordAgain": "Повторите новый пароль",
   "password": "Пароль",
-  "passwordAgain": "Повторите пароль",
+  "repeatPassword": "Повторите пароль",
   "resetPassword": "Забыли свой пароль?",
   "login": "Логин",
   "nickname": "Никнейм",
-  "firstName": "Имя",
-  "secondName": "Фамилия",
+  "first_name": "Имя",
+  "second_name": "Фамилия",
+  "email": "Email",
   "phone": "Телефон",
   "avatar": "Аватар пользователя",
   "signUp": "Регистрация",
@@ -57,5 +58,7 @@
   "required": "Обязательно",
   "switchLanguage": "Вы находитесь в России, переключить язык на русский?",
   "errorGetLocation": "Не удалось получить информацию о местонахождении",
-  "errorGeolocation": "Геолокация не поддерживается вашим браузером"
+  "errorGeolocation": "Геолокация не поддерживается вашим браузером",
+  "Name": "Название",
+  "Score": "Счет"
 }

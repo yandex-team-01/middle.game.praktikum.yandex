@@ -3,7 +3,6 @@ import { ReactNode, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/hooks/redux';
 import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
-import { useNavigator } from 'src/hooks/useNavigator';
 import { fetchGeoLocation } from 'src/store/geolocation/GeoActions';
 import { selectGeoLocation } from 'src/store/geolocation/GeoSelectors';
 import { geolocation } from 'src/utils/geoLocationAPI';
@@ -13,9 +12,8 @@ export interface Props {
   children: ReactNode;
 }
 
-export const useLocation = () => {
+export const useGeoLocation = () => {
   const location = useAppSelector(selectGeoLocation);
-  const navigator = useNavigator();
 
   const { t } = useTranslation();
   const callback = useBoundAction((data) => fetchGeoLocation(data));
@@ -37,17 +35,12 @@ export const useLocation = () => {
       switchLanguage = confirm(t('switchLanguage'));
       if (!switchLanguage) return;
 
-      const pathname = window.location.pathname.split('/en')[1];
-
       i18next.changeLanguage('ru', err => {
         if (err) {
           console.error(err);
           return;
         }
-        // т.к. при смене языка нас перебрасывает на 404, 
-        // мы запоминаем текущий pathname и восстанавливаем страницу 
-        navigator(`${pathname}`);
       });
     }
-  }, [location, navigator, t]);
+  }, [location, t]);
 };

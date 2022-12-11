@@ -10,12 +10,13 @@
   "newPassword": "New Password",
   "newPasswordAgain": "New Password Again",
   "password": "Password",
-  "passwordAgain": "Password Again",
+  "repeatPassword": "Password Again",
   "resetPassword": "Forgot Your Password?",
   "login": "Login",
   "nickname": "Nickname",
-  "firstName": "First Name",
-  "secondName": "Second Name",
+  "first_name": "First Name",
+  "second_name": "Second Name",
+  "email": "Email",
   "phone": "Phone",
   "avatar": "User Avatar",
   "signUp": "Sign Up",
@@ -57,5 +58,7 @@
   "required": "Required",
   "switchLanguage": "Are you in Russia, switch the language to Russian?",
   "errorGetLocation": "Couldn't get location information",
-  "errorGeolocation": "Geolocation is not supported by your browser"
+  "errorGeolocation": "Geolocation is not supported by your browser",
+  "Name": "Name",
+  "Score": "Score"
 }

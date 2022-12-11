@@ -22,6 +22,7 @@ export const addLeader = (score: number, login = '') => {
   return fetchApi<Leader[]>('/leaderboard', {
     method: 'POST',
     headers: defaultHeaders,
+    credentials: 'include',
     body: JSON.stringify(prepareLeaderboardRequestData(score, login)),
   });
 };
@@ -30,6 +31,7 @@ export const getLeaderboard = (data: ILeaderboardRequest) => {
   const res = fetchApi<Leader[]>('/leaderboard/all', {
     method: 'POST',
     headers: defaultHeaders,
+    credentials: 'include',
     body: JSON.stringify(data),
   });
   return res;

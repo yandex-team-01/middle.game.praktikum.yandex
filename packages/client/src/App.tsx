@@ -1,10 +1,11 @@
 import { ErrorsNotification } from 'src/components/ErrorsNotification';
-import { useLocation } from 'src/hooks/useLocation';
+import { useGeoLocation } from 'src/hooks/useGeoLocation';
 import { Routing } from 'src/components/Routing';
 import { withAuth } from 'src/hocs/withAuth';
 
 const AppComponent = () => {
-  useLocation();
+
+  useGeoLocation();
 
   return (
     <>
