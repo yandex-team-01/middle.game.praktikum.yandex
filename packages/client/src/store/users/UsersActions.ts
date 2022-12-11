@@ -15,6 +15,7 @@ export const fetchChangeUser = createAsyncThunk(
       const res: IUser = await fetchApi('/user/profile', {
         method: 'PUT',
         headers: defaultHeaders,
+        credentials: 'include',
         body: JSON.stringify(data),
       });
       thunkApi.dispatch(updateUser(res));
@@ -34,6 +35,7 @@ export const fetchChangePassword = createAsyncThunk(
       const res = await fetchApi('/user/password', {
         method: 'PUT',
         headers: defaultHeaders,
+        credentials: 'include',
         body: JSON.stringify(data),
       });
       return res;
@@ -53,6 +55,7 @@ export const fetchChangeAvatar = createAsyncThunk(
       formData.append('avatar', data);
       const res = await fetchApi('/user/profile/avatar', {
         method: 'PUT',
+        credentials: 'include',
         body: formData,
       });
       return res;
