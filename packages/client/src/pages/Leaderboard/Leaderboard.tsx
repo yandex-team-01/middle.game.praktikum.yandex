@@ -46,7 +46,7 @@ export const Leaderboard = () => {
   return (
     <ErrorBoundary>
       <div className={styles.block}>
-      <SEO title={t('title.leaderboard')} />
+        <SEO title={t('title.leaderboard')} />
         <div className={styles.button_wrapper}>
           <Button regular onClick={handleBack}>
             {t('goBack')}
