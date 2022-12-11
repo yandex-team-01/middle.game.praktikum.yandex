@@ -12,7 +12,7 @@ export const reverseGeocoding = (coordinates: GeoCoordinates) => {
       headers: {
         ...defaultHeaders,
         Accept: 'application/json',
-        Authorization: 'Token ' + env.TOKEN_FOR_GEO_CODER,
+        Authorization: 'Token ' + import.meta.env.VITE_TOKEN_FOR_GEO_CODER,
       },
       body: JSON.stringify(coordinates),
     },
