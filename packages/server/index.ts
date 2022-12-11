@@ -1,7 +1,9 @@
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
-import fs from 'fs';
+
+import { router } from './routing/routing';
+
 dotenv.config();
 
 //! Временно отключено для тестирования
@@ -9,26 +11,23 @@ dotenv.config();
 
 import express from 'express';
 
-// @ts-ignore
-import { render } from '../client/dist/ssr/entry-server.cjs';
-
 const app = express();
 app.use(cors());
-
 const port = Number(process.env.PORT) || 3001;
 
 //! Временно отключено для тестирования
 // createClientAndConnect();
 
-app.get('/ru/', (req, res) => {
-  const result = render(req.url);
-  const template = path.resolve(__dirname, '../client/dist/client/index.html');
-  const htmlString = fs.readFileSync(template, 'utf-8');
-  const newString = htmlString.replace('<!--ssr-outlet-->', result);
-  res.send(newString);
-});
+app.use(
+  '/assets',
+  express.static(path.resolve(__dirname, 'public/client/assets'))
+);
+app.use(
+  '/locales',
+  express.static(path.resolve(__dirname, 'public/client/locales'))
+);
 
-app.use(express.static(path.resolve(__dirname, '../client/dist/client')));
+app.use(router);
 
 app.listen(port, () => {
   console.log(`  ➜ 🎸 Server is listening on port: ${port}`);

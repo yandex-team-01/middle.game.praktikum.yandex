@@ -77,7 +77,7 @@ abstract class Player {
   subtractHP() {
     this.hitPoints = this.hitPoints - 1;
     if (this.hitPoints === 0) {
-      this.game.end();
+      this.game.end(false, this.score);
     }
   }
 

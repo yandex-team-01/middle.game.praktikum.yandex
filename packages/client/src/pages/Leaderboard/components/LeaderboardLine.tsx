@@ -1,27 +1,24 @@
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { SCORE_FIELD_NAME } from 'src/constants/LeaderboardConsts';
 import styles from './LeaderboardLine.module.scss';
 
-interface ITeam {
-  name: string;
-  score: number;
-  players: string[];
+export interface ILeader {
+  user: string;
+  [SCORE_FIELD_NAME]: number;
 }
 interface Props {
-  team: ITeam;
+  leader: ILeader;
   idx: number;
 }
 
-export const LeaderboardLine = ({ idx, team }: Props) => {
-  const { name, score, players } = team;
+export const LeaderboardLine = ({ idx, leader }: Props) => {
+  const { user } = leader;
+  const score = leader[SCORE_FIELD_NAME];
   return (
     <ErrorBoundary>
-      <div className={styles.leader_line}>
-        <span className={styles.leader_line_item}>{name}</span>
-        <span className={styles.leader_line_item}>{idx + 1}</span>
-        <span className={styles.leader_line_item}>{score}</span>
-        <span className={styles.leader_line_item}>{players[0]}, </span>
-        <span className={styles.leader_line_item}>{players[1]}</span>
-      </div>
+      <div className={styles.leader_line_item}>{idx + 1}</div>
+      <div className={styles.leader_line_item}>{user}</div>
+      <div className={styles.leader_line_item}>{score}</div>
     </ErrorBoundary>
   );
 };
