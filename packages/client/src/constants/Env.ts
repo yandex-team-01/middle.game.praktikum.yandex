@@ -7,7 +7,7 @@ export const env = {
 
 export const getEnvSsr = () => {
   let isSsr = true;
-  if (typeof document !== undefined && typeof document !== 'undefined') {
+  if (typeof document !== 'undefined') {
     isSsr = false;
   }
   return isSsr;
