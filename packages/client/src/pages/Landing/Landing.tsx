@@ -5,19 +5,19 @@ import gameImg from 'src/assets/images/game.png';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { TitleGame } from 'src/components/TitleGame';
 import { fetchOAuthStepOneGetServiceIdFromApiPracticum } from 'src/store/auth/AuthActions';
-import { useAppDispatch } from 'src/hooks/redux';
-import { useCheckOauthCode } from 'src/App';
+import { useCheckOauthCode } from 'src/hooks/useCheckOauthCode';
+import { useBoundAction } from 'src/hooks/useBoundAction';
 
 export const Landing = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const navigateLogin = () => navigator('auth');
   const navigateSignup = () => navigator('/auth/reg');
 //первый шаг oAuth - получаем service_id с api practicum
-  const oAuthHandle = () => {
-    dispatch(fetchOAuthStepOneGetServiceIdFromApiPracticum());
-  };
+  const oAuthHandle = useBoundAction(
+    fetchOAuthStepOneGetServiceIdFromApiPracticum
+  );
   //третий шаг oAuth - отправляем код полученный после редиректа на страницу согласия на авторизацию
   useCheckOauthCode();
   
