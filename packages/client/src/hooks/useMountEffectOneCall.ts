@@ -11,13 +11,21 @@ export const useMountEffectOneCall = (
     if (!isRepeatCall) {
       callbackUnmounting = effectCallback();
     }
+    const isProd = getEnvSsr();
 
     return () => {
-      if (isRepeatCall && callbackUnmounting) {
+      if (
+        (isRepeatCall && callbackUnmounting) ||
+        (callbackUnmounting && isProd)
+      ) {
         callbackUnmounting();
       }
 
       isRepeatCall = true;
     };
   }, []);
+};
+
+const getEnvSsr = () => {
+  return import.meta.env.PROD;
 };

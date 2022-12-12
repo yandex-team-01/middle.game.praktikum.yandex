@@ -1,9 +1,11 @@
+
 import { ErrorsNotification } from './components/ErrorsNotification';
 import { Routing } from './components/Routing';
 import { withAuth } from './hocs/withAuth';
 import { useMountEffectOneCall } from './hooks/useMountEffectOneCall';
 import { fetchOAuthStepThreeGetApproveFromApiPracticum } from 'src/store/auth/AuthActions';
 import { useAppDispatch } from './hooks/redux';
+import { useGeoLocation } from 'src/hooks/useGeoLocation';
 
 export const useCheckOauthCode = () => {
   const dispatch = useAppDispatch();
@@ -19,6 +21,8 @@ export const useCheckOauthCode = () => {
 }; 
 
 const AppComponent = () => {
+  useGeoLocation();
+
   return (
     <>
       <ErrorsNotification />
