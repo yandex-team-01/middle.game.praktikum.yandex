@@ -12,13 +12,13 @@ import { setupStore } from 'src/store/store';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { startServiceWorker } from 'src/utils/serviceWorker';
 import { PreloadedState } from 'src/store/types';
-import { getEnvSsr } from 'src/utils/getEnvSsr';
+import { getEnvSsrAndProd } from 'src/utils/getEnvSsrAndProd';
 
 const defineStore = window.__PRELOADED_STATE__ as PreloadedState;
 delete window.__PRELOADED_STATE__;
 const store = setupStore(defineStore);
 
-const isSsr = getEnvSsr();
+const env = getEnvSsrAndProd();
 const dom = (
   <React.StrictMode>
     <React.Suspense>
@@ -35,7 +35,7 @@ const dom = (
   </React.StrictMode>
 );
 
-if (isSsr) {
+if (env.SSR) {
   ReactDOM.hydrateRoot(document.getElementById('root') as HTMLElement, dom);
 } else {
   ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
