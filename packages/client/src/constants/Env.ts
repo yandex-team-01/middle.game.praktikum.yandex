@@ -6,11 +6,3 @@ export const env = {
   GEO_CODER:
     'https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address',
 };
-
-export const getEnvSsr = () => {
-  let isSsr = true;
-  if (typeof document !== 'undefined') {
-    isSsr = false;
-  }
-  return isSsr;
-};

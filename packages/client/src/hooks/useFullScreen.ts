@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getEnvSsr } from 'src/constants/Env';
+import { getEnvSsr } from 'src/utils/getEnvSsr';
 
 export const useFullScreen = (initialIsFullScreen = false) => {
   const [isFullScreen, setValue] = useState(initialIsFullScreen);
