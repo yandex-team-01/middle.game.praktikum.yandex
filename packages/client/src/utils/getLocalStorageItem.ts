@@ -1,4 +1,4 @@
-import { getEnvSsr } from 'src/utils/getEnvSsr';
+import { getEnvSsrAndProd } from 'src/utils/getEnvSsrAndProd';
 
 export enum LocalStorageItems {
   Lang = 'i18nextLng',
@@ -9,9 +9,9 @@ const LOCAL_STORAGE_DEFAULTS: Record<LocalStorageItems, string> = {
 };
 
 export function getLocalStorageItem(key: LocalStorageItems) {
-  const isSsr = getEnvSsr();
+  const env = getEnvSsrAndProd();
 
-  if (!isSsr) {
+  if (!env.isSSR) {
     const res = localStorage.getItem(key);
     return res || LOCAL_STORAGE_DEFAULTS[key];
   }

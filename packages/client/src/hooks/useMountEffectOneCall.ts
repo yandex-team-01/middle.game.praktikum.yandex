@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
+import { getEnvSsrAndProd } from 'src/utils/getEnvSsrAndProd';
 
 export const useMountEffectOneCall = (
   effectCallback: () => (() => void) | void
@@ -11,12 +12,12 @@ export const useMountEffectOneCall = (
     if (!isRepeatCall) {
       callbackUnmounting = effectCallback();
     }
-    const isProd = getEnvSsr();
+    const env = getEnvSsrAndProd();
 
     return () => {
       if (
         (isRepeatCall && callbackUnmounting) ||
-        (callbackUnmounting && isProd)
+        (callbackUnmounting && env.isPROD)
       ) {
         callbackUnmounting();
       }
@@ -24,8 +25,4 @@ export const useMountEffectOneCall = (
       isRepeatCall = true;
     };
   }, []);
-};
-
-const getEnvSsr = () => {
-  return import.meta.env.PROD;
 };

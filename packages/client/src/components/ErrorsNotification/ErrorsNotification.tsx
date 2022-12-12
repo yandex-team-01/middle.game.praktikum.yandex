@@ -10,7 +10,6 @@ import { useBoundAction } from 'src/hooks/useBoundAction';
 export const ErrorsNotification = () => {
   const errorList = useAppSelector(selectErrorList);
   const handleClose = useBoundAction((id: string) => removeError(id));
-
   return (
     <ErrorBoundary>
       <div className={styles.error_container}>
