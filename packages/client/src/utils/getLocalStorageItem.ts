@@ -11,7 +11,7 @@ const LOCAL_STORAGE_DEFAULTS: Record<LocalStorageItems, string> = {
 export function getLocalStorageItem(key: LocalStorageItems) {
   const env = getEnvSsrAndProd();
 
-  if (!env.SSR) {
+  if (!env.isSSR) {
     const res = localStorage.getItem(key);
     return res || LOCAL_STORAGE_DEFAULTS[key];
   }

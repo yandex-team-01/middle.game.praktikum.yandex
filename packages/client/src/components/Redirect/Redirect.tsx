@@ -11,7 +11,7 @@ export const Redirect = ({ to }: RedirectProps) => {
   const env = getEnvSsrAndProd();
   const ctx = useContext(HttpContext);
 
-  if (!env.SSR) {
+  if (!env.isSSR) {
     return <Navigate to={to} replace />;
   }
 

@@ -1,3 +1,6 @@
 export const getEnvSsrAndProd = () => {
-  return { SSR: import.meta.env.SSR, PROD: import.meta.env.PROD };
+  return {
+    isSSR: import.meta.env.SSR,
+    isPROD: import.meta.env.PROD,
+  };
 };

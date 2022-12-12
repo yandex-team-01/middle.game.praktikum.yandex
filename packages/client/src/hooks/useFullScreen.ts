@@ -8,7 +8,7 @@ export const useFullScreen = (initialIsFullScreen = false) => {
     setValue(previousValue => !previousValue);
     // На сервере нет window и document так что нужно проверять либо так либо чекать через env переменную уоторую выставляет vite
     const env = getEnvSsrAndProd();
-    if (env.SSR && !document.fullscreenElement) {
+    if (!env.isSSR && !document.fullscreenElement) {
       document.documentElement.requestFullscreen();
     } else if (document.exitFullscreen) {
       document.exitFullscreen();

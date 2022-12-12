@@ -17,7 +17,7 @@ export const useMountEffectOneCall = (
     return () => {
       if (
         (isRepeatCall && callbackUnmounting) ||
-        (callbackUnmounting && env.PROD)
+        (callbackUnmounting && env.isPROD)
       ) {
         callbackUnmounting();
       }

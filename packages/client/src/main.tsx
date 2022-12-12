@@ -35,7 +35,7 @@ const dom = (
   </React.StrictMode>
 );
 
-if (env.SSR) {
+if (env.isSSR) {
   ReactDOM.hydrateRoot(document.getElementById('root') as HTMLElement, dom);
 } else {
   ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
