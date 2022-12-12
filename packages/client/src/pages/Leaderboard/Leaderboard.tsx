@@ -6,7 +6,6 @@ import { BlankWindow } from 'src/components/BlankWindow';
 import { Button } from 'src/components/Button';
 import { LeaderboardLine } from './components/LeaderboardLine';
 import { useNavigator } from 'src/hooks/useNavigator';
-import { useMountEffect } from 'src/hooks/useMountEffect';
 import { getAllLeaderboard } from 'src/store/leaderboard/LeaderboardActions';
 import { BackgroundLayout } from 'src/layouts/BackgroundLayout';
 import { Spinner } from 'src/components/Spinner';
@@ -19,6 +18,7 @@ import { leaderboardRequestData } from 'src/constants/LeaderboardConsts';
 import { useBoundAction } from 'src/hooks/useBoundAction';
 import { Leader } from 'src/store/leaderboard/types';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
 
 export const Leaderboard = () => {
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ export const Leaderboard = () => {
   const leaderboard = useAppSelector(selectLeaderboardRecords);
 
   const handleGetLeaderboard = useBoundAction(getAllLeaderboard);
-  useMountEffect(() => {
+  useMountEffectOneCall(() => {
     handleGetLeaderboard(leaderboardRequestData);
   });
 
