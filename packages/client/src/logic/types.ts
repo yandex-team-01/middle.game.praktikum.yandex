@@ -6,7 +6,7 @@ import { Game } from './Game';
 import { Timer } from './Timer';
 
 export type SpriteOptions = {
-  id: number | string;
+  id: string;
   src: string;
   width: number;
   height: number;
@@ -16,8 +16,6 @@ export type AllSpritesType = Record<number | string, Sprite>;
 
 export type NpcConstructorOptions = {
   id: number;
-  defaultX: number;
-  defaultY: number;
   type: string;
 };
 

@@ -6,29 +6,19 @@ import { BlankWindow } from 'src/components/BlankWindow';
 import { Button } from 'src/components/Button';
 import { LeaderboardLine } from './components/LeaderboardLine';
 import { useNavigator } from 'src/hooks/useNavigator';
-
-const LeadersMockData = [
-  {
-    name: 'Team 1',
-    score: 12345,
-    players: ['player 1', 'player 2'],
-  },
-  {
-    name: 'Team 3',
-    score: 1000,
-    players: ['player 6', 'player 10'],
-  },
-  {
-    name: 'Team 5',
-    score: 933,
-    players: ['player 33', 'player 24'],
-  },
-  {
-    name: 'Team 6',
-    score: 600,
-    players: ['player 122', 'player 442'],
-  },
-];
+import { getAllLeaderboard } from 'src/store/leaderboard/LeaderboardActions';
+import { BackgroundLayout } from 'src/layouts/BackgroundLayout';
+import { Spinner } from 'src/components/Spinner';
+import {
+  selectLeaderboardRecords,
+  selectLoading,
+} from 'src/store/leaderboard/LeaderboardSelectors';
+import { useAppSelector } from 'src/hooks/redux';
+import { leaderboardRequestData } from 'src/constants/LeaderboardConsts';
+import { useBoundAction } from 'src/hooks/useBoundAction';
+import { Leader } from 'src/store/leaderboard/types';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
 
 export const Leaderboard = () => {
   const { t } = useTranslation();
@@ -36,25 +26,50 @@ export const Leaderboard = () => {
 
   const handleBack = () => navigator(-1);
   const handleLoadGame = () => navigator('/loadinggame');
+  const isLoading = useAppSelector(selectLoading);
+  const leaderboard = useAppSelector(selectLeaderboardRecords);
+
+  const handleGetLeaderboard = useBoundAction(getAllLeaderboard);
+  useMountEffectOneCall(() => {
+    handleGetLeaderboard(leaderboardRequestData);
+  });
+
+  if (isLoading) {
+    return (
+      <BackgroundLayout>
+        <Spinner />
+      </BackgroundLayout>
+    );
+  }
 
   return (
-    <div className={styles.block}>
-      <div className={styles.button_wrapper}>
-        <Button regular onClick={handleBack}>
-          {t('goBack')}
-        </Button>
-        <Button regular onClick={handleLoadGame}>
-          {t('play')}
-        </Button>
-      </div>
-      <BlankWindow className={styles.window}>
-        <div className={styles.background_overlay}>
-          <h1 className={styles.header}>{t('topTeams')}</h1>
-          {LeadersMockData.map((team, idx) => {
-            return <LeaderboardLine team={team} idx={idx} key={idx} />;
-          })}
+    <ErrorBoundary>
+      <div className={styles.block}>
+        <div className={styles.button_wrapper}>
+          <Button regular onClick={handleBack}>
+            {t('goBack')}
+          </Button>
+          <Button regular onClick={handleLoadGame}>
+            {t('play')}
+          </Button>
         </div>
-      </BlankWindow>
-    </div>
+        <BlankWindow className={styles.window}>
+          <div className={styles.background_overlay}>
+            <h1 className={styles.header}>{t('topTeams')}</h1>
+            <div className={styles.table}>
+              <div className={styles.header_item}>#</div>
+              <div className={styles.header_item}>{t('Name')}</div>
+              <div className={styles.header_item}>{t('Score')}</div>
+
+              {leaderboard.map((leader: Leader, idx) => {
+                return (
+                  <LeaderboardLine leader={leader.data} idx={idx} key={idx} />
+                );
+              })}
+            </div>
+          </div>
+        </BlankWindow>
+      </div>
+    </ErrorBoundary>
   );
 };

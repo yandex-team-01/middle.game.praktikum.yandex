@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { useRef } from 'react';
 
 import styles from './SettingsAvatar.module.scss';
 
@@ -18,20 +19,32 @@ export const SettingsAvatar = () => {
 
   const avatar: string = user.avatar ? url : noAvatarImg;
 
+  const inputFileRef = useRef<HTMLInputElement | null>(null);
+
   const onUploadAvatar = (event: ChangeEvent) => {
     const target = event.target as HTMLInputElement;
     const file: File = (target.files as FileList)[0];
-    if (file.type.indexOf("image") !== -1) {
+    if (file.type.indexOf('image') !== -1) {
       dispatch(fetchChangeAvatar(file));
     }
   };
 
+  const clickHandler = () => {
+    inputFileRef.current?.click();
+  };
+
   return (
     <div>
-      <div className={styles.rounded}>
+      <div onClick={clickHandler} className={styles.rounded}>
         <img className={styles.avatar} src={avatar} alt={t('avatar')} />
       </div>
-      <input accept="image/*" type="file" onChange={onUploadAvatar} />
+      <input
+        ref={inputFileRef}
+        className={styles.input}
+        accept="image/*"
+        type="file"
+        onChange={onUploadAvatar}
+      />
     </div>
   );
 };

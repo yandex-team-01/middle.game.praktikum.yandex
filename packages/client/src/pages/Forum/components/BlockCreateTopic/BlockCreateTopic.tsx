@@ -9,7 +9,7 @@ import { dateFormatting } from 'src/utils/dateFormatting';
 import { selectUserLogin } from 'src/store/auth/AuthSelectors';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { useFormik } from 'formik';
-import { initialRegValuesSchema, regSchema } from './CreateTopicSchema';
+import { initialTopicValuesSchema, topicSchema } from './CreateTopicSchema';
 import styles from './CreateTopic.module.scss';
 import { ITopic } from 'src/pages/Forum/part/Topic/types';
 import { v1 } from 'uuid';
@@ -33,8 +33,8 @@ export const BlockCreateTopic = () => {
 
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
-      initialValues: initialRegValuesSchema,
-      validationSchema: regSchema,
+      initialValues: initialTopicValuesSchema,
+      validationSchema: topicSchema(t),
       onSubmit: values => {
         const newtopic: ITopic = {
           id: v1(),

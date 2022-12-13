@@ -5,7 +5,7 @@ export const useProgress = () => {
   const isRunning = progress <= 100;
 
   useEffect(() => {
-    let id: ReturnType<typeof setInterval> = 0;
+    let id: ReturnType<typeof setInterval> | number = 0;
 
     if (isRunning) {
       id = setInterval(() => {

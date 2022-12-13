@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { useBoundAction } from 'src/hooks/useBoundAction';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { changeActiveTopic } from 'src/store/forum/ForumSlice';
 import { Column } from '../Column/Column';
-import { useBoundAction } from './helper';
 import styles from './Topic.module.scss';
 import { ITopic } from './types';
 

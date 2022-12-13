@@ -10,7 +10,7 @@ i18next
   .use(Backend)
   .init({
     supportedLngs: ['en', 'ru'],
-    fallbackLng: 'ru',
+    fallbackLng: 'en',
     detection: {
       order: ['path', 'localStorage'],
       caches: ['localStorage'],

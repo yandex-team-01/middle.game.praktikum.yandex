@@ -9,7 +9,10 @@ import { selectLogin } from 'src/store/forum/ForumSelectors';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { Props } from './types';
 import { useFormik } from 'formik';
-import { initialRegValuesSchema, regSchema } from './CommentEditorSchema';
+import {
+  initialCommentValuesSchema,
+  commentSchema,
+} from './CommentEditorSchema';
 import { IComment } from '../Comment/types';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { useTranslation } from 'react-i18next';
@@ -33,8 +36,8 @@ export const SendComment = ({ topicId }: Props) => {
 
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
-      initialValues: initialRegValuesSchema,
-      validationSchema: regSchema,
+      initialValues: initialCommentValuesSchema,
+      validationSchema: commentSchema(t),
       onSubmit: values => {
         const comment: IComment = {
           text: values.comment,

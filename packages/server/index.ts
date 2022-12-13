@@ -1,19 +1,33 @@
 import dotenv from 'dotenv';
 import cors from 'cors';
+import path from 'path';
+
+import { router } from './routing/routing';
+
 dotenv.config();
 
+//! Временно отключено для тестирования
+// import { createClientAndConnect } from './db';
+
 import express from 'express';
-import { createClientAndConnect } from './db';
 
 const app = express();
 app.use(cors());
-const port = Number(process.env.SERVER_PORT) || 3001;
+const port = Number(process.env.PORT) || 3001;
 
-createClientAndConnect();
+//! Временно отключено для тестирования
+// createClientAndConnect();
 
-app.get('/', (_, res) => {
-  res.json('👋 Howdy from the server :)');
-});
+app.use(
+  '/assets',
+  express.static(path.resolve(__dirname, 'public/client/assets'))
+);
+app.use(
+  '/locales',
+  express.static(path.resolve(__dirname, 'public/client/locales'))
+);
+
+app.use(router);
 
 app.listen(port, () => {
   console.log(`  ➜ 🎸 Server is listening on port: ${port}`);

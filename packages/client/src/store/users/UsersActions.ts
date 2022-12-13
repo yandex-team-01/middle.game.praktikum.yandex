@@ -6,11 +6,7 @@ import { addError } from '../error/ErrorSlice';
 import { updateUser } from '../auth/AuthSlice';
 import { IUser } from 'src/modules/IUser';
 import { ChangePasswordData } from 'src/modules/IUsers';
-
-const defaultHeaders = {
-  'content-type': 'application/json',
-  mode: 'cors',
-};
+import { defaultHeaders } from 'src/constants/http';
 
 export const fetchChangeUser = createAsyncThunk(
   'auth/fetchChangeUser',
@@ -19,6 +15,7 @@ export const fetchChangeUser = createAsyncThunk(
       const res: IUser = await fetchApi('/user/profile', {
         method: 'PUT',
         headers: defaultHeaders,
+        credentials: 'include',
         body: JSON.stringify(data),
       });
       thunkApi.dispatch(updateUser(res));
@@ -38,6 +35,7 @@ export const fetchChangePassword = createAsyncThunk(
       const res = await fetchApi('/user/password', {
         method: 'PUT',
         headers: defaultHeaders,
+        credentials: 'include',
         body: JSON.stringify(data),
       });
       return res;
@@ -55,10 +53,12 @@ export const fetchChangeAvatar = createAsyncThunk(
     try {
       const formData = new FormData();
       formData.append('avatar', data);
-      const res = await fetchApi('/user/profile/avatar', {
+      const res: IUser = await fetchApi('/user/profile/avatar', {
         method: 'PUT',
+        credentials: 'include',
         body: formData,
       });
+      thunkApi.dispatch(updateUser(res));
       return res;
     } catch (error) {
       thunkApi.dispatch(addError('Ошибка смены аватара профиля'));

@@ -24,3 +24,10 @@ export interface ForumState {
   activeTopic: ITopic | undefined;
   topics: Record<string, ITopic>;
 }
+
+export interface PreloadedState {
+  auth: AuthState;
+  error: ErrorState;
+  forum: ForumState;
+  users: ChangeDataState;
+}

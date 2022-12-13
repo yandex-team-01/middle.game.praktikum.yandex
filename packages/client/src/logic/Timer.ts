@@ -28,7 +28,7 @@ export class Timer {
   }
 
   initGameTimer() {
-    this.gameRoundDuration = 1 * 60 * 1000;
+    this.gameRoundDuration = 5 * 60 * 1000;
     this.gameStartMoment = new Date();
     this.gameEndMoment = new Date(
       this.gameStartMoment.getTime() + this.gameRoundDuration
@@ -39,6 +39,7 @@ export class Timer {
 
   render() {
     this.ctx.font = '30px PixelDigivolve';
+    this.ctx.fillStyle = '#fff';
     this.ctx.fillText(`${this.gameTimer}`, this.canvasWidth / 2, 40);
     this.animate();
   }

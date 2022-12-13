@@ -5,6 +5,7 @@ import { selectListTopics } from 'src/store/forum/ForumSelectors';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { useAppSelector } from 'src/hooks/redux';
 import { ButtonCreateTopic } from 'src/pages/Forum/part/ButtonCreateTopic';
+import { ITopic } from '../../part/Topic/types';
 
 export const TopicList = memo(() => {
   const topics = useAppSelector(selectListTopics);
@@ -14,8 +15,8 @@ export const TopicList = memo(() => {
       <div className={styles.block_topics}>
         <ButtonCreateTopic />
         <div className={styles.list}>
-          {Object.keys(topics).map((topicId: string, index: number) => {
-            return <Topic key={index} {...topics[topicId]} />;
+          {Object.values(topics).map((topic: ITopic, index: number) => {
+            return <Topic key={index} {...topic} />;
           })}
         </div>
       </div>

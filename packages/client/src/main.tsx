@@ -5,16 +5,21 @@ import { BrowserRouter } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
 import { i18next } from '../i18next.config';
 
-import { App } from './App';
+import { App } from 'src/App';
 import 'normalize.css';
 import './index.module.scss';
-import { setupStore } from './store/store';
-import { ErrorBoundary } from './components/ErrorBoundary';
-import { startServiceWorker } from './utils/serviceWorker';
+import { setupStore } from 'src/store/store';
+import { ErrorBoundary } from 'src/components/ErrorBoundary';
+import { startServiceWorker } from 'src/utils/serviceWorker';
+import { PreloadedState } from 'src/store/types';
+import { getEnvSsrAndProd } from 'src/utils/getEnvSsrAndProd';
 
-const store = setupStore();
+const defineStore = window.__PRELOADED_STATE__ as PreloadedState;
+delete window.__PRELOADED_STATE__;
+const store = setupStore(defineStore);
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+const env = getEnvSsrAndProd();
+const dom = (
   <React.StrictMode>
     <React.Suspense>
       <BrowserRouter>
@@ -29,5 +34,13 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     </React.Suspense>
   </React.StrictMode>
 );
+
+if (env.isSSR) {
+  ReactDOM.hydrateRoot(document.getElementById('root') as HTMLElement, dom);
+} else {
+  ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+    dom
+  );
+}
 
 startServiceWorker();
