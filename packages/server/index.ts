@@ -4,10 +4,9 @@ import path from 'path';
 
 import { router } from './routing/routing';
 
-dotenv.config();
+import { dbConnect } from './db';
 
-//! Временно отключено для тестирования
-// import { createClientAndConnect } from './db';
+dotenv.config();
 
 import express from 'express';
 
@@ -15,20 +14,22 @@ const app = express();
 app.use(cors());
 const port = Number(process.env.PORT) || 3001;
 
-//! Временно отключено для тестирования
-// createClientAndConnect();
+async function init() {
+  await dbConnect();
+  app.use(
+    '/assets',
+    express.static(path.resolve(__dirname, 'public/client/assets'))
+  );
+  app.use(
+    '/locales',
+    express.static(path.resolve(__dirname, 'public/client/locales'))
+  );
 
-app.use(
-  '/assets',
-  express.static(path.resolve(__dirname, 'public/client/assets'))
-);
-app.use(
-  '/locales',
-  express.static(path.resolve(__dirname, 'public/client/locales'))
-);
+  app.use(router);
 
-app.use(router);
+  app.listen(port, () => {
+    console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
+  });
+}
 
-app.listen(port, () => {
-  console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
-});
+init();
