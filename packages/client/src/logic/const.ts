@@ -9,6 +9,7 @@ import npcEnemyHuggy from '/src/assets/images/game-npc-huggy.png';
 import npcEnemyKissy from '/src/assets/images/game-npc-kissy.png';
 import collisionBood from '/src/assets/images/game-collision-blood.png';
 import collisionTeleport from '/src/assets/images/game-collision-teleport.png';
+import speed from '/src/assets/images/game-ico-speed.png';
 
 export const GAME_SETTINGS = {
   GAME_TIME_LIMIT: 14.8 * 60 * 1000,
@@ -61,6 +62,7 @@ export enum SPRITE_ID {
   MONEY = 'money',
   COLLISION_BLOOD = 'collision_bood',
   COLLISION_TELEPORT = 'collision_teleport',
+  SHOW_SPEED = 'speed'
 }
 
 export const spritesOptions: SpriteOptions[] = [
@@ -124,6 +126,7 @@ export const spritesOptions: SpriteOptions[] = [
     width: GAME_SETTINGS.COLLISION_TELEPORT_WIDTH,
     height: GAME_SETTINGS.COLLISION_TELEPORT_HEIGHT,
   },
+  { id: SPRITE_ID.SHOW_SPEED, src: speed, width: 16, height: 16 },
 ];
 
 // временная константа для вывода npc

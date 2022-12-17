@@ -1,3 +1,4 @@
+import { Sprite } from './Sprite';
 import { ClashesController } from './ClashesController';
 import { NpcControll } from './NpcControll';
 import { PlayerOne } from './Player';
@@ -55,6 +56,7 @@ export class View {
       sprites[SPRITE_ID.COLLISION_TELEPORT],
       sprites[SPRITE_ID.COLLISION_BLOOD]
     );
+    this.showSpeed.setSprite(sprites[SPRITE_ID.SHOW_SPEED] as Sprite);
   }
 
   prepareCanvas(): void {
