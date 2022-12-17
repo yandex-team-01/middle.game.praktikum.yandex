@@ -22,28 +22,45 @@ export class ShowSpeed {
     this.npcControll = npcControll;
   }
 
-  speedPlayer() {
+  title() {
     this.ctx.font = '30px PixelDigivolve';
     this.ctx.fillStyle = '#fff';
+    this.ctx.fillText(`Speed`, 0, 80);
+  }
+
+  speedPlayer() {
+    let player = this.playerOne.speed.toFixed(2);
+    this.ctx.font = '24px PixelDigivolve';
+    this.ctx.fillStyle = '#fff';
+    this.ctx.fillText(`Player: ${player}`, 0, 110);
+  }
+
+  speedHuggy() {
+    let huggy = this.npcControll.arrNpc[1].speed.toFixed(2);
+    this.ctx.font = '24px PixelDigivolve';
+    this.ctx.fillStyle = '#fff';
     this.ctx.fillText(
-      `Player: ${this.playerOne.speed.toFixed(2)}`,
-      this.canvasWidth / 4,
-      40
+      `Huggy Wuggy: ${huggy}`,
+      0,
+      130
     );
   }
 
-  speedNpc() {
-    this.ctx.font = '30px PixelDigivolve';
+  speedKissy() {
+    let kissy = this.npcControll.arrNpc[0].speed.toFixed(2);
+    this.ctx.font = '24px PixelDigivolve';
     this.ctx.fillStyle = '#fff';
     this.ctx.fillText(
-      `NPC: ${this.npcControll.arrNpc[0].speed.toFixed(2)}`,
-      this.canvasWidth / 1.5,
-      40
+      `Kissy Missy: ${kissy}`,
+      0,
+      150
     );
   }
 
   render() {
+    this.title();
     this.speedPlayer();
-    this.speedNpc();
+    this.speedHuggy();
+    this.speedKissy();
   }
 }
