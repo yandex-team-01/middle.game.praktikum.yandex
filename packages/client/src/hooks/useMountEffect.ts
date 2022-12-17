@@ -1,6 +1,9 @@
-import { useEffect } from 'react';
+import { useMountEffectProd } from 'src/hooks/useMountEffectProd';
+import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
+import { getEnvSsrAndProd } from 'src/utils/getEnvSsrAndProd';
 
-export const useMountEffect = (effectCallback: () => (() => void) | void) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(effectCallback, []);
-};
+const env = getEnvSsrAndProd();
+
+export const useMountEffect = env.isPROD
+  ? useMountEffectProd
+  : useMountEffectOneCall;

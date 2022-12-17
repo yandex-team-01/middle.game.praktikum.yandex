@@ -6,7 +6,7 @@
     "dev": "vite",
     "build:client": "vite build --outDir=../server/public/client",
     "build:ssr": "vite build --outDir=../server/public/ssr --ssr src/entry-server.tsx",
-    "build": "rm -rf ../server/public && yarn build:client && yarn build:ssr ",
+    "build": "npx rimraf ../server/public && yarn build:client && yarn build:ssr ",
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
@@ -29,6 +29,7 @@
     "react-icons": "4.6.0",
     "react-redux": "8.0.4",
     "react-router-dom": "6.4.2",
+    "rimraf": "3.0.2",
     "sass": "1.55.0",
     "uuid": "9.0.0",
     "yup": "0.32.11"

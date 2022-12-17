@@ -21,7 +21,6 @@ import {
 import { ErrorBoundary } from '../ErrorBoundary';
 import { ProtectedRoute } from '../ProtectedRoute';
 import { useAppSelector } from 'src/hooks/redux';
-// import { langPath } from 'src/utils/langPath';
 
 import { TopicList } from 'src/pages/Forum/components/TopicList';
 import { BlockCreateTopic } from 'src/pages/Forum/components/BlockCreateTopic';
@@ -108,48 +107,6 @@ export const Routing = () => {
           element={<ErrorPage title="404" description={t('error404')} />}
         />
         <Route path="*" element={<Redirect to="/404" />} />
-        {/* Временно убрала логику с langPath */}
-        {/* <Route
-          path="/auth"
-          element={<Navigate to={langPath('/auth')} replace />}
-        /> */}
-        {/* <Route path="/" element={<Navigate to={langPath('/')} replace />} /> */}
-        {/* <Route
-          path="/forum"
-          element={<Navigate to={langPath('/forum')} replace />}
-        /> */}
-        {/* <Route
-          path="/leaders"
-          element={<Navigate to={langPath('/leaders')} replace />}
-        /> */}
-        {/* <Route
-          path="/loadinggame"
-          element={<Navigate to={langPath('/loadinggame')} replace />}
-        /> */}
-        {/* <Route
-          path={langPath('/resetpassword')}
-          element={
-            <BackgroundLayout>
-              <Landing />
-            </BackgroundLayout>
-          }
-        />
-        <Route
-          path="/resetpassword"
-          element={<Navigate to={langPath('/resetpassword')} replace />}
-        /> */}
-        {/* <Route
-          path="/game"
-          element={<Navigate to={langPath('/game')} replace />}
-        /> */}
-        {/* <Route
-          path="/settings"
-          element={<Navigate to={langPath('/settings')} replace />}
-        /> */}
-        {/* <Route
-          path="/500"
-          element={<Navigate to={langPath('/500')} replace />}
-        /> */}
       </Routes>
     </ErrorBoundary>
   );

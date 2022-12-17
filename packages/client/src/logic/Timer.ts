@@ -1,3 +1,4 @@
+import { GAME_SETTINGS } from './const';
 import { Game } from './Game';
 import { GameEntities } from './types';
 
@@ -28,7 +29,7 @@ export class Timer {
   }
 
   initGameTimer() {
-    this.gameRoundDuration = 5 * 60 * 1000;
+    this.gameRoundDuration = GAME_SETTINGS.GAME_TIME_LIMIT;
     this.gameStartMoment = new Date();
     this.gameEndMoment = new Date(
       this.gameStartMoment.getTime() + this.gameRoundDuration
@@ -55,7 +56,7 @@ export class Timer {
     }
 
     if (this.gameEndMoment && new Date() >= this.gameEndMoment) {
-      this.game.end(true);
+      this.game.end(true, this.game.playerOne.score);
     }
   }
 }
