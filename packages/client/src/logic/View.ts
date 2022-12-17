@@ -3,7 +3,7 @@ import { ClashesController } from './ClashesController';
 import { NpcControll } from './NpcControll';
 import { PlayerOne } from './Player';
 import { Timer } from './Timer';
-import { ShowSpeed } from './ShowSpeed';
+import { Speedometer } from './Speedometer';
 import { AllSpritesType } from './types';
 import { GameEntities } from './types';
 import { SPRITE_ID } from './const';
@@ -23,13 +23,13 @@ export class View {
   public clashesController: ClashesController;
   public gameOver: boolean;
   public timer: Timer;
-  public showSpeed: ShowSpeed;
+  public speedometer: Speedometer;
   public levels: Levels;
 
   constructor(
     canvas: HTMLCanvasElement,
     ctx: CanvasRenderingContext2D,
-    { player, npcControll, timer, showSpeed, levels }: GameEntities
+    { player, npcControll, timer, speedometer, levels }: GameEntities
   ) {
     this.sprites = {};
     this.canvas = canvas;
@@ -47,7 +47,7 @@ export class View {
       npcControll,
       levels
     );
-    this.showSpeed = showSpeed;
+    this.speedometer = speedometer;
   }
 
   setSprite(sprites: AllSpritesType) {
@@ -56,7 +56,7 @@ export class View {
       sprites[SPRITE_ID.COLLISION_TELEPORT],
       sprites[SPRITE_ID.COLLISION_BLOOD]
     );
-    this.showSpeed.setSprite(sprites[SPRITE_ID.SHOW_SPEED] as Sprite);
+    this.speedometer.setSprite(sprites[SPRITE_ID.SHOW_SPEED] as Sprite);
   }
 
   prepareCanvas(): void {
@@ -114,7 +114,7 @@ export class View {
     this.npcControll.render();
     this.playerOne.render();
     this.timer.render();
-    this.showSpeed.render();
+    this.speedometer.render();
     this.levels.render();
   }
 

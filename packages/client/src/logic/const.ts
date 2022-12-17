@@ -29,6 +29,8 @@ export const GAME_SETTINGS = {
   MONEY_HEIGHT: 40,
   HEARTH_WIDTH: 40,
   HEARTH_HEIGHT: 40,
+  SHOW_SPEED_WIDTH: 16,
+  SHOW_SPEED_HEIGHT: 16,
   BACKGROUND_VERTICAL_LIMIT: 100,
   SKIN_HORIZONTAL_FRAME: 0,
   SKIN_TOTAL_NUMBER_OF_HORIZONTAL_FRAMES: 3,
@@ -126,7 +128,12 @@ export const spritesOptions: SpriteOptions[] = [
     width: GAME_SETTINGS.COLLISION_TELEPORT_WIDTH,
     height: GAME_SETTINGS.COLLISION_TELEPORT_HEIGHT,
   },
-  { id: SPRITE_ID.SHOW_SPEED, src: speed, width: 16, height: 16 },
+  { 
+    id: SPRITE_ID.SHOW_SPEED, 
+    src: speed,
+    width: GAME_SETTINGS.SHOW_SPEED_WIDTH,
+    height: GAME_SETTINGS.SHOW_SPEED_HEIGHT
+  },
 ];
 
 // временная константа для вывода npc

@@ -2,7 +2,7 @@ import { PlayerOne } from './Player';
 import { NpcControll } from './NpcControll';
 import { Sprite } from './Sprite';
 
-export class ShowSpeed {
+export class Speedometer {
   private ctx: CanvasRenderingContext2D;
   private canvasHeight: number;
   private canvasWidth: number;
@@ -29,13 +29,15 @@ export class ShowSpeed {
   }
 
   speedPlayer() {
+    const defineX = 72;
+    const defineY = 48;
     const player = this.playerOne.speed.toFixed(2);
     this.ctx.font = '14px PixelDigivolve';
     this.ctx.fillStyle = '#fff';
     this.ctx.drawImage(
       this.speed.image,
-      72,
-      48,
+      defineX,
+      defineY,
       this.speed.width,
       this.speed.height
     );
@@ -43,13 +45,15 @@ export class ShowSpeed {
   }
 
   speedHuggy() {
+    const defineX = 72;
+    const defineY = 68;
     const huggy = this.npcControll.arrNpc[1].speed.toFixed(2);
     this.ctx.font = '14px PixelDigivolve';
     this.ctx.fillStyle = '#fff';
     this.ctx.drawImage(
       this.speed.image,
-      72,
-      68,
+      defineX,
+      defineY,
       this.speed.width,
       this.speed.height
     );
@@ -57,13 +61,15 @@ export class ShowSpeed {
   }
 
   speedKissy() {
+    const defineX = 72;
+    const defineY = 88;
     const kissy = this.npcControll.arrNpc[0].speed.toFixed(2);
     this.ctx.font = '14px PixelDigivolve';
     this.ctx.fillStyle = '#fff';
     this.ctx.drawImage(
       this.speed.image,
-      72,
-      88,
+      defineX,
+      defineY,
       this.speed.width,
       this.speed.height
     );
