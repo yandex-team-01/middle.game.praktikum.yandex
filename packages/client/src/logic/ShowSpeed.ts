@@ -29,14 +29,14 @@ export class ShowSpeed {
   }
 
   speedPlayer() {
-    let player = this.playerOne.speed.toFixed(2);
+    const player = this.playerOne.speed.toFixed(2);
     this.ctx.font = '24px PixelDigivolve';
     this.ctx.fillStyle = '#fff';
     this.ctx.fillText(`Player: ${player}`, 0, 110);
   }
 
   speedHuggy() {
-    let huggy = this.npcControll.arrNpc[1].speed.toFixed(2);
+    const huggy = this.npcControll.arrNpc[1].speed.toFixed(2);
     this.ctx.font = '24px PixelDigivolve';
     this.ctx.fillStyle = '#fff';
     this.ctx.fillText(
@@ -47,7 +47,7 @@ export class ShowSpeed {
   }
 
   speedKissy() {
-    let kissy = this.npcControll.arrNpc[0].speed.toFixed(2);
+    const kissy = this.npcControll.arrNpc[0].speed.toFixed(2);
     this.ctx.font = '24px PixelDigivolve';
     this.ctx.fillStyle = '#fff';
     this.ctx.fillText(
