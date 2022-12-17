@@ -56,7 +56,7 @@ export class View {
       sprites[SPRITE_ID.COLLISION_TELEPORT],
       sprites[SPRITE_ID.COLLISION_BLOOD]
     );
-    this.speedometer.setSprite(sprites[SPRITE_ID.SHOW_SPEED] as Sprite);
+    this.speedometer.setSprite(sprites[SPRITE_ID.SPEEDOMETER] as Sprite);
   }
 
   prepareCanvas(): void {

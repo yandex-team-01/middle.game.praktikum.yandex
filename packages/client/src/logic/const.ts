@@ -29,8 +29,8 @@ export const GAME_SETTINGS = {
   MONEY_HEIGHT: 40,
   HEARTH_WIDTH: 40,
   HEARTH_HEIGHT: 40,
-  SHOW_SPEED_WIDTH: 16,
-  SHOW_SPEED_HEIGHT: 16,
+  SPEEDOMETER_WIDTH: 16,
+  SPEEDOMETER_HEIGHT: 16,
   BACKGROUND_VERTICAL_LIMIT: 100,
   SKIN_HORIZONTAL_FRAME: 0,
   SKIN_TOTAL_NUMBER_OF_HORIZONTAL_FRAMES: 3,
@@ -64,7 +64,7 @@ export enum SPRITE_ID {
   MONEY = 'money',
   COLLISION_BLOOD = 'collision_bood',
   COLLISION_TELEPORT = 'collision_teleport',
-  SHOW_SPEED = 'speed'
+  SPEEDOMETER = 'speed'
 }
 
 export const spritesOptions: SpriteOptions[] = [
@@ -129,10 +129,10 @@ export const spritesOptions: SpriteOptions[] = [
     height: GAME_SETTINGS.COLLISION_TELEPORT_HEIGHT,
   },
   { 
-    id: SPRITE_ID.SHOW_SPEED, 
+    id: SPRITE_ID.SPEEDOMETER, 
     src: speed,
-    width: GAME_SETTINGS.SHOW_SPEED_WIDTH,
-    height: GAME_SETTINGS.SHOW_SPEED_HEIGHT
+    width: GAME_SETTINGS.SPEEDOMETER_WIDTH,
+    height: GAME_SETTINGS.SPEEDOMETER_HEIGHT
   },
 ];
 
