@@ -1,5 +1,3 @@
-import { env } from 'src/constants/Env';
-
 export const hostResources = (path: string) => {
-  return `${env.HOST_RESOURCES}${path}`;
+  return `${import.meta.env.VITE_HOST_RESOURCES}${path}`;
 };

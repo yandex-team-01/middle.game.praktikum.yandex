@@ -3,12 +3,14 @@ import { getEnvSsrAndProd } from 'src/utils/getEnvSsrAndProd';
 
 export const useFullScreen = (initialIsFullScreen = false) => {
   const [isFullScreen, setValue] = useState(initialIsFullScreen);
+  const env = getEnvSsrAndProd();
 
   const toggleIsFullScreen = () => {
     setValue(previousValue => !previousValue);
-    // На сервере нет window и document так что нужно проверять либо так либо чекать через env переменную уоторую выставляет vite
-    const env = getEnvSsrAndProd();
-    if (!env.isSSR && !document.fullscreenElement) {
+    if (env.isSSR) {
+      return;
+    }
+    if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
     } else if (document.exitFullscreen) {
       document.exitFullscreen();

@@ -1,6 +1,4 @@
-import { env } from 'src/constants/Env';
-
-const baseUrl = env.HOST_API;
+const baseUrl = import.meta.env.VITE_HOST_API;
 
 export const fetchApi = <T>(
   path: string,

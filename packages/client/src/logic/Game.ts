@@ -4,12 +4,13 @@ import { View } from './View';
 import { NpcControll } from './NpcControll';
 import { GameEntities, AllSpritesType } from './types';
 import { Timer } from './Timer';
+import { GAME_SETTINGS } from './const';
 
 export class Game {
   private ctx: CanvasRenderingContext2D;
-  private width = 1240;
-  private height = 600;
-  private playerOne: PlayerOne;
+  private width = GAME_SETTINGS.GAME_WIDTH;
+  private height = GAME_SETTINGS.GAME_HEIGHT;
+  public playerOne: PlayerOne;
   private gameOverBackgroundAudio: HTMLAudioElement | undefined;
   private allSprites: AllSprites;
   private sprites: AllSpritesType;

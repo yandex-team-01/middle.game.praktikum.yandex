@@ -23,7 +23,7 @@
 
 .rounded:hover::after {
   background-color: #000;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg fill='%23ffffff' stroke-width='0' viewBox='0 0 24 24' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M20 2H8c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM8 16V4h12l.002 12H8z'%3e%3c/path%3e%3cpath d='M4 8H2v12c0 1.103.897 2 2 2h12v-2H4V8zm11-2h-2v3h-3v2h3v3h2v-3h3V9h-3z'%3e%3c/path%3e%3c/svg%3e");
+  background-image: url('/src/assets/images/avatar-rounded-hover-after.svg');
   background-repeat: no-repeat;
   background-position: center center;
   cursor: pointer;

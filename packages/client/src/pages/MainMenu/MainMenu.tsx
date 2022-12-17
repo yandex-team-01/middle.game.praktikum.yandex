@@ -15,9 +15,7 @@ export const MainMenu = () => {
   const settingsHandle = () => navigator('/settings');
   const gameLoading = () => navigator('/loadinggame');
 
-  const logoutHandle = useBoundAction(() => {
-    return fetchLogout();
-  });
+  const logoutHandle = useBoundAction(fetchLogout);
 
   return (
     <div className={styles.page}>

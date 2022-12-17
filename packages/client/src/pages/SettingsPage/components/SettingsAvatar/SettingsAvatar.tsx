@@ -29,13 +29,13 @@ export const SettingsAvatar = () => {
     }
   };
 
-  const clickHandler = () => {
+  const handleClick = () => {
     inputFileRef.current?.click();
   };
 
   return (
     <div>
-      <div onClick={clickHandler} className={styles.rounded}>
+      <div onClick={handleClick} className={styles.rounded}>
         <img className={styles.avatar} src={avatar} alt={t('avatar')} />
       </div>
       <input

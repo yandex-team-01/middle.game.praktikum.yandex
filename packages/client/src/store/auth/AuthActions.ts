@@ -3,7 +3,6 @@ import { SignupData, SigninData, oAuthServiceIdData } from 'src/modules/IAuth';
 import { fetchApi } from '../utils';
 import { addError } from '../error/ErrorSlice';
 import { IUser } from 'src/modules/IUser';
-import { env } from 'src/constants/Env';
 import { defaultHeaders } from 'src/constants/http';
 
 export const fetchAuth = createAsyncThunk(
@@ -100,7 +99,9 @@ export const fetchOAuthStepOneGetServiceIdFromApiPracticum = createAsyncThunk(
 
 //второй шаг oAuth - редирект на страницу получения согласия
 const oAuthStepTwoRedirectToOAuthProvider = (service_id: string) => {
-  const url = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${service_id}&redirect_uri=${env.REDIRECT_URI}`;
+  const url = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${service_id}&redirect_uri=${
+    import.meta.env.VITE_REDIRECT_URI
+  }`;
   window.location.href = url;
 };
 
@@ -111,7 +112,7 @@ export const fetchOAuthStepThreeGetApproveFromApiPracticum = createAsyncThunk(
     try {
       const data = {
         code: code,
-        redirect_uri: env.REDIRECT_URI,
+        redirect_uri: import.meta.env.VITE_REDIRECT_URI,
       };
       const res = await fetchApi('/oauth/yandex', {
         method: 'POST',

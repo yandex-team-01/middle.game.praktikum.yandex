@@ -18,7 +18,7 @@ const prepareLeaderboardRequestData = (
   };
 };
 
-export const addLeader = (score: number, login = '') => {
+export const addLeader = (score: number, login: string) => {
   return fetchApi<Leader[]>('/leaderboard', {
     method: 'POST',
     headers: defaultHeaders,
