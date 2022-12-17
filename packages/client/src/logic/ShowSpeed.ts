@@ -39,22 +39,14 @@ export class ShowSpeed {
     const huggy = this.npcControll.arrNpc[1].speed.toFixed(2);
     this.ctx.font = '24px PixelDigivolve';
     this.ctx.fillStyle = '#fff';
-    this.ctx.fillText(
-      `Huggy Wuggy: ${huggy}`,
-      0,
-      130
-    );
+    this.ctx.fillText(`Huggy Wuggy: ${huggy}`, 0, 130);
   }
 
   speedKissy() {
     const kissy = this.npcControll.arrNpc[0].speed.toFixed(2);
     this.ctx.font = '24px PixelDigivolve';
     this.ctx.fillStyle = '#fff';
-    this.ctx.fillText(
-      `Kissy Missy: ${kissy}`,
-      0,
-      150
-    );
+    this.ctx.fillText(`Kissy Missy: ${kissy}`, 0, 150);
   }
 
   render() {
