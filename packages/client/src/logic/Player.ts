@@ -83,6 +83,7 @@ abstract class Player {
 
   addScore(bonus: number) {
     this.score = this.score + bonus;
+    
   }
 
   handlePlayerLegsFrame() {

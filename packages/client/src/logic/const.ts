@@ -41,8 +41,8 @@ export const GAME_SETTINGS = {
   FRIEND_SPEED: 6,
   HIT_POINTS: 3,
   DEFINE_BONUS: 1,
-  PLAYER_COLLISION_SPEED_BONUS: 0.1,
-  NPC_ENEMY_COLLISION_SPEED_BONUS: 0.2,
+  PLAYER_COLLISION_SPEED_BONUS: 0.2,
+  NPC_ENEMY_COLLISION_SPEED_BONUS: 0.3,
   ENEMY_HUGGY_START_X: 500,
   ENEMY_KISSY_START_X: 700,
   ENEMY_START_Y: 200,
@@ -157,5 +157,38 @@ export const defaultOptionNpc = [
   {
     id: 8,
     type: 'friend',
+  },
+];
+
+export const scoreLevels = [
+  {
+    id: 1,
+    name: 'level 1',
+    score: 5,
+    active: false
+  },
+  {
+    id: 2,
+    name: 'level 2',
+    score: 10,
+    active: false
+  },
+  {
+    id: 3,
+    name: 'level 3',
+    score: 25,
+    active: false
+  },
+  {
+    id: 4,
+    name: 'level 4',
+    score: 50,
+    active: false
+  },
+  {
+    id: 5,
+    name: 'level 5',
+    score: 100,
+    active: false
   },
 ];
