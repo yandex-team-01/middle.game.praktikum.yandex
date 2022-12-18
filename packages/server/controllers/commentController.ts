@@ -4,7 +4,7 @@ import { createComment, getCommentById, getAllComments, deleteCommentById } from
 
 
 export const commentController = (app: Express) => {
-    app.post('/comment/create', async function (req, res) {
+    app.post('/comment', async function (req, res) {
         const comment: IComment = req.body;
         const response = await createComment(comment);
 
@@ -12,7 +12,7 @@ export const commentController = (app: Express) => {
     });
 
     app.get('/comment', async function (req, res) {
-        console.log(req);
+        console.log(req); //lint требует, чтобы все переменные были использованы, без нее контейнер не собирается
         const comments = await getAllComments();
 
         res.send(comments);
@@ -26,9 +26,13 @@ export const commentController = (app: Express) => {
     });
 
     app.delete('/comment/:id', async function (req, res) {
-        const id = req.params.id;
-        const response = await deleteCommentById(String(id));
+        try {
+            const id = req.params.id;
+            await deleteCommentById(String(id));
 
-        res.send(response);
+            res.sendStatus(200);
+        } catch {
+            res.sendStatus(404);
+        }
     });
 };

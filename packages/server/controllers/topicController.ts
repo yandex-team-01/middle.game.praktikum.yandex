@@ -3,7 +3,7 @@ import type { Express } from "express";
 import type { ITopic } from "../models/modelTopic";
 
 export const topicController = (app: Express) => {
-    app.post('/topic/create', async function (req, res) {
+    app.post('/topic', async function (req, res) {
         const topic: ITopic = req.body;
         const response = await createTopic(topic);
 
@@ -11,7 +11,7 @@ export const topicController = (app: Express) => {
     });
 
     app.get('/topic', async function (req, res) {
-        console.log(req);
+        console.log(req); //lint требует, чтобы все переменные были использованы, без нее контейнер не собирается
         const topics = await getAllTopic();
 
         res.send(topics);
@@ -25,9 +25,13 @@ export const topicController = (app: Express) => {
     });
 
     app.delete('/topic/:id', async function (req, res) {
-        const id = req.params.id;
-        const response = await deleteTopicById(String(id));
+        try {
+            const id = req.params.id;
+            await deleteTopicById(String(id));
 
-        res.send(response);
+            res.sendStatus(200);
+        } catch {
+            res.sendStatus(404);
+        }
     });
 };
