@@ -40,11 +40,7 @@ export class Game {
     );
     this.allSprites = new AllSprites();
     this.npcControll = new NpcControll(this.ctx, this.height, this.width);
-    this.levels = new Levels(
-      this.ctx,
-      this.playerOne,
-      this.npcControll
-    );
+    this.levels = new Levels(this.ctx, this.playerOne, this.npcControll);
     this.view = new View(this.canvas, this.ctx, this.gameEntities);
     this.sprites = {};
   }
@@ -75,7 +71,7 @@ export class Game {
       npcControll: this.npcControll,
       game: this,
       timer: this.timer,
-      levels: this.levels
+      levels: this.levels,
     };
   }
 

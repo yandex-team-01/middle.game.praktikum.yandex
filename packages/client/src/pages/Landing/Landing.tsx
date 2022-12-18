@@ -14,13 +14,13 @@ export const Landing = () => {
   // const dispatch = useAppDispatch();
   const navigateLogin = () => navigator('auth');
   const navigateSignup = () => navigator('/auth/reg');
-//первый шаг oAuth - получаем service_id с api practicum
+  //первый шаг oAuth - получаем service_id с api practicum
   const oAuthHandle = useBoundAction(
     fetchOAuthStepOneGetServiceIdFromApiPracticum
   );
   //третий шаг oAuth - отправляем код полученный после редиректа на страницу согласия на авторизацию
   useCheckOauthCode();
-  
+
   return (
     <div className={styles.page}>
       <TitleGame className={styles.title} />

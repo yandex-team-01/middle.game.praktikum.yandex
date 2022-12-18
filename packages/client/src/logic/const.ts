@@ -164,26 +164,26 @@ export const scoreLevels = [
   {
     id: 1,
     name: 'level 1',
-    score: 0
+    score: 0,
   },
   {
     id: 2,
     name: 'level 2',
-    score: 5
+    score: 5,
   },
   {
     id: 3,
     name: 'level 3',
-    score: 20
+    score: 20,
   },
   {
     id: 4,
     name: 'level 4',
-    score: 40
+    score: 40,
   },
   {
     id: 5,
     name: 'level 5',
-    score: 100
+    score: 100,
   },
 ];

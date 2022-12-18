@@ -38,7 +38,12 @@ export class View {
     this.npcControll = npcControll;
     this.gameOver = false;
     this.levels = levels;
-    this.clashesController = new ClashesController(ctx, player, npcControll, levels);
+    this.clashesController = new ClashesController(
+      ctx,
+      player,
+      npcControll,
+      levels
+    );
   }
 
   setSprite(sprites: AllSpritesType) {
