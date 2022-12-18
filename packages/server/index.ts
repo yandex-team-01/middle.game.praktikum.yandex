@@ -1,21 +1,24 @@
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
-
+import express from 'express';
 import { router } from './routing/routing';
-
 import { dbConnect } from './db';
+import { apiController } from './controllers';
 
 dotenv.config();
 
-import express from 'express';
-
 const app = express();
 app.use(cors());
+app.use(express.json());
+
 const port = Number(process.env.PORT) || 3001;
 
 async function init() {
   await dbConnect();
+
+  apiController(app);
+
   app.use(
     '/assets',
     express.static(path.resolve(__dirname, 'public/client/assets'))
