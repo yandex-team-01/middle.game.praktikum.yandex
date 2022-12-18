@@ -3,7 +3,7 @@ import { Sprite } from './Sprite';
 interface SpeedometerControllerRenderProps {
   spriteX: number;
   spriteY: number;
-  speedometerValue: number | void;
+  speedometerValue: number;
   speedometerText: string;
   textX: number;
   textY: number;
