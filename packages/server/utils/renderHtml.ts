@@ -7,7 +7,15 @@ import { renderObject } from './renderObject';
 import { defaultStore } from '../constants/defaultStore';
 
 export const renderHtml = (req: Request, res: Response) => {
-  const { html, httpContext } = render(req.url, defaultStore);
+  const store = defaultStore;
+
+  if (res.locals.user) {
+    store.auth.checkAuth = true;
+    store.auth.auth = true;
+    store.auth.user = res.locals.user;
+  }
+
+  const { html, httpContext } = render(req.url, store);
 
   if (httpContext.redirectLocation) {
     res.redirect(httpContext.redirectLocation);
@@ -20,9 +28,7 @@ export const renderHtml = (req: Request, res: Response) => {
   let newString = htmlString.replace('<!--ssr-outlet-->', html);
   newString = newString.replace(
     '<!--ssr-redux-->',
-    ` <script>window.__PRELOADED_STATE__ = ${renderObject(
-      defaultStore
-    )}</script>`
+    ` <script>window.__PRELOADED_STATE__ = ${renderObject(store)}</script>`
   );
 
   res.send(newString);
