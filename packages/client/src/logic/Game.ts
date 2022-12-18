@@ -44,7 +44,7 @@ export class Game {
       this.ctx,
       this.playerOne,
       this.npcControll
-    )
+    );
     this.view = new View(this.canvas, this.ctx, this.gameEntities);
     this.sprites = {};
   }
