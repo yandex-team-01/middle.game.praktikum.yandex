@@ -70,7 +70,7 @@ export enum SPRITE_ID {
   MONEY = 'money',
   COLLISION_BLOOD = 'collision_bood',
   COLLISION_TELEPORT = 'collision_teleport',
-  SPEEDOMETER = 'speedometer'
+  SPEEDOMETER = 'speedometer',
 }
 
 export const spritesOptions: SpriteOptions[] = [
@@ -134,11 +134,11 @@ export const spritesOptions: SpriteOptions[] = [
     width: GAME_SETTINGS.COLLISION_TELEPORT_WIDTH,
     height: GAME_SETTINGS.COLLISION_TELEPORT_HEIGHT,
   },
-  { 
-    id: SPRITE_ID.SPEEDOMETER, 
+  {
+    id: SPRITE_ID.SPEEDOMETER,
     src: speedometer,
     width: GAME_SETTINGS.SPEEDOMETER_WIDTH,
-    height: GAME_SETTINGS.SPEEDOMETER_HEIGHT
+    height: GAME_SETTINGS.SPEEDOMETER_HEIGHT,
   },
 ];
 

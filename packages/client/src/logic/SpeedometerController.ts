@@ -27,7 +27,7 @@ export class SpeedometerController {
     speedometerValue,
     speedometerText,
     textX,
-    textY
+    textY,
   }: SpeedometerControllerRenderProps) {
     this.ctx.font = '14px PixelDigivolve';
     this.ctx.fillStyle = '#fff';
@@ -38,15 +38,7 @@ export class SpeedometerController {
       this.speedometer.width,
       this.speedometer.height
     );
-    this.ctx.fillText(
-      `${speedometerText}`,
-      textX,
-      textY
-    );
-    this.ctx.fillText(
-      `${speedometerValue.toFixed(2)}`,
-      textX + 85,
-      textY
-    );
+    this.ctx.fillText(`${speedometerText}`, textX, textY);
+    this.ctx.fillText(`${speedometerValue.toFixed(2)}`, textX + 85, textY);
   }
 }

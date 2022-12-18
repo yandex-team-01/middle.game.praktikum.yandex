@@ -31,7 +31,13 @@ export class View {
   constructor(
     canvas: HTMLCanvasElement,
     ctx: CanvasRenderingContext2D,
-    { player, npcControll, timer, speedometerController, speedometer, levels }: GameEntities
+    {
+      player,
+      npcControll,
+      timer,
+      speedometerController,
+      speedometer,
+   , levels }: GameEntities
   ) {
     this.sprites = {};
     this.canvas = canvas;

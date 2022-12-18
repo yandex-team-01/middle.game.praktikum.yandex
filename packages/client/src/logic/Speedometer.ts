@@ -1,17 +1,7 @@
 import { SpeedometerController } from './SpeedometerController';
 import { PlayerOne } from './Player';
 import { NpcControll } from './NpcControll';
-import { Sprite } from './Sprite';
 import { GAME_SETTINGS } from './const';
-
-interface SpeedometerControllerRenderProps {
-  spriteX: number;
-  spriteY: number;
-  speedometerValue: number;
-  speedometerText: string;
-  textX: number;
-  textY: number;
-}
 
 export class Speedometer {
   private ctx: CanvasRenderingContext2D;
