@@ -4,24 +4,15 @@ import { NpcControll } from './NpcControll';
 import { GAME_SETTINGS } from './const';
 
 export class Speedometer {
-  private ctx: CanvasRenderingContext2D;
-  private canvasHeight: number;
-  private canvasWidth: number;
   private playerOne: PlayerOne;
   private npcControll: NpcControll;
   private speedometerController: SpeedometerController;
 
   constructor(
-    ctx: CanvasRenderingContext2D,
-    canvasHeight: number,
-    canvasWidth: number,
     playerOne: PlayerOne,
     npcControll: NpcControll,
     speedometerController: SpeedometerController
   ) {
-    this.ctx = ctx;
-    this.canvasHeight = canvasHeight;
-    this.canvasWidth = canvasWidth;
     this.playerOne = playerOne;
     this.npcControll = npcControll;
     this.speedometerController = speedometerController;

@@ -46,9 +46,6 @@ export class Game {
     this.allSprites = new AllSprites();
     this.npcControll = new NpcControll(this.ctx, this.height, this.width);
     this.speedometer = new Speedometer(
-      this.ctx,
-      this.height,
-      this.width,
       this.playerOne,
       this.npcControll,
       this.speedometerController
