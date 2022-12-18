@@ -4,6 +4,7 @@ import { Sprite } from './Sprite';
 import { NpcControll } from './NpcControll';
 import { Game } from './Game';
 import { Timer } from './Timer';
+import { SpeedometerController } from './SpeedometerController';
 import { Speedometer } from './Speedometer';
 import { Levels } from './Levels';
 
@@ -28,6 +29,7 @@ export type GameEntities = {
   sprites: Record<number | string, Sprite>;
   game: Game;
   timer: Timer;
+  speedometerController: SpeedometerController;
   speedometer: Speedometer;
   levels: Levels;
 };

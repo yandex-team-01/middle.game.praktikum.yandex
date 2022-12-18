@@ -1,6 +1,17 @@
+import { SpeedometerController } from './SpeedometerController';
 import { PlayerOne } from './Player';
 import { NpcControll } from './NpcControll';
 import { Sprite } from './Sprite';
+import { GAME_SETTINGS } from './const';
+
+interface SpeedometerControllerRenderProps {
+  spriteX: number;
+  spriteY: number;
+  speedometerValue: number;
+  speedometerText: string;
+  textX: number;
+  textY: number;
+}
 
 export class Speedometer {
   private ctx: CanvasRenderingContext2D;
@@ -8,77 +19,78 @@ export class Speedometer {
   private canvasWidth: number;
   private playerOne: PlayerOne;
   private npcControll: NpcControll;
-  speed!: Sprite;
+  private speedometerController: SpeedometerController;
 
   constructor(
     ctx: CanvasRenderingContext2D,
     canvasHeight: number,
     canvasWidth: number,
     playerOne: PlayerOne,
-    npcControll: NpcControll
+    npcControll: NpcControll,
+    speedometerController: SpeedometerController
   ) {
     this.ctx = ctx;
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
     this.playerOne = playerOne;
     this.npcControll = npcControll;
+    this.speedometerController = speedometerController;
   }
 
-  setSprite(speed: Sprite) {
-    this.speed = speed;
+  playerSpeedometer() {
+    const spriteX = GAME_SETTINGS.SPEEDOMETER_PLAYER_X;
+    const spriteY = GAME_SETTINGS.SPEEDOMETER_PLAYER_Y;
+    const speedometerValue = this.playerOne.speed;
+    const speedometerText = `Player`;
+    const textX = 8;
+    const textY = 60;
+    this.speedometerController.render({
+      spriteX,
+      spriteY,
+      speedometerValue,
+      speedometerText,
+      textX,
+      textY,
+    });
   }
 
-  speedPlayer() {
-    const defineX = 72;
-    const defineY = 48;
-    const player = this.playerOne.speed.toFixed(2);
-    this.ctx.font = '14px PixelDigivolve';
-    this.ctx.fillStyle = '#fff';
-    this.ctx.drawImage(
-      this.speed.image,
-      defineX,
-      defineY,
-      this.speed.width,
-      this.speed.height
-    );
-    this.ctx.fillText(`Player      ${player}`, 8, 60);
+  huggySpeedometer() {
+    const spriteX = GAME_SETTINGS.SPEEDOMETER_HUGGY_X;
+    const spriteY = GAME_SETTINGS.SPEEDOMETER_HUGGY_Y;
+    const speedometerValue = this.npcControll.arrNpc[1].speed;
+    const speedometerText = `Huggy`;
+    const textX = 8;
+    const textY = 80;
+    this.speedometerController.render({
+      spriteX,
+      spriteY,
+      speedometerValue,
+      speedometerText,
+      textX,
+      textY,
+    });
   }
 
-  speedHuggy() {
-    const defineX = 72;
-    const defineY = 68;
-    const huggy = this.npcControll.arrNpc[1].speed.toFixed(2);
-    this.ctx.font = '14px PixelDigivolve';
-    this.ctx.fillStyle = '#fff';
-    this.ctx.drawImage(
-      this.speed.image,
-      defineX,
-      defineY,
-      this.speed.width,
-      this.speed.height
-    );
-    this.ctx.fillText(`Huggy       ${huggy}`, 8, 80);
-  }
-
-  speedKissy() {
-    const defineX = 72;
-    const defineY = 88;
-    const kissy = this.npcControll.arrNpc[0].speed.toFixed(2);
-    this.ctx.font = '14px PixelDigivolve';
-    this.ctx.fillStyle = '#fff';
-    this.ctx.drawImage(
-      this.speed.image,
-      defineX,
-      defineY,
-      this.speed.width,
-      this.speed.height
-    );
-    this.ctx.fillText(`Kissy        ${kissy}`, 8, 100);
+  kissySpeedometer() {
+    const spriteX = GAME_SETTINGS.SPEEDOMETER_KISSY_X;
+    const spriteY = GAME_SETTINGS.SPEEDOMETER_KISSY_Y;
+    const speedometerValue = this.npcControll.arrNpc[0].speed;
+    const speedometerText = `Kissy`;
+    const textX = 8;
+    const textY = 100;
+    this.speedometerController.render({
+      spriteX,
+      spriteY,
+      speedometerValue,
+      speedometerText,
+      textX,
+      textY,
+    });
   }
 
   render() {
-    this.speedPlayer();
-    this.speedHuggy();
-    this.speedKissy();
+    this.playerSpeedometer();
+    this.huggySpeedometer();
+    this.kissySpeedometer();
   }
 }

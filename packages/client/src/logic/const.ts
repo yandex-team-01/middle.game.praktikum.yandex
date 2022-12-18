@@ -9,7 +9,7 @@ import npcEnemyHuggy from '/src/assets/images/game-npc-huggy.png';
 import npcEnemyKissy from '/src/assets/images/game-npc-kissy.png';
 import collisionBood from '/src/assets/images/game-collision-blood.png';
 import collisionTeleport from '/src/assets/images/game-collision-teleport.png';
-import speed from '/src/assets/images/game-ico-speed.png';
+import speedometer from '/src/assets/images/game-icon-speedometer.png';
 
 export const GAME_SETTINGS = {
   GAME_TIME_LIMIT: 14.8 * 60 * 1000,
@@ -31,6 +31,12 @@ export const GAME_SETTINGS = {
   HEARTH_HEIGHT: 40,
   SPEEDOMETER_WIDTH: 16,
   SPEEDOMETER_HEIGHT: 16,
+  SPEEDOMETER_PLAYER_X: 72,
+  SPEEDOMETER_PLAYER_Y: 48,
+  SPEEDOMETER_HUGGY_X: 72,
+  SPEEDOMETER_HUGGY_Y: 68,
+  SPEEDOMETER_KISSY_X: 72,
+  SPEEDOMETER_KISSY_Y: 88,
   BACKGROUND_VERTICAL_LIMIT: 100,
   SKIN_HORIZONTAL_FRAME: 0,
   SKIN_TOTAL_NUMBER_OF_HORIZONTAL_FRAMES: 3,
@@ -64,7 +70,7 @@ export enum SPRITE_ID {
   MONEY = 'money',
   COLLISION_BLOOD = 'collision_bood',
   COLLISION_TELEPORT = 'collision_teleport',
-  SPEEDOMETER = 'speed'
+  SPEEDOMETER = 'speedometer'
 }
 
 export const spritesOptions: SpriteOptions[] = [
@@ -130,7 +136,7 @@ export const spritesOptions: SpriteOptions[] = [
   },
   { 
     id: SPRITE_ID.SPEEDOMETER, 
-    src: speed,
+    src: speedometer,
     width: GAME_SETTINGS.SPEEDOMETER_WIDTH,
     height: GAME_SETTINGS.SPEEDOMETER_HEIGHT
   },
