@@ -30,12 +30,12 @@ export class Speedometer {
   }
 
   playerSpeedometer() {
-    const spriteX = GAME_SETTINGS.SPEEDOMETER_PLAYER_X;
-    const spriteY = GAME_SETTINGS.SPEEDOMETER_PLAYER_Y;
+    const spriteX = GAME_SETTINGS.SPEEDOMETER_SPRITE_PLAYER_X;
+    const spriteY = GAME_SETTINGS.SPEEDOMETER_SPRITE_PLAYER_Y;
     const speedometerValue = this.playerOne.speed;
     const speedometerText = `Player`;
-    const textX = 8;
-    const textY = 60;
+    const textX = GAME_SETTINGS.SPEEDOMETER_TEXT_PLAYER_X;
+    const textY = GAME_SETTINGS.SPEEDOMETER_TEXT_PLAYER_Y;
     this.speedometerController.render({
       spriteX,
       spriteY,
@@ -47,12 +47,12 @@ export class Speedometer {
   }
 
   huggySpeedometer() {
-    const spriteX = GAME_SETTINGS.SPEEDOMETER_HUGGY_X;
-    const spriteY = GAME_SETTINGS.SPEEDOMETER_HUGGY_Y;
+    const spriteX = GAME_SETTINGS.SPEEDOMETER_SPRITE_HUGGY_X;
+    const spriteY = GAME_SETTINGS.SPEEDOMETER_SPRITE_HUGGY_Y;
     const speedometerValue = this.arrNpcTypeFilter('enemy_huggy').speed;
     const speedometerText = `Huggy`;
-    const textX = 8;
-    const textY = 80;
+    const textX = GAME_SETTINGS.SPEEDOMETER_TEXT_HUGGY_X;
+    const textY = GAME_SETTINGS.SPEEDOMETER_TEXT_HUGGY_Y;
     this.speedometerController.render({
       spriteX,
       spriteY,
@@ -64,12 +64,12 @@ export class Speedometer {
   }
 
   kissySpeedometer() {
-    const spriteX = GAME_SETTINGS.SPEEDOMETER_KISSY_X;
-    const spriteY = GAME_SETTINGS.SPEEDOMETER_KISSY_Y;
+    const spriteX = GAME_SETTINGS.SPEEDOMETER_SPRITE_KISSY_X;
+    const spriteY = GAME_SETTINGS.SPEEDOMETER_SPRITE_KISSY_Y;
     const speedometerValue = this.arrNpcTypeFilter('enemy_kissy').speed;
     const speedometerText = `Kissy`;
-    const textX = 8;
-    const textY = 100;
+    const textX = GAME_SETTINGS.SPEEDOMETER_TEXT_KISSY_X;
+    const textY = GAME_SETTINGS.SPEEDOMETER_TEXT_KISSY_Y;
     this.speedometerController.render({
       spriteX,
       spriteY,
