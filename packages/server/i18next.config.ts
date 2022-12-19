@@ -4,7 +4,7 @@ import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 const options: any = {
-  fallbackLng: 'ru',
+  fallbackLng: 'en',
   supportedLngs: ['en', 'ru'],
   load: 'languageOnly', // мы предоставляем только en, ru -> нет прочих, таких как en-US, de-DE
   ns: ['translation'],
