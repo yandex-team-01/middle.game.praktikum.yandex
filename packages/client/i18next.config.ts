@@ -9,8 +9,9 @@ i18next
   .use(LanguageDetector)
   .use(Backend)
   .init({
-    supportedLngs: ['en', 'ru'],
     fallbackLng: 'en',
-    debug: false,
+    supportedLngs: ['en', 'ru'],
+
     saveMissing: true,
+    debug: false,
   });

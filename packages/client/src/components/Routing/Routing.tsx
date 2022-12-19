@@ -19,7 +19,7 @@ import {
 } from '../../pages/SettingsPage';
 
 import { ErrorBoundary } from '../ErrorBoundary';
-// import { ProtectedRoute } from '../ProtectedRoute';
+import { ProtectedRoute } from '../ProtectedRoute';
 import { useAppSelector } from 'src/hooks/redux';
 
 import { TopicList } from 'src/pages/Forum/components/TopicList';
@@ -43,11 +43,11 @@ export const Routing = () => {
         <Route
           path="/auth"
           element={
-            // <ProtectedRoute flag={!auth} redirect="/">
-            <BackgroundLayout>
-              <AuthPage />
-            </BackgroundLayout>
-            // </ProtectedRoute>
+            <ProtectedRoute flag={!auth} redirect="/">
+              <BackgroundLayout>
+                <AuthPage />
+              </BackgroundLayout>
+            </ProtectedRoute>
           }>
           <Route index element={<LoginForm />} />
           <Route path="reg" element={<RegistrationForm />} />
@@ -63,11 +63,11 @@ export const Routing = () => {
         <Route
           path="/forum"
           element={
-            // <ProtectedRoute flag={auth} redirect="/auth">
-            <BackgroundLayout>
-              <Forum />
-            </BackgroundLayout>
-            // </ProtectedRoute>
+            <ProtectedRoute flag={auth} redirect="/auth">
+              <BackgroundLayout>
+                <Forum />
+              </BackgroundLayout>
+            </ProtectedRoute>
           }>
           <Route index element={<TopicList />} />
           <Route path="topic" element={<CommentsPage />} />
@@ -76,11 +76,11 @@ export const Routing = () => {
         <Route
           path="/leaders"
           element={
-            // <ProtectedRoute flag={auth} redirect="/auth">
-            <BackgroundLayout>
-              <Leaderboard />
-            </BackgroundLayout>
-            // {/* </ProtectedRoute> */}
+            <ProtectedRoute flag={auth} redirect="/auth">
+              <BackgroundLayout>
+                <Leaderboard />
+              </BackgroundLayout>
+            </ProtectedRoute>
           }
         />
         <Route path="/loadinggame" element={<GameLoadingPage />} />
@@ -88,11 +88,11 @@ export const Routing = () => {
         <Route
           path="/settings"
           element={
-            // <ProtectedRoute flag={auth} redirect="/auth">
-            <BackgroundLayout>
-              <SettingsPage />
-            </BackgroundLayout>
-            // </ProtectedRoute>
+            <ProtectedRoute flag={auth} redirect="/auth">
+              <BackgroundLayout>
+                <SettingsPage />
+              </BackgroundLayout>
+            </ProtectedRoute>
           }>
           <Route index element={<SettingsData />} />
           <Route path="edit" element={<SettingsChangeData />} />
