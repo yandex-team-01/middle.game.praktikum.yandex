@@ -11,10 +11,6 @@ i18next
   .init({
     supportedLngs: ['en', 'ru'],
     fallbackLng: 'en',
-    detection: {
-      order: ['path', 'localStorage'],
-      caches: ['localStorage'],
-    },
     debug: false,
     saveMissing: true,
   });
