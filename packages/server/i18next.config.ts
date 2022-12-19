@@ -1,21 +1,38 @@
-import i18next from 'i18next';
+import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import i18nextMiddleware from 'i18next-http-middleware';
 import Backend from 'i18next-http-backend';
+import LanguageDetector from 'i18next-browser-languagedetector';
 
-export { i18next };
-i18next
-  .use(initReactI18next)
-  .use(i18nextMiddleware.LanguageDetector)
-  .use(Backend)
-  .init({
-    supportedLngs: ['en', 'ru'],
-    fallbackLng: 'en',
-    defaultNS: 'translation',
-    fallbackNS: 'translation',
-    ns: ['translation'],
-    backend: {
-      loadPath: `public/client/locales/{{lng}}/{{ns}}.json`,
-      addPath: `public/client/locales/{{lng}}/{{ns}}.missing.json`,
+const options: any = {
+  fallbackLng: 'ru',
+  supportedLngs: ['en', 'ru'],
+  load: 'languageOnly', // мы предоставляем только en, ru -> нет прочих, таких как en-US, de-DE
+  ns: ['translation'],
+  defaultNS: 'translation',
+
+  saveMissing: true,
+  debug: true,
+
+  interpolation: {
+    escapeValue: false, // не нужно для react
+    formatSeparator: ',',
+    // @ts-ignore
+    format: ({ value, format, lng }: any) => {
+      if (format === 'uppercase') return value.toUpperCase();
+      return value;
     },
-  });
+  },
+  useSuspense: process && !process.release,
+};
+
+// для браузера используйте http-бэкэнд для загрузки переводов и детектора LNG браузера
+if (process && !process.release) {
+  i18n.use(Backend).use(initReactI18next).use(LanguageDetector);
+}
+
+// инициализировать, если он еще не инициализирован
+if (!i18n.isInitialized) {
+  i18n.init(options);
+}
+
+export default i18n;

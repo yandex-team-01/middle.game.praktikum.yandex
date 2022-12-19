@@ -11,10 +11,11 @@ i18next
   .init({
     supportedLngs: ['en', 'ru'],
     fallbackLng: 'en',
-    detection: {
-      order: ['path', 'localStorage'],
-      caches: ['localStorage'],
-    },
+    // detection: {
+    //   order: ['path', 'localStorage'],
+    //   caches: ['localStorage'],
+    // },
+    react: { useSuspense: false },
     debug: false,
     saveMissing: true,
   });

@@ -15,10 +15,10 @@ import { startServiceWorker } from 'src/utils/serviceWorker';
 import { PreloadedState } from 'src/store/types';
 
 declare global {
-    interface Window {
-        initialLanguage: string;
-        initialI18nStore: Resource;
-    }
+  interface Window {
+    initialLanguage: string;
+    initialI18nStore: Resource;
+  }
 }
 
 const defineStore = window.__PRELOADED_STATE__ as PreloadedState;
@@ -26,26 +26,21 @@ delete window.__PRELOADED_STATE__;
 const store = setupStore(defineStore);
 
 const DOM = () => {
-    const { initialI18nStore, initialLanguage } = window;
-    useSSR(initialI18nStore, initialLanguage);
-    return (
-        <React.StrictMode>
-            <React.Suspense>
-                <BrowserRouter>
-                    <Provider store={store}>
-                        <I18nextProvider i18n={i18next}>
-                            <ErrorBoundary>
-                                <App />
-                            </ErrorBoundary>
-                        </I18nextProvider>
-                    </Provider>
-                </BrowserRouter>
-            </React.Suspense>
-        </React.StrictMode>
-    );
+  const { initialI18nStore, initialLanguage } = window;
+  useSSR(initialI18nStore, initialLanguage);
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <I18nextProvider i18n={i18next}>
+          <ErrorBoundary>
+            <App />
+          </ErrorBoundary>
+        </I18nextProvider>
+      </Provider>
+    </BrowserRouter>
+  );
 };
 
-ReactDOM.hydrateRoot(document.getElementById('root') as HTMLElement,
-    <DOM />);
+ReactDOM.hydrateRoot(document.getElementById('root') as HTMLElement, <DOM />);
 
 startServiceWorker();

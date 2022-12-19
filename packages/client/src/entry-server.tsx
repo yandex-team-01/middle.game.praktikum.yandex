@@ -21,33 +21,27 @@ export const render = (
   i18next: i18n
 ) => {
   const store = setupStore(defaultStore);
-  const i18n = i18next;
 
   const httpContext: HttpContextData = {
     statusCode: 200,
   };
 
   const html = ReactDOMServer.renderToString(
-    <React.StrictMode>
-      <React.Suspense>
-        <HttpProvider context={httpContext}>
-          <StaticRouter location={url}>
-            <Provider store={store}>
-              <I18nextProvider i18n={i18n}>
-                <ErrorBoundary>
-                  <App />
-                </ErrorBoundary>
-              </I18nextProvider>
-            </Provider>
-          </StaticRouter>
-        </HttpProvider>
-      </React.Suspense>
-    </React.StrictMode>
+    <HttpProvider context={httpContext}>
+      <StaticRouter location={url}>
+        <Provider store={store}>
+          <I18nextProvider i18n={i18next}>
+            <ErrorBoundary>
+              <App />
+            </ErrorBoundary>
+          </I18nextProvider>
+        </Provider>
+      </StaticRouter>
+    </HttpProvider>
   );
 
   return {
     html,
     httpContext,
-    i18n,
   };
 };
