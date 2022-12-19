@@ -1,7 +1,12 @@
-import i18n from 'i18next';
+import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
-import LanguageDetector from 'i18next-browser-languagedetector';
+
+interface FormatProps {
+  value: string;
+  format: string;
+  lng?: string;
+}
 
 const options: any = {
   fallbackLng: 'en',
@@ -11,13 +16,12 @@ const options: any = {
   defaultNS: 'translation',
 
   saveMissing: true,
-  debug: true,
+  debug: false,
 
   interpolation: {
     escapeValue: false, // не нужно для react
     formatSeparator: ',',
-    // @ts-ignore
-    format: ({ value, format, lng }: any) => {
+    format: ({ value, format }: FormatProps) => {
       if (format === 'uppercase') return value.toUpperCase();
       return value;
     },
@@ -27,12 +31,12 @@ const options: any = {
 
 // для браузера используйте http-бэкэнд для загрузки переводов и детектора LNG браузера
 if (process && !process.release) {
-  i18n.use(Backend).use(initReactI18next).use(LanguageDetector);
+  i18next.use(Backend).use(initReactI18next);
 }
 
 // инициализировать, если он еще не инициализирован
-if (!i18n.isInitialized) {
-  i18n.init(options);
+if (!i18next.isInitialized) {
+  i18next.init(options);
 }
 
-export default i18n;
+export { i18next };

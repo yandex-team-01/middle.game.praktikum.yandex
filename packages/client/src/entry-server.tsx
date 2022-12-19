@@ -27,17 +27,21 @@ export const render = (
   };
 
   const html = ReactDOMServer.renderToString(
-    <HttpProvider context={httpContext}>
-      <StaticRouter location={url}>
-        <Provider store={store}>
-          <I18nextProvider i18n={i18next}>
-            <ErrorBoundary>
-              <App />
-            </ErrorBoundary>
-          </I18nextProvider>
-        </Provider>
-      </StaticRouter>
-    </HttpProvider>
+    <React.StrictMode>
+      <React.Suspense>
+        <HttpProvider context={httpContext}>
+          <StaticRouter location={url}>
+            <Provider store={store}>
+              <I18nextProvider i18n={i18next}>
+                <ErrorBoundary>
+                  <App />
+                </ErrorBoundary>
+              </I18nextProvider>
+            </Provider>
+          </StaticRouter>
+        </HttpProvider>
+      </React.Suspense>
+    </React.StrictMode>
   );
 
   return {
