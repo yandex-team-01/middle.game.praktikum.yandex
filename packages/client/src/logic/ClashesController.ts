@@ -63,13 +63,14 @@ export class ClashesController {
         npc.collisionHandling(this.playerOne);
         if (npc.type === NpcTypes.Friend) {
           this.levels.levelUp();
+          this.playerOne.speed =
+          this.playerOne.speed + GAME_SETTINGS.PLAYER_COLLISION_SPEED_BONUS;
           this.deleteAndRestoreNpc(npc);
           this.setColisionImgCoordinats(npc, false);
         } else {
           npc.isMoving = false;
           npc.hasCollision = true;
-          // Заморожено (прибавляет скорость npc enemy)
-          // npc.speed = npc.speed + GAME_SETTINGS.NPC_ENEMY_COLLISION_SPEED_BONUS;
+          npc.speed = npc.speed + GAME_SETTINGS.NPC_ENEMY_COLLISION_SPEED_BONUS;
           this.setColisionImgCoordinats(npc, true);
         }
       }
@@ -115,8 +116,7 @@ export class ClashesController {
         npc.type === NpcTypes.Enemy_kissy) &&
       prevNpc.type === NpcTypes.Friend
     ) {
-      // Заморожено (прибавляет скорость npc enemy при поедании friendly npc)
-      // npc.speed = npc.speed + GAME_SETTINGS.NPC_ENEMY_COLLISION_SPEED_BONUS;
+      npc.speed = npc.speed + GAME_SETTINGS.NPC_ENEMY_COLLISION_SPEED_BONUS;
       this.setColisionImgCoordinats(prevNpc, true);
       this.deleteAndRestoreNpc(prevNpc);
     }

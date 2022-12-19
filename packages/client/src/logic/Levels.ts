@@ -33,9 +33,9 @@ export class Levels {
     scoreLevels.forEach(level => {
       if (score === level.score) {
         this.playerOne.speed =
-          this.playerOne.speed + GAME_SETTINGS.PLAYER_COLLISION_SPEED_BONUS;
+          this.playerOne.speed + GAME_SETTINGS.PLAYER_LEVEL_SPEED_BONUS;
         this.npcControll.arrNpc.forEach(npc => {
-          npc.speed = npc.speed + GAME_SETTINGS.NPC_ENEMY_COLLISION_SPEED_BONUS;
+          npc.speed = npc.speed + GAME_SETTINGS.NPC_ENEMY_LEVEL_SPEED_BONUS;
         });
       }
     });
