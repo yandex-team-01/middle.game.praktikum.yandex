@@ -5,10 +5,18 @@ import fs from 'fs';
 import https from 'https';
 import { cookieParser, auth } from './middlewares';
 
+import i18nextMiddleware from 'i18next-http-middleware';
+import Backend from 'i18next-fs-backend';
+
+import { i18next } from './i18next.config';
+
 import express from 'express';
 import { router } from './routing/routing';
 import { dbConnect } from './db';
 import { apiRouter } from './routing/index.router';
+
+// Времено отключено для тестирования
+// import { dbConnect } from './db';
 
 dotenv.config();
 
@@ -26,22 +34,48 @@ const port = Number(process.env.PORT) || 3001;
 async function init() {
   await dbConnect();
 
+  // Времено отключено для тестирования
+  // await dbConnect();
+
   app.use(
     '/assets',
     express.static(path.resolve(__dirname, 'public/client/assets'))
-  );
-  app.use(
-    '/locales',
-    express.static(path.resolve(__dirname, 'public/client/locales'))
   );
 
   app.use(cookieParser);
   app.use(auth);
   app.use("/api", apiRouter);
   app.use(router);
-  app.get('/', (_req, res) => {
-    res.send('this is an secure server');
-  });
+
+  const bootstrap = () => {
+    app
+      .disable('x-powered-by')
+      // @ts-ignore
+      .use(i18nextMiddleware.handle(i18next))
+      .use(
+        '/locales',
+        express.static(path.resolve(__dirname, 'public/client/locales'))
+      )
+      .use(function (req, res, next) {
+        router(req, res, next);
+      });
+  };
+
+  i18next
+    .use(Backend)
+    .use(i18nextMiddleware.LanguageDetector)
+    .init(
+      {
+        defaultNS: 'translation',
+        fallbackNS: 'translation',
+        ns: ['translation'],
+        backend: {
+          loadPath: `public/client/locales/{{lng}}/{{ns}}.json`,
+          addPath: `public/client/locales/{{lng}}/{{ns}}.missing.json`,
+        },
+      },
+      bootstrap
+    );
 
   server.listen(port, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
