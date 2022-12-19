@@ -80,9 +80,13 @@ export class Speedometer {
     });
   }
 
-  render() {
+  speedometerPush() {
     this.playerSpeedometer();
     this.huggySpeedometer();
     this.kissySpeedometer();
+  }
+
+  render() {
+    this.speedometerPush();
   }
 }
