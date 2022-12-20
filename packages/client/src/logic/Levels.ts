@@ -4,28 +4,38 @@ import { NpcControll } from './NpcControll';
 
 export class Levels {
   private ctx: CanvasRenderingContext2D;
+  private canvasWidth: number;
   private playerOne: PlayerOne;
   private npcControll: NpcControll;
   private levelName?: string;
+  private playerOneSpeed: number;
+  private huggySpeed: number;
+  private kissySpeed: number;
+  private levelInfo: () => void;
 
   constructor(
     ctx: CanvasRenderingContext2D,
+    canvasWidth: number,
     playerOne: PlayerOne,
     npcControll: NpcControll
   ) {
     this.ctx = ctx;
+    this.canvasWidth = canvasWidth;
     this.playerOne = playerOne;
     this.npcControll = npcControll;
-  }
+    this.playerOneSpeed = GAME_SETTINGS.PLAYER_SPEED;
+    this.huggySpeed = GAME_SETTINGS.ENEMY_SPEED;
+    this.kissySpeed = GAME_SETTINGS.ENEMY_SPEED;
 
-  levelInfo() {
-    const score = this.playerOne.score;
-    scoreLevels.forEach(level => {
-      if (score === level.score) {
-        this.levelName = level.name;
-      }
-    });
-    this.ctx.fillText(`${this.levelName}`, 200, 140);
+    this.levelInfo = () => {
+      const score = this.playerOne.score;
+      scoreLevels.forEach(level => {
+        if (score === level.score) {
+          this.levelName = level.name;
+        }
+      });
+      this.ctx.fillText(`${this.levelName}`, this.canvasWidth / 2 - 30, 80);
+    };
   }
 
   updateLevel() {
@@ -33,27 +43,23 @@ export class Levels {
     scoreLevels.forEach(level => {
       if (score === level.score) {
         this.playerOne.speed =
-          this.playerOne.speed + GAME_SETTINGS.PLAYER_LEVEL_SPEED_BONUS;
-        this.npcControll.arrNpc.forEach(npc => {
-          npc.speed = npc.speed + GAME_SETTINGS.NPC_ENEMY_LEVEL_SPEED_BONUS;
-        });
+          this.playerOneSpeed + GAME_SETTINGS.PLAYER_LEVEL_SPEED_BONUS;
+        this.playerOneSpeed = this.playerOne.speed;
+
+        this.npcControll.arrNpcTypeFilter('enemy_huggy').speed =
+          this.huggySpeed + GAME_SETTINGS.NPC_ENEMY_LEVEL_SPEED_BONUS;
+        this.huggySpeed =
+          this.npcControll.arrNpcTypeFilter('enemy_huggy').speed;
+
+        this.npcControll.arrNpcTypeFilter('enemy_kissy').speed =
+          this.kissySpeed + GAME_SETTINGS.NPC_ENEMY_LEVEL_SPEED_BONUS;
+        this.kissySpeed =
+          this.npcControll.arrNpcTypeFilter('enemy_kissy').speed;
       }
     });
   }
 
   render() {
-    // Добавлено для теста, будет удалено перед мерджем
     this.levelInfo();
-    this.ctx.fillText(`Player ${this.playerOne.speed.toFixed(2)}`, 200, 40);
-    this.ctx.fillText(
-      `Kissy ${this.npcControll.arrNpc[0].speed.toFixed(2)}`,
-      200,
-      70
-    );
-    this.ctx.fillText(
-      `Huggy ${this.npcControll.arrNpc[1].speed.toFixed(2)}`,
-      200,
-      100
-    );
   }
 }
