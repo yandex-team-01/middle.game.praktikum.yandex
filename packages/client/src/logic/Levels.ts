@@ -34,7 +34,9 @@ export class Levels {
           this.levelName = level.name;
         }
       });
-      this.ctx.fillText(`${this.levelName}`, this.canvasWidth / 2 - 30, 80);
+      this.ctx.font = '14px PixelDigivolve';
+      this.ctx.fillStyle = '#fff';
+      this.ctx.fillText(`${this.levelName}`, this.canvasWidth / 2, 60);
     };
   }
 
