@@ -28,7 +28,7 @@ export class Levels {
     this.ctx.fillText(`${this.levelName}`, 200, 140);
   }
 
-  levelUp() {
+  updateLevel() {
     const score = this.playerOne.score;
     scoreLevels.forEach(level => {
       if (score === level.score) {
