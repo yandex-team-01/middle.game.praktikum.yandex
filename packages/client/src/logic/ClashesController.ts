@@ -62,7 +62,7 @@ export class ClashesController {
       if (XColl && YColl) {
         npc.collisionHandling(this.playerOne);
         if (npc.type === NpcTypes.Friend) {
-          this.levels.levelUp();
+          this.levels.updateLevel();
           this.playerOne.speed =
           this.playerOne.speed + GAME_SETTINGS.PLAYER_COLLISION_SPEED_BONUS;
           this.deleteAndRestoreNpc(npc);
