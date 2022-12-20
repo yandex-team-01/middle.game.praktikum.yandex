@@ -117,8 +117,6 @@ export class ClashesController {
       prevNpc.type === NpcTypes.Friend
     ) {
       npc.speed = npc.speed + GAME_SETTINGS.NPC_ENEMY_COLLISION_SPEED_BONUS;
-      this.playerOne.speed =
-          this.playerOne.speed - GAME_SETTINGS.NPC_ENEMY_COLLISION_SPEED_DAMAGE;
       this.setColisionImgCoordinats(prevNpc, true);
       this.deleteAndRestoreNpc(prevNpc);
     }
