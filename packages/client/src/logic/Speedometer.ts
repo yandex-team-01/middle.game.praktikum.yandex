@@ -1,5 +1,4 @@
-import { SpeedometerController } from './SpeedometerController';
-import { PlayerOne } from './Player';
+import { SpeedometerController } from './SpeedometerController';import { PlayerOne } from './Player';
 import { NpcControll } from './NpcControll';
 import { GAME_SETTINGS } from './const';
 
@@ -16,11 +15,9 @@ export class Speedometer {
     this.playerOne = playerOne;
     this.npcControll = npcControll;
     this.speedometerController = speedometerController;
-
-
   }
 
-  playerSpeedometer() {
+  private playerSpeedometer() {
     const spriteX = GAME_SETTINGS.SPEEDOMETER_SPRITE_PLAYER_X;
     const spriteY = GAME_SETTINGS.SPEEDOMETER_SPRITE_PLAYER_Y;
     const speedometerValue = this.playerOne.speed;
@@ -37,7 +34,7 @@ export class Speedometer {
     });
   }
 
-  huggySpeedometer() {
+  private huggySpeedometer() {
     const spriteX = GAME_SETTINGS.SPEEDOMETER_SPRITE_HUGGY_X;
     const spriteY = GAME_SETTINGS.SPEEDOMETER_SPRITE_HUGGY_Y;
     const speedometerValue = this.npcControll.arrNpcTypeFilter('enemy_huggy').speed;
@@ -54,7 +51,7 @@ export class Speedometer {
     });
   }
 
-  kissySpeedometer() {
+  private kissySpeedometer() {
     const spriteX = GAME_SETTINGS.SPEEDOMETER_SPRITE_KISSY_X;
     const spriteY = GAME_SETTINGS.SPEEDOMETER_SPRITE_KISSY_Y;
     const speedometerValue = this.npcControll.arrNpcTypeFilter('enemy_kissy').speed;
@@ -71,13 +68,13 @@ export class Speedometer {
     });
   }
 
-  speedometerPush() {
+  prepareSpeedometer() {
     this.playerSpeedometer();
     this.huggySpeedometer();
     this.kissySpeedometer();
   }
 
   render() {
-    this.speedometerPush();
+    this.prepareSpeedometer();
   }
 }
