@@ -10,13 +10,61 @@
         "author": "user_2",
         "text": "Hello",
         "date": "25/10/2022 12:32",
-        "likes": 2
+        "likes": 2,
+        "emoji": [
+          {
+            "native": "👍",
+            "number": "5"
+          },
+          {
+            "native": "😘",
+            "number": "5"
+          },
+          {
+            "native": "😀",
+            "number": "5"
+          },
+          {
+            "native": "😍",
+            "number": "5"
+          },
+          {
+            "native": "😆",
+            "number": "5"
+          },
+          {
+            "native": "😜",
+            "number": "5"
+          },
+          {
+            "native": "😂",
+            "number": "5"
+          },
+          {
+            "native": "😅",
+            "number": "5"
+          },
+          {
+            "native": "😱",
+            "number": "5"
+          }
+        ]
       },
       {
         "author": "user_1",
         "text": "How are you?",
         "date": "25/10/2022 12:36",
-        "likes": 1
+        "likes": 1,
+        "emoji": [
+          {
+            "native": "😅",
+            "number": "15"
+          },
+          {
+            "native": "😱",
+            "number": "53"
+          }
+        ]
       }
     ],
     "views": 74
