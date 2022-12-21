@@ -1,6 +1,6 @@
 import { Sprite } from './Sprite';
 
-interface SpeedometerControllerRenderProps {
+export interface SpeedometerControllerRenderProps {
   spriteX: number;
   spriteY: number;
   speedometerValue: number;
