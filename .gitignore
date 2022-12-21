@@ -5,6 +5,7 @@ node_modules/
 dist
 tmp
 .DS_Store
+.pem
 
 yarn-error.log
 lerna-debug.log
