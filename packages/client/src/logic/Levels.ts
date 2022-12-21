@@ -11,7 +11,6 @@ export class Levels {
   private playerOneSpeed: number;
   private huggySpeed: number;
   private kissySpeed: number;
-  private prepareLevelInfo: () => void;
 
   constructor(
     ctx: CanvasRenderingContext2D,
@@ -26,19 +25,19 @@ export class Levels {
     this.playerOneSpeed = GAME_SETTINGS.PLAYER_SPEED;
     this.huggySpeed = GAME_SETTINGS.ENEMY_SPEED;
     this.kissySpeed = GAME_SETTINGS.ENEMY_SPEED;
-
-    this.prepareLevelInfo = () => {
-      const score = this.playerOne.score;
-      scoreLevels.forEach(level => {
-        if (score === level.score) {
-          this.levelName = level.name;
-        }
-      });
-      this.ctx.font = '14px PixelDigivolve';
-      this.ctx.fillStyle = '#fff';
-      this.ctx.fillText(`${this.levelName}`, this.canvasWidth / 2, 60);
-    };
   }
+
+  private prepareLevelInfo() {
+    const score = this.playerOne.score;
+    scoreLevels.forEach(level => {
+      if (score === level.score) {
+        this.levelName = level.name;
+      }
+    });
+    this.ctx.font = '14px PixelDigivolve';
+    this.ctx.fillStyle = '#fff';
+    this.ctx.fillText(`${this.levelName}`, this.canvasWidth / 2, 60);
+  };
 
   updateLevel() {
     const score = this.playerOne.score;
