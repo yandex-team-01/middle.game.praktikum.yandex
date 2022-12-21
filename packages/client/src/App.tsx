@@ -5,7 +5,7 @@ import { useGeoLocation } from 'src/hooks/useGeoLocation';
 import { useCheckOauthCode } from './hooks/useCheckOauthCode';
 import { useAppSelector } from './hooks/redux';
 import { selectTheme } from './store/theme/selectTheme';
-import { ThemeContext } from './components/ThemeTogglerButton/ThemeContext';
+import { ThemeContext } from './utils/theme/ThemeContext';
 
 const AppComponent = () => {
   useGeoLocation();

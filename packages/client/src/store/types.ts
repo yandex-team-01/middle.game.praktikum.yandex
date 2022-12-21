@@ -34,5 +34,5 @@ export interface PreloadedState {
 }
 
 export interface ThemeState {
-  theme: Record<'background', string>;
+  activeTheme: Record<'background', string>;
 }

@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { selectTheme } from 'src/store/theme/selectTheme';
 import { changeTheme } from 'src/store/theme/ThemeSlice';
 import { Button } from '../Button';
-import { themes } from './ThemeContext';
+import { themes } from '../../utils/theme/ThemeContext';
 import styles from 'src/pages/MainMenu/MainMenu.module.scss';
 import { useTranslation } from 'react-i18next';
 

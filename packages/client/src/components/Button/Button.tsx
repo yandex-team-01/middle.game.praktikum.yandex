@@ -2,7 +2,7 @@ import cn from 'classnames';
 import { Props } from './types';
 import styles from './button.module.scss';
 import { ErrorBoundary } from '../ErrorBoundary';
-import { ThemeContext } from '../ThemeTogglerButton/ThemeContext';
+import { ThemeContext } from '../../utils/theme/ThemeContext';
 
 export const Button = ({
   children,
