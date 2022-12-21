@@ -4,7 +4,7 @@ import path from 'path';
 import express from 'express';
 import { router } from './routing/routing';
 import { dbConnect } from './db';
-import { apiController } from './controllers';
+import { apiRouter } from './routing/index.router';
 
 dotenv.config();
 
@@ -17,7 +17,7 @@ const port = Number(process.env.PORT) || 3001;
 async function init() {
   await dbConnect();
 
-  apiController(app);
+  app.use("/api", apiRouter);
 
   app.use(
     '/assets',

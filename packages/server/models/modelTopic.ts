@@ -1,16 +1,19 @@
-import type { ModelAttributes } from 'sequelize';
-import { DataType, Model } from 'sequelize-typescript';
+import { Repository } from '../types/Repository';
+import { DataType, Model, ModelType } from 'sequelize-typescript';
+import { sequelize } from '../db';
 
-export interface ITopic {
-  id?: string;
-  title: string;
-  description: string;
-  id_author: string;
-  date: string;
-  views: number;
-}
+// export interface ITopic {
+//   id?: string;
+//   title: string;
+//   description: string;
+//   id_author: string;
+//   date: string;
+//   views: number;
+// }
 
-export const topicModel: ModelAttributes<Model, ITopic> = {
+export class Topic extends Model { }
+
+Topic.init({
   id: {
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
@@ -36,4 +39,10 @@ export const topicModel: ModelAttributes<Model, ITopic> = {
   views: {
     type: DataType.INTEGER,
   }
-};
+}, { sequelize });
+
+
+//@ts-ignore
+export type TypeTopic = ModelType<Topic>; //пытаюсь вытащить тип из модели, но это не работает
+
+export const topicRepos = new Repository(Topic);
