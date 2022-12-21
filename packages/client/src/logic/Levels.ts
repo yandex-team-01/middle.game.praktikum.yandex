@@ -11,7 +11,7 @@ export class Levels {
   private playerOneSpeed: number;
   private huggySpeed: number;
   private kissySpeed: number;
-  private levelInfo: () => void;
+  private prepareLevelInfo: () => void;
 
   constructor(
     ctx: CanvasRenderingContext2D,
@@ -27,7 +27,7 @@ export class Levels {
     this.huggySpeed = GAME_SETTINGS.ENEMY_SPEED;
     this.kissySpeed = GAME_SETTINGS.ENEMY_SPEED;
 
-    this.levelInfo = () => {
+    this.prepareLevelInfo = () => {
       const score = this.playerOne.score;
       scoreLevels.forEach(level => {
         if (score === level.score) {
@@ -62,6 +62,6 @@ export class Levels {
   }
 
   render() {
-    this.levelInfo();
+    this.prepareLevelInfo();
   }
 }
