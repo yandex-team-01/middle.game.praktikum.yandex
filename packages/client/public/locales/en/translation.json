@@ -64,5 +64,6 @@
   "errorGetLocation": "Couldn't get location information",
   "errorGeolocation": "Geolocation is not supported by your browser",
   "Name": "Name",
-  "Score": "Score"
+  "Score": "Score",
+  "toggleTheme": "Toggle Theme"
 }

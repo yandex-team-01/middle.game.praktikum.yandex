@@ -49,8 +49,20 @@ export const Routing = () => {
               </BackgroundLayout>
             </ProtectedRoute>
           }>
-          <Route index element={<LoginForm />} />
-          <Route path="reg" element={<RegistrationForm />} />
+          <Route index element={<LoginForm login={''} password={''} />} />
+          <Route
+            path="reg"
+            element={
+              <RegistrationForm
+                first_name={''}
+                second_name={''}
+                login={''}
+                email={''}
+                password={''}
+                phone={''}
+              />
+            }
+          />
         </Route>
         <Route
           path="/"
