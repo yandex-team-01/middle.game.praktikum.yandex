@@ -1,8 +1,7 @@
-import { commentModel } from './models/modelComment';
-import { topicModel } from './models/modelTopic';
+// import { commentModel } from './models/modelComment';
+// import { topicModel } from './models/modelTopic';
+import { Topic } from './models/modelTopic';
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
-// import { createTopic } from './services/topicService';
-// import { getTopicById } from './services/topicService';
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
   process.env;
@@ -19,8 +18,9 @@ const sequelizeOptions: SequelizeOptions = {
 export const sequelize = new Sequelize(sequelizeOptions);
 
 // тут можно задефайнить нужные модели
-export const Topic = sequelize.define('Topic', topicModel, {});
-export const Comment = sequelize.define('Comment', commentModel, {});
+// export const Topic = sequelize.define('Topic', topicModel, {});
+// export const Comment = sequelize.define('Comment', commentModel, {});
+sequelize.addModels([Topic]);
 
 export async function dbConnect() {
   try {
