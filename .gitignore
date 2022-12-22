@@ -1,9 +1,9 @@
-node_modules/
-.idea/
-.vscode/
-dist/
-tmp/
-keys/
+node_modules
+.idea
+.vscode
+dist
+tmp
+keys
 
 .env
 .DS_Store
