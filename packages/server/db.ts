@@ -13,9 +13,6 @@ const sequelizeOptions: SequelizeOptions = {
   password: POSTGRES_PASSWORD,
   database: POSTGRES_DB,
   dialect: 'postgres',
-  define: {
-    freezeTableName: true,
-  },
 };
 
 

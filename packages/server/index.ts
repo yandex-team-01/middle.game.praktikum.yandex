@@ -26,8 +26,6 @@ const port = Number(process.env.PORT) || 3001;
 async function init() {
   await dbConnect();
 
-  app.use("/api", apiRouter);
-
   app.use(
     '/assets',
     express.static(path.resolve(__dirname, 'public/client/assets'))
@@ -39,6 +37,7 @@ async function init() {
 
   app.use(cookieParser);
   app.use(auth);
+  app.use("/api", apiRouter);
   app.use(router);
   app.get('/', (_req, res) => {
     res.send('this is an secure server');
