@@ -17,10 +17,20 @@ const rootReducer = combineReducers({
   geolocation: geolocationReducer,
 });
 
-export const setupStore = (preloadedState: PreloadedState) => {
+export const setupStore = (
+  preloadedState: PreloadedState,
+  i18next: unknown
+) => {
   return configureStore({
     reducer: rootReducer,
     preloadedState: preloadedState,
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({
+        thunk: {
+          extraArgument: i18next,
+        },
+        serializableCheck: false,
+      }),
   });
 };
 

@@ -28,7 +28,7 @@ export const addLeader = (score: number, login: string) => {
 };
 
 export const getLeaderboard = (data: ILeaderboardRequest) => {
-  const res = fetchApi<Leader[]>('/leaderboard/all', {
+  const res = fetchApi<Leader[]>('/leaderboard/1all', {
     method: 'POST',
     headers: defaultHeaders,
     credentials: 'include',

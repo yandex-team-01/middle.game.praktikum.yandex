@@ -30,9 +30,11 @@ export const recordScore = createAsyncThunk<
 
 export const getAllLeaderboard = createAsyncThunk<
   Leader[],
-  ILeaderboardRequest
->('leaderboard/all', async (data: ILeaderboardRequest, thunkApi) => {
+  ILeaderboardRequest,
+  { extra: unknown }
+>('leaderboard/all', async (data: ILeaderboardRequest, { thunkApi, extra }) => {
   try {
+    console.log(extra);
     const res = await getLeaderboard(data);
     return res;
   } catch (error) {
