@@ -19,8 +19,12 @@
     "typeRoots": ["node_modules/yup"]
   },
   "include": ["src", "typings/**/*.d.ts", "*.d.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }],
-
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "skipLibCheck": true,
   "paths": {
     "src/*": ["src/*"]
   }
