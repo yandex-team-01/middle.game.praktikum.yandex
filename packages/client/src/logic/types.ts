@@ -40,3 +40,12 @@ export type Position = {
   y1: number;
   y2: number;
 };
+
+export type SpeedometerControllerRenderProps = {
+  spriteX: number;
+  spriteY: number;
+  speedometerValue: number;
+  speedometerText: string;
+  textX: number;
+  textY: number;
+}

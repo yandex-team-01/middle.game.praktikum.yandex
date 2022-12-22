@@ -1,13 +1,5 @@
 import { Sprite } from './Sprite';
-
-export interface SpeedometerControllerRenderProps {
-  spriteX: number;
-  spriteY: number;
-  speedometerValue: number;
-  speedometerText: string;
-  textX: number;
-  textY: number;
-}
+import { SpeedometerControllerRenderProps } from './types';
 
 export class SpeedometerController {
   private ctx: CanvasRenderingContext2D;
