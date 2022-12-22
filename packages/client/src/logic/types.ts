@@ -48,4 +48,4 @@ export type SpeedometerControllerRenderProps = {
   speedometerText: string;
   textX: number;
   textY: number;
-}
+};
