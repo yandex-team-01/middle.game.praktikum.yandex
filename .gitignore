@@ -1,9 +1,11 @@
 node_modules/
+.idea/
+.vscode/
+dist/
+tmp/
+keys/
+
 .env
-.idea
-.vscode
-dist
-tmp
 .DS_Store
 .pem
 
