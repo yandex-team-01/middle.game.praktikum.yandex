@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
-import { commentRepos } from "../models/modelComment";
-import { topicRepos } from "../models/modelTopic";
+import { topicRepos, commentRepos } from "../db";
 
 export class forumService {
     getAllTopics = (_: Request, res: Response) => {
@@ -27,7 +26,7 @@ export class forumService {
     deleteTopic = (_req: Request, res: Response) => {
         topicRepos
             .delete(_req.params.id)
-            .then(() => res.status(200))
+            .then(() => res.status(200).json('ok'))
             .catch(err => res.status(500).json({ error: ["db error", err] }));
     };
 
@@ -55,7 +54,7 @@ export class forumService {
     deleteComment = (_req: Request, res: Response) => {
         commentRepos
             .delete(_req.params.id)
-            .then(() => res.status(200))
+            .then(() => res.status(200).json('ok'))
             .catch(err => res.status(500).json({ error: ["db error", err] }));
     };
 };
