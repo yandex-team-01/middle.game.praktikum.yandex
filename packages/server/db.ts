@@ -1,4 +1,7 @@
-import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
+import { topicModel } from './models/modelTopic';
+import { ModelCtor, Sequelize, SequelizeOptions } from 'sequelize-typescript';
+import { Repository } from './types/Repository';
+import { commentModel } from './models/modelComment';
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
   process.env;
@@ -12,10 +15,16 @@ const sequelizeOptions: SequelizeOptions = {
   dialect: 'postgres',
 };
 
+
 export const sequelize = new Sequelize(sequelizeOptions);
 
 // тут можно задефайнить нужные модели
-// export const User = sequelize.define('User', userModel, {});
+export const Topic = sequelize.define('Topic', topicModel, {});
+export const topicRepos = new Repository(Topic as ModelCtor);
+
+export const Comment = sequelize.define('Comment', commentModel, {});
+export const commentRepos = new Repository(Comment as ModelCtor);
+
 
 export async function dbConnect() {
   try {
