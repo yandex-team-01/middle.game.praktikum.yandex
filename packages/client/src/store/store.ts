@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-
+import { i18n } from 'i18next';
 import { usersReducer } from './users/UsersSlice';
 import { authReducer } from './auth/AuthSlice';
 import { errorReducer } from './error/ErrorSlice';
@@ -17,20 +17,17 @@ const rootReducer = combineReducers({
   geolocation: geolocationReducer,
 });
 
-export const setupStore = (
-  preloadedState: PreloadedState,
-  i18next: unknown
-) => {
+export const setupStore = (preloadedState: PreloadedState, i18n: i18n) => {
   return configureStore({
     reducer: rootReducer,
-    preloadedState: preloadedState,
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware({
         thunk: {
-          extraArgument: i18next,
+          extraArgument: i18n,
         },
         serializableCheck: false,
       }),
+    preloadedState: preloadedState,
   });
 };
 
