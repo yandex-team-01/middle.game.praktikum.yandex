@@ -4,6 +4,7 @@ import { PlayerOne } from './Player';
 import { Sprite } from './Sprite';
 import { Collision } from './Collision';
 import { GAME_SETTINGS } from './const';
+import { Levels } from './Levels';
 
 export class ClashesController {
   playerOne: PlayerOne;
@@ -13,6 +14,7 @@ export class ClashesController {
   spriteTeleport: Sprite | undefined;
   arrCollision: Collision[] = [];
   npcScreamingAudio: HTMLAudioElement;
+  levels: Levels;
   x = 0;
   y = 0;
   skinHorizontalFrame = GAME_SETTINGS.SKIN_HORIZONTAL_FRAME;
@@ -25,12 +27,13 @@ export class ClashesController {
   constructor(
     ctx: CanvasRenderingContext2D,
     player: PlayerOne,
-    npcControll: NpcControll
+    npcControll: NpcControll,
+    levels: Levels
   ) {
     this.ctx = ctx;
-
     this.playerOne = player;
     this.npcControll = npcControll;
+    this.levels = levels;
     this.npcScreamingAudio = new Audio(
       '/src/assets/audio/game-npc-friend-screaming.mp3'
     );
@@ -59,8 +62,9 @@ export class ClashesController {
       if (XColl && YColl) {
         npc.collisionHandling(this.playerOne);
         if (npc.type === NpcTypes.Friend) {
+          this.levels.updateLevel();
           this.playerOne.speed =
-            this.playerOne.speed + GAME_SETTINGS.PLAYER_COLLISION_SPEED_BONUS;
+          this.playerOne.speed + GAME_SETTINGS.PLAYER_COLLISION_SPEED_BONUS;
           this.deleteAndRestoreNpc(npc);
           this.setColisionImgCoordinats(npc, false);
         } else {

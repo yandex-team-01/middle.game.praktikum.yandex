@@ -5,6 +5,7 @@ import { NpcControll } from './NpcControll';
 import { GameEntities, AllSpritesType } from './types';
 import { Timer } from './Timer';
 import { GAME_SETTINGS } from './const';
+import { Levels } from './Levels';
 
 export class Game {
   private ctx: CanvasRenderingContext2D;
@@ -16,6 +17,7 @@ export class Game {
   private sprites: AllSpritesType;
   private npcControll: NpcControll;
   private timer: Timer;
+  private levels: Levels;
   public view: View;
   private onEndGame?: (score: number) => void;
 
@@ -38,6 +40,7 @@ export class Game {
     );
     this.allSprites = new AllSprites();
     this.npcControll = new NpcControll(this.ctx, this.height, this.width);
+    this.levels = new Levels(this.ctx, this.width, this.playerOne, this.npcControll);
     this.view = new View(this.canvas, this.ctx, this.gameEntities);
     this.sprites = {};
   }
@@ -68,6 +71,7 @@ export class Game {
       npcControll: this.npcControll,
       game: this,
       timer: this.timer,
+      levels: this.levels,
     };
   }
 

@@ -11,7 +11,7 @@ import collisionBood from '/src/assets/images/game-collision-blood.png';
 import collisionTeleport from '/src/assets/images/game-collision-teleport.png';
 
 export const GAME_SETTINGS = {
-  GAME_TIME_LIMIT: 5 * 60 * 1000,
+  GAME_TIME_LIMIT: 14.8 * 60 * 1000,
   GAME_WIDTH: 1240,
   GAME_HEIGHT: 600,
   ENEMY_WIDTH: 49,
@@ -41,8 +41,10 @@ export const GAME_SETTINGS = {
   FRIEND_SPEED: 6,
   HIT_POINTS: 3,
   DEFINE_BONUS: 1,
-  PLAYER_COLLISION_SPEED_BONUS: 0.1,
-  NPC_ENEMY_COLLISION_SPEED_BONUS: 0.2,
+  PLAYER_LEVEL_SPEED_BONUS: 2,
+  NPC_ENEMY_LEVEL_SPEED_BONUS: 2,
+  PLAYER_COLLISION_SPEED_BONUS: 0.05,
+  NPC_ENEMY_COLLISION_SPEED_BONUS: 0.025,
   ENEMY_HUGGY_START_X: 500,
   ENEMY_KISSY_START_X: 700,
   ENEMY_START_Y: 200,
@@ -157,5 +159,58 @@ export const defaultOptionNpc = [
   {
     id: 8,
     type: 'friend',
+  },
+];
+
+export const scoreLevels = [
+  {
+    id: 1,
+    name: 'level 1',
+    score: 0,
+  },
+  {
+    id: 2,
+    name: 'level 2',
+    score: 5,
+  },
+  {
+    id: 3,
+    name: 'level 3',
+    score: 20,
+  },
+  {
+    id: 4,
+    name: 'level 4',
+    score: 40,
+  },
+  {
+    id: 5,
+    name: 'level 5',
+    score: 100,
+  },
+  {
+    id: 6,
+    name: 'level 6',
+    score: 200,
+  },
+  {
+    id: 7,
+    name: 'level 7',
+    score: 350,
+  },
+  {
+    id: 8,
+    name: 'level 8',
+    score: 500,
+  },
+  {
+    id: 9,
+    name: 'level 9',
+    score: 700,
+  },
+  {
+    id: 10,
+    name: 'level 10',
+    score: 1000,
   },
 ];

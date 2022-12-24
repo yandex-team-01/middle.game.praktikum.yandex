@@ -16,14 +16,18 @@ export const TopicList = memo(() => {
         <ButtonCreateTopic />
         <div className={styles.list}>
           {Object.values(topics).map((topic: ITopic, index: number) => {
-            return <Topic id={topic.id} 
-            title={topic.title} 
-            description={topic.description} 
-            author={topic.author} 
-            date={topic.date} 
-            comments={topic.comments} 
-            views={topic.views} 
-            key={index}  />;
+            return (
+              <Topic
+                id={topic.id}
+                title={topic.title}
+                description={topic.description}
+                author={topic.author}
+                date={topic.date}
+                comments={topic.comments}
+                views={topic.views}
+                key={index}
+              />
+            );
           })}
         </div>
       </div>

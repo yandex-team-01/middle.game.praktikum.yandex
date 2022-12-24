@@ -5,6 +5,7 @@ import { Timer } from './Timer';
 import { AllSpritesType } from './types';
 import { GameEntities } from './types';
 import { SPRITE_ID } from './const';
+import { Levels } from './Levels';
 
 export class View {
   public canvas: HTMLCanvasElement;
@@ -20,11 +21,12 @@ export class View {
   public clashesController: ClashesController;
   public gameOver: boolean;
   public timer: Timer;
+  public levels: Levels;
 
   constructor(
     canvas: HTMLCanvasElement,
     ctx: CanvasRenderingContext2D,
-    { player, npcControll, timer }: GameEntities
+    { player, npcControll, timer, levels }: GameEntities
   ) {
     this.sprites = {};
     this.canvas = canvas;
@@ -35,7 +37,13 @@ export class View {
     this.timer = timer;
     this.npcControll = npcControll;
     this.gameOver = false;
-    this.clashesController = new ClashesController(ctx, player, npcControll);
+    this.levels = levels;
+    this.clashesController = new ClashesController(
+      ctx,
+      player,
+      npcControll,
+      levels
+    );
   }
 
   setSprite(sprites: AllSpritesType) {
@@ -101,6 +109,7 @@ export class View {
     this.npcControll.render();
     this.playerOne.render();
     this.timer.render();
+    this.levels.render();
   }
 
   startAnimating(fps: number) {

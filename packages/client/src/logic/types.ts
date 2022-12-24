@@ -4,6 +4,7 @@ import { Sprite } from './Sprite';
 import { NpcControll } from './NpcControll';
 import { Game } from './Game';
 import { Timer } from './Timer';
+import { Levels } from './Levels';
 
 export type SpriteOptions = {
   id: string;
@@ -26,6 +27,7 @@ export type GameEntities = {
   sprites: Record<number | string, Sprite>;
   game: Game;
   timer: Timer;
+  levels: Levels;
 };
 
 export type Position = {
