@@ -1,13 +1,13 @@
-node_modules
-.idea
-.vscode
-dist
-tmp
-keys
+**/node_modules/
+**/.idea/
+**/.vscode/
+**/dist/
+**/keys/
+tmp/
 
-.env
-.DS_Store
-.pem
+*.env
+*.DS_Store
+*.pem
 
 yarn-error.log
 lerna-debug.log

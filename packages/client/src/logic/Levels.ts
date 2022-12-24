@@ -37,7 +37,7 @@ export class Levels {
     this.ctx.font = '14px PixelDigivolve';
     this.ctx.fillStyle = '#fff';
     this.ctx.fillText(`${this.levelName}`, this.canvasWidth / 2, 60);
-  };
+  }
 
   updateLevel() {
     const score = this.playerOne.score;

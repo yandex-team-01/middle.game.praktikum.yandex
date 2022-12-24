@@ -15,7 +15,6 @@ const sequelizeOptions: SequelizeOptions = {
   dialect: 'postgres',
 };
 
-
 export const sequelize = new Sequelize(sequelizeOptions);
 
 // тут можно задефайнить нужные модели
@@ -24,7 +23,6 @@ export const topicRepos = new Repository(Topic as ModelCtor);
 
 export const Comment = sequelize.define('Comment', commentModel, {});
 export const commentRepos = new Repository(Comment as ModelCtor);
-
 
 export async function dbConnect() {
   try {

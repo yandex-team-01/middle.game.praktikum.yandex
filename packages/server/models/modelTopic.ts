@@ -15,25 +15,25 @@ export const topicModel: ModelAttributes<Model, ITopic> = {
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
   },
   title: {
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   },
   description: {
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   },
   id_author: {
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   },
   date: {
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   },
   views: {
     type: DataType.INTEGER,
-  }
+  },
 };
