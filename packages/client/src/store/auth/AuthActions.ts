@@ -87,24 +87,27 @@ export const fetchLogout = createAsyncThunk<string, string, { extra: i18n }>(
 );
 
 //первый шаг oAuth - получаем service_id с api practicum
-export const fetchOAuthStepOneGetServiceIdFromApiPracticum = createAsyncThunk<
-  oAuthServiceIdData,
-  string,
-  { extra: i18n }
->('oauth/fetchServiceIdFromYaApi', async (_, thunkApi) => {
-  try {
-    const res: oAuthServiceIdData = await fetchApi(`/oauth/yandex/service-id`, {
-      method: 'GET',
-      headers: defaultHeaders,
-    });
-    oAuthStepTwoRedirectToOAuthProvider(res.service_id);
-    return res;
-  } catch (error) {
-    const errorMessageText = thunkApi.extra.t('LoginError');
-    thunkApi.dispatch(addError(errorMessageText));
-    throw error;
+export const fetchOAuthStepOneGetServiceIdFromApiPracticum = createAsyncThunk(
+  'oauth/fetchServiceIdFromYaApi',
+  async (_, thunkApi) => {
+    try {
+      const res: oAuthServiceIdData = await fetchApi(
+        `/oauth/yandex/service-id`,
+        {
+          method: 'GET',
+          headers: defaultHeaders,
+        }
+      );
+      oAuthStepTwoRedirectToOAuthProvider(res.service_id);
+      return res;
+    } catch (error) {
+      const i18n = thunkApi.extra as i18n;
+      const errorMessageText = i18n.t('LoginError');
+      thunkApi.dispatch(addError(errorMessageText));
+      throw error;
+    }
   }
-});
+);
 
 //второй шаг oAuth - редирект на страницу получения согласия
 const oAuthStepTwoRedirectToOAuthProvider = (service_id: string) => {
