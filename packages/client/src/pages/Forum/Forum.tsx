@@ -7,10 +7,18 @@ import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { Button } from 'src/components/Button';
 
 import { useNavigator } from 'src/hooks/useNavigator';
+import { fetchTopics } from 'src/store/forum/ForumActions';
+import { useBoundAction } from 'src/hooks/useBoundAction';
+import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
 
 export const Forum = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
+  const getTopics = useBoundAction(() => fetchTopics());
+
+  useMountEffectOneCall(() => {
+    getTopics();
+  });
 
   const handlerBack = () => navigator(-1);
   const handlerLoadGame = () => navigator('/loadinggame');

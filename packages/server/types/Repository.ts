@@ -15,27 +15,30 @@ export class Repository<T extends Model<T>> {
   }
 
   public async create(
-    value: MakeNullishOptional<T['_creationAttributes']>
+    value: MakeNullishOptional<T["_creationAttributes"]>
   ): Promise<T> {
     return this.model.create(value);
   }
 
   public async update(
-    id: WhereAttributeHashValue<Attributes<T>['id']> | undefined,
-    value: MakeNullishOptional<T['_creationAttributes']>
+    id: WhereAttributeHashValue<Attributes<T>["id"]> | undefined,
+    value: MakeNullishOptional<T["_creationAttributes"]>
   ): Promise<[affectedCount: number]> {
     return this.model.update(value, { where: { id } });
   }
 
-  public async getAll(): Promise<T[]> {
-    return this.model.findAll();
+  public async getAll(
+    options?: FindOptions<Attributes<T>> | undefined
+  ): Promise<T[]> {
+    if (options) return this.model.findAll(options);
+    else return this.model.findAll();
   }
   public async findAll(options: FindOptions<Attributes<T>>): Promise<T[]> {
     return this.model.findAll(options);
   }
 
   public async get(
-    id: WhereAttributeHashValue<Attributes<T>['id']> | undefined
+    id: WhereAttributeHashValue<Attributes<T>["id"]> | undefined
   ): Promise<T | null> {
     return this.model.findOne({ where: { id } });
   }

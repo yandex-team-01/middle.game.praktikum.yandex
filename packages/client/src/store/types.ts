@@ -22,7 +22,8 @@ export interface ErrorState {
 
 export interface ForumState {
   activeTopic: ITopic | undefined;
-  topics: Record<string, ITopic>;
+  topics: Record<string, ITopic> | undefined;
+  loading: boolean;
 }
 
 export interface PreloadedState {
