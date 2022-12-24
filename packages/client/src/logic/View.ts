@@ -37,7 +37,8 @@ export class View {
       timer,
       speedometerController,
       speedometer,
-   , levels }: GameEntities
+      levels,
+    }: GameEntities
   ) {
     this.sprites = {};
     this.canvas = canvas;
