@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { topicRepos, commentRepos } from '../db';
+import { topicRepos, commentRepos, Reaction } from '../db';
 
 export class forumService {
   getAllTopics = (_: Request, res: Response) => {
@@ -32,7 +32,9 @@ export class forumService {
 
   getAllComment = (_req: Request, res: Response) => {
     commentRepos
-      .getAll()
+      .findAll({
+        include: [Reaction],
+      })
       .then(comments => res.status(200).json(comments))
       .catch(err => res.status(500).json({ error: ['db error', err] }));
   };
