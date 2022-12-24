@@ -1,5 +1,5 @@
-import type { RequestHandler } from 'express';
-import cookieParserMiddleware from 'cookie-parser';
-
-export const cookieParser: RequestHandler = cookieParserMiddleware();
+import type { RequestHandler } from 'express'; 
+import cookieParserMiddleware from 'cookie-parser'; 
+ 
+export const cookieParser: RequestHandler = cookieParserMiddleware(); 
 export { auth } from './auth';

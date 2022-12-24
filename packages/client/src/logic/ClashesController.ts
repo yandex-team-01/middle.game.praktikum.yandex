@@ -64,7 +64,7 @@ export class ClashesController {
         if (npc.type === NpcTypes.Friend) {
           this.levels.updateLevel();
           this.playerOne.speed =
-          this.playerOne.speed + GAME_SETTINGS.PLAYER_COLLISION_SPEED_BONUS;
+            this.playerOne.speed + GAME_SETTINGS.PLAYER_COLLISION_SPEED_BONUS;
           this.deleteAndRestoreNpc(npc);
           this.setColisionImgCoordinats(npc, false);
         } else {

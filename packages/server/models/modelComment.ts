@@ -15,11 +15,11 @@ export const commentModel: ModelAttributes<Model, IComment> = {
     type: DataType.STRING,
     defaultValue: DataType.UUIDV4,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
   },
   id_topic: {
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   },
   text: {
     type: DataType.STRING,
@@ -32,5 +32,5 @@ export const commentModel: ModelAttributes<Model, IComment> = {
   },
   likes: {
     type: DataType.INTEGER,
-  }
+  },
 };
