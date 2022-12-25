@@ -41,10 +41,10 @@ export type Position = {
   y2: number;
 };
 
-export type SpeedometerControllerRenderProps = {
+export type SpeedometerOptions = {
+  type?: string;
   spriteX: number;
   spriteY: number;
-  speedometerValue: number;
   speedometerText: string;
   textX: number;
   textY: number;

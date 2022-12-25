@@ -1,4 +1,4 @@
-import { SpriteOptions } from './types';
+import { SpriteOptions, SpeedometerOptions } from './types';
 import background from '/src/assets/images/game-background.png';
 import gameOver from '/src/assets/images/game-over-background.png';
 import player from '/src/assets/images/game-player-1.png';
@@ -78,6 +78,33 @@ export enum SPRITE_ID {
   COLLISION_TELEPORT = 'collision_teleport',
   SPEEDOMETER = 'speedometer',
 }
+
+export const speedometerOptions: SpeedometerOptions[] = [
+  {
+    type: 'player',
+    spriteX: GAME_SETTINGS.SPEEDOMETER_SPRITE_PLAYER_X,
+    spriteY: GAME_SETTINGS.SPEEDOMETER_SPRITE_PLAYER_Y,
+    speedometerText: 'Player',
+    textX: GAME_SETTINGS.SPEEDOMETER_TEXT_PLAYER_X,
+    textY: GAME_SETTINGS.SPEEDOMETER_TEXT_PLAYER_Y,
+  },
+  {
+    type: 'enemy_huggy',
+    spriteX: GAME_SETTINGS.SPEEDOMETER_SPRITE_HUGGY_X,
+    spriteY: GAME_SETTINGS.SPEEDOMETER_SPRITE_HUGGY_Y,
+    speedometerText: 'Huggy',
+    textX: GAME_SETTINGS.SPEEDOMETER_TEXT_HUGGY_X,
+    textY: GAME_SETTINGS.SPEEDOMETER_TEXT_HUGGY_Y,
+  },
+  {
+    type: 'enemy_kissy',
+    spriteX: GAME_SETTINGS.SPEEDOMETER_SPRITE_KISSY_X,
+    spriteY: GAME_SETTINGS.SPEEDOMETER_SPRITE_KISSY_Y,
+    speedometerText: 'Kissy',
+    textX: GAME_SETTINGS.SPEEDOMETER_TEXT_KISSY_X,
+    textY: GAME_SETTINGS.SPEEDOMETER_TEXT_KISSY_Y,
+  },
+];
 
 export const spritesOptions: SpriteOptions[] = [
   {

@@ -29,7 +29,6 @@ export class Game {
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
     this.canvas.width = this.width;
     this.canvas.height = this.height;
-    this.speedometerController = new SpeedometerController(this.ctx);
 
     this.playerOne = new PlayerOne(
       this.ctx,
@@ -45,17 +44,17 @@ export class Game {
     );
     this.allSprites = new AllSprites();
     this.npcControll = new NpcControll(this.ctx, this.height, this.width);
-    this.speedometer = new Speedometer(
+    this.speedometerController = new SpeedometerController(
+      this.ctx,
       this.playerOne,
-      this.npcControll,
-      this.speedometerController
+      this.npcControll
     );
+    this.speedometer = new Speedometer(this.speedometerController);
     this.levels = new Levels(
       this.ctx,
       this.width,
       this.playerOne,
-      this.npcControll,
-      this.speedometerController
+      this.npcControll
     );
     this.levels = new Levels(
       this.ctx,
