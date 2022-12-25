@@ -7,7 +7,7 @@ import { defaultHeaders } from 'src/constants/http';
 import { i18n } from 'i18next';
 import { SignUpUserId } from './types';
 
-export const fetchAuth = createAsyncThunk(
+export const fetchAuth = createAsyncThunk<IUser, undefined, { extra: i18n }>(
   'auth/fetchAuth',
   async (_, thunkApi) => {
     try {
@@ -15,8 +15,7 @@ export const fetchAuth = createAsyncThunk(
         credentials: 'include',
       });
     } catch (error) {
-      const i18n = thunkApi.extra as i18n;
-      const errorMessageText = i18n.t('LoginError');
+      const errorMessageText = thunkApi.extra.t('LoginError');
       return thunkApi.rejectWithValue(errorMessageText);
     }
   }
@@ -87,27 +86,25 @@ export const fetchLogout = createAsyncThunk<string, string, { extra: i18n }>(
 );
 
 //первый шаг oAuth - получаем service_id с api practicum
-export const fetchOAuthStepOneGetServiceIdFromApiPracticum = createAsyncThunk(
-  'oauth/fetchServiceIdFromYaApi',
-  async (_, thunkApi) => {
-    try {
-      const res: oAuthServiceIdData = await fetchApi(
-        `/oauth/yandex/service-id`,
-        {
-          method: 'GET',
-          headers: defaultHeaders,
-        }
-      );
-      oAuthStepTwoRedirectToOAuthProvider(res.service_id);
-      return res;
-    } catch (error) {
-      const i18n = thunkApi.extra as i18n;
-      const errorMessageText = i18n.t('LoginError');
-      thunkApi.dispatch(addError(errorMessageText));
-      throw error;
-    }
+export const fetchOAuthStepOneGetServiceIdFromApiPracticum = createAsyncThunk<
+  oAuthServiceIdData,
+  undefined,
+  { extra: i18n }
+>('oauth/fetchServiceIdFromYaApi', async (_, thunkApi) => {
+  try {
+    const res: oAuthServiceIdData = await fetchApi(`/oauth/yandex/service-id`, {
+      method: 'GET',
+      headers: defaultHeaders,
+    });
+    oAuthStepTwoRedirectToOAuthProvider(res.service_id);
+    return res;
+  } catch (error) {
+    const i18n = thunkApi.extra as i18n;
+    const errorMessageText = i18n.t('LoginError');
+    thunkApi.dispatch(addError(errorMessageText));
+    throw error;
   }
-);
+});
 
 //второй шаг oAuth - редирект на страницу получения согласия
 const oAuthStepTwoRedirectToOAuthProvider = (service_id: string) => {
