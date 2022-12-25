@@ -23,6 +23,7 @@ COPY --from=builder /app/packages/server/keys/ /app/keys/
 COPY --from=builder /app/packages/server/dist/ /app/
 COPY --from=builder /app/packages/server/public/ /app/public/
 COPY --from=builder /app/packages/server/package.json /app/package.json
+COPY --from=builder /app/packages/server/keys/ /app/keys/
 RUN yarn install --production=true
 
 EXPOSE $SERVER_PORT

@@ -3,6 +3,7 @@ import { ModelCtor, Sequelize, SequelizeOptions } from 'sequelize-typescript';
 import { Repository } from './types/Repository';
 import { commentModel } from './models/modelComment';
 import { reactionModel } from './models/modelReaction';
+import { topicUser } from './models/userModel';
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
   process.env;
@@ -29,6 +30,8 @@ Reaction.belongsTo(Comment, { foreignKey: 'id' });
 export const topicRepos = new Repository(Topic as ModelCtor);
 export const commentRepos = new Repository(Comment as ModelCtor);
 export const reactionRepos = new Repository(Reaction as ModelCtor);
+export const User = sequelize.define('User', topicUser, {});
+export const userRepos = new Repository(User as ModelCtor);
 
 export async function dbConnect() {
   try {

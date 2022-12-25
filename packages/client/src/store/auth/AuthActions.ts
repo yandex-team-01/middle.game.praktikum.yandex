@@ -4,6 +4,10 @@ import { fetchApi } from '../utils';
 import { addError } from '../error/ErrorSlice';
 import { IUser } from 'src/modules/IUser';
 import { defaultHeaders } from 'src/constants/http';
+import { getOrCreateUser } from 'src/api/userApi';
+import { COOKIE_THEME_NAME } from 'src/constants/themes';
+import { cookies } from 'src/utils/cookies';
+import { themes } from 'src/utils/theme/ThemeContext';
 import { i18n } from 'i18next';
 import { SignUpUserId } from './types';
 import { createAppAsyncThunk } from 'src/utils/thunk';
@@ -56,6 +60,23 @@ export const fetchSignup = createAppAsyncThunk(
         body: JSON.stringify(data),
       });
       thunkApi.dispatch(fetchAuth());
+
+      const themeValueFromCookie = cookies.get(COOKIE_THEME_NAME);
+      const currentTheme = themeValueFromCookie
+        ? themeValueFromCookie
+        : themes.light;
+
+      const { password, ...rawDataForDb } = data; // eslint-disable-line @typescript-eslint/no-unused-vars
+
+      const dataForDB = {
+        ...rawDataForDb,
+        id: res.id,
+        display_name: null,
+        avatar: null,
+        theme: JSON.stringify(currentTheme),
+      };
+
+      await getOrCreateUser(res.id, dataForDB);
 
       return res;
     } catch (error) {
