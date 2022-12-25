@@ -66,7 +66,7 @@ export const fetchSignup = createAsyncThunk<
   }
 });
 
-export const fetchLogout = createAsyncThunk<string, string, { extra: i18n }>(
+export const fetchLogout = createAsyncThunk<string, undefined, { extra: i18n }>(
   'auth/fetchLogout',
   async (_, thunkApi) => {
     try {
