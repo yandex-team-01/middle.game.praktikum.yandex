@@ -5,6 +5,8 @@ import { NpcControll } from './NpcControll';
 import { GameEntities, AllSpritesType } from './types';
 import { Timer } from './Timer';
 import { GAME_SETTINGS } from './const';
+import { Speedometer } from './Speedometer';
+import { SpeedometerController } from './SpeedometerController';
 import { Levels } from './Levels';
 
 export class Game {
@@ -17,6 +19,8 @@ export class Game {
   private sprites: AllSpritesType;
   private npcControll: NpcControll;
   private timer: Timer;
+  private speedometer: Speedometer;
+  private speedometerController: SpeedometerController;
   private levels: Levels;
   public view: View;
   private onEndGame?: (score: number) => void;
@@ -40,6 +44,18 @@ export class Game {
     );
     this.allSprites = new AllSprites();
     this.npcControll = new NpcControll(this.ctx, this.height, this.width);
+    this.speedometerController = new SpeedometerController(
+      this.ctx,
+      this.playerOne,
+      this.npcControll
+    );
+    this.speedometer = new Speedometer(this.speedometerController);
+    this.levels = new Levels(
+      this.ctx,
+      this.width,
+      this.playerOne,
+      this.npcControll
+    );
     this.levels = new Levels(
       this.ctx,
       this.width,
@@ -76,6 +92,8 @@ export class Game {
       npcControll: this.npcControll,
       game: this,
       timer: this.timer,
+      speedometer: this.speedometer,
+      speedometerController: this.speedometerController,
       levels: this.levels,
     };
   }

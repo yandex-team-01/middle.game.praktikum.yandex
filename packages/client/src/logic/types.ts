@@ -4,6 +4,8 @@ import { Sprite } from './Sprite';
 import { NpcControll } from './NpcControll';
 import { Game } from './Game';
 import { Timer } from './Timer';
+import { SpeedometerController } from './SpeedometerController';
+import { Speedometer } from './Speedometer';
 import { Levels } from './Levels';
 
 export type SpriteOptions = {
@@ -27,6 +29,8 @@ export type GameEntities = {
   sprites: Record<number | string, Sprite>;
   game: Game;
   timer: Timer;
+  speedometerController: SpeedometerController;
+  speedometer: Speedometer;
   levels: Levels;
 };
 
@@ -35,4 +39,13 @@ export type Position = {
   x2: number;
   y1: number;
   y2: number;
+};
+
+export type SpeedometerOptions = {
+  type?: string;
+  spriteX: number;
+  spriteY: number;
+  speedometerText: string;
+  textX: number;
+  textY: number;
 };
