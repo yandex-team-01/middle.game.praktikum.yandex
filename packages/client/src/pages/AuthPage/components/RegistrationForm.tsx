@@ -16,9 +16,7 @@ export const RegistrationForm: FunctionComponent<SignupData> = () => {
   const { t } = useTranslation();
   const loading = useAppSelector(selectLoading);
 
-  const onSubmit = useBoundAction((values) =>
-    fetchSignup(values)
-  );
+  const onSubmit = useBoundAction(values => fetchSignup(values));
 
   return (
     <ErrorBoundary>

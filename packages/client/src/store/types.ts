@@ -30,4 +30,9 @@ export interface PreloadedState {
   error: ErrorState;
   forum: ForumState;
   users: ChangeDataState;
+  themes: ThemeState;
+}
+
+export interface ThemeState {
+  activeTheme: Record<'background', string>;
 }

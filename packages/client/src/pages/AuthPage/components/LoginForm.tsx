@@ -12,12 +12,10 @@ import { selectLoading } from 'src/store/auth/AuthSelectors';
 import { useBoundAction } from 'src/hooks/useBoundAction';
 import { FunctionComponent } from 'react';
 
-export const LoginForm : FunctionComponent<SigninData> = () => {
+export const LoginForm: FunctionComponent<SigninData> = () => {
   const { t } = useTranslation();
   const loading = useAppSelector(selectLoading);
-  const onSubmit = useBoundAction((values) =>
-    fetchSignin(values)
-  );
+  const onSubmit = useBoundAction(values => fetchSignin(values));
 
   return (
     <ErrorBoundary>

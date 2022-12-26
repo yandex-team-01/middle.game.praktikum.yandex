@@ -1,4 +1,4 @@
-import { NpcEnemy, NpcFriend, NpcTypes } from './Npc';
+import { NpcEnemy, NpcFriend, NpcModel, NpcTypes } from './Npc';
 import { AllSpritesType } from './types';
 import { defaultOptionNpc } from './const';
 import { SPRITE_ID } from './const';
@@ -46,6 +46,16 @@ export class NpcControll {
         npc.setSprite(sprites[SPRITE_ID.NPC_ENEMY_KISSY]);
       }
     });
+  }
+
+  arrNpcTypeFilter(npcType: string) {
+    let npcObject: NpcModel;
+    this.arrNpc.forEach(object => {
+      if (object.type === npcType) {
+        npcObject = object;
+      }
+    });
+    return npcObject!;
   }
 
   render() {

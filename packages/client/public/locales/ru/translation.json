@@ -69,5 +69,6 @@
   "ErrorRecordingTheResultOfTheGame": "Ошибка записи результата игры",
   "ProfileModificationError": "Ошибка изменения профиля",
   "PasswordChangeError": "Ошибка смены пароля",
-  "ErrorChangingProfileAvatar": "Ошибка смены аватара профиля"
+  "ErrorChangingProfileAvatar": "Ошибка смены аватара профиля",
+  "toggleTheme": "Сменить Тему"
 }

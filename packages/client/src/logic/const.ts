@@ -1,4 +1,4 @@
-import { SpriteOptions } from './types';
+import { SpriteOptions, SpeedometerOptions } from './types';
 import background from '/src/assets/images/game-background.png';
 import gameOver from '/src/assets/images/game-over-background.png';
 import player from '/src/assets/images/game-player-1.png';
@@ -9,9 +9,10 @@ import npcEnemyHuggy from '/src/assets/images/game-npc-huggy.png';
 import npcEnemyKissy from '/src/assets/images/game-npc-kissy.png';
 import collisionBood from '/src/assets/images/game-collision-blood.png';
 import collisionTeleport from '/src/assets/images/game-collision-teleport.png';
+import speedometer from '/src/assets/images/game-icon-speedometer.png';
 
 export const GAME_SETTINGS = {
-  GAME_TIME_LIMIT: 5 * 60 * 1000,
+  GAME_TIME_LIMIT: 14.8 * 60 * 1000,
   GAME_WIDTH: 1240,
   GAME_HEIGHT: 600,
   ENEMY_WIDTH: 49,
@@ -28,6 +29,20 @@ export const GAME_SETTINGS = {
   MONEY_HEIGHT: 40,
   HEARTH_WIDTH: 40,
   HEARTH_HEIGHT: 40,
+  SPEEDOMETER_SPRITE_WIDTH: 16,
+  SPEEDOMETER_SPRITE_HEIGHT: 16,
+  SPEEDOMETER_SPRITE_PLAYER_X: 72,
+  SPEEDOMETER_SPRITE_PLAYER_Y: 48,
+  SPEEDOMETER_TEXT_PLAYER_X: 8,
+  SPEEDOMETER_TEXT_PLAYER_Y: 60,
+  SPEEDOMETER_SPRITE_HUGGY_X: 72,
+  SPEEDOMETER_SPRITE_HUGGY_Y: 68,
+  SPEEDOMETER_TEXT_HUGGY_X: 8,
+  SPEEDOMETER_TEXT_HUGGY_Y: 80,
+  SPEEDOMETER_SPRITE_KISSY_X: 72,
+  SPEEDOMETER_SPRITE_KISSY_Y: 88,
+  SPEEDOMETER_TEXT_KISSY_X: 8,
+  SPEEDOMETER_TEXT_KISSY_Y: 100,
   BACKGROUND_VERTICAL_LIMIT: 100,
   SKIN_HORIZONTAL_FRAME: 0,
   SKIN_TOTAL_NUMBER_OF_HORIZONTAL_FRAMES: 3,
@@ -41,8 +56,10 @@ export const GAME_SETTINGS = {
   FRIEND_SPEED: 6,
   HIT_POINTS: 3,
   DEFINE_BONUS: 1,
-  PLAYER_COLLISION_SPEED_BONUS: 0.1,
-  NPC_ENEMY_COLLISION_SPEED_BONUS: 0.2,
+  PLAYER_LEVEL_SPEED_BONUS: 2,
+  NPC_ENEMY_LEVEL_SPEED_BONUS: 2,
+  PLAYER_COLLISION_SPEED_BONUS: 0.05,
+  NPC_ENEMY_COLLISION_SPEED_BONUS: 0.025,
   ENEMY_HUGGY_START_X: 500,
   ENEMY_KISSY_START_X: 700,
   ENEMY_START_Y: 200,
@@ -59,7 +76,35 @@ export enum SPRITE_ID {
   MONEY = 'money',
   COLLISION_BLOOD = 'collision_bood',
   COLLISION_TELEPORT = 'collision_teleport',
+  SPEEDOMETER = 'speedometer',
 }
+
+export const speedometerOptions: SpeedometerOptions[] = [
+  {
+    type: 'player',
+    spriteX: GAME_SETTINGS.SPEEDOMETER_SPRITE_PLAYER_X,
+    spriteY: GAME_SETTINGS.SPEEDOMETER_SPRITE_PLAYER_Y,
+    speedometerText: 'Player',
+    textX: GAME_SETTINGS.SPEEDOMETER_TEXT_PLAYER_X,
+    textY: GAME_SETTINGS.SPEEDOMETER_TEXT_PLAYER_Y,
+  },
+  {
+    type: 'enemy_huggy',
+    spriteX: GAME_SETTINGS.SPEEDOMETER_SPRITE_HUGGY_X,
+    spriteY: GAME_SETTINGS.SPEEDOMETER_SPRITE_HUGGY_Y,
+    speedometerText: 'Huggy',
+    textX: GAME_SETTINGS.SPEEDOMETER_TEXT_HUGGY_X,
+    textY: GAME_SETTINGS.SPEEDOMETER_TEXT_HUGGY_Y,
+  },
+  {
+    type: 'enemy_kissy',
+    spriteX: GAME_SETTINGS.SPEEDOMETER_SPRITE_KISSY_X,
+    spriteY: GAME_SETTINGS.SPEEDOMETER_SPRITE_KISSY_Y,
+    speedometerText: 'Kissy',
+    textX: GAME_SETTINGS.SPEEDOMETER_TEXT_KISSY_X,
+    textY: GAME_SETTINGS.SPEEDOMETER_TEXT_KISSY_Y,
+  },
+];
 
 export const spritesOptions: SpriteOptions[] = [
   {
@@ -122,6 +167,12 @@ export const spritesOptions: SpriteOptions[] = [
     width: GAME_SETTINGS.COLLISION_TELEPORT_WIDTH,
     height: GAME_SETTINGS.COLLISION_TELEPORT_HEIGHT,
   },
+  {
+    id: SPRITE_ID.SPEEDOMETER,
+    src: speedometer,
+    width: GAME_SETTINGS.SPEEDOMETER_SPRITE_WIDTH,
+    height: GAME_SETTINGS.SPEEDOMETER_SPRITE_HEIGHT,
+  },
 ];
 
 // временная константа для вывода npc
@@ -157,5 +208,58 @@ export const defaultOptionNpc = [
   {
     id: 8,
     type: 'friend',
+  },
+];
+
+export const scoreLevels = [
+  {
+    id: 1,
+    name: 'level 1',
+    score: 0,
+  },
+  {
+    id: 2,
+    name: 'level 2',
+    score: 5,
+  },
+  {
+    id: 3,
+    name: 'level 3',
+    score: 20,
+  },
+  {
+    id: 4,
+    name: 'level 4',
+    score: 40,
+  },
+  {
+    id: 5,
+    name: 'level 5',
+    score: 100,
+  },
+  {
+    id: 6,
+    name: 'level 6',
+    score: 200,
+  },
+  {
+    id: 7,
+    name: 'level 7',
+    score: 350,
+  },
+  {
+    id: 8,
+    name: 'level 8',
+    score: 500,
+  },
+  {
+    id: 9,
+    name: 'level 9',
+    score: 700,
+  },
+  {
+    id: 10,
+    name: 'level 10',
+    score: 1000,
   },
 ];

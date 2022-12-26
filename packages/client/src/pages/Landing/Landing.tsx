@@ -7,20 +7,20 @@ import { TitleGame } from 'src/components/TitleGame';
 import { fetchOAuthStepOneGetServiceIdFromApiPracticum } from 'src/store/auth/AuthActions';
 import { useCheckOauthCode } from 'src/hooks/useCheckOauthCode';
 import { useBoundAction } from 'src/hooks/useBoundAction';
+import { ThemeTogglerButton } from 'src/components/ThemeTogglerButton';
 
 export const Landing = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
-  // const dispatch = useAppDispatch();
   const navigateLogin = () => navigator('auth');
   const navigateSignup = () => navigator('/auth/reg');
-//первый шаг oAuth - получаем service_id с api practicum
+  //первый шаг oAuth - получаем service_id с api practicum
   const oAuthHandle = useBoundAction(
     fetchOAuthStepOneGetServiceIdFromApiPracticum
   );
   //третий шаг oAuth - отправляем код полученный после редиректа на страницу согласия на авторизацию
   useCheckOauthCode();
-  
+
   return (
     <div className={styles.page}>
       <TitleGame className={styles.title} />
@@ -48,7 +48,8 @@ export const Landing = () => {
           onClick={navigateSignup}>
           {t('signUp')}
         </Button>
-
+      </div>
+      <div className={styles.block_buttons}>
         <Button
           regular
           type="submit"
@@ -57,6 +58,7 @@ export const Landing = () => {
           {t('loginWithYandexID')}
         </Button>
       </div>
+      <ThemeTogglerButton />
     </div>
   );
 };
