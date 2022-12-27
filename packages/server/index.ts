@@ -1,3 +1,4 @@
+import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
@@ -16,11 +17,10 @@ import { apiRouter } from './routing/index.router';
 
 dotenv.config();
 
-import express from 'express';
 const app = express();
 
-const key = fs.readFileSync('keys/key.pem');
-const cert = fs.readFileSync('keys/cert.pem');
+const key = fs.readFileSync(path.resolve(__dirname, 'keys/key.pem'));
+const cert = fs.readFileSync(path.resolve(__dirname, 'keys/cert.pem'));
 const server = https.createServer({ key: key, cert: cert }, app);
 
 app.use(cors());

@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { topicRepos, commentRepos } from '../db';
+import { topicRepos, commentRepos, Reaction, reactionRepos } from '../db';
 
 export class forumService {
   getAllTopics = (_: Request, res: Response) => {
@@ -32,14 +32,19 @@ export class forumService {
 
   getAllComment = (_req: Request, res: Response) => {
     commentRepos
-      .getAll()
+      .findAll({
+        include: [Reaction],
+      })
       .then(comments => res.status(200).json(comments))
       .catch(err => res.status(500).json({ error: ['db error', err] }));
   };
 
   getComment = (_req: Request, res: Response) => {
     commentRepos
-      .get(_req.params.id)
+      .findAll({
+        include: [Reaction],
+        where: { id: _req.params.id },
+      })
       .then(comment => res.status(200).json(comment))
       .catch(err => res.status(500).json({ error: ['db error', err] }));
   };
@@ -55,6 +60,26 @@ export class forumService {
     commentRepos
       .delete(_req.params.id)
       .then(() => res.status(200).json('ok'))
+      .catch(err => res.status(500).json({ error: ['db error', err] }));
+  };
+
+  createReaction = (_req: Request, res: Response) => {
+    reactionRepos
+      .createOrDestroy(
+        {
+          id_author: _req.body.id_author,
+          id_comment: _req.body.id_comment,
+          value: _req.body.value,
+        },
+        _req.body
+      )
+      .then(reaction => res.status(200).json(reaction))
+      .catch(err => res.status(500).json({ error: ['db error', err] }));
+  };
+  getReactions = (_req: Request, res: Response) => {
+    reactionRepos
+      .getAll()
+      .then(reactions => res.status(200).json(reactions))
       .catch(err => res.status(500).json({ error: ['db error', err] }));
   };
 }

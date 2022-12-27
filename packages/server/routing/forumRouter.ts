@@ -16,5 +16,8 @@ export const forumRouter = (apiRouter: Router) => {
   router.post('/comment', service.createComment);
   router.delete('/comment/:id', service.deleteComment);
 
+  router.post('/reaction', service.createReaction);
+  router.get('/reaction', service.getReactions);
+
   apiRouter.use('/forum', router);
 };
