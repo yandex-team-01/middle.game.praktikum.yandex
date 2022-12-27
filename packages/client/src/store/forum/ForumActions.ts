@@ -32,7 +32,6 @@ export const fetchComments = createAsyncThunk(
     async (id_topic: string) => {
         try {
             const res = await getComments(id_topic);
-            console.log(res);
             return res;
         } catch (error) {
             console.error(error);

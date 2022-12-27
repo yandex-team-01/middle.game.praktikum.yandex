@@ -35,7 +35,7 @@ export class forumService {
       .findAll({
         include: [Reaction],
         where: {
-          id_topic: _req.body.id_topic
+          id_topic: _req.query.id_topic
         }
       })
       .then(comments => res.status(200).json(comments))

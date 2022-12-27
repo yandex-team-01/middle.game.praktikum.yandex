@@ -20,3 +20,8 @@ export const selectComments = createSelector(
   (state: RootState) => state.forum,
   forum => forum.comments
 );
+
+export const selectLoading = createSelector(
+  (state: RootState) => state.forum,
+  forum => forum.loading
+);

@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IComment } from 'src/pages/Forum/part/Comment/types';
-// import { IComment } from 'src/pages/Forum/part/Comment/types';
 import { ITopic } from 'src/pages/Forum/part/Topic/types';
 import { fetchComments, fetchCreateComments, fetchCreateTopic, fetchTopics } from './ForumActions';
 import { initialState } from './initialSlice';
@@ -70,7 +69,7 @@ export const forumSlice = createSlice({
     buider.addCase(
       fetchCreateComments.fulfilled,
       (state) => {
-        state.loading = true;
+        state.loading = false;
       }
     );
     buider.addCase(fetchCreateComments.rejected, state => {
