@@ -7,8 +7,17 @@ import { useAppSelector } from 'src/hooks/redux';
 import { ButtonCreateTopic } from 'src/pages/Forum/part/ButtonCreateTopic';
 import { ITopic } from 'src/pages/Forum/part/Topic/types';
 
+import { fetchTopics } from 'src/store/forum/ForumActions';
+import { useBoundAction } from 'src/hooks/useBoundAction';
+import { useMountEffectOneCall } from 'src/hooks/useMountEffectOneCall';
+
 export const TopicList = memo(() => {
   const topics = useAppSelector(selectListTopics);
+  const getTopics = useBoundAction(() => fetchTopics());
+
+  useMountEffectOneCall(() => {
+    getTopics();
+  });
 
   return (
     <ErrorBoundary>
@@ -19,9 +28,8 @@ export const TopicList = memo(() => {
             return <Topic id={topic.id}
               title={topic.title}
               description={topic.description}
-              author={topic.author}
+              id_author={topic.id_author}
               date={topic.date}
-              comments={topic.comments}
               views={topic.views}
               key={index} />;
           })}

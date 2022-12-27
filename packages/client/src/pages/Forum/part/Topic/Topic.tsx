@@ -1,8 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
-import { useBoundAction } from 'src/hooks/useBoundAction';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
+// import { useBoundAction } from 'src/hooks/useBoundAction';
 import { useNavigator } from 'src/hooks/useNavigator';
+import { fetchComments } from 'src/store/forum/ForumActions';
+import { selectComments } from 'src/store/forum/ForumSelectors';
 import { changeActiveTopic } from 'src/store/forum/ForumSlice';
 import { Column } from '../Column/Column';
 import styles from './Topic.module.scss';
@@ -12,18 +15,29 @@ export const Topic = ({
   id,
   title,
   description,
-  author,
+  id_author,
   date,
-  comments,
   views,
 }: ITopic) => {
+  const comments = useAppSelector(selectComments);
+
+  const dispatch = useAppDispatch();
+
+  let countComments = 0;
+  if (comments) countComments = Object.values(comments).length;
+
   const { t } = useTranslation();
   const navigator = useNavigator();
 
-  const handleTopicChange = useBoundAction(() => {
+  const handleTopicChange = () => {
+    dispatch(fetchComments(id));
+    dispatch(changeActiveTopic(id));
     navigator('topic');
-    return changeActiveTopic(id);
-  });
+  };
+  // useBoundAction(() => {
+  //   navigator('topic');
+  //   return [fetchComments(id), changeActiveTopic(id)];
+  // });
 
   return (
     <ErrorBoundary>
@@ -33,13 +47,13 @@ export const Topic = ({
           <div>{description}</div>
           <div className={styles.author}>
             <div>
-              {t('author')}: {author}
+              {t('author')}: {id_author}
             </div>
             <div>{date}</div>
           </div>
         </div>
         <Column title={t('comments')}>
-          <h3>{comments.length}</h3>
+          <h3>{countComments}</h3>
         </Column>
         <Column title={t('views')}>
           <h3>{views}</h3>

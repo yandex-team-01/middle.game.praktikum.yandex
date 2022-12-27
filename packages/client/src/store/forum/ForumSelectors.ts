@@ -15,3 +15,8 @@ export const selectLogin = createSelector(
   [(state: RootState) => state.auth],
   auth => ({ login: auth.user?.login })
 );
+
+export const selectComments = createSelector(
+  (state: RootState) => state.forum,
+  forum => forum.comments
+);

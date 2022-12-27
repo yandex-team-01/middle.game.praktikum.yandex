@@ -1,7 +1,6 @@
-import React, { useCallback } from 'react';
-import { addCommentInTopic } from 'src/store/forum/ForumSlice';
+import React from 'react';
 import { dateFormatting } from 'src/utils/dateFormatting';
-import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
+import { useAppSelector } from 'src/hooks/redux';
 import { Input } from 'src/components/Input';
 import styles from './CommentEditor.module.scss';
 import { Button } from 'src/components/Button';
@@ -16,22 +15,16 @@ import {
 import { IComment } from '../Comment/types';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { useTranslation } from 'react-i18next';
+import { fetchCreateComments } from 'src/store/forum/ForumActions';
+import { useBoundAction } from 'src/hooks/useBoundAction';
+import { v1 } from 'uuid';
 
 export const SendComment = ({ topicId }: Props) => {
   const { t } = useTranslation();
   const { login } = useAppSelector(selectLogin);
-  const dispatch = useAppDispatch();
 
-  const addComment = useCallback(
-    (comment: IComment): void => {
-      dispatch(
-        addCommentInTopic({
-          id: topicId,
-          comment: comment,
-        })
-      );
-    },
-    [dispatch, topicId]
+  const addComment = useBoundAction(
+    (comment: IComment) => fetchCreateComments(comment)
   );
 
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
@@ -40,8 +33,10 @@ export const SendComment = ({ topicId }: Props) => {
       validationSchema: commentSchema(t),
       onSubmit: values => {
         const comment: IComment = {
+          id: v1(),
           text: values.comment,
-          author: login || '',
+          id_topic: topicId,
+          id_author: login || '',
           date: dateFormatting(new Date()),
           likes: 0,
         };

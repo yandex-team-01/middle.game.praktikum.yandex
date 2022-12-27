@@ -3,8 +3,8 @@ import { BlankWindow } from 'src/components/BlankWindow';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { Button } from 'src/components/Button';
 import { Input } from 'src/components/Input';
-import { addNewTopic } from 'src/store/forum/ForumSlice';
-import { useAppSelector } from 'src/hooks/redux';
+// import { addNewTopic } from 'src/store/forum/ForumSlice';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { dateFormatting } from 'src/utils/dateFormatting';
 import { selectUserLogin } from 'src/store/auth/AuthSelectors';
 import { useNavigator } from 'src/hooks/useNavigator';
@@ -13,19 +13,19 @@ import { initialTopicValuesSchema, topicSchema } from './CreateTopicSchema';
 import styles from './CreateTopic.module.scss';
 import { ITopic } from 'src/pages/Forum/part/Topic/types';
 import { v1 } from 'uuid';
-import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { fetchCreateTopic } from 'src/store/forum/ForumActions';
 
 export const BlockCreateTopic = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
 
   const login = useAppSelector(selectUserLogin);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleCreateNewTopic = useCallback(
     (newtopic: ITopic) => {
-      dispatch(addNewTopic(newtopic));
+      dispatch(fetchCreateTopic(newtopic));
       navigator(-1);
     },
     [dispatch, navigator]
@@ -40,9 +40,8 @@ export const BlockCreateTopic = () => {
           id: v1(),
           title: values.name_topic,
           description: values.description_topic,
-          author: login || '',
+          id_author: login || '',
           date: dateFormatting(new Date()),
-          comments: [],
           views: 0,
         };
         handleCreateNewTopic(newtopic);

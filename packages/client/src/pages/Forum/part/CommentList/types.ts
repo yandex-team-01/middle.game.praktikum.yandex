@@ -1,5 +1,5 @@
 import { IComment } from '../Comment/types';
 
 export interface Props {
-  comments: IComment[];
+  comments: Record<string, IComment> | undefined;
 }
