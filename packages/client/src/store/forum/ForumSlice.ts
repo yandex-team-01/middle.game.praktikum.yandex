@@ -63,12 +63,10 @@ export const forumSlice = createSlice({
       state.loading = false;
     });
     // создаем новый комментарий к топику
-    buider.addCase(fetchCreateComments.pending, state => {
-      state.loading = true;
-    });
     buider.addCase(
       fetchCreateComments.fulfilled,
-      (state) => {
+      (state, action) => {
+        if (state.comments && action.payload) state.comments[action.payload.id] = action.payload;
         state.loading = false;
       }
     );
