@@ -11,10 +11,8 @@ export const getTopics = () => {
       method: 'GET',
       headers: {
         ...defaultHeaders,
-        "Content-Type": "text/plain;charset=UTF-8",
+        'Content-Type': 'text/plain;charset=UTF-8',
         'Accept': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        "referrerPolicy": "strict-origin-when-cross-origin",
       },
     },
     `${import.meta.env.VITE_SERVER}`);
@@ -30,7 +28,7 @@ export const createTopics = (topic: ITopic) => {
         'Content-Type': 'application/json;charset=utf-8',
         'Accept': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        "referrerPolicy": "strict-origin-when-cross-origin",
+        'referrerPolicy': 'strict-origin-when-cross-origin',
       },
       body: JSON.stringify(topic)
     },
@@ -45,10 +43,8 @@ export const getComments = (id_topic: string) => {
       method: 'GET',
       headers: {
         ...defaultHeaders,
-        "Content-Type": "text/plain;charset=UTF-8",
+        'Content-Type': 'text/plain;charset=UTF-8',
         'Accept': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        "referrerPolicy": "strict-origin-when-cross-origin",
       },
     },
     `${import.meta.env.VITE_SERVER}`);
@@ -64,7 +60,7 @@ export const createComment = (comment: IComment) => {
         'Content-Type': 'application/json;charset=utf-8',
         'Accept': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        "referrerPolicy": "strict-origin-when-cross-origin",
+        'referrerPolicy': 'strict-origin-when-cross-origin',
       },
       body: JSON.stringify(comment)
     },

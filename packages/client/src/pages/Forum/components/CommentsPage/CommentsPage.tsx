@@ -6,8 +6,10 @@ import { selectActiveTopic, selectComments } from 'src/store/forum/ForumSelector
 import { BlockComments } from 'src/pages/Forum/part/BlockComments';
 
 export const CommentsPage = () => {
-  const topic = useAppSelector(selectActiveTopic);
-  const comments = useAppSelector(selectComments);
+  const { topic, comments } = useAppSelector((state) => ({
+    topic: selectActiveTopic(state),
+    comments: selectComments(state)
+  }));
 
   return (
     <ErrorBoundary>
