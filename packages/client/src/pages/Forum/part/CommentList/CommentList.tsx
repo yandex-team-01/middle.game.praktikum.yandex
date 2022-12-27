@@ -18,13 +18,18 @@ export const CommentList = memo(({ comments }: Props) => {
       <div>
         <div className={styles.title}>{t('comments')}</div>
         <div className={styles.list}>
-          {isLoading ? <Spinner /> :
+          {isLoading ? (
+            <Spinner />
+          ) : (
             <>
-              {comments && Object.values(comments).map((comment: IComment, index: number) => {
-                return <Comment key={index} comment={comment} />;
-              })}
+              {comments &&
+                Object.values(comments).map(
+                  (comment: IComment, index: number) => {
+                    return <Comment key={index} comment={comment} />;
+                  }
+                )}
             </>
-          }
+          )}
         </div>
       </div>
     </ErrorBoundary>

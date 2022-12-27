@@ -24,15 +24,20 @@ export const TopicList = memo(() => {
       <div className={styles.block_topics}>
         <ButtonCreateTopic />
         <div className={styles.list}>
-          {topics && Object.values(topics).map((topic: ITopic, index: number) => {
-            return <Topic id={topic.id}
-              title={topic.title}
-              description={topic.description}
-              id_author={topic.id_author}
-              date={topic.date}
-              views={topic.views}
-              key={index} />;
-          })}
+          {topics &&
+            Object.values(topics).map((topic: ITopic, index: number) => {
+              return (
+                <Topic
+                  id={topic.id}
+                  title={topic.title}
+                  description={topic.description}
+                  id_author={topic.id_author}
+                  date={topic.date}
+                  views={topic.views}
+                  key={index}
+                />
+              );
+            })}
         </div>
       </div>
     </ErrorBoundary>

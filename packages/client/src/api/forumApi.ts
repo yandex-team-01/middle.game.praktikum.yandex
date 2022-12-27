@@ -12,10 +12,11 @@ export const getTopics = () => {
       headers: {
         ...defaultHeaders,
         'Content-Type': 'text/plain;charset=UTF-8',
-        'Accept': 'application/json',
+        Accept: 'application/json',
       },
     },
-    `${import.meta.env.VITE_SERVER}`);
+    `${import.meta.env.VITE_SERVER}`
+  );
 };
 
 export const createTopics = (topic: ITopic) => {
@@ -24,15 +25,16 @@ export const createTopics = (topic: ITopic) => {
     {
       method: 'POST',
       headers: {
-        'mode': 'cors',
+        mode: 'cors',
         'Content-Type': 'application/json;charset=utf-8',
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'referrerPolicy': 'strict-origin-when-cross-origin',
+        referrerPolicy: 'strict-origin-when-cross-origin',
       },
-      body: JSON.stringify(topic)
+      body: JSON.stringify(topic),
     },
-    `${import.meta.env.VITE_SERVER}`);
+    `${import.meta.env.VITE_SERVER}`
+  );
 };
 
 export const getComments = (id_topic: string) => {
@@ -44,10 +46,11 @@ export const getComments = (id_topic: string) => {
       headers: {
         ...defaultHeaders,
         'Content-Type': 'text/plain;charset=UTF-8',
-        'Accept': 'application/json',
+        Accept: 'application/json',
       },
     },
-    `${import.meta.env.VITE_SERVER}`);
+    `${import.meta.env.VITE_SERVER}`
+  );
 };
 
 export const createComment = (comment: IComment) => {
@@ -56,13 +59,14 @@ export const createComment = (comment: IComment) => {
     {
       method: 'POST',
       headers: {
-        'mode': 'cors',
+        mode: 'cors',
         'Content-Type': 'application/json;charset=utf-8',
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'referrerPolicy': 'strict-origin-when-cross-origin',
+        referrerPolicy: 'strict-origin-when-cross-origin',
       },
-      body: JSON.stringify(comment)
+      body: JSON.stringify(comment),
     },
-    `${import.meta.env.VITE_SERVER}`);
+    `${import.meta.env.VITE_SERVER}`
+  );
 };

@@ -23,8 +23,8 @@ export const SendComment = ({ topicId }: Props) => {
   const { t } = useTranslation();
   const { login } = useAppSelector(selectLogin);
 
-  const addComment = useBoundAction(
-    (comment: IComment) => fetchCreateComments(comment)
+  const addComment = useBoundAction((comment: IComment) =>
+    fetchCreateComments(comment)
   );
 
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
