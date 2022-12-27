@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
-// import { useBoundAction } from 'src/hooks/useBoundAction';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { fetchComments } from 'src/store/forum/ForumActions';
 import { selectComments } from 'src/store/forum/ForumSelectors';
@@ -34,10 +33,6 @@ export const Topic = ({
     dispatch(changeActiveTopic(id));
     navigator('topic');
   };
-  // useBoundAction(() => {
-  //   navigator('topic');
-  //   return [fetchComments(id), changeActiveTopic(id)];
-  // });
 
   return (
     <ErrorBoundary>

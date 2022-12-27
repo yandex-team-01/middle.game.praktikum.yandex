@@ -3,7 +3,6 @@ import { BlankWindow } from 'src/components/BlankWindow';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { Button } from 'src/components/Button';
 import { Input } from 'src/components/Input';
-// import { addNewTopic } from 'src/store/forum/ForumSlice';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { dateFormatting } from 'src/utils/dateFormatting';
 import { selectUserLogin } from 'src/store/auth/AuthSelectors';
