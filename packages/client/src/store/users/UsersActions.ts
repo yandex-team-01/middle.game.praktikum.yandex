@@ -7,8 +7,9 @@ import { updateUser } from '../auth/AuthSlice';
 import { IUser } from 'src/modules/IUser';
 import { ChangePasswordData } from 'src/modules/IUsers';
 import { defaultHeaders } from 'src/constants/http';
+import { i18n } from 'i18next';
 
-export const fetchChangeUser = createAsyncThunk(
+export const fetchChangeUser = createAsyncThunk<IUser, IUser, { extra: i18n }>(
   'auth/fetchChangeUser',
   async (data: IUser, thunkApi) => {
     try {
@@ -21,33 +22,36 @@ export const fetchChangeUser = createAsyncThunk(
       thunkApi.dispatch(updateUser(res));
       return res;
     } catch (error) {
-      thunkApi.dispatch(addError('Ошибка изменения профиля'));
-      thunkApi.rejectWithValue('Ошибка изменения профиля');
+      const errorMessageText = thunkApi.extra.t('ProfileModificationError');
+      thunkApi.dispatch(addError(errorMessageText));
+      thunkApi.rejectWithValue(errorMessageText);
       throw error;
     }
   }
 );
 
-export const fetchChangePassword = createAsyncThunk(
-  'auth/fetchChangePassword',
-  async (data: ChangePasswordData, thunkApi) => {
-    try {
-      const res = await fetchApi('/user/password', {
-        method: 'PUT',
-        headers: defaultHeaders,
-        credentials: 'include',
-        body: JSON.stringify(data),
-      });
-      return res;
-    } catch (error) {
-      thunkApi.dispatch(addError('Ошибка смены пароля'));
-      thunkApi.rejectWithValue('Ошибка смены пароля');
-      throw error;
-    }
+export const fetchChangePassword = createAsyncThunk<
+  string,
+  ChangePasswordData,
+  { extra: i18n }
+>('auth/fetchChangePassword', async (data: ChangePasswordData, thunkApi) => {
+  try {
+    const res: string = await fetchApi('/user/password', {
+      method: 'PUT',
+      headers: defaultHeaders,
+      credentials: 'include',
+      body: JSON.stringify(data),
+    });
+    return res;
+  } catch (error) {
+    const errorMessageText = thunkApi.extra.t('PasswordChangeError');
+    thunkApi.dispatch(addError(errorMessageText));
+    thunkApi.rejectWithValue(errorMessageText);
+    throw error;
   }
-);
+});
 
-export const fetchChangeAvatar = createAsyncThunk(
+export const fetchChangeAvatar = createAsyncThunk<IUser, File, { extra: i18n }>(
   'auth/fetchChangeAvatar',
   async (data: File, thunkApi) => {
     try {
@@ -61,8 +65,9 @@ export const fetchChangeAvatar = createAsyncThunk(
       thunkApi.dispatch(updateUser(res));
       return res;
     } catch (error) {
-      thunkApi.dispatch(addError('Ошибка смены аватара профиля'));
-      thunkApi.rejectWithValue('Ошибка смены аватара профиля');
+      const errorMessageText = thunkApi.extra.t('ErrorChangingProfileAvatar');
+      thunkApi.dispatch(addError(errorMessageText));
+      thunkApi.rejectWithValue(errorMessageText);
       throw error;
     }
   }

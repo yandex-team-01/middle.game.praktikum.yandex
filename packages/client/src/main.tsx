@@ -17,7 +17,7 @@ import { getEnvSsrAndProd } from './utils/getEnvSsrAndProd';
 
 const defineStore = window.__PRELOADED_STATE__ as PreloadedState;
 delete window.__PRELOADED_STATE__;
-const store = setupStore(defineStore);
+const store = setupStore(defineStore, i18next);
 
 const env = getEnvSsrAndProd();
 

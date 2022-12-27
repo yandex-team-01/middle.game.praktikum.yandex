@@ -65,5 +65,10 @@
   "errorGeolocation": "Геолокация не поддерживается вашим браузером",
   "Name": "Название",
   "Score": "Счет",
+  "LeaderboardRequestError": "Ошибка запроса лидерборда",
+  "ErrorRecordingTheResultOfTheGame": "Ошибка записи результата игры",
+  "ProfileModificationError": "Ошибка изменения профиля",
+  "PasswordChangeError": "Ошибка смены пароля",
+  "ErrorChangingProfileAvatar": "Ошибка смены аватара профиля",
   "toggleTheme": "Сменить Тему"
 }
