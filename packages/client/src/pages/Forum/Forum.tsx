@@ -11,7 +11,6 @@ import { useNavigator } from 'src/hooks/useNavigator';
 export const Forum = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
-
   const handlerBack = () => navigator(-1);
   const handlerLoadGame = () => navigator('/loadinggame');
 

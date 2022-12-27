@@ -12,7 +12,7 @@ export const forumRouter = (apiRouter: Router) => {
   router.delete('/topic/:id', service.deleteTopic);
 
   router.get('/comment/:id', service.getComment);
-  router.get('/comment', service.getAllComment);
+  router.get('/comment', service.getAllCommentsForTopic);
   router.post('/comment', service.createComment);
   router.delete('/comment/:id', service.deleteComment);
 

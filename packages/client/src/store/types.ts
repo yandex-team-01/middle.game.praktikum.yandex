@@ -1,3 +1,4 @@
+import { IComment } from 'src/pages/Forum/part/Comment/types';
 import { ITopic } from 'src/pages/Forum/part/Topic/types';
 import { IUser } from '../modules/IUser';
 
@@ -22,7 +23,9 @@ export interface ErrorState {
 
 export interface ForumState {
   activeTopic: ITopic | undefined;
-  topics: Record<string, ITopic>;
+  topics: Record<string, ITopic> | undefined;
+  comments: Record<string, IComment> | undefined;
+  loading: boolean;
 }
 
 export interface PreloadedState {

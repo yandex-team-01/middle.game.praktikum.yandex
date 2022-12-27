@@ -27,8 +27,11 @@ export class Repository<T extends Model<T>> {
     return this.model.update(value, { where: { id } });
   }
 
-  public async getAll(): Promise<T[]> {
-    return this.model.findAll();
+  public async getAll(
+    options?: FindOptions<Attributes<T>> | undefined
+  ): Promise<T[]> {
+    if (options) return this.model.findAll(options);
+    else return this.model.findAll();
   }
   public async findAll(options: FindOptions<Attributes<T>>): Promise<T[]> {
     return this.model.findAll(options);

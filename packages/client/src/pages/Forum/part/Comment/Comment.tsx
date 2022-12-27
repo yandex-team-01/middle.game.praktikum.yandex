@@ -15,7 +15,7 @@ export const Comment = (props: Props) => {
   return (
     <ErrorBoundary>
       <BlankWindow className={styles.card}>
-        <AuthorBlock avatar={avatar} author={comment.author} />
+        <AuthorBlock avatar={avatar} author={comment.id_author} />
         <CommentAbstract text={comment.text} date={comment.date} />
         <Column title={comment.likes}>
           <AiFillStar />

@@ -30,10 +30,13 @@ export class forumService {
       .catch(err => res.status(500).json({ error: ['db error', err] }));
   };
 
-  getAllComment = (_req: Request, res: Response) => {
+  getAllCommentsForTopic = (_req: Request, res: Response) => {
     commentRepos
       .findAll({
         include: [Reaction],
+        where: {
+          id_topic: _req.query.id_topic,
+        },
       })
       .then(comments => res.status(200).json(comments))
       .catch(err => res.status(500).json({ error: ['db error', err] }));
