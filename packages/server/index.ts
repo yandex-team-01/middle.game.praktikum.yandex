@@ -39,7 +39,6 @@ async function init() {
   app.use(cookieParser);
   app.use(auth);
   app.use('/api', apiRouter);
-  app.use(router);
 
   i18next.use(Backend).init(
     {
