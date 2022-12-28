@@ -12,7 +12,7 @@ import {
   initialCommentValuesSchema,
   commentSchema,
 } from './CommentEditorSchema';
-import { IComment } from '../Comment/types';
+import { ICommentCreate } from '../Comment/types';
 import { BlankWindow } from 'src/components/BlankWindow';
 import { useTranslation } from 'react-i18next';
 import { fetchCreateComments } from 'src/store/forum/ForumActions';
@@ -23,7 +23,7 @@ export const SendComment = ({ topicId }: Props) => {
   const { t } = useTranslation();
   const { login } = useAppSelector(selectLogin);
 
-  const addComment = useBoundAction((comment: IComment) =>
+  const addComment = useBoundAction((comment: ICommentCreate) =>
     fetchCreateComments(comment)
   );
 
@@ -32,7 +32,7 @@ export const SendComment = ({ topicId }: Props) => {
       initialValues: initialCommentValuesSchema,
       validationSchema: commentSchema(t),
       onSubmit: values => {
-        const comment: IComment = {
+        const comment: ICommentCreate = {
           id: v1(),
           text: values.comment,
           id_topic: topicId,
