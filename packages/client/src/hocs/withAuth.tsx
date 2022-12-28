@@ -6,6 +6,7 @@ import { useBoundAction } from 'src/hooks/useBoundAction';
 export const withAuth = (Component: ComponentType) => {
   return () => {
     const handleFetchAuth = useBoundAction(fetchAuth);
+
     useMountEffect(() => {
       handleFetchAuth();
     });

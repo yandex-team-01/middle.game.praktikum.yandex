@@ -6,6 +6,7 @@ import {
   fetchCreateComments,
   fetchCreateTopic,
   fetchTopics,
+  fetchCreateReaction,
 } from './ForumActions';
 import { initialState } from './initialSlice';
 
@@ -43,8 +44,8 @@ export const forumSlice = createSlice({
     buider.addCase(fetchComments.fulfilled, (state, action) => {
       if (action.payload)
         state.comments = action.payload.reduce<Record<string, IComment>>(
-          (acc, t) => {
-            acc[t.id] = t;
+          (acc, comment) => {
+            acc[comment.id] = comment;
             return acc;
           },
           {}
@@ -71,6 +72,16 @@ export const forumSlice = createSlice({
       state.loading = false;
     });
     buider.addCase(fetchCreateComments.rejected, state => {
+      state.loading = false;
+    });
+    //добавить реакцию
+    buider.addCase(fetchCreateReaction.pending, state => {
+      state.loading = true;
+    });
+    buider.addCase(fetchCreateReaction.fulfilled, state => {
+      state.loading = false;
+    });
+    buider.addCase(fetchCreateReaction.rejected, state => {
       state.loading = false;
     });
   },
