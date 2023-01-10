@@ -23,6 +23,7 @@ export const sequelize = new Sequelize(sequelizeOptions);
 export const Topic = sequelize.define('Topic', topicModel, {});
 export const Comment = sequelize.define('Comment', commentModel, {});
 export const Reaction = sequelize.define('Reaction', reactionModel, {});
+export const User = sequelize.define('User', topicUser, {});
 
 Comment.hasMany(Reaction, { foreignKey: 'id_comment' });
 Reaction.belongsTo(Comment, { foreignKey: 'id' });
@@ -30,7 +31,6 @@ Reaction.belongsTo(Comment, { foreignKey: 'id' });
 export const topicRepos = new Repository(Topic as ModelCtor);
 export const commentRepos = new Repository(Comment as ModelCtor);
 export const reactionRepos = new Repository(Reaction as ModelCtor);
-export const User = sequelize.define('User', topicUser, {});
 export const userRepos = new Repository(User as ModelCtor);
 
 export async function dbConnect() {

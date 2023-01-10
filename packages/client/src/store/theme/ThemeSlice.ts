@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { themes } from 'src/utils/theme/ThemeContext';
 import { initialState } from './initialSlice';
 import { changeTheme } from './themeActions';
-import { cookies } from 'src/utils/cookies';
+import { getCookies } from 'src/utils/cookies';
 import { COOKIE_THEME_NAME } from 'src/constants/themes';
 
 export const themeSlice = createSlice({
@@ -16,7 +16,7 @@ export const themeSlice = createSlice({
       const themeValueForCookie =
         payloadTheme === themes.light ? themes.light : themes.dark;
 
-      cookies.set(COOKIE_THEME_NAME, JSON.stringify(themeValueForCookie));
+      getCookies().set(COOKIE_THEME_NAME, JSON.stringify(themeValueForCookie));
     });
   },
 });

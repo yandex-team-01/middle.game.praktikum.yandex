@@ -6,7 +6,7 @@ import { IUser } from 'src/modules/IUser';
 import { defaultHeaders } from 'src/constants/http';
 import { getOrCreateUser } from 'src/api/userApi';
 import { COOKIE_THEME_NAME } from 'src/constants/themes';
-import { cookies } from 'src/utils/cookies';
+import { getCookies } from 'src/utils/cookies';
 import { themes } from 'src/utils/theme/ThemeContext';
 import { i18n } from 'i18next';
 import { SignUpUserId } from './types';
@@ -61,7 +61,7 @@ export const fetchSignup = createAppAsyncThunk(
       });
       thunkApi.dispatch(fetchAuth());
 
-      const themeValueFromCookie = cookies.get(COOKIE_THEME_NAME);
+      const themeValueFromCookie = getCookies().get(COOKIE_THEME_NAME);
       const currentTheme = themeValueFromCookie
         ? themeValueFromCookie
         : themes.light;

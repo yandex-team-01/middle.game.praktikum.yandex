@@ -3,5 +3,4 @@ export const defaultHeaders = {
   referrerPolicy: 'strict-origin-when-cross-origin',
   'content-type': 'application/json',
   mode: 'cors',
-  'Access-Control-Allow-Origin': '*',
 };
