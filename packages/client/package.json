@@ -31,6 +31,7 @@
     "react-router-dom": "6.4.2",
     "rimraf": "3.0.2",
     "sass": "1.55.0",
+    "universal-cookie": "4.0.4",
     "uuid": "9.0.0",
     "yup": "0.32.11"
   },

@@ -20,11 +20,23 @@ export class Repository<T extends Model<T>> {
     return this.model.create(value);
   }
 
+  public async findOrCreate(
+    id: WhereAttributeHashValue<Attributes<T>['id']> | undefined,
+    values: MakeNullishOptional<T['_creationAttributes']>
+  ) {
+    return this.model.findOrCreate({
+      where: { id },
+      defaults: {
+        ...values,
+      },
+    });
+  }
+
   public async update(
     id: WhereAttributeHashValue<Attributes<T>['id']> | undefined,
-    value: MakeNullishOptional<T['_creationAttributes']>
+    values: MakeNullishOptional<T['_creationAttributes']>
   ): Promise<[affectedCount: number]> {
-    return this.model.update(value, { where: { id } });
+    return this.model.update(values, { where: { id } });
   }
 
   public async getAll(

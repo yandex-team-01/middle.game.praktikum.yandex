@@ -19,6 +19,10 @@ export const renderHtml = (req: Request, res: Response) => {
 
   const { html, httpContext } = render(req.url, store, req.i18n);
 
+  if (res.locals.theme) {
+    store.themes.activeTheme = res.locals.theme;
+  }
+
   if (httpContext.redirectLocation) {
     res.redirect(httpContext.redirectLocation);
     return;

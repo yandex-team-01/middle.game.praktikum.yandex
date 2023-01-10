@@ -17,6 +17,11 @@ export const selectUserLogin = createSelector(
   auth => auth.user?.login
 );
 
+export const selectUserId = createSelector(
+  (state: RootState) => state.auth,
+  auth => auth.user?.id
+);
+
 export const selectLoading = createSelector(
   (state: RootState) => state.auth,
   auth => auth.loading

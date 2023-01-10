@@ -9,4 +9,9 @@ export const defaultStore = {
     user: null,
     loading: false,
   },
+  themes: {
+    activeTheme: {
+      background: 'rgb(55, 68, 110)',
+    },
+  },
 };
