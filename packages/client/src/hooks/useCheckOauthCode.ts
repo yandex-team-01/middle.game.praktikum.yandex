@@ -1,4 +1,3 @@
-import { env } from 'src/constants/Env';
 import { fetchOAuthStepThreeGetApproveFromApiPracticum } from 'src/store/auth/AuthActions';
 import { useBoundAction } from './useBoundAction';
 import { useMountEffectOneCall } from './useMountEffectOneCall';
@@ -15,7 +14,7 @@ export const useCheckOauthCode = () => {
     if (code) {
       handler(code);
       urlParams.delete('code');
-      window.history.replaceState({}, '', env.REDIRECT_URI);
+      window.history.replaceState({}, '', import.meta.env.VITE_REDIRECT_URI);
     }
   });
 };

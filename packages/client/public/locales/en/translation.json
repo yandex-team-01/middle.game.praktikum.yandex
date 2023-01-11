@@ -64,5 +64,10 @@
   "errorGetLocation": "Couldn't get location information",
   "errorGeolocation": "Geolocation is not supported by your browser",
   "Name": "Name",
-  "Score": "Score"
+  "Score": "Score",
+  "Leaderboard request error": "Leaderboard request error",
+  "Error recording the result of the game": "Error recording the result of the game",
+  "ProfileModificationError": "Profile modification error",
+  "PasswordChangeError": "Password change error",
+  "toggleTheme": "Toggle Theme"
 }

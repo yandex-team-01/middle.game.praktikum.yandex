@@ -6,7 +6,7 @@ import { SendComment } from '../CommentEditor';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { CommentList } from '../CommentList';
 
-export const BlockComments = ({ topic }: Props) => {
+export const BlockComments = ({ topic, comments }: Props) => {
   return (
     <ErrorBoundary>
       <div className={styles.block_topics}>
@@ -14,12 +14,11 @@ export const BlockComments = ({ topic }: Props) => {
           id={topic.id}
           title={topic.title}
           description={topic.description}
-          author={topic.author}
+          id_author={topic.id_author}
           date={topic.date}
-          comments={topic.comments}
           views={topic.views}
         />
-        <CommentList comments={topic.comments} />
+        <CommentList comments={comments} />
         <SendComment topicId={topic.id} />
       </div>
     </ErrorBoundary>

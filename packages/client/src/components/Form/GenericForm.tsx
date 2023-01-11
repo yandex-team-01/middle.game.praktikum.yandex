@@ -40,7 +40,7 @@ export const GenericForm = ({
                   className="regular"
                   key={index}
                   showError={Boolean(errors[item]) && Boolean(touched[item])}
-                  error={errors[item] as string}
+                  error={String(errors[item])}
                 />
               ))}
               {children}

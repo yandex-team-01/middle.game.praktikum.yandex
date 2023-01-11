@@ -3,27 +3,35 @@ import { SignupData, SigninData, oAuthServiceIdData } from 'src/modules/IAuth';
 import { fetchApi } from '../utils';
 import { addError } from '../error/ErrorSlice';
 import { IUser } from 'src/modules/IUser';
-import { env } from 'src/constants/Env';
 import { defaultHeaders } from 'src/constants/http';
+import { getOrCreateUser } from 'src/api/userApi';
+import { COOKIE_THEME_NAME } from 'src/constants/themes';
+import { getCookies } from 'src/utils/cookies';
+import { themes } from 'src/utils/theme/ThemeContext';
+import { i18n } from 'i18next';
+import { SignUpUserId } from './types';
+import { createAppAsyncThunk } from 'src/utils/thunk';
 
-export const fetchAuth = createAsyncThunk(
+export const fetchAuth = createAsyncThunk<IUser, undefined, { extra: i18n }>(
   'auth/fetchAuth',
   async (_, thunkApi) => {
     try {
-      return await fetchApi<IUser>('/auth/user', {
+      const res = await fetchApi<IUser>('/auth/user', {
         credentials: 'include',
       });
+      return res;
     } catch (error) {
-      return thunkApi.rejectWithValue('Login error');
+      const errorMessageText = thunkApi.extra.t('LoginError');
+      return thunkApi.rejectWithValue(errorMessageText);
     }
   }
 );
 
-export const fetchSignin = createAsyncThunk(
+export const fetchSignin = createAppAsyncThunk(
   'auth/fetchSignin',
   async (data: SigninData, thunkApi) => {
     try {
-      const res = await fetchApi('/auth/signin', {
+      const res: string = await fetchApi('/auth/signin', {
         method: 'POST',
         headers: defaultHeaders,
         credentials: 'include',
@@ -34,17 +42,18 @@ export const fetchSignin = createAsyncThunk(
 
       return res;
     } catch (error) {
-      thunkApi.dispatch(addError('Login error'));
-      return thunkApi.rejectWithValue('Login error');
+      const errorMessageText = thunkApi.extra.t('LoginError');
+      thunkApi.dispatch(addError(errorMessageText));
+      return thunkApi.rejectWithValue(errorMessageText);
     }
   }
 );
 
-export const fetchSignup = createAsyncThunk(
+export const fetchSignup = createAppAsyncThunk(
   'auth/fetchSignup',
   async (data: SignupData, thunkApi) => {
     try {
-      const res = await fetchApi('/auth/signup', {
+      const res: SignUpUserId = await fetchApi('/auth/signup', {
         method: 'POST',
         headers: defaultHeaders,
         credentials: 'include',
@@ -52,19 +61,37 @@ export const fetchSignup = createAsyncThunk(
       });
       thunkApi.dispatch(fetchAuth());
 
+      const themeValueFromCookie = getCookies().get(COOKIE_THEME_NAME);
+      const currentTheme = themeValueFromCookie
+        ? themeValueFromCookie
+        : themes.light;
+
+      const { password, ...rawDataForDb } = data; // eslint-disable-line @typescript-eslint/no-unused-vars
+
+      const dataForDB = {
+        ...rawDataForDb,
+        id: res.id,
+        display_name: null,
+        avatar: null,
+        theme: JSON.stringify(currentTheme),
+      };
+
+      await getOrCreateUser(res.id, dataForDB);
+
       return res;
     } catch (error) {
-      thunkApi.dispatch(addError('Registration error'));
-      return thunkApi.rejectWithValue('Registration error');
+      const errorMessageText = thunkApi.extra.t('RegistrationError');
+      thunkApi.dispatch(addError(errorMessageText));
+      return thunkApi.rejectWithValue(errorMessageText);
     }
   }
 );
 
-export const fetchLogout = createAsyncThunk(
+export const fetchLogout = createAsyncThunk<string, undefined, { extra: i18n }>(
   'auth/fetchLogout',
   async (_, thunkApi) => {
     try {
-      const res = await fetchApi('/auth/logout', {
+      const res: string = await fetchApi('/auth/logout', {
         method: 'POST',
         credentials: 'include',
         headers: defaultHeaders,
@@ -72,16 +99,16 @@ export const fetchLogout = createAsyncThunk(
 
       return res;
     } catch (error) {
-      thunkApi.dispatch(addError('Logout error'));
-      return thunkApi.rejectWithValue('Logout error');
+      const errorMessageText = thunkApi.extra.t('LogoutError');
+      thunkApi.dispatch(addError(errorMessageText));
+      return thunkApi.rejectWithValue(errorMessageText);
     }
   }
 );
 
 //первый шаг oAuth - получаем service_id с api practicum
-export const fetchOAuthStepOneGetServiceIdFromApiPracticum = createAsyncThunk(
-  'oauth/fetchServiceIdFromYaApi',
-  async (_, thunkApi) => {
+export const fetchOAuthStepOneGetServiceIdFromApiPracticum =
+  createAppAsyncThunk('oauth/fetchServiceIdFromYaApi', async (_, thunkApi) => {
     try {
       const res: oAuthServiceIdData = await fetchApi(
         `/oauth/yandex/service-id`,
@@ -91,40 +118,41 @@ export const fetchOAuthStepOneGetServiceIdFromApiPracticum = createAsyncThunk(
         }
       );
       oAuthStepTwoRedirectToOAuthProvider(res.service_id);
+      return res;
     } catch (error) {
-      thunkApi.dispatch(addError('Login error'));
+      const errorMessageText = thunkApi.extra.t('LoginError');
+      thunkApi.dispatch(addError(errorMessageText));
       throw error;
     }
-  }
-);
+  });
 
 //второй шаг oAuth - редирект на страницу получения согласия
 const oAuthStepTwoRedirectToOAuthProvider = (service_id: string) => {
-  const url = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${service_id}&redirect_uri=${env.REDIRECT_URI}`;
+  const url = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${service_id}&redirect_uri=${
+    import.meta.env.VITE_REDIRECT_URI
+  }`;
   window.location.href = url;
 };
 
 //третий шаг oAuth - получаем подтвержедние от api practicum взамен на код полученный на странице согласия
-export const fetchOAuthStepThreeGetApproveFromApiPracticum = createAsyncThunk(
-  'oauth',
-  async (code: string, thunkApi) => {
+export const fetchOAuthStepThreeGetApproveFromApiPracticum =
+  createAppAsyncThunk('oauth', async (code: string, thunkApi) => {
     try {
       const data = {
         code: code,
-        redirect_uri: env.REDIRECT_URI,
+        redirect_uri: import.meta.env.VITE_REDIRECT_URI,
       };
-      const res = await fetchApi('/oauth/yandex', {
+      const res: string = await fetchApi('/oauth/yandex', {
         method: 'POST',
         headers: defaultHeaders,
         body: JSON.stringify(data),
         credentials: 'include',
       });
       thunkApi.dispatch(fetchAuth());
-
       return res;
     } catch (error) {
-      thunkApi.dispatch(addError('Login error'));
+      const errorMessageText = thunkApi.extra.t('LoginError');
+      thunkApi.dispatch(addError(errorMessageText));
       throw error;
     }
-  }
-);
+  });

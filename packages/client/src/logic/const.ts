@@ -1,4 +1,4 @@
-import { SpriteOptions } from './types';
+import { SpriteOptions, SpeedometerOptions } from './types';
 import background from '/src/assets/images/game-background.png';
 import gameOver from '/src/assets/images/game-over-background.png';
 import player from '/src/assets/images/game-player-1.png';
@@ -9,27 +9,61 @@ import npcEnemyHuggy from '/src/assets/images/game-npc-huggy.png';
 import npcEnemyKissy from '/src/assets/images/game-npc-kissy.png';
 import collisionBood from '/src/assets/images/game-collision-blood.png';
 import collisionTeleport from '/src/assets/images/game-collision-teleport.png';
+import speedometer from '/src/assets/images/game-icon-speedometer.png';
 
-export enum GAME_SETTINGS {
-  BACKGROUND_VERTICAL_LIMIT = 100,
-  SKIN_HORIZONTAL_FRAME = 0,
-  SKIN_TOTAL_NUMBER_OF_HORIZONTAL_FRAMES = 3,
-  SKIN_FIRST_HORIZONTAL_FRAME = 0,
-  SKIN_VERTICAL_FRAME = 0,
-  INACCURACY_OF_CHARACTER_SPRITE = 10,
-  PLAYER_ONE_X = 100,
-  PLAYER_ONE_Y = 400,
-  PLAYER_SPEED = 7,
-  ENEMY_SPEED = 8,
-  FRIEND_SPEED = 6,
-  HIT_POINTS = 3,
-  DEFINE_BONUS = 1,
-  PLAYER_COLLISION_SPEED_BONUS = 0.1,
-  NPC_ENEMY_COLLISION_SPEED_BONUS = 0.2,
-  ENEMY_HUGGY_START_X = 500,
-  ENEMY_KISSY_START_X = 700,
-  ENEMY_START_Y = 200,
-}
+export const GAME_SETTINGS = {
+  GAME_TIME_LIMIT: 14.8 * 60 * 1000,
+  GAME_WIDTH: 1240,
+  GAME_HEIGHT: 600,
+  ENEMY_WIDTH: 49,
+  ENEMY_HEIGHT: 101,
+  FRIEND_WIDTH: 45,
+  FRIEND_HEIGHT: 90,
+  PLAYER_WIDTH: 54,
+  PLAYER_HEIGHT: 84,
+  COLLISION_BLOOD_WIDTH: 49,
+  COLLISION_BLOOD_HEIGHT: 33,
+  COLLISION_TELEPORT_WIDTH: 70.75,
+  COLLISION_TELEPORT_HEIGHT: 90,
+  MONEY_WIDTH: 40,
+  MONEY_HEIGHT: 40,
+  HEARTH_WIDTH: 40,
+  HEARTH_HEIGHT: 40,
+  SPEEDOMETER_SPRITE_WIDTH: 16,
+  SPEEDOMETER_SPRITE_HEIGHT: 16,
+  SPEEDOMETER_SPRITE_PLAYER_X: 72,
+  SPEEDOMETER_SPRITE_PLAYER_Y: 48,
+  SPEEDOMETER_TEXT_PLAYER_X: 8,
+  SPEEDOMETER_TEXT_PLAYER_Y: 60,
+  SPEEDOMETER_SPRITE_HUGGY_X: 72,
+  SPEEDOMETER_SPRITE_HUGGY_Y: 68,
+  SPEEDOMETER_TEXT_HUGGY_X: 8,
+  SPEEDOMETER_TEXT_HUGGY_Y: 80,
+  SPEEDOMETER_SPRITE_KISSY_X: 72,
+  SPEEDOMETER_SPRITE_KISSY_Y: 88,
+  SPEEDOMETER_TEXT_KISSY_X: 8,
+  SPEEDOMETER_TEXT_KISSY_Y: 100,
+  BACKGROUND_VERTICAL_LIMIT: 100,
+  SKIN_HORIZONTAL_FRAME: 0,
+  SKIN_TOTAL_NUMBER_OF_HORIZONTAL_FRAMES: 3,
+  SKIN_FIRST_HORIZONTAL_FRAME: 0,
+  SKIN_VERTICAL_FRAME: 0,
+  INACCURACY_OF_CHARACTER_SPRITE: 10,
+  PLAYER_ONE_X: 100,
+  PLAYER_ONE_Y: 400,
+  PLAYER_SPEED: 7,
+  ENEMY_SPEED: 8,
+  FRIEND_SPEED: 6,
+  HIT_POINTS: 3,
+  DEFINE_BONUS: 1,
+  PLAYER_LEVEL_SPEED_BONUS: 2,
+  NPC_ENEMY_LEVEL_SPEED_BONUS: 2,
+  PLAYER_COLLISION_SPEED_BONUS: 0.05,
+  NPC_ENEMY_COLLISION_SPEED_BONUS: 0.025,
+  ENEMY_HUGGY_START_X: 500,
+  ENEMY_KISSY_START_X: 700,
+  ENEMY_START_Y: 200,
+} as const;
 
 export enum SPRITE_ID {
   MAIN_BACK = 'back',
@@ -42,23 +76,102 @@ export enum SPRITE_ID {
   MONEY = 'money',
   COLLISION_BLOOD = 'collision_bood',
   COLLISION_TELEPORT = 'collision_teleport',
+  SPEEDOMETER = 'speedometer',
 }
 
+export const speedometerOptions: SpeedometerOptions[] = [
+  {
+    type: 'player',
+    spriteX: GAME_SETTINGS.SPEEDOMETER_SPRITE_PLAYER_X,
+    spriteY: GAME_SETTINGS.SPEEDOMETER_SPRITE_PLAYER_Y,
+    speedometerText: 'Player',
+    textX: GAME_SETTINGS.SPEEDOMETER_TEXT_PLAYER_X,
+    textY: GAME_SETTINGS.SPEEDOMETER_TEXT_PLAYER_Y,
+  },
+  {
+    type: 'enemy_huggy',
+    spriteX: GAME_SETTINGS.SPEEDOMETER_SPRITE_HUGGY_X,
+    spriteY: GAME_SETTINGS.SPEEDOMETER_SPRITE_HUGGY_Y,
+    speedometerText: 'Huggy',
+    textX: GAME_SETTINGS.SPEEDOMETER_TEXT_HUGGY_X,
+    textY: GAME_SETTINGS.SPEEDOMETER_TEXT_HUGGY_Y,
+  },
+  {
+    type: 'enemy_kissy',
+    spriteX: GAME_SETTINGS.SPEEDOMETER_SPRITE_KISSY_X,
+    spriteY: GAME_SETTINGS.SPEEDOMETER_SPRITE_KISSY_Y,
+    speedometerText: 'Kissy',
+    textX: GAME_SETTINGS.SPEEDOMETER_TEXT_KISSY_X,
+    textY: GAME_SETTINGS.SPEEDOMETER_TEXT_KISSY_Y,
+  },
+];
+
 export const spritesOptions: SpriteOptions[] = [
-  { id: SPRITE_ID.MAIN_BACK, src: background, width: 100, height: 100 },
-  { id: SPRITE_ID.GAME_OVER_BACK, src: gameOver, width: 100, height: 100 },
-  { id: SPRITE_ID.NPC_FRIEND, src: npcFriend, width: 45, height: 90 },
-  { id: SPRITE_ID.PLAYER, src: player, width: 54, height: 84 },
-  { id: SPRITE_ID.NPC_ENEMY_HUGGY, src: npcEnemyHuggy, width: 49, height: 101 },
-  { id: SPRITE_ID.NPC_ENEMY_KISSY, src: npcEnemyKissy, width: 49, height: 101 },
-  { id: SPRITE_ID.HEART, src: heart, width: 40, height: 40 },
-  { id: SPRITE_ID.MONEY, src: money, width: 40, height: 40 },
-  { id: SPRITE_ID.COLLISION_BLOOD, src: collisionBood, width: 49, height: 33 },
+  {
+    id: SPRITE_ID.MAIN_BACK,
+    src: background,
+    width: GAME_SETTINGS.GAME_WIDTH,
+    height: GAME_SETTINGS.GAME_HEIGHT,
+  },
+  {
+    id: SPRITE_ID.GAME_OVER_BACK,
+    src: gameOver,
+    width: GAME_SETTINGS.GAME_WIDTH,
+    height: GAME_SETTINGS.GAME_HEIGHT,
+  },
+  {
+    id: SPRITE_ID.NPC_FRIEND,
+    src: npcFriend,
+    width: GAME_SETTINGS.FRIEND_WIDTH,
+    height: GAME_SETTINGS.FRIEND_HEIGHT,
+  },
+  {
+    id: SPRITE_ID.PLAYER,
+    src: player,
+    width: GAME_SETTINGS.PLAYER_WIDTH,
+    height: GAME_SETTINGS.PLAYER_HEIGHT,
+  },
+  {
+    id: SPRITE_ID.NPC_ENEMY_HUGGY,
+    src: npcEnemyHuggy,
+    width: GAME_SETTINGS.ENEMY_WIDTH,
+    height: GAME_SETTINGS.ENEMY_HEIGHT,
+  },
+  {
+    id: SPRITE_ID.NPC_ENEMY_KISSY,
+    src: npcEnemyKissy,
+    width: GAME_SETTINGS.ENEMY_WIDTH,
+    height: GAME_SETTINGS.ENEMY_HEIGHT,
+  },
+  {
+    id: SPRITE_ID.HEART,
+    src: heart,
+    width: GAME_SETTINGS.HEARTH_WIDTH,
+    height: GAME_SETTINGS.HEARTH_HEIGHT,
+  },
+  {
+    id: SPRITE_ID.MONEY,
+    src: money,
+    width: GAME_SETTINGS.MONEY_WIDTH,
+    height: GAME_SETTINGS.MONEY_HEIGHT,
+  },
+  {
+    id: SPRITE_ID.COLLISION_BLOOD,
+    src: collisionBood,
+    width: GAME_SETTINGS.COLLISION_BLOOD_WIDTH,
+    height: GAME_SETTINGS.COLLISION_BLOOD_HEIGHT,
+  },
   {
     id: SPRITE_ID.COLLISION_TELEPORT,
     src: collisionTeleport,
-    width: 70.75,
-    height: 90,
+    width: GAME_SETTINGS.COLLISION_TELEPORT_WIDTH,
+    height: GAME_SETTINGS.COLLISION_TELEPORT_HEIGHT,
+  },
+  {
+    id: SPRITE_ID.SPEEDOMETER,
+    src: speedometer,
+    width: GAME_SETTINGS.SPEEDOMETER_SPRITE_WIDTH,
+    height: GAME_SETTINGS.SPEEDOMETER_SPRITE_HEIGHT,
   },
 ];
 
@@ -95,5 +208,58 @@ export const defaultOptionNpc = [
   {
     id: 8,
     type: 'friend',
+  },
+];
+
+export const scoreLevels = [
+  {
+    id: 1,
+    name: 'level 1',
+    score: 0,
+  },
+  {
+    id: 2,
+    name: 'level 2',
+    score: 5,
+  },
+  {
+    id: 3,
+    name: 'level 3',
+    score: 20,
+  },
+  {
+    id: 4,
+    name: 'level 4',
+    score: 40,
+  },
+  {
+    id: 5,
+    name: 'level 5',
+    score: 100,
+  },
+  {
+    id: 6,
+    name: 'level 6',
+    score: 200,
+  },
+  {
+    id: 7,
+    name: 'level 7',
+    score: 350,
+  },
+  {
+    id: 8,
+    name: 'level 8',
+    score: 500,
+  },
+  {
+    id: 9,
+    name: 'level 9',
+    score: 700,
+  },
+  {
+    id: 10,
+    name: 'level 10',
+    score: 1000,
   },
 ];

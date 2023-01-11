@@ -1,27 +1,22 @@
 import stylesForm from 'src/components/Form/Form.module.scss';
-
 import { useTranslation } from 'react-i18next';
-import { FormikValues } from 'formik';
-
 import { regSchema, initialRegValuesSchema } from './schema';
 import { Button } from 'src/components/Button';
 import { GenericForm } from 'src/components/Form';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { Nav } from 'src/components/Nav';
-
 import { useAppSelector } from 'src/hooks/redux';
 import { SignupData } from 'src/modules/IAuth';
 import { fetchSignup } from 'src/store/auth/AuthActions';
 import { selectLoading } from 'src/store/auth/AuthSelectors';
 import { useBoundAction } from 'src/hooks/useBoundAction';
+import { FunctionComponent } from 'react';
 
-export const RegistrationForm = () => {
+export const RegistrationForm: FunctionComponent<SignupData> = () => {
   const { t } = useTranslation();
   const loading = useAppSelector(selectLoading);
 
-  const onSubmit = useBoundAction((values: FormikValues) =>
-    fetchSignup(values as SignupData)
-  );
+  const onSubmit = useBoundAction(values => fetchSignup(values));
 
   return (
     <ErrorBoundary>

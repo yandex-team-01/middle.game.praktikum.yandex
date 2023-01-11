@@ -5,6 +5,7 @@ import { fetchLogout } from 'src/store/auth/AuthActions';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { TitleGame } from 'src/components/TitleGame';
 import { useBoundAction } from 'src/hooks/useBoundAction';
+import { ThemeTogglerButton } from 'src/components/ThemeTogglerButton';
 
 export const MainMenu = () => {
   const { t } = useTranslation();
@@ -15,9 +16,7 @@ export const MainMenu = () => {
   const settingsHandle = () => navigator('/settings');
   const gameLoading = () => navigator('/loadinggame');
 
-  const logoutHandle = useBoundAction(() => {
-    return fetchLogout();
-  });
+  const logoutHandle = useBoundAction(fetchLogout);
 
   return (
     <div className={styles.page}>
@@ -41,6 +40,7 @@ export const MainMenu = () => {
           {t('logout')}
         </Button>
       </div>
+      <ThemeTogglerButton />
     </div>
   );
 };

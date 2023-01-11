@@ -1,4 +1,4 @@
-import { useMountEffect } from '../hooks/useMountEffect';
+import { useMountEffect } from 'src/hooks/useMountEffect';
 import { fetchAuth } from 'src/store/auth/AuthActions';
 import { ComponentType } from 'react';
 import { useBoundAction } from 'src/hooks/useBoundAction';
