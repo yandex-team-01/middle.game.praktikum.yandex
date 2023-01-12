@@ -6,6 +6,7 @@ import fs from 'fs';
 import https from 'https';
 import i18nextMiddleware from 'i18next-http-middleware';
 import Backend from 'i18next-fs-backend';
+import helmet from 'helmet';
 
 import { i18next } from './i18next.config';
 
@@ -27,6 +28,17 @@ app.use(cors());
 app.use(express.json());
 
 const port = Number(process.env.PORT) || 3001;
+
+app.use(helmet.dnsPrefetchControl());
+app.use(helmet.expectCt());
+app.use(helmet.frameguard());
+app.use(helmet.hidePoweredBy());
+app.use(helmet.hsts());
+app.use(helmet.ieNoOpen());
+app.use(helmet.noSniff());
+app.use(helmet.permittedCrossDomainPolicies());
+app.use(helmet.referrerPolicy());
+app.use(helmet.xssFilter());
 
 async function init() {
   await dbConnect();
