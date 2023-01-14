@@ -8,6 +8,8 @@ import { selectLogin } from 'src/store/forum/ForumSelectors';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
 import { Props } from './types';
 import { useFormik } from 'formik';
+import DOMPurify from 'dompurify';
+
 import {
   initialCommentValuesSchema,
   commentSchema,
@@ -22,6 +24,7 @@ import { v1 } from 'uuid';
 export const SendComment = ({ topicId }: Props) => {
   const { t } = useTranslation();
   const { login } = useAppSelector(selectLogin);
+  const purify = (value: string) => DOMPurify.sanitize(value);
 
   const addComment = useBoundAction((comment: ICommentCreate) =>
     fetchCreateComments(comment)
@@ -32,6 +35,7 @@ export const SendComment = ({ topicId }: Props) => {
       initialValues: initialCommentValuesSchema,
       validationSchema: commentSchema(t),
       onSubmit: values => {
+        values.comment = purify(values.comment);
         const comment: ICommentCreate = {
           id: v1(),
           text: values.comment,

@@ -1,6 +1,7 @@
 import { FormikValues } from 'formik';
 import { ReactNode } from 'react';
 import { AnySchema } from 'yup';
+import { SigninData, SignupData } from 'src/modules/IAuth';
 
 export type Props = {
   children: ReactNode;
@@ -14,5 +15,5 @@ export type PropsGenericForm = {
 
   initialValues: FormikValues;
   validationSchema: AnySchema;
-  onSubmit: (values: FormikValues) => void;
+  onSubmit: (values: SigninData | SignupData) => void;
 };

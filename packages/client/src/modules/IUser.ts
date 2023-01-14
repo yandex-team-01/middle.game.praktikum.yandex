@@ -2,11 +2,11 @@ export interface IUser {
   id: number;
   first_name: string;
   second_name: string;
-  display_name?: string | null;
+  display_name?: string | undefined;
   login: string;
   email: string;
   phone: string;
-  avatar?: string | null;
+  avatar?: string | undefined;
 }
 
 export interface IUserWithTheme extends IUser {
