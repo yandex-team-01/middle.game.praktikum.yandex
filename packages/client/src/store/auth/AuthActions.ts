@@ -1,4 +1,3 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import { SignupData, SigninData, oAuthServiceIdData } from 'src/modules/IAuth';
 import { fetchApi } from '../utils';
 import { addError } from '../error/ErrorSlice';
@@ -8,11 +7,10 @@ import { getOrCreateUser } from 'src/api/userApi';
 import { COOKIE_THEME_NAME } from 'src/constants/themes';
 import { getCookies } from 'src/utils/cookies';
 import { themes } from 'src/utils/theme/ThemeContext';
-import { i18n } from 'i18next';
 import { SignUpUserId } from './types';
 import { createAppAsyncThunk } from 'src/utils/thunk';
 
-export const fetchAuth = createAsyncThunk<IUser, undefined, { extra: i18n }>(
+export const fetchAuth = createAppAsyncThunk(
   'auth/fetchAuth',
   async (_, thunkApi) => {
     try {
@@ -37,8 +35,7 @@ export const fetchSignin = createAppAsyncThunk(
         credentials: 'include',
         body: JSON.stringify(data),
       });
-
-      thunkApi.dispatch(fetchAuth());
+      thunkApi.dispatch(fetchAuth('' as never));
 
       return res;
     } catch (error) {
@@ -59,7 +56,7 @@ export const fetchSignup = createAppAsyncThunk(
         credentials: 'include',
         body: JSON.stringify(data),
       });
-      thunkApi.dispatch(fetchAuth());
+      thunkApi.dispatch(fetchAuth('' as never));
 
       const themeValueFromCookie = getCookies().get(COOKIE_THEME_NAME);
       const currentTheme = themeValueFromCookie
@@ -87,7 +84,7 @@ export const fetchSignup = createAppAsyncThunk(
   }
 );
 
-export const fetchLogout = createAsyncThunk<string, undefined, { extra: i18n }>(
+export const fetchLogout = createAppAsyncThunk(
   'auth/fetchLogout',
   async (_, thunkApi) => {
     try {
@@ -148,7 +145,7 @@ export const fetchOAuthStepThreeGetApproveFromApiPracticum =
         body: JSON.stringify(data),
         credentials: 'include',
       });
-      thunkApi.dispatch(fetchAuth());
+      thunkApi.dispatch(fetchAuth('' as never));
       return res;
     } catch (error) {
       const errorMessageText = thunkApi.extra.t('LoginError');
