@@ -4,7 +4,10 @@ import {
   IComment,
   ICommentCreate,
 } from 'src/pages/Forum/part/Comment/types';
-import { IEmojiCreate } from 'src/pages/Forum/part/EmojiBlock/types';
+import {
+  IEmojiCreate,
+  IEmojiAnswer,
+} from 'src/pages/Forum/part/EmojiBlock/types';
 import { ITopic } from 'src/pages/Forum/part/Topic/types';
 import { fetchApi } from 'src/store/utils';
 
@@ -77,7 +80,7 @@ export const createComment = (comment: ICommentCreate) => {
 };
 
 export const createReaction = (reaction: IEmojiCreate) => {
-  return fetchApi<IEmojiCreate>(
+  return fetchApi<IEmojiAnswer | null>(
     '/api/forum/reaction',
     {
       method: 'POST',

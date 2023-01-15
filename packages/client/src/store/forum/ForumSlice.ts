@@ -78,7 +78,45 @@ export const forumSlice = createSlice({
     buider.addCase(fetchCreateReaction.pending, state => {
       state.loading = true;
     });
-    buider.addCase(fetchCreateReaction.fulfilled, state => {
+    buider.addCase(fetchCreateReaction.fulfilled, (state, action) => {
+      if (action.payload && state.comments) {
+        if (action.payload.data) {
+          //добавили новую реакцию
+          const reaction = action.payload.data;
+          const comment = state.comments[reaction.id_comment];
+
+          const index = comment.Reactions.findIndex(
+            item => item.value === reaction.value
+          );
+
+          if (index === -1) {
+            // если такой реакции не было, добавляю
+            comment.Reactions.push({
+              value: reaction.value,
+              authorsId: [reaction.id_author],
+            });
+          } else {
+            // если реакция была, добавляю id пользователя в authorsId
+            comment.Reactions[index].authorsId.push(reaction.id_author);
+          }
+        } else {
+          // удалили реакцию
+          const request = action.payload.request;
+          const comment = state.comments[request.id_comment];
+          const index = comment.Reactions.findIndex(
+            item => item.value === request.value
+          );
+
+          if (index !== -1) {
+            // убираю id пользователя из authorsId
+            comment.Reactions[index].authorsId = comment.Reactions[
+              index
+            ].authorsId.filter(item => item !== request.id_author);
+          }
+        }
+      }
+
+      // state.comments
       state.loading = false;
     });
     buider.addCase(fetchCreateReaction.rejected, state => {

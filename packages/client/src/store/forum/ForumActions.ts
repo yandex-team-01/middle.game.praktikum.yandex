@@ -93,7 +93,11 @@ export const fetchCreateReaction = createAsyncThunk(
   async (reaction: IEmojiCreate) => {
     try {
       const res = await createReaction(reaction);
-      return res;
+
+      return {
+        request: reaction,
+        data: res,
+      };
     } catch (error) {
       console.error(error);
     }

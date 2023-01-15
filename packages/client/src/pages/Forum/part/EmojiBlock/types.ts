@@ -15,6 +15,14 @@ export interface IEmojiCreate {
   value: string;
   id_author: string;
 }
+export interface IEmojiAnswer {
+  createdAt: string;
+  id: string;
+  id_author: string;
+  id_comment: string;
+  updatedAt: string;
+  value: string;
+}
 
 export interface Props {
   reactions: IEmoji[];

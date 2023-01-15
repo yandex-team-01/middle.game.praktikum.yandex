@@ -57,17 +57,21 @@ export const EmojiBlock = ({ reactions, idComment }: Props) => {
     <div className={styles.block}>
       <div className={styles['emoji-container']}>
         {reactions.map((item, index) => (
-          <button
-            key={index}
-            className={styles.emoji}
-            onClick={() => {
-              addEmoji(item.value);
-            }}>
-            <span>{item.value}</span>
-            <span className={styles['emoji-number']}>
-              {item.authorsId.length}
-            </span>
-          </button>
+          <>
+            {item.authorsId.length === 0 ? null : (
+              <button
+                key={index}
+                className={styles.emoji}
+                onClick={() => {
+                  addEmoji(item.value);
+                }}>
+                <span>{item.value}</span>
+                <span className={styles['emoji-number']}>
+                  {item.authorsId.length}
+                </span>
+              </button>
+            )}
+          </>
         ))}
       </div>
 
