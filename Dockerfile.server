@@ -12,7 +12,7 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
-RUN yarn /usr/local/lib/node_modules/lerna/index.js bootstrap
+RUN yarn lerna bootstrap
 RUN rm -rf /app/packages/server/dist/ && yarn run build
 
 
