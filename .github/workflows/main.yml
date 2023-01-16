@@ -11,8 +11,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: SSH-Compose
-      uses: matiasnu/github-action-ssh-docker-compose@v2.0.1
+    - uses: alex-ac/github-action-ssh-docker-compose@master
+      name: Docker-Compose Remote Deployment
 
       with:
         ssh_host: 158.160.55.139
