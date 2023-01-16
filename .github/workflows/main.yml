@@ -19,3 +19,4 @@ jobs:
         ssh_private_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
         ssh_user: ${{ secrets.DEPLOY_COM_SSH_USER }}
         docker_compose_prefix: team_01
+        docker_compose_filename: docker-compose.yml
