@@ -17,5 +17,5 @@ jobs:
       with:
         ssh_host: 158.160.55.139
         ssh_private_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
-        ssh_user: ${{ secrets.DEPLOY_SSH_USER }}
+        ssh_user: ${{ secrets.DEPLOY_COM_SSH_USER }}
         docker_compose_prefix: team_01
