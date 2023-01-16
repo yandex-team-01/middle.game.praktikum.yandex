@@ -21,8 +21,10 @@
   "engines": {
     "node": ">=15"
   },
-  "devDependencies": {
-    "@evilmartians/lefthook": "1.1.1",
+  "dependencies": {
     "lerna": "5.4.3"
+  },
+  "devDependencies": {
+    "@evilmartians/lefthook": "1.1.1"
   }
 }
