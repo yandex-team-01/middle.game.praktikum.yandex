@@ -12,7 +12,7 @@ import { createAppAsyncThunk } from 'src/utils/thunk';
 
 export const fetchAuth = createAppAsyncThunk(
   'auth/fetchAuth',
-  async (_, thunkApi) => {
+  async (_: void, thunkApi) => {
     try {
       const res = await fetchApi<IUser>('/auth/user', {
         credentials: 'include',
@@ -35,7 +35,7 @@ export const fetchSignin = createAppAsyncThunk(
         credentials: 'include',
         body: JSON.stringify(data),
       });
-      thunkApi.dispatch(fetchAuth('' as never));
+      thunkApi.dispatch(fetchAuth());
 
       return res;
     } catch (error) {
@@ -56,7 +56,7 @@ export const fetchSignup = createAppAsyncThunk(
         credentials: 'include',
         body: JSON.stringify(data),
       });
-      thunkApi.dispatch(fetchAuth('' as never));
+      thunkApi.dispatch(fetchAuth());
 
       const themeValueFromCookie = getCookies().get(COOKIE_THEME_NAME);
       const currentTheme = themeValueFromCookie
@@ -145,7 +145,7 @@ export const fetchOAuthStepThreeGetApproveFromApiPracticum =
         body: JSON.stringify(data),
         credentials: 'include',
       });
-      thunkApi.dispatch(fetchAuth('' as never));
+      thunkApi.dispatch(fetchAuth());
       return res;
     } catch (error) {
       const errorMessageText = thunkApi.extra.t('LoginError');
