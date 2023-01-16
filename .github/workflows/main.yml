@@ -1,0 +1,20 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: alex-ac/github-action-ssh-docker-compose@master
+      name: Docker-Compose Remote Deployment
+      with:
+        ssh_host: 158.160.55.139
+        ssh_private_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+        ssh_user: ${{ secrets.DEPLOY_SSH_USER }}
+        docker_compose_prefix: team_01
