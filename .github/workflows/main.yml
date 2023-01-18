@@ -48,6 +48,7 @@ jobs:
         
     - name: create client env file
       run: |
+        ls -la
         touch packages/client/.env
         echo ${{ secrets.ENV_CLIENT }} >> packages/client/.env
     
