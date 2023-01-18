@@ -24,6 +24,21 @@ jobs:
         echo PGADMIN_DEFAULT_PASSWORD=${{ secrets.PGADMIN_DEFAULT_PASSWORD }} >> .env &&
         echo PGADMIN_LISTEN_PORT=${{ secrets.PGADMIN_LISTEN_PORT }} >> .env
     
+    - name: create cert.pem file
+      run: |
+        touch cert.pem
+        echo ${{ secrets.CERT_PEM}} >> cert.pem
+    
+    - name: create key.pem file
+      run: |
+        touch key.pem
+        echo ${{ secrets.KEY_PEM}} >> key.pem
+        
+    - name: create keytmp.pem file
+      run: |
+        touch keytmp.pem
+        echo ${{ secrets.KEYTMP_PEM}} >> keytmp.pem
+    
     - uses: alex-ac/github-action-ssh-docker-compose@master
       name: Docker-Compose Remote Deployment
 
