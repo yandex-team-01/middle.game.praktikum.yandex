@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 dotenv.config();
 import dns from 'dns';
+import csp from 'vite-plugin-csp';
 
 dns.setDefaultResultOrder('verbatim');
 
@@ -19,7 +20,7 @@ export default defineConfig({
     target: 'node',
     format: 'cjs',
   },
-  plugins: [react()],
+  plugins: [react(), csp()],
   resolve: {
     alias: {
       src: path.resolve(__dirname, './src'),

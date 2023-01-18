@@ -45,3 +45,18 @@
     background: #4c5c89;
   }
 }
+.dark{
+  background-color: $main_bg_color_dark;
+}
+
+.light{
+  background-color: $main_bg_color_light;
+}
+
+.dark:hover{
+  background-color: $main_bg_color_dark_hover;
+}
+
+.light:hover{
+  background-color: $main_bg_color_light_hover;
+}

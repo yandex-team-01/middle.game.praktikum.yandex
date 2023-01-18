@@ -2,7 +2,7 @@ import cn from 'classnames';
 import { Props } from './types';
 import styles from './button.module.scss';
 import { ErrorBoundary } from '../ErrorBoundary';
-import { ThemeContext } from '../../utils/theme/ThemeContext';
+import { ThemeContext, themes } from '../../utils/theme/ThemeContext';
 
 export const Button = ({
   children,
@@ -18,13 +18,14 @@ export const Button = ({
         <button
           className={cn(
             styles.button,
+            { [styles.light]: theme === themes.dark },
+            { [styles.dark]: theme === themes.light },
             { [styles.regular]: regular },
             className
           )}
           onClick={onClick}
           type={type}
-          disabled={disabled}
-          style={{ backgroundColor: theme.background }}>
+          disabled={disabled}>
           {children}
         </button>
       )}
