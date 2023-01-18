@@ -7,7 +7,7 @@ WORKDIR /app
 
 FROM base as builder
 
-COPY package.json yarn.lock
+COPY package.json yarn.lock lerna.json ./
 RUN yarn install --frozen-lockfile
 
 COPY . .
@@ -19,11 +19,10 @@ RUN rm -rf /app/packages/server/dist/ && yarn run build
 FROM node:$NODE_VERSION-buster-slim as production
 WORKDIR /app
 
-COPY --from=builder /app/packages/server/keys/ /app/keys/
 COPY --from=builder /app/packages/server/dist/ /app/
 COPY --from=builder /app/packages/server/public/ /app/public/
 COPY --from=builder /app/packages/server/package.json /app/package.json
-COPY --from=builder /app/packages/server/keys/ /app/keys/
+COPY --from=builder /keys/ /app/keys/
 RUN yarn install --production=true
 
 EXPOSE $SERVER_PORT
