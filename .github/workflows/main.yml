@@ -26,17 +26,19 @@ jobs:
     
     - name: create cert.pem file
       run: |
+        mkdir keys
+        cd keys
         touch cert.pem
         echo ${{ secrets.CERT_PEM}} >> cert.pem
     
     - name: create key.pem file
       run: |
-        touch key.pem
+        touch keys/key.pem
         echo ${{ secrets.KEY_PEM}} >> key.pem
         
     - name: create keytmp.pem file
       run: |
-        touch keytmp.pem
+        touch keys/keytmp.pem
         echo ${{ secrets.KEYTMP_PEM}} >> keytmp.pem
     
     - uses: alex-ac/github-action-ssh-docker-compose@master
