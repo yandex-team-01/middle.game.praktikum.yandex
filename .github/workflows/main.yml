@@ -48,8 +48,8 @@ jobs:
         
     - name: create client env file
       run: |
-        ls -la
         touch packages/client/.env
+        ls -la packages/client
         echo ${{ secrets.ENV_CLIENT }} >> packages/client/.env
     
     - uses: alex-ac/github-action-ssh-docker-compose@master
