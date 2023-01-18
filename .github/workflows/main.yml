@@ -30,7 +30,7 @@ jobs:
       run: |
         mkdir keys
         touch keys/cert.pem
-        echo "$CERT" | base64 --decode > keys/cert.pem
+        echo "$CERT" > keys/cert.pem
     
     - name: create key.pem file
       env:
