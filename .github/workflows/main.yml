@@ -47,10 +47,11 @@ jobs:
         echo "$KEYTMP" > keys/keytmp.pem
         
     - name: create client env file
+      env:
+        ENV_CLIENT: ${{ secrets.ENV_CLIENT }}
       run: |
         touch packages/client/.env
-        ls -la packages/client
-        echo ${{ secrets.ENV_CLIENT }} >> packages/client/.env
+        echo "$ENV_CLIENT" > packages/client/.env
     
     - uses: alex-ac/github-action-ssh-docker-compose@master
       name: Docker-Compose Remote Deployment
