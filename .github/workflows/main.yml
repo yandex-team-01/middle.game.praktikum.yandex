@@ -27,19 +27,23 @@ jobs:
     - name: create cert.pem file
       run: |
         mkdir keys
-        cd keys
-        touch cert.pem
-        echo ${{ secrets.CERT_PEM}} >> cert.pem
+        touch keys/cert.pem
+        echo ${{ secrets.CERT_PEM }} >> keys/cert.pem
     
     - name: create key.pem file
       run: |
         touch keys/key.pem
-        echo ${{ secrets.KEY_PEM}} >> key.pem
+        echo ${{ secrets.KEY_PEM }} >> keys/key.pem
         
     - name: create keytmp.pem file
       run: |
         touch keys/keytmp.pem
-        echo ${{ secrets.KEYTMP_PEM}} >> keytmp.pem
+        echo ${{ secrets.KEYTMP_PEM }} >> keys/keytmp.pem
+        
+    - name: create client env file
+      run: |
+        touch packages/client/.env
+        echo ${{ secrets.ENV_CLIENT }} >> packages/client/.env
     
     - uses: alex-ac/github-action-ssh-docker-compose@master
       name: Docker-Compose Remote Deployment
