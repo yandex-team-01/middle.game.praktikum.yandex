@@ -52,3 +52,11 @@
 .light{
   background-color: $main_bg_color_light;
 }
+
+.dark:hover{
+  background-color: $main_bg_color_dark_hover;
+}
+
+.light:hover{
+  background-color: $main_bg_color_light_hover;
+}

@@ -33,7 +33,6 @@
     "sass": "1.55.0",
     "universal-cookie": "4.0.4",
     "uuid": "9.0.0",
-    "vite-plugin-csp": "1.1.2",
     "yup": "0.32.11"
   },
   "devDependencies": {
