@@ -37,14 +37,14 @@ jobs:
         KEY_PEM: ${{ secrets.KEY_PEM }}
       run: |
         touch keys/key.pem
-        echo "$KEY_PEM" | base64 --decode > keys/key.pem
+        echo "$KEY_PEM" > keys/key.pem
         
     - name: create keytmp.pem file
       env:
         KEYTMP: ${{ secrets.KEYTMP_PEM }}
       run: |
         touch keys/keytmp.pem
-        echo "$KEYTMP" | base64 --decode > keys/keytmp.pem
+        echo "$KEYTMP" > keys/keytmp.pem
         
     - name: create client env file
       run: |
