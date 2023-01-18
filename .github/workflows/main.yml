@@ -25,20 +25,26 @@ jobs:
         echo PGADMIN_LISTEN_PORT=${{ secrets.PGADMIN_LISTEN_PORT }} >> .env
     
     - name: create cert.pem file
+      env:
+        CERT: ${{ secrets.CERT_PEM }}
       run: |
         mkdir keys
         touch keys/cert.pem
-        echo ${{ secrets.CERT_PEM }} >> keys/cert.pem
+        echo "$CERT" | base64 --decode > keys/cert.pem
     
     - name: create key.pem file
+      env:
+        KEY_PEM: ${{ secrets.KEY_PEM }}
       run: |
         touch keys/key.pem
-        echo ${{ secrets.KEY_PEM }} >> keys/key.pem
+        echo "$KEY_PEM" | base64 --decode > keys/key.pem
         
     - name: create keytmp.pem file
+      env:
+        KEYTMP: ${{ secrets.KEYTMP_PEM }}
       run: |
         touch keys/keytmp.pem
-        echo ${{ secrets.KEYTMP_PEM }} >> keys/keytmp.pem
+        echo "$KEYTMP" | base64 --decode > keys/keytmp.pem
         
     - name: create client env file
       run: |
