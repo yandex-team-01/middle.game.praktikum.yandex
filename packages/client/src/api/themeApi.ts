@@ -11,6 +11,6 @@ export const updateTheme = (data: { id: number; theme: string }) => {
       credentials: 'include',
       body: JSON.stringify(data),
     },
-    `${import.meta.env.VITE_SERVER}`
+    `/api`
   );
 };

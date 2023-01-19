@@ -21,7 +21,7 @@ export const getTopics = () => {
 
 export const createTopics = (topic: ITopic) => {
   return fetchApi<ITopic>(
-    '/api/forum/topic',
+    '/forum/topic',
     {
       method: 'POST',
       headers: {
@@ -33,13 +33,13 @@ export const createTopics = (topic: ITopic) => {
       },
       body: JSON.stringify(topic),
     },
-    `${import.meta.env.VITE_SERVER}`
+    `/api`
   );
 };
 
 export const getComments = (id_topic: string) => {
   return fetchApi<IComment[]>(
-    `/api/forum/comment?id_topic=${id_topic}`,
+    `/forum/comment?id_topic=${id_topic}`,
     {
       credentials: 'include',
       method: 'GET',
@@ -49,13 +49,13 @@ export const getComments = (id_topic: string) => {
         Accept: 'application/json',
       },
     },
-    `${import.meta.env.VITE_SERVER}`
+    `/api`
   );
 };
 
 export const createComment = (comment: IComment) => {
   return fetchApi<IComment>(
-    '/api/forum/comment',
+    '/forum/comment',
     {
       method: 'POST',
       headers: {
@@ -67,6 +67,6 @@ export const createComment = (comment: IComment) => {
       },
       body: JSON.stringify(comment),
     },
-    `${import.meta.env.VITE_SERVER}`
+    `/api`
   );
 };

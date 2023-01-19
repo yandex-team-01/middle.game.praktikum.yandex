@@ -11,6 +11,6 @@ export const getOrCreateUser = (id: number, data: IUserWithTheme) => {
       credentials: 'include',
       body: JSON.stringify(data),
     },
-    'https://localhost:3001/api'
+    '/api'
   );
 };
