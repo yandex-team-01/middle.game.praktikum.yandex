@@ -53,7 +53,7 @@ jobs:
         touch packages/client/.env
         echo "$ENV_CLIENT" > packages/client/.env
     
-    - uses: helgamir/action-deploy-compose@v1
+    - uses: helgamir/action-deploy-compose@v1.0.0
       name: Docker-Compose Remote Deployment
 
       with:
