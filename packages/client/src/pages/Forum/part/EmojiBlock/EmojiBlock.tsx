@@ -10,6 +10,7 @@ import { AiFillPlusCircle, AiOutlineCloseCircle } from 'react-icons/ai';
 import { Props } from './types';
 import { useBoundAction } from 'src/hooks/useBoundAction';
 import { fetchCreateReaction } from 'src/store/forum/ForumActions';
+import { v1 } from 'uuid';
 
 export interface IProps {
   emoticons: string[];
@@ -32,6 +33,7 @@ export const EmojiBlock = ({ reactions, idComment }: Props) => {
 
   const addEmojiToComment = (event: IProps) => {
     const newEmoji: IEmojiCreate = {
+      id: v1(),
       id_comment: idComment,
       value: event.native,
       id_author: String(user.id),
@@ -41,6 +43,7 @@ export const EmojiBlock = ({ reactions, idComment }: Props) => {
   };
   const addEmoji = (value: string) => {
     const newEmoji: IEmojiCreate = {
+      id: v1(),
       id_comment: idComment,
       value: value,
       id_author: String(user.id),

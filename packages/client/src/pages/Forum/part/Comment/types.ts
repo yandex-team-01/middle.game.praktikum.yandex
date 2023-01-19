@@ -7,7 +7,7 @@ export interface IComment {
   id_author: string;
   date: string;
   likes: number;
-  Reactions: IEmoji[];
+  reactions: IEmoji[];
 }
 export interface ICommentForBackend {
   id: string;
@@ -16,7 +16,7 @@ export interface ICommentForBackend {
   id_author: string;
   date: string;
   likes: number;
-  Reactions: IEmojiForBackend[];
+  reactions: IEmojiForBackend[];
 }
 
 export interface ICommentCreate {

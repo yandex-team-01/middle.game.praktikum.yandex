@@ -49,7 +49,7 @@ export const fetchComments = createAsyncThunk(
       // преобразую массив реакций собирая одинаковые эмоджи в один объект
       const newArr: IComment[] = res.map((comment: ICommentForBackend) => {
         newReactions = [];
-        comment.Reactions.forEach((reaction: IEmojiForBackend) => {
+        comment.reactions.forEach((reaction: IEmojiForBackend) => {
           const indexEmoji = newReactions.findIndex(
             item => item.value === reaction.value
           );
@@ -66,7 +66,7 @@ export const fetchComments = createAsyncThunk(
 
         return {
           ...comment,
-          Reactions: newReactions,
+          reactions: newReactions,
         };
       });
 

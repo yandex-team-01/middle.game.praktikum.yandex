@@ -11,6 +11,7 @@ export interface IEmojiForBackend {
   value: string;
 }
 export interface IEmojiCreate {
+  id: string;
   id_comment: string;
   value: string;
   id_author: string;

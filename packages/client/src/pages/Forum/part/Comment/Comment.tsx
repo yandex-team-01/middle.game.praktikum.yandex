@@ -16,7 +16,9 @@ export const Comment = (props: Props) => {
       <BlankWindow className={styles.card}>
         <AuthorBlock avatar={avatar} author={comment.id_author} />
         <CommentAbstract text={comment.text} date={comment.date} />
-        <EmojiBlock reactions={comment.Reactions} idComment={comment.id} />
+        {comment.reactions ? (
+          <EmojiBlock reactions={comment.reactions} idComment={comment.id} />
+        ) : null}
       </BlankWindow>
     </ErrorBoundary>
   );
