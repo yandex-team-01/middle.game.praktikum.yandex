@@ -31,9 +31,6 @@ export const LoginForm: FunctionComponent<SigninData> = () => {
             <Nav to="/auth/reg">{t('signUp')}</Nav>
           </div>
         }>
-        <div className={stylesForm.reset_link}>
-          <Nav to="/resetpassword">{t('resetPassword')}</Nav>
-        </div>
       </GenericForm>
     </ErrorBoundary>
   );
