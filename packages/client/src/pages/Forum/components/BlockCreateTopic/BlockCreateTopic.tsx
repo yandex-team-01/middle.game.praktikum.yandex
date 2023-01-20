@@ -8,6 +8,7 @@ import { dateFormatting } from 'src/utils/dateFormatting';
 import { selectUserLogin } from 'src/store/auth/AuthSelectors';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { useFormik } from 'formik';
+import DOMPurify from 'dompurify';
 import { initialTopicValuesSchema, topicSchema } from './CreateTopicSchema';
 import styles from './CreateTopic.module.scss';
 import { ITopic } from 'src/pages/Forum/part/Topic/types';
@@ -18,6 +19,7 @@ import { fetchCreateTopic } from 'src/store/forum/ForumActions';
 export const BlockCreateTopic = () => {
   const { t } = useTranslation();
   const navigator = useNavigator();
+  const purify = (value: string) => DOMPurify.sanitize(value);
 
   const login = useAppSelector(selectUserLogin);
   const dispatch = useAppDispatch();
@@ -35,6 +37,8 @@ export const BlockCreateTopic = () => {
       initialValues: initialTopicValuesSchema,
       validationSchema: topicSchema(t),
       onSubmit: values => {
+        values.description_topic = purify(values.description_topic);
+        values.name_topic = purify(values.name_topic);
         const newtopic: ITopic = {
           id: v1(),
           title: values.name_topic,

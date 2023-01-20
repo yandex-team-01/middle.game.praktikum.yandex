@@ -9,6 +9,8 @@ import stylesForm from 'src/components/Form/Form.module.scss';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { fetchChangeUser } from 'src/store/users/UsersActions';
 import { useFormik } from 'formik';
+import DOMPurify from 'dompurify';
+
 import { changeDataSchema } from './SettingsChangeDataSchema';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { IUser } from 'src/modules/IUser';
@@ -19,6 +21,7 @@ export const SettingsChangeData = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigator = useNavigator();
+  const purify = (value: string) => DOMPurify.sanitize(value);
 
   const goBackHandle = () => navigator('/settings');
 
@@ -36,6 +39,13 @@ export const SettingsChangeData = () => {
       initialValues: user,
       validationSchema: changeDataSchema,
       onSubmit: values => {
+        values.avatar = purify(values.avatar);
+        values.display_name = purify(values.display_name);
+        values.first_name = purify(values.first_name);
+        values.second_name = purify(values.second_name);
+        values.email = purify(values.email);
+        values.login = purify(values.login);
+        values.phone = purify(values.phone);
         changeDataHandler(values as IUser);
       },
     });
