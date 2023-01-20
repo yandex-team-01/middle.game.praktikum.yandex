@@ -5,7 +5,7 @@ import { fetchApi } from 'src/store/utils';
 
 export const getTopics = () => {
   return fetchApi<ITopic[]>(
-    '/api/forum/topic',
+    '/forum/topic',
     {
       credentials: 'include',
       method: 'GET',
@@ -15,7 +15,7 @@ export const getTopics = () => {
         Accept: 'application/json',
       },
     },
-    `${import.meta.env.VITE_SERVER}`
+    `/api`
   );
 };
 
