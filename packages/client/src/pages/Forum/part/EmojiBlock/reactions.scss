@@ -1,0 +1,10 @@
+em-emoji-picker {
+  --padding: 5px;
+
+  height: max-content;
+  min-height: auto;
+  padding: 0;
+  .scroll {
+    overflow-y: hidden;
+  }
+}

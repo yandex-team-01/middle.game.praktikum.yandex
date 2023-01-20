@@ -55,7 +55,11 @@ export class forumService {
   createComment = (_req: Request, res: Response) => {
     commentRepos
       .create(_req.body)
-      .then(comment => res.status(200).json(comment))
+      .then(comment => {
+        comment.setDataValue('reactions', []);
+
+        return res.status(200).json(comment);
+      })
       .catch(err => res.status(500).json({ error: ['db error', err] }));
   };
 
