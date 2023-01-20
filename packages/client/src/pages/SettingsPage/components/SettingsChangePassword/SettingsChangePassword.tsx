@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
+import DOMPurify from 'dompurify';
 
 import { Button } from 'src/components/Button';
 import { Form } from 'src/components/Form';
@@ -20,6 +21,7 @@ export const SettingsChangePassword = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const navigator = useNavigator();
+  const purify = (value: string) => DOMPurify.sanitize(value);
 
   const goBackHandle = () => navigator('/settings');
 
@@ -37,6 +39,9 @@ export const SettingsChangePassword = () => {
       initialValues: initialChangePasswordValuesSchema,
       validationSchema: changePasswordSchema,
       onSubmit: values => {
+        values.newPassword = purify(values.newPassword);
+        values.oldPassword = purify(values.oldPassword);
+        values.repeatPassword = purify(values.repeatPassword);
         changePasswordHandler(values as ChangePasswordData);
       },
     });
