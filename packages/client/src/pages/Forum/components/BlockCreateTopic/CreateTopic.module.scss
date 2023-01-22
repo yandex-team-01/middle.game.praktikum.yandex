@@ -30,7 +30,7 @@
   margin-top: 10px;
 
   .title {
-    @include fontTitle(normal, 400, 14px, 20px);
+    @include fontText(normal, 400, 14px, 20px);
     color: $text-primary;
     margin: 5px 10px;
   }
@@ -41,7 +41,7 @@
 }
 
 .title_description {
-  @include fontTitle(normal, 400, 14px, 20px);
+  @include fontText(normal, 400, 14px, 20px);
   color: $text-primary;
   margin: 10px 10px 0px 10px;
 }
