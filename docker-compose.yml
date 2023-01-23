@@ -1,4 +1,5 @@
 version: '3.9'
+
 services:
   postgres:
     container_name: postgresql
@@ -28,6 +29,7 @@ services:
       - ./tmp/pgadmin:/var/lib/pgadmin
     depends_on:
       - postgres
+
   client:
     container_name: prakticum-client
     image: prakticum-client
@@ -42,6 +44,7 @@ services:
     environment:
       - CLIENT_PORT=${CLIENT_PORT}
       - SERVER_PORT=${SERVER_PORT}
+
   server:
     container_name: prakticum-server
     image: prakticum-server
