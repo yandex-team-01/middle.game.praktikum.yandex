@@ -10,7 +10,6 @@ import { useFormik } from 'formik';
 export const GenericForm = ({
   children,
   buttonsBlock,
-
   initialValues,
   validationSchema,
   onSubmit,
@@ -31,20 +30,31 @@ export const GenericForm = ({
           <div className={styles.form_group}>
             <div className={styles.form_inputs_buttons}>
               {Object.keys(initialValues).map((item, index) => (
-                <Input
-                  label={t(item)}
-                  name={item}
-                  value={values[item]}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className="regular"
-                  key={index}
-                  showError={Boolean(errors[item]) && Boolean(touched[item])}
-                  error={String(errors[item])}
-                />
+                (!['password', 'repeatPassword'].includes(item)) ?
+                  <Input
+                    label={t(item)}
+                    name={item}
+                    value={values[item]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className="regular"
+                    key={index}
+                    showError={Boolean(errors[item]) && Boolean(touched[item])}
+                    error={String(errors[item])}
+                  /> : <Input
+                    label={t(item)}
+                    name={item}
+                    value={values[item]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className="regular"
+                    key={index}
+                    showError={Boolean(errors[item]) && Boolean(touched[item])}
+                    error={String(errors[item])}
+                    type='password'
+                  />
               ))}
               {children}
-
               <div className={styles.form_buttons}>{buttonsBlock}</div>
             </div>
           </div>
