@@ -14,11 +14,6 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - ./tmp/pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ['CMD-SHELL', 'pg_isready']
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   pgadmin:
     container_name: pgadmin
