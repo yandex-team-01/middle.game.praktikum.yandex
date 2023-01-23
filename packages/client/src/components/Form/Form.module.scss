@@ -100,7 +100,7 @@
 }
 
 .form_title {
-  @include font-face($font_type_Frijole_400_18_px, $main_input_text_color, 0px);
+  @include font-face($font_type_PixelDigivolve_400_18_px, $main_input_text_color, 0px);
   @include lg {
     font-size: 17px;
     text-align: left;

@@ -13,7 +13,7 @@
   flex: 1;
 
   .title {
-    @include fontTitle(normal, 400, 14px, 20px);
+    @include fontText(normal, 400, 14px, 20px);
     color: $text-primary;
   }
 

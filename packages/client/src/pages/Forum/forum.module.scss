@@ -2,7 +2,8 @@
 
 .forum {
   @include fontSecondaryText(normal, 400, 12px, 20px);
-  width: 50vw;
+  width: 50vw;  
+  min-width: 600px;
   color: $text-secondary;
 }
 

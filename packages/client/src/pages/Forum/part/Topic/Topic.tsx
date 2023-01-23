@@ -16,7 +16,6 @@ export const Topic = ({
   description,
   id_author,
   date,
-  views,
 }: ITopic) => {
   const comments = useAppSelector(selectComments);
 
@@ -49,9 +48,6 @@ export const Topic = ({
         </div>
         <Column title={t('comments')}>
           <h3>{countComments}</h3>
-        </Column>
-        <Column title={t('views')}>
-          <h3>{views}</h3>
         </Column>
       </BlankWindow>
     </ErrorBoundary>

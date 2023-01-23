@@ -1,7 +1,7 @@
 @import 'src/index.module.scss';
 
 .title {
-  @include fontTitle(normal, 400, 20px, 16px);
+  @include fontText(normal, 400, 20px, 16px);
   color: white;
   margin: 20px 0px;
   width: 100%;
