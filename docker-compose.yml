@@ -34,7 +34,6 @@ services:
       - ./tmp/pgadmin:/var/lib/pgadmin
     depends_on:
       - postgres
-          condition: service_healthy
 
   client:
     container_name: prakticum-client
@@ -69,4 +68,3 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     depends_on:
       - postgres
-          condition: service_healthy
