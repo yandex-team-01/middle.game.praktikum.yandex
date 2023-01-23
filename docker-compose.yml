@@ -32,8 +32,9 @@ services:
       - '8080:80'
     volumes:
       - ./tmp/pgadmin:/var/lib/pgadmin
-    postgres:
-      condition: service_healthy
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   client:
     container_name: prakticum-client
