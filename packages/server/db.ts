@@ -9,7 +9,7 @@ const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
   process.env;
 
 const sequelizeOptions: SequelizeOptions = {
-  host: 'postgresql',
+  host: 'postgresql', //postgresql-для докера localhost - для npm run dev:ssr
   port: parseInt(POSTGRES_PORT || ''),
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
@@ -22,11 +22,14 @@ export const sequelize = new Sequelize(sequelizeOptions);
 // тут можно задефайнить нужные модели
 export const Topic = sequelize.define('Topic', topicModel, {});
 export const Comment = sequelize.define('Comment', commentModel, {});
-export const Reaction = sequelize.define('Reaction', reactionModel, {});
+export const Reaction = sequelize.define('reaction', reactionModel, {});
 export const User = sequelize.define('User', topicUser, {});
 
-Comment.hasMany(Reaction, { foreignKey: 'id_comment' });
-Reaction.belongsTo(Comment, { foreignKey: 'id' });
+Comment.hasMany(Reaction, { foreignKey: 'id_comment' }); // 1 A ко многим B, внешний ключ в B
+Reaction.belongsTo(Comment, { foreignKey: 'id_comment', targetKey: 'id' }); // внешний ключ A
+// foreignKey - внешник ключ
+//Comment.hasMany(Reaction, { foreignKey: 'id_comment' });
+//Reaction.belongsTo(Comment, { foreignKey: 'id' });
 
 export const topicRepos = new Repository(Topic as ModelCtor);
 export const commentRepos = new Repository(Comment as ModelCtor);

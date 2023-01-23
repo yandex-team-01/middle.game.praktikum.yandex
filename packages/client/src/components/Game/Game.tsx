@@ -9,6 +9,7 @@ import { ErrorBoundary } from '../ErrorBoundary';
 import { useNavigator } from 'src/hooks/useNavigator';
 import { recordScore } from 'src/store/leaderboard/LeaderboardActions';
 import { useBoundAction } from 'src/hooks/useBoundAction';
+import { pointerLockAPI } from 'src/hooks/pointerLockAPI';
 
 export const GameComponent = () => {
   const { t } = useTranslation();
@@ -22,7 +23,9 @@ export const GameComponent = () => {
   const canvas = useRef<HTMLCanvasElement>(null); //https://stackoverflow.com/a/63119934
   const game = useRef<Game | null>(null);
 
+
   useMountEffectOneCall(() => {
+    pointerLockAPI(canvas.current);
     game.current = new Game(canvas.current as HTMLCanvasElement);
     game.current.init(() => {
       console.log('Игра загружена');

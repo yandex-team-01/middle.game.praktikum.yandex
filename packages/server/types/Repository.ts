@@ -72,7 +72,8 @@ export class Repository<T extends Model<T>> {
 
       return null;
     } else {
-      return this.create(body);
+      const res = await this.create(body);
+      return res;
     }
   }
 }

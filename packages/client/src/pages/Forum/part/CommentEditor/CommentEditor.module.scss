@@ -6,7 +6,7 @@
   gap: 10px;
 
   .text {
-    @include fontTitle(normal, 400, 14px, 20px);
+    @include fontText(normal, 400, 14px, 20px);
     color: $text-primary;
     margin: 5px 10px;
   }
