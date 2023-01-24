@@ -12,6 +12,7 @@ export const GenericForm = ({
   buttonsBlock,
   initialValues,
   validationSchema,
+  typesValues,
   onSubmit,
 }: PropsGenericForm) => {
   const { t } = useTranslation();
@@ -30,29 +31,18 @@ export const GenericForm = ({
           <div className={styles.form_group}>
             <div className={styles.form_inputs_buttons}>
               {Object.keys(initialValues).map((item, index) => (
-                (!['password', 'repeatPassword'].includes(item)) ?
-                  <Input
-                    label={t(item)}
-                    name={item}
-                    value={values[item]}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className="regular"
-                    key={index}
-                    showError={Boolean(errors[item]) && Boolean(touched[item])}
-                    error={String(errors[item])}
-                  /> : <Input
-                    label={t(item)}
-                    name={item}
-                    value={values[item]}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className="regular"
-                    key={index}
-                    showError={Boolean(errors[item]) && Boolean(touched[item])}
-                    error={String(errors[item])}
-                    type='password'
-                  />
+                <Input
+                  type={typesValues[item]}
+                  label={t(item)}
+                  name={item}
+                  value={values[item]}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="regular"
+                  key={index}
+                  showError={Boolean(errors[item]) && Boolean(touched[item])}
+                  error={String(errors[item])}
+                />
               ))}
               {children}
               <div className={styles.form_buttons}>{buttonsBlock}</div>

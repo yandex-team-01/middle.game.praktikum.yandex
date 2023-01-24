@@ -1,6 +1,6 @@
 import stylesForm from 'src/components/Form/Form.module.scss';
 import { useTranslation } from 'react-i18next';
-import { loginSchema, initialLoginValuesSchema } from './schema';
+import { loginSchema, initialLoginValuesSchema, typeLoginValuesSchema } from './schema';
 import { Button } from 'src/components/Button';
 import { GenericForm } from 'src/components/Form';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
@@ -29,6 +29,7 @@ export const LoginForm: FunctionComponent<SigninData> = () => {
     <ErrorBoundary>
       <GenericForm
         initialValues={initialLoginValuesSchema}
+        typesValues={typeLoginValuesSchema}
         validationSchema={loginSchema(t)}
         onSubmit={handleSanitize}
         buttonsBlock={

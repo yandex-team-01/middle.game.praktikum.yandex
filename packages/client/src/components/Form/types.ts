@@ -12,8 +12,8 @@ export type Props = {
 export type PropsGenericForm = {
   children?: ReactNode;
   buttonsBlock: ReactNode;
-
   initialValues: FormikValues;
+  typesValues: FormikValues;
   validationSchema: AnySchema;
   onSubmit: (values: SigninData | SignupData) => void;
 };

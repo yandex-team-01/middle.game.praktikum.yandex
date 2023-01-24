@@ -1,6 +1,6 @@
 import stylesForm from 'src/components/Form/Form.module.scss';
 import { useTranslation } from 'react-i18next';
-import { regSchema, initialRegValuesSchema } from './schema';
+import { regSchema, initialRegValuesSchema, typeRegValuesSchema } from './schema';
 import { Button } from 'src/components/Button';
 import { GenericForm } from 'src/components/Form';
 import { ErrorBoundary } from 'src/components/ErrorBoundary';
@@ -33,6 +33,7 @@ export const RegistrationForm: FunctionComponent<SignupData> = () => {
     <ErrorBoundary>
       <GenericForm
         initialValues={initialRegValuesSchema}
+        typesValues={typeRegValuesSchema}
         validationSchema={regSchema(t)}
         onSubmit={handleSanitize}
         buttonsBlock={
