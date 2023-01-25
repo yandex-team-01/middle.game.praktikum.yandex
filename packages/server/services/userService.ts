@@ -9,7 +9,7 @@ export class userService {
       .catch(err =>
         res
           .status(500)
-          .json({ error: ['db error: unable to find or create user', err] })
+          .json({ error: ['db error: unable to find or create user', err.status] })
       );
   };
   setTheme = (_req: Request, res: Response) => {
@@ -17,7 +17,7 @@ export class userService {
       .update(_req.body.id, { theme: _req.body.theme })
       .then(() => res.status(200).json('ok'))
       .catch(err =>
-        res.status(500).json({ error: ['db error: unable to set theme', err] })
+        res.status(500).json({ error: ['db error: unable to set theme', err.status] })
       );
   };
 }

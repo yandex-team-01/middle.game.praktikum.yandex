@@ -6,28 +6,28 @@ export class forumService {
     topicRepos
       .getAll()
       .then(topics => res.status(200).json(topics))
-      .catch(err => res.status(500).json({ error: ['db error', err] }));
+      .catch(err => res.status(500).json({ error: ['db error', err.status] }));
   };
 
   getTopic = (_req: Request, res: Response) => {
     topicRepos
       .get(_req.params.id)
       .then(topic => res.status(200).json(topic))
-      .catch(err => res.status(500).json({ error: ['db error', err] }));
+      .catch(err => res.status(500).json({ error: ['db error', err.status] }));
   };
 
   createTopic = (_req: Request, res: Response) => {
     topicRepos
       .create(_req.body)
       .then(topic => res.status(200).json(topic))
-      .catch(err => res.status(500).json({ error: ['db error', err] }));
+      .catch(err => res.status(500).json({ error: ['db error', err.status] }));
   };
 
   deleteTopic = (_req: Request, res: Response) => {
     topicRepos
       .delete(_req.params.id)
       .then(() => res.status(200).json('ok'))
-      .catch(err => res.status(500).json({ error: ['db error', err] }));
+      .catch(err => res.status(500).json({ error: ['db error', err.status] }));
   };
 
   getAllCommentsForTopic = (_req: Request, res: Response) => {
@@ -39,7 +39,7 @@ export class forumService {
         },
       })
       .then(comments => res.status(200).json(comments))
-      .catch(err => res.status(500).json({ error: ['db error', err] }));
+      .catch(err => res.status(500).json({ error: ['db error', err.status] }));
   };
 
   getComment = (_req: Request, res: Response) => {
@@ -49,7 +49,7 @@ export class forumService {
         where: { id: _req.params.id },
       })
       .then(comment => res.status(200).json(comment))
-      .catch(err => res.status(500).json({ error: ['db error', err] }));
+      .catch(err => res.status(500).json({ error: ['db error', err.status] }));
   };
 
   createComment = (_req: Request, res: Response) => {
@@ -60,14 +60,14 @@ export class forumService {
 
         return res.status(200).json(comment);
       })
-      .catch(err => res.status(500).json({ error: ['db error', err] }));
+      .catch(err => res.status(500).json({ error: ['db error', err.status] }));
   };
 
   deleteComment = (_req: Request, res: Response) => {
     commentRepos
       .delete(_req.params.id)
       .then(() => res.status(200).json('ok'))
-      .catch(err => res.status(500).json({ error: ['db error', err] }));
+      .catch(err => res.status(500).json({ error: ['db error', err.status] }));
   };
 
   createReaction = (_req: Request, res: Response) => {
@@ -81,12 +81,12 @@ export class forumService {
         _req.body
       )
       .then(reaction => res.status(200).json(reaction))
-      .catch(err => res.status(500).json({ error: ['db error', err] }));
+      .catch(err => res.status(500).json({ error: ['db error', err.status] }));
   };
   getReactions = (_req: Request, res: Response) => {
     reactionRepos
       .getAll()
       .then(reactions => res.status(200).json(reactions))
-      .catch(err => res.status(500).json({ error: ['db error', err] }));
+      .catch(err => res.status(500).json({ error: ['db error', err.status] }));
   };
 }

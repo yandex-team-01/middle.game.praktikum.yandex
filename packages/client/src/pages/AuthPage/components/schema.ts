@@ -14,6 +14,11 @@ export const initialLoginValuesSchema = {
   password: '',
 };
 
+export const typeLoginValuesSchema = {
+  login: 'text',
+  password: 'password',
+};
+
 export const loginSchema = (translation: TFunction) => {
   const requiredMessage = String(translation('required'));
 
@@ -39,6 +44,16 @@ export const initialRegValuesSchema = {
   login: '',
   password: '',
   repeatPassword: '',
+};
+
+export const typeRegValuesSchema = {
+  first_name: 'text',
+  second_name: 'text',
+  phone: 'text',
+  email: 'text',
+  login: 'text',
+  password: 'password',
+  repeatPassword: 'password',
 };
 
 export const regSchema = (translation: TFunction) => {

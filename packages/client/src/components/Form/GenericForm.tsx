@@ -10,9 +10,9 @@ import { useFormik } from 'formik';
 export const GenericForm = ({
   children,
   buttonsBlock,
-
   initialValues,
   validationSchema,
+  typesValues,
   onSubmit,
 }: PropsGenericForm) => {
   const { t } = useTranslation();
@@ -32,6 +32,7 @@ export const GenericForm = ({
             <div className={styles.form_inputs_buttons}>
               {Object.keys(initialValues).map((item, index) => (
                 <Input
+                  type={typesValues[item]}
                   label={t(item)}
                   name={item}
                   value={values[item]}
@@ -44,7 +45,6 @@ export const GenericForm = ({
                 />
               ))}
               {children}
-
               <div className={styles.form_buttons}>{buttonsBlock}</div>
             </div>
           </div>
