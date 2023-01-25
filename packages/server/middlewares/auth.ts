@@ -20,8 +20,8 @@ export async function auth(req: Request, res: Response, next: NextFunction) {
     const { data } = await axios.get(PRAKTIKUM_AUTH_ENDPOINT, {
       headers: { Cookie: cookies },
     });
+    res.locals.user = data;
     const user = await userRepos.get(data.id);
-
     if (themeCookie) {
       res.locals.theme = JSON.parse(themeCookie);
     } else {
@@ -29,13 +29,11 @@ export async function auth(req: Request, res: Response, next: NextFunction) {
       // @ts-ignore
       res.locals.theme = JSON.parse(user?.theme);
     }
-
-    res.locals.user = data;
   } catch (err) {
     if (themeCookie) {
       res.locals.theme = JSON.parse(themeCookie);
     }
-    res.locals.user = null;
+    //res.locals.user = null;
   }
 
   next();

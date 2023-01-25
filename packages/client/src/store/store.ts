@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
   themes: themeReducer,
 });
 
-export const setupStore = (preloadedState: PreloadedState, i18n: i18n) => {
+export const setupStore = (preloadedState: PreloadedState, i18n?: i18n) => {
   return configureStore({
     reducer: rootReducer,
     middleware: getDefaultMiddleware =>

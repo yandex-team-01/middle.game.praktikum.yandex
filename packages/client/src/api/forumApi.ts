@@ -82,7 +82,7 @@ export const createComment = (comment: ICommentCreate) => {
 
 export const createReaction = (reaction: IEmojiCreate) => {
   return fetchApi<IEmojiAnswer | null>(
-    '/api/forum/reaction',
+    '/forum/reaction',
     {
       method: 'POST',
       headers: {
@@ -94,6 +94,6 @@ export const createReaction = (reaction: IEmojiCreate) => {
       },
       body: JSON.stringify(reaction),
     },
-    `${import.meta.env.VITE_SERVER}`
+    `/api`
   );
 };

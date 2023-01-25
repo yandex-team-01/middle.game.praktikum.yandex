@@ -52,9 +52,8 @@ export const renderHtml = (req: Request, res: Response) => {
     `  
     <script> 
     window.__PRELOADED_STATE__ = ${renderObject(store)}; 
-    window.initialI18nStore = JSON.parse('${JSON.stringify(
-      initialI18nStore
-    )}'); 
+    window.initialI18nStore = ${renderObject(initialI18nStore)}
+    
     window.initialLanguage = '${initialLanguage}'; 
     </script> 
     `
