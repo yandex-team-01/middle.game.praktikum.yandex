@@ -10,6 +10,8 @@ import { useNavigator } from 'src/hooks/useNavigator';
 import { recordScore } from 'src/store/leaderboard/LeaderboardActions';
 import { useBoundAction } from 'src/hooks/useBoundAction';
 import { pointerLockAPI } from 'src/hooks/pointerLockAPI';
+import IconFullScreenOpen from 'src/assets/icons/fullscreen-open.svg';
+import IconFullScreenClose from 'src/assets/icons/fullscreen-close.svg';
 
 export const GameComponent = () => {
   const { t } = useTranslation();
@@ -22,7 +24,6 @@ export const GameComponent = () => {
 
   const canvas = useRef<HTMLCanvasElement>(null); //https://stackoverflow.com/a/63119934
   const game = useRef<Game | null>(null);
-
 
   useMountEffectOneCall(() => {
     pointerLockAPI(canvas.current);
@@ -47,7 +48,9 @@ export const GameComponent = () => {
             regular
             className="button"
             onClick={() => toggleIsFullScreen()}>
-            {isFullScreen ? '╬' : '⛶'}
+            <img
+              src={isFullScreen ? IconFullScreenClose : IconFullScreenOpen}
+            />
           </Button>
         </div>
         <canvas id="game-canvas" ref={canvas} />
