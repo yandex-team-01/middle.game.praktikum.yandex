@@ -8,6 +8,7 @@ import { geolocationReducer } from './geolocation/GeoSlice';
 import { PreloadedState } from './types';
 import { leaderboardReducer } from './leaderboard/LeaderboardSlice';
 import { themeReducer } from './theme/ThemeSlice';
+import { getEnvSsrAndProd } from 'src/utils/getEnvSsrAndProd';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -19,9 +20,12 @@ const rootReducer = combineReducers({
   themes: themeReducer,
 });
 
+const env = getEnvSsrAndProd();
+
 export const setupStore = (preloadedState: PreloadedState, i18n?: i18n) => {
   return configureStore({
     reducer: rootReducer,
+    devTools: !env.isPROD,
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware({
         thunk: {
