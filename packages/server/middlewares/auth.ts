@@ -21,7 +21,12 @@ export async function auth(req: Request, res: Response, next: NextFunction) {
       headers: { Cookie: cookies },
     });
     res.locals.user = data;
-    const user = await userRepos.get(data.id);
+  } catch (error) {
+    res.locals.user = null;
+  }
+
+  try {
+    const user = await userRepos.get(res.locals.user?.id);
     if (themeCookie) {
       res.locals.theme = JSON.parse(themeCookie);
     } else {
@@ -29,11 +34,10 @@ export async function auth(req: Request, res: Response, next: NextFunction) {
       // @ts-ignore
       res.locals.theme = JSON.parse(user?.theme);
     }
-  } catch (err) {
+  } catch (error) {
     if (themeCookie) {
       res.locals.theme = JSON.parse(themeCookie);
     }
-    //res.locals.user = null;
   }
 
   next();
