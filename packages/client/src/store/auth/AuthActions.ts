@@ -114,7 +114,8 @@ export const fetchOAuthStepOneGetServiceIdFromApiPracticum =
           headers: defaultHeaders,
         }
       );
-      oAuthStepTwoRedirectToOAuthProvider(res.service_id);
+      // oAuthStepTwoRedirectToOAuthProvider(res.service_id);
+      oAuthStepTwoRedirectToOAuthProvider('5a2db4fa908b4c4aa25725a8bd4dae7a');
       return res;
     } catch (error) {
       const errorMessageText = thunkApi.extra.t('LoginError');
