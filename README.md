@@ -2,8 +2,8 @@
 
 TODO: добавить описание игры
 
-ссылка на дизайн в [Figma](https://www.figma.com/file/Rb3TydNVrVGhaETL85DoQE/hagi-vagi-kisi-misi-landing)
-
+ссылка на дизайн в [Figma]([https://www.figma.com/file/Rb3TydNVrVGhaETL85DoQE/hagi-vagi-kisi-misi-landing](https://www.figma.com/design/MGI2RDA8C7ZdQKD2iP95ei/sprint_game?m=auto&t=FOtqXT4J9NC4I3Uy-6))
+Демо-видео на [Youtube](https://www.youtube.com/watch?v=43CW8S9K87w)
 ## sprint 1
 
 - Сверстаны следующие страницы:
